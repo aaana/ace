@@ -7,6 +7,7 @@
 
     <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
@@ -36,6 +37,7 @@
 
     <!-- ace settings handler -->
     <script src="assets/js/ace-extra.min.js"></script>
+
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
     <!--[if lte IE 8]>
@@ -43,19 +45,6 @@
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
 
-    <style>
-        .plugin-action {
-            display: inline-block;
-            color: steelblue;
-            margin-right: 10px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .plugin-action:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 
 <body class="no-skin">
@@ -916,9 +905,6 @@
     </div>
 
 
-
-
-
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
@@ -998,38 +984,23 @@
         [
             {
                 id: "1",
-                name: "插画",
-                note: "张三",
-                stock: "2015-11-15",
-                ship: "15",
-                sdate: "2007-12-03",
-                detail: '<span class="plugin-action" gm-click="clickDetail">教程详情</span>',
-                state: '已发布',
-                analyze: '<span class="plugin-action" gm-click="getAnalyze">学习情况</span>',
-                opt: '<span class="plugin-action" gm-click="cancel">取消发布</span>',
+                course: "插画",
+                name: "张三",
+                publish_date: "2015-11-15",
+                count: "15",
+                last_date: "2007-12-03",
+                state: '已发布'
             },
-            {id: "2", name: "Laptop", note: "Long text ", stock: "Yes", ship: "InTime", sdate: "2007-12-03"},
-            {id: "3", name: "LCD Monitor", note: "note3", stock: "Yes", ship: "TNT", sdate: "2007-12-03"},
-            {id: "4", name: "Speakers", note: "note", stock: "No", ship: "ARAMEX", sdate: "2007-12-03"},
-            {id: "5", name: "Laser Printer", note: "note2", stock: "Yes", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "6", name: "Play Station", note: "note3", stock: "No", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "7", name: "Mobile Telephone", note: "note", stock: "Yes", ship: "ARAMEX", sdate: "2007-12-03"},
-            {id: "8", name: "Server", note: "note2", stock: "Yes", ship: "TNT", sdate: "2007-12-03"},
-            {id: "9", name: "Matrix Printer", note: "note3", stock: "No", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "10", name: "Desktop Computer", note: "note", stock: "Yes", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "11", name: "Laptop", note: "Long text ", stock: "Yes", ship: "InTime", sdate: "2007-12-03"},
-            {id: "12", name: "LCD Monitor", note: "note3", stock: "Yes", ship: "TNT", sdate: "2007-12-03"},
-            {id: "13", name: "Speakers", note: "note", stock: "No", ship: "ARAMEX", sdate: "2007-12-03"},
-            {id: "14", name: "Laser Printer", note: "note2", stock: "Yes", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "15", name: "Play Station", note: "note3", stock: "No", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "16", name: "Mobile Telephone", note: "note", stock: "Yes", ship: "ARAMEX", sdate: "2007-12-03"},
-            {id: "17", name: "Server", note: "note2", stock: "Yes", ship: "TNT", sdate: "2007-12-03"},
-            {id: "18", name: "Matrix Printer", note: "note3", stock: "No", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "19", name: "Matrix Printer", note: "note3", stock: "No", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "20", name: "Desktop Computer", note: "note", stock: "Yes", ship: "FedEx", sdate: "2007-12-03"},
-            {id: "21", name: "Laptop", note: "Long text ", stock: "Yes", ship: "InTime", sdate: "2007-12-03"},
-            {id: "22", name: "LCD Monitor", note: "note3", stock: "Yes", ship: "TNT", sdate: "2007-12-03"},
-            {id: "23", name: "Speakers", note: "note", stock: "No", ship: "ARAMEX", sdate: "2007-12-03"}
+            {id: "2", course: "Laptop", name: "李四", publish_date: "2016-03-05", count: "20", last_date: "2007-12-03", state: '已发布'},
+            {
+                id: "3",
+                course: "LCD Monitor",
+                name: "王五",
+                publish_date: "2018-02-18",
+                count: "30",
+                last_date: "2007-12-03",
+                state: '已发布'
+            },
         ];
 
     var subgrid_data =
@@ -1132,8 +1103,8 @@
                 },*/
                 {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
                 {
-                    name: 'sdate',
-                    index: 'sdate',
+                    name: 'course',
+                    index: 'course',
                     width: 90,
                     editable: true,
                     sortable: true,
@@ -1149,8 +1120,8 @@
                     editoptions: {size: "20", maxlength: "30"}
                 },
                 {
-                    name: 'stock',
-                    index: 'stock',
+                    name: 'publish_date',
+                    index: 'publish_date',
                     width: 70,
                     editable: true,
                     sortable: true,
@@ -1159,8 +1130,8 @@
                     unformat: aceSwitch
                 },
                 {
-                    name: 'ship',
-                    index: 'ship',
+                    name: 'count',
+                    index: 'count',
                     width: 90,
                     editable: true,
                     sortable: true,
@@ -1168,8 +1139,8 @@
                     editoptions: {value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}
                 },
                 {
-                    name: 'note',
-                    index: 'note',
+                    name: 'last_date',
+                    index: 'last_date',
                     width: 150,
                     sortable: true,
                     editable: true,
@@ -1182,12 +1153,18 @@
                     width: 150,
                     sortable: true,
                     editable: false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">教程详情</a>"
+                    }
                 }, {
                     name: 'analyze',
                     index: 'analyze',
                     width: 150,
                     sortable: true,
                     editable: false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                    }
                 }, {
                     name: 'state',
                     index: 'state',
@@ -1200,6 +1177,9 @@
                     width: 150,
                     sortable: true,
                     editable: false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">取消发布</a>"
+                    }
                 }
             ],
 
