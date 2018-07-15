@@ -1,0 +1,15 @@
+.page-header i, .page-header span {
+    padding: 0;
+    font-size: 20px;
+    margin: 0;
+    font-weight: lighter;
+    color: #2679B5;
+}
+
+.page-header span{
+    margin: 0 8px;
+}
+
+a.btn-scroll-up{
+    z-index: 105;
+}
