@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
     <title>jqGrid - Ace Admin</title>
 
-    <meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
-    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css"/>
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
     <![endif]-->
-    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -75,7 +75,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
 									系统管理员
@@ -116,12 +116,18 @@
 
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
-        try{ace.settings.loadState('main-container')}catch(e){}
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
     </script>
 
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
-            try{ace.settings.loadState('sidebar')}catch(e){}
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
         </script>
 
         <!--<div class="sidebar-shortcuts" id="sidebar-shortcuts">-->
@@ -159,16 +165,16 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
-                <a href="courseAdmin.html">
+            <li class="active">
+                <a href="#">
                     <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
                     <span class="menu-text"> 教程管理 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
-            <li class="active">
-                <a href="#">
+            <li class="">
+                <a href="workAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 作品管理 </span>
                 </a>
@@ -177,11 +183,11 @@
             </li>
 
 
-
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
 
@@ -197,7 +203,7 @@
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
-                    <li class="active">作品管理</li>
+                    <li class="active">教程管理</li>
                 </ul><!-- /.breadcrumb -->
 
                 <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
@@ -212,81 +218,14 @@
 
 
             <div class="page-content">
-
-                <!--<div class="ace-settings-container" id="ace-settings-container">-->
-                    <!--<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">-->
-                        <!--<i class="ace-icon fa fa-cog bigger-130"></i>-->
-                    <!--</div>-->
-
-                    <!--<div class="ace-settings-box clearfix" id="ace-settings-box">-->
-                        <!--<div class="pull-left width-50">-->
-                            <!--<div class="ace-settings-item">-->
-                                <!--<div class="pull-left">-->
-                                    <!--<select id="skin-colorpicker" class="hide">-->
-                                        <!--<option data-skin="no-skin" value="#438EB9">#438EB9</option>-->
-                                        <!--<option data-skin="skin-1" value="#222A2D">#222A2D</option>-->
-                                        <!--<option data-skin="skin-2" value="#C6487E">#C6487E</option>-->
-                                        <!--<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>-->
-                                    <!--</select>-->
-                                <!--</div>-->
-                                <!--<span>&nbsp; Choose Skin</span>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-add-container">-->
-                                    <!--Inside-->
-                                    <!--<b>.container</b>-->
-                                <!--</label>-->
-                            <!--</div>-->
-                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
-
-                        <!--<div class="pull-left width-50">-->
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>-->
-                            <!--</div>-->
-
-                            <!--<div class="ace-settings-item">-->
-                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />-->
-                                <!--<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>-->
-                            <!--</div>-->
-                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
-                    <!--</div>&lt;!&ndash; /.ace-settings-box &ndash;&gt;-->
-                <!--</div>&lt;!&ndash; /.ace-settings-container &ndash;&gt;-->
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
 
+                        <table id="grid-table1"></table>
 
-                        <table id="grid-table"></table>
+                        <div id="grid-pager1"></div>
 
-                        <div id="grid-pager"></div>
                         <!-- PAGE CONTENT ENDS -->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -336,85 +275,80 @@
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
-
-<!-- inline scripts related to this page -->
-<!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/jquery.jqGrid.min.js"></script>
 <script src="assets/js/grid.locale-en.js"></script>
+<script src="assets/js/jquery.jqGrid.min.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
-
-
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-
-
     var grid_data =
         [
-            //id name grade class sdate display rawVideo processedVideo
-            {id:"1",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 08:00:00"},
-            {id:"2",name:"王同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 09:00:00"},
-            {id:"3",name:"赵同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 10:00:00"},
-            {id:"4",name:"朱同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 11:00:00"},
-            {id:"5",name:"黄同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"6",name:"丁同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"7",name:"邓同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"8",name:"秦同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"9",name:"江同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"10",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"11",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"12",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"13",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"14",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"15",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"16",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"17",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"18",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"19",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"20",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"21",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"22",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-
-
+            {
+                id: "1",
+                course: "插画",
+                name: "张三",
+                publish_date: "2015-11-15",
+                count: "15",
+                last_date: "2007-12-03",
+                state: '已发布'
+            },
+            {
+                id: "2",
+                course: "Laptop",
+                name: "李四",
+                publish_date: "2016-03-05",
+                count: "20",
+                last_date: "2007-12-03",
+                state: '已发布'
+            },
+            {
+                id: "3",
+                course: "LCD Monitor",
+                name: "王五",
+                publish_date: "2018-02-18",
+                count: "30",
+                last_date: "2007-12-03",
+                state: '已发布'
+            },
         ];
 
-    // var subgrid_data =
-    //     [
-    //         {id:"1", name:"sub grid item 1", qty: 11},
-    //         {id:"2", name:"sub grid item 2", qty: 3},
-    //         {id:"3", name:"sub grid item 3", qty: 12},
-    //         {id:"4", name:"sub grid item 4", qty: 5},
-    //         {id:"5", name:"sub grid item 5", qty: 2},
-    //         {id:"6", name:"sub grid item 6", qty: 9},
-    //         {id:"7", name:"sub grid item 7", qty: 3},
-    //         {id:"8", name:"sub grid item 8", qty: 8}
-    //     ];
+    var subgrid_data =
+        [
+            {id: "1", name: "sub grid item 1", qty: 11},
+            {id: "2", name: "sub grid item 2", qty: 3},
+            {id: "3", name: "sub grid item 3", qty: 12},
+            {id: "4", name: "sub grid item 4", qty: 5},
+            {id: "5", name: "sub grid item 5", qty: 2},
+            {id: "6", name: "sub grid item 6", qty: 9},
+            {id: "7", name: "sub grid item 7", qty: 3},
+            {id: "8", name: "sub grid item 8", qty: 8}
+        ];
 
-    jQuery(function($) {
-        var grid_selector = "#grid-table";
-        var pager_selector = "#grid-pager";
+    jQuery(function ($) {
+        var grid_selector = "#grid-table1";
+        var pager_selector = "#grid-pager1";
 
 
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
-            $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+            $(grid_selector).jqGrid('setGridWidth', parent_column.width());
         })
 
         //resize on sidebar collapse/expand
-        $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
-            if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+        $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+            if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
                 //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
-                setTimeout(function() {
-                    $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                setTimeout(function () {
+                    $(grid_selector).jqGrid('setGridWidth', parent_column.width());
                 }, 20);
             }
         })
@@ -442,13 +376,13 @@
             //direction: "rtl",
 
             //subgrid options
-            subGrid : false,
+            subGrid: false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
             //datatype: "xml",
-            subGridOptions : {
-                plusicon : "ace-icon fa fa-plus center bigger-110 blue",
-                minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
-                openicon : "ace-icon fa fa-chevron-right center orange"
+            subGridOptions: {
+                plusicon: "ace-icon fa fa-plus center bigger-110 blue",
+                minusicon: "ace-icon fa fa-minus center bigger-110 blue",
+                openicon: "ace-icon fa fa-chevron-right center orange"
             },
             //for this example we are using local data
             subGridRowExpanded: function (subgridDivId, rowId) {
@@ -457,61 +391,129 @@
                 $("#" + subgridTableId).jqGrid({
                     datatype: 'local',
                     data: subgrid_data,
-                    colNames: ['No','Item Name','Qty'],
+                    colNames: ['No', 'Item Name', 'Qty'],
                     colModel: [
-                        { name: 'id', width: 50 },
-                        { name: 'name', width: 150 },
-                        { name: 'qty', width: 50 }
+                        {name: 'id', width: 50},
+                        {name: 'name', width: 150},
+                        {name: 'qty', width: 50}
                     ]
                 });
             },
 
 
-
             data: grid_data,
             datatype: "local",
             height: 250,
-            colNames:[' ', '学号','姓名','年级','班级','时间', '展示', '原制作视频','制作过程'],
-            colModel:[
-                {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
-                    formatter:'actions',
-                    formatoptions:{
-                        keys:true,
-                        //delbutton: false,//disable delete button
+            colNames: ['序号', '教程名称', '教师名字', '发布时间', '参与人数', '最近修改', '教程详情', '学习情况', '状态', '操作'],
+            colModel: [
+                /*{
+                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
+                    formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        delbutton: false,//disable delete button
+                        editbutton:false,
 
-                        delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
-                        //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+                        delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
+                        //editformbutton:false, //editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
+                },*/
+                {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
+                {
+                    name: 'course',
+                    index: 'course',
+                    width: 90,
+                    editable: true,
+                    sortable: true,
+                    sorttype: "date",
+                    unformat: pickDate
                 },
-                {name:'id',index:'id', width:60, sorttype:"int", editable: false},
-                {name:'name',index:'name', width:150,editable: false},
-                {name:'grade',index:'grade', width:150,editable: false},
-                {name:'class',index:'class', width:150,editable: false},
-                {name:'sdate',index:'sdate',width:90, editable:false, sorttype:"time",unformat: pickDate},
-                {name:'display',index:'display', width:70, editable: true,edittype:"checkbox",editoptions: {value:"是:否"},unformat: aceSwitch},
-                {name:'rawVideo',index:'rawVideo', width:90, sortable:false, editable: false,
+                {
+                    name: 'name',
+                    index: 'name',
+                    width: 150,
+                    editable: true,
+                    sortable: true,
+                    editoptions: {size: "20", maxlength: "30"}
+                },
+                {
+                    name: 'publish_date',
+                    index: 'publish_date',
+                    width: 70,
+                    editable: true,
+                    sortable: true,
+                    edittype: "checkbox",
+                    editoptions: {value: "Yes:No"},
+                    unformat: aceSwitch
+                },
+                {
+                    name: 'count',
+                    index: 'count',
+                    width: 90,
+                    editable: true,
+                    sortable: true,
+                    edittype: "select",
+                    editoptions: {value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}
+                },
+                {
+                    name: 'last_date',
+                    index: 'last_date',
+                    width: 150,
+                    sortable: true,
+                    editable: true,
+                    edittype: "textarea",
+                    editoptions: {rows: "2", cols: "10"}
+                },
+                {
+                    name: 'detail',
+                    index: 'detail',
+                    width: 150,
+                    sortable: true,
+                    editable: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='"+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">下载</a>"}  },
-                {name:'processedVideo',index:'processedVideo', width:150, sortable:false,editable: false,
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">教程详情</a>"
+                    }
+                }, {
+                    name: 'analyze',
+                    index: 'analyze',
+                    width: 150,
+                    sortable: true,
+                    editable: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看（上传）</a>"}
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                    }
+                }, {
+                    name: 'state',
+                    index: 'state',
+                    width: 150,
+                    sortable: true,
+                    editable: false,
+                }, {
+                    name: 'opt',
+                    index: 'opt',
+                    width: 150,
+                    sortable: true,
+                    editable: false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">取消发布</a>"
+                    }
                 }
             ],
 
-            viewrecords : true,
-            rowNum:10,
-            rowList:[10,20,30],
-            pager : pager_selector,
+            viewrecords: true,
+            rowNum: 10,
+            rowList: [10, 20, 30],
+            pager: pager_selector,
             altRows: true,
             //toppager: true,
 
-            multiselect: true,
+            multiselect: false,
             //multikey: "ctrlKey",
             multiboxonly: true,
 
-            loadComplete : function() {
+            loadComplete: function () {
                 var table = this;
-                setTimeout(function(){
+                setTimeout(function () {
                     styleCheckbox(table);
 
                     updateActionIcons(table);
@@ -520,9 +522,8 @@
                 }, 0);
             },
 
-            //todo 保存
             editurl: "./dummy.php",//nothing is saved
-            caption: "学生作品"
+            caption: "教程管理"
 
             //,autowidth: true,
 
@@ -543,51 +544,51 @@
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
 
-
         //enable search/filter toolbar
         //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
         //jQuery(grid_selector).filterToolbar({});
 
 
         //switch element when editing inline
-        function aceSwitch( cellvalue, options, cell ) {
-            setTimeout(function(){
-                $(cell) .find('input[type=checkbox]')
+        function aceSwitch(cellvalue, options, cell) {
+            setTimeout(function () {
+                $(cell).find('input[type=checkbox]')
                     .addClass('ace ace-switch ace-switch-5')
                     .after('<span class="lbl"></span>');
             }, 0);
         }
+
         //enable datepicker
-        function pickDate( cellvalue, options, cell ) {
-            setTimeout(function(){
-                $(cell) .find('input[type=text]')
-                    .datepicker({format:'yyyy-mm-dd hh:mm:ss' , autoclose:true});
+        function pickDate(cellvalue, options, cell) {
+            setTimeout(function () {
+                $(cell).find('input[type=text]')
+                    .datepicker({format: 'yyyy-mm-dd', autoclose: true});
             }, 0);
         }
 
 
-        //navButtons下面导航区
-        jQuery(grid_selector).jqGrid('navGrid',pager_selector,
+        //navButtons
+        jQuery(grid_selector).jqGrid('navGrid', pager_selector,
             { 	//navbar options
                 edit: false,
-                editicon : 'ace-icon fa fa-pencil blue',
+                editicon: 'ace-icon fa fa-pencil blue',
                 add: false,
-                addicon : 'ace-icon fa fa-plus-circle purple',
-                del: true,
-                delicon : 'ace-icon fa fa-trash-o red',
+                addicon: 'ace-icon fa fa-plus-circle purple',
+                del: false,
+                delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
-                searchicon : 'ace-icon fa fa-search orange',
-                refresh: true,
-                refreshicon : 'ace-icon fa fa-refresh green',
-                view: true,
-                viewicon : 'ace-icon fa fa-search-plus grey',
+                searchicon: 'ace-icon fa fa-search orange',
+                refresh: false,
+                refreshicon: 'ace-icon fa fa-refresh green',
+                view: false,
+                viewicon: 'ace-icon fa fa-search-plus grey',
             },
             {
                 //edit record form
                 //closeAfterEdit: true,
                 //width: 700,
                 recreateForm: true,
-                beforeShowForm : function(e) {
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                     style_edit_form(form);
@@ -599,7 +600,7 @@
                 closeAfterAdd: true,
                 recreateForm: true,
                 viewPagerButtons: false,
-                beforeShowForm : function(e) {
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
                         .wrapInner('<div class="widget-header" />')
@@ -609,28 +610,28 @@
             {
                 //delete record form
                 recreateForm: true,
-                beforeShowForm : function(e) {
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
-                    if(form.data('styled')) return false;
+                    if (form.data('styled')) return false;
 
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                     style_delete_form(form);
 
                     form.data('styled', true);
                 },
-                onClick : function(e) {
+                onClick: function (e) {
                     //alert(1);
                 }
             },
             {
                 //search form
                 recreateForm: true,
-                afterShowSearch: function(e){
+                afterShowSearch: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                     style_search_form(form);
                 },
-                afterRedraw: function(){
+                afterRedraw: function () {
                     style_search_filters($(this));
                 }
                 ,
@@ -643,7 +644,7 @@
             {
                 //view record form
                 recreateForm: true,
-                beforeShowForm: function(e){
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                 }
@@ -651,12 +652,11 @@
         )
 
 
-
         function style_edit_form(form) {
             //enable datepicker on "sdate" field and switches for "stock" field
-            form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+            form.find('input[name=sdate]').datepicker({format: 'yyyy-mm-dd', autoclose: true})
 
-            form.find('input[name=display]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+            form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
             //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
             //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
 
@@ -686,6 +686,7 @@
             form.find('.add-group').addClass('btn btn-xs btn-success');
             form.find('.delete-group').addClass('btn btn-xs btn-danger');
         }
+
         function style_search_form(form) {
             var dialog = form.closest('.ui-jqdialog');
             var buttons = dialog.find('.EditTable')
@@ -696,7 +697,7 @@
 
         function beforeDeleteCallback(e) {
             var form = $(e[0]);
-            if(form.data('styled')) return false;
+            if (form.data('styled')) return false;
 
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_delete_form(form);
@@ -709,7 +710,6 @@
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_edit_form(form);
         }
-
 
 
         //it causes some flicker when reloading or navigating grid
@@ -752,27 +752,30 @@
         function updatePagerIcons(table) {
             var replacement =
                 {
-                    'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
-                    'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
-                    'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
-                    'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
                 };
-            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
                 var icon = $(this);
                 var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 
-                if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+                if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
             })
         }
 
         function enableTooltips(table) {
-            $('.navtable .ui-pg-button').tooltip({container:'body'});
-            $(table).find('.ui-pg-div').tooltip({container:'body'});
+            $('.navtable .ui-pg-button').tooltip({container: 'body'});
+            $(table).find('.ui-pg-div').tooltip({container: 'body'});
         }
+
+
+        //添加
 
         //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
-        $(document).one('ajaxloadstart.page', function(e) {
+        $(document).one('ajaxloadstart.page', function (e) {
             $.jgrid.gridDestroy(grid_selector);
             $('.ui-jqdialog').remove();
         });
