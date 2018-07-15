@@ -404,20 +404,20 @@
             data: grid_data,
             datatype: "local",
             height: 250,
-            colNames: ['序号', '教程名称', '教师名字', '发布时间', '参与人数', '最近修改', '教程详情', '学习情况', '状态', '操作'],
+            colNames: ['','序号', '教程名称', '教师名字', '发布时间', '参与人数', '最近修改', '教程详情', '学习情况', '状态', '操作'],
             colModel: [
-                /*{
+                {
                     name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
                     formatter: 'actions',
                     formatoptions: {
                         keys: true,
-                        delbutton: false,//disable delete button
+                        delbutton: true,//disable delete button
                         editbutton:false,
 
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                         //editformbutton:false, //editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
-                },*/
+                },
                 {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
                 {
                     name: 'course',
@@ -507,7 +507,7 @@
             altRows: true,
             //toppager: true,
 
-            multiselect: false,
+            multiselect: true,
             //multikey: "ctrlKey",
             multiboxonly: true,
 
@@ -574,13 +574,13 @@
                 editicon: 'ace-icon fa fa-pencil blue',
                 add: false,
                 addicon: 'ace-icon fa fa-plus-circle purple',
-                del: false,
+                del: true,
                 delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon: 'ace-icon fa fa-search orange',
-                refresh: false,
+                refresh: true,
                 refreshicon: 'ace-icon fa fa-refresh green',
-                view: false,
+                view: true,
                 viewicon: 'ace-icon fa fa-search-plus grey',
             },
             {
