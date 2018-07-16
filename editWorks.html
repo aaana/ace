@@ -15,6 +15,7 @@
     <!-- page specific plugin styles -->
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css"/>
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
@@ -85,6 +86,21 @@
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <!--<li>-->
+                        <!--<a href="#">-->
+                        <!--<i class="ace-icon fa fa-cog"></i>-->
+                        <!--Settings-->
+                        <!--</a>-->
+                        <!--</li>-->
+
+                        <!--<li>-->
+                        <!--<a href="profile.html">-->
+                        <!--<i class="ace-icon fa fa-user"></i>-->
+                        <!--Profile-->
+                        <!--</a>-->
+                        <!--</li>-->
+
+                        <!--<li class="divider"></li>-->
 
                         <li>
                             <a href="#">
@@ -142,7 +158,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="active">
+            <li class="">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建 </span>
@@ -158,8 +174,8 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
-                <a href="studySituation.html">
+            <li class="active">
+                <a href="index.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
                     <span class="menu-text"> 查询 </span>
                 </a>
@@ -181,37 +197,26 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-plus"></i>
-                        <a href="#">创建</a>
+                        <i class="ace-icon fa fa-search"></i>
+                        <a href="#">查询</a>
                     </li>
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
+                    <li class="active">学习情况</li>
+                    <li class="active">编辑学生作品</li>
                 </ul><!-- /.breadcrumb -->
+
+                <!--<div class="nav-search" id="nav-search">-->
+                <!--<form class="form-search">-->
+                <!--<span class="input-icon">-->
+                <!--<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />-->
+                <!--<i class="ace-icon fa fa-search nav-search-icon"></i>-->
+                <!--</span>-->
+                <!--</form>-->
+                <!--</div>&lt;!&ndash; /.nav-search &ndash;&gt;-->
             </div>
-            <!--<div class="breadcrumbs ace-save-state" id="breadcrumbs">-->
-            <!--<ul class="breadcrumb">-->
-            <!--<li>-->
-            <!--<i class="ace-icon fa fa-search"></i>-->
-            <!--<a href="#">查询</a>-->
-            <!--</li>-->
-
-            <!--&lt;!&ndash;<li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<a href="#">学习情况</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--<li class="active">学习情况</li>-->
-            <!--</ul>&lt;!&ndash; /.breadcrumb &ndash;&gt;-->
-
-            <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<form class="form-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<span class="input-icon">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<i class="ace-icon fa fa-search nav-search-icon"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</form>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&lt;!&ndash; /.nav-search &ndash;&gt;&ndash;&gt;-->
-            <!--</div>-->
 
 
             <div class="page-content">
@@ -290,49 +295,74 @@
                         </div><!-- /.pull-left -->
                     </div><!-- /.ace-settings-box -->
                 </div><!-- /.ace-settings-container -->
+
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
                         <form class="form-horizontal" role="form">
-                            <div class="row">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-course">
-                                        教程名称：</label>
+                            <div class="form-group col-xs-10 col-sm-5">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-work">
+                                    作品名称：</label>
 
-                                    <div class="col-sm-9">
-                                        <input type="text" id="form-field-course" placeholder="教程名称"
-                                               style="width:250px;"
-                                        />
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-work" placeholder="作品名称" style="width:250px;"
+                                    />
 
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-right"
-                                           for="form-field-workDemand">任务要求：</label>
-                                    <div class="col-sm-9">
-                                <textarea class="col-xs-10 col-sm-8" id="form-field-workDemand" style="width:450px;"
-                                          placeholder="任务要求"></textarea>
-                                    </div>
+                            <div class="form-group col-xs-10 col-sm-5">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-workID">
+                                    作品ID：</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-workID" placeholder="作品ID"
+                                    />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-top"> 任务难度: </label>
+                            <div class="form-group col-xs-10 col-sm-5">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-student">
+                                    学生姓名：</label>
 
-                                    <div class="col-sm-9">
-                                        <div class="rating inline"></div>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-student" placeholder="学生姓名"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-10 col-sm-5">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-studentID">
+                                    学生ID：</label>
 
-                                        <div class="hr hr-16 hr-dotted"></div>
-                                    </div>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-field-studentID" placeholder="学生ID"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-10 col-sm-5">
+                                <label class="col-sm-3 control-label no-padding-right"
+                                       for="form-field-workDetail">作品简介：</label>
+                                <div class="col-sm-9">
+                                <textarea class="col-xs-10 col-sm-8" id="form-field-workDetail" style="width:600px;"
+                                          placeholder="作品简介"></textarea>
                                 </div>
                             </div>
 
+
+                            <div class="col-xs-10 col-sm-8">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-studentID">
+                                    完成日期：</label>
+                                <div class="input-group">
+                                    <input class="form-control date-picker"
+                                           id="id-date-picker-1" type="text"
+                                           data-date-format="dd-mm-yyyy"/>
+                                    <span class="input-group-addon">
+																		<i class="fa fa-calendar bigger-110"></i>
+																	</span>
+                                </div>
+                            </div>
                             <div class="col-xs-10 col-sm-6">
                                 <div class="widget-box">
                                     <div class="widget-header">
-                                        <h4 class="widget-title">教程上传</h4>
+                                        <h4 class="widget-title">作品上传</h4>
                                     </div>
 
                                     <div class="widget-body">
@@ -358,13 +388,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-10 col-sm-8">
-                                    <button type="button" class="btn btn-sm btn-success" style="width:100px;">
-                                        创建
-                                        <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
-                                    </button>
-                                </div>
+                            <div class="col-xs-10 col-sm-8">
+                                <button type="button" class="btn btn-sm btn-success" style="width:100px;">
+                                    提交
+                                    <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
+                                </button>
                             </div>
                         </form>
                         <!-- PAGE CONTENT ENDS -->
@@ -421,15 +449,6 @@
 <script src="assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="assets/js/jquery.jqGrid.min.js"></script>
-
-<!-- ace scripts -->
-<script src="assets/js/ace-elements.min.js"></script>
-<script src="assets/js/ace.min.js"></script>
-
-<script src="assets/js/echarts.js"></script>
-
-<!-- page specific plugin scripts -->
 <script src="assets/js/jquery-ui.custom.min.js"></script>
 <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
@@ -445,45 +464,22 @@
 <script src="assets/js/jquery.inputlimiter.min.js"></script>
 <script src="assets/js/jquery.maskedinput.min.js"></script>
 <script src="assets/js/bootstrap-tag.min.js"></script>
-<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
-<script src="assets/js/jquery.raty.min.js"></script>
-<script src="assets/js/bootstrap-multiselect.min.js"></script>
-<script src="assets/js/select2.min.js"></script>
-<script src="assets/js/jquery-typeahead.js"></script>
 
+<!-- inline scripts related to this page -->
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
+<script src="assets/js/jquery.jqGrid.min.js"></script>
 <script src="assets/js/grid.locale-en.js"></script>
+
+<!-- ace scripts -->
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+
+<script src="assets/js/echarts.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     jQuery(function ($) {
-        var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({infoTextFiltered: '<span class="label label-purple label-lg">Filtered</span>'});
-        var container1 = demo1.bootstrapDualListbox('getContainer');
-        container1.find('.btn').addClass('btn-white btn-info btn-bold');
-
-        /**var setRatingColors = function() {
-					$(this).find('.star-on-png,.star-half-png').addClass('orange2').removeClass('grey');
-					$(this).find('.star-off-png').removeClass('orange2').addClass('grey');
-				}*/
-        $('.rating').raty({
-            'cancel': false,
-            'half': false,
-            'starType': 'i'
-            /**,
-
-             'click': function() {
-						setRatingColors.call(this);
-					},
-             'mouseover': function() {
-						setRatingColors.call(this);
-					},
-             'mouseout': function() {
-						setRatingColors.call(this);
-					}*/
-        })//.find('i:not(.star-raty)').addClass('grey');
-
-
         $('#id-disable-check').on('click', function () {
             var inp = $('#form-input-readonly').get(0);
             if (inp.hasAttribute('disabled')) {

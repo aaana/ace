@@ -46,7 +46,6 @@
     <![endif]-->
 
     <!--Custom styles-->
-    <link rel="stylesheet" href="assets/css/custom/studySituation.css"/>
 
 </head>
 
@@ -67,7 +66,7 @@
             <a href="index.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    蔷薇小学教师和作品管理后台
+                    系统管理
                 </small>
             </a>
         </div>
@@ -79,7 +78,7 @@
                         <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									系统管理员
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
@@ -131,53 +130,53 @@
             }
         </script>
 
-        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success">
-                    <i class="ace-icon fa fa-plus"></i>
-                </button>
+        <!--<div class="sidebar-shortcuts" id="sidebar-shortcuts">-->
+        <!--<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">-->
+        <!--<button class="btn btn-success">-->
+        <!--<i class="ace-icon fa fa-plus"></i>-->
+        <!--</button>-->
 
-                <button class="btn btn-info">
-                    <i class="ace-icon fa fa-list"></i>
-                </button>
+        <!--<button class="btn btn-info">-->
+        <!--<i class="ace-icon fa fa-list"></i>-->
+        <!--</button>-->
 
-                <button class="btn btn-warning">
-                    <i class="ace-icon fa fa-search"></i>
-                </button>
+        <!--<button class="btn btn-warning">-->
+        <!--<i class="ace-icon fa fa-search"></i>-->
+        <!--</button>-->
 
-            </div>
+        <!--</div>-->
 
-            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                <span class="btn btn-success"></span>
+        <!--<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">-->
+        <!--<span class="btn btn-success"></span>-->
 
-                <span class="btn btn-info"></span>
+        <!--<span class="btn btn-info"></span>-->
 
-                <span class="btn btn-warning"></span>
+        <!--<span class="btn btn-warning"></span>-->
 
-            </div>
-        </div><!-- /.sidebar-shortcuts -->
+        <!--</div>-->
+        <!--</div>&lt;!&ndash; /.sidebar-shortcuts &ndash;&gt;-->
 
         <ul class="nav nav-list">
+            <li class="">
+                <a href="userAdmin.html">
+                    <i class="menu-icon fa fa-users" aria-hidden="true"></i>
+                    <span class="menu-text"> 用户管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
             <li class="active">
-                <a href="createCourse.html">
-                    <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
-                    <span class="menu-text"> 创建 </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-            <li class="">
                 <a href="#">
-                    <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 我的创建 </span>
+                    <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
+                    <span class="menu-text"> 教程管理 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="studySituation.html">
-                    <i class="menu-icon fa fa-search" aria-hidden="true"></i>
-                    <span class="menu-text"> 查询 </span>
+                <a href="workAdmin.html">
+                    <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
+                    <span class="menu-text"> 作品管理 </span>
                 </a>
 
                 <b class="arrow"></b>
@@ -197,15 +196,26 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-list"></i>
-                        <a href="#">我的创建</a>
+                        <i class="ace-icon fa fa-home"></i>
+                        <a href="#">主页</a>
                     </li>
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
+                    <li class="active">教程管理</li>
                 </ul><!-- /.breadcrumb -->
+
+                <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
+                <!--&lt;!&ndash;<form class="form-search">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="input-icon">&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<i class="ace-icon fa fa-search nav-search-icon"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;</form>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&lt;!&ndash; /.nav-search &ndash;&gt;&ndash;&gt;-->
             </div>
+
 
             <div class="page-content">
                 <div class="row">
@@ -270,9 +280,6 @@
 <script src="assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
-
-<!-- inline scripts related to this page -->
-<!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/grid.locale-en.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
@@ -280,7 +287,6 @@
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
-
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     var grid_data =
@@ -398,20 +404,20 @@
             data: grid_data,
             datatype: "local",
             height: 250,
-            colNames: ['序号', '教程名称', '教师名字', '发布时间', '参与人数', '最近修改', '教程详情', '学习情况', '状态', '操作'],
+            colNames: ['','序号', '教程名称', '教师名字', '发布时间', '参与人数', '最近修改', '教程详情', '学习情况', '状态', '操作'],
             colModel: [
-                /*{
+                {
                     name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
                     formatter: 'actions',
                     formatoptions: {
                         keys: true,
-                        delbutton: false,//disable delete button
+                        delbutton: true,//disable delete button
                         editbutton:false,
 
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                         //editformbutton:false, //editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
-                },*/
+                },
                 {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
                 {
                     name: 'course',
@@ -501,7 +507,7 @@
             altRows: true,
             //toppager: true,
 
-            multiselect: false,
+            multiselect: true,
             //multikey: "ctrlKey",
             multiboxonly: true,
 
@@ -517,7 +523,7 @@
             },
 
             editurl: "./dummy.php",//nothing is saved
-            caption: "我的创建"
+            caption: "教程管理"
 
             //,autowidth: true,
 
@@ -568,13 +574,13 @@
                 editicon: 'ace-icon fa fa-pencil blue',
                 add: false,
                 addicon: 'ace-icon fa fa-plus-circle purple',
-                del: false,
+                del: true,
                 delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon: 'ace-icon fa fa-search orange',
-                refresh: false,
+                refresh: true,
                 refreshicon: 'ace-icon fa fa-refresh green',
-                view: false,
+                view: true,
                 viewicon: 'ace-icon fa fa-search-plus grey',
             },
             {
@@ -777,4 +783,3 @@
 </script>
 </body>
 </html>
-
