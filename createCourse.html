@@ -294,7 +294,7 @@
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
                         <form class="form-horizontal" role="form">
-                            <div class="row">
+                            <div class="row col-sm-offset-3">
                                 <div class="form-group col-xs-10 col-sm-5">
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-course">
                                         教程名称：</label>
@@ -307,18 +307,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row col-sm-offset-3">
                                 <div class="form-group col-xs-10 col-sm-5">
                                     <label class="col-sm-3 control-label no-padding-right"
                                            for="form-field-workDemand">任务要求：</label>
                                     <div class="col-sm-9">
-                                <textarea class="col-xs-10 col-sm-8" id="form-field-workDemand" style="width:450px;"
+                                <textarea class="col-xs-10 col-sm-8" id="form-field-workDemand"
+                                          style="width:350px;height: 100px"
                                           placeholder="任务要求"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-xs-offset-2 col-xs-10 col-sm-offset-4 col-sm-5">
+                            <div class="row col-sm-offset-3">
+                                <div class="form-group col-xs-10 col-sm-5">
                                     <label class="col-sm-3 control-label no-padding-top"> 任务难度: </label>
 
                                     <div class="col-sm-9">
@@ -329,43 +330,44 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-10 col-sm-6">
-                                <div class="widget-box">
-                                    <div class="widget-header">
-                                        <h4 class="widget-title">教程上传</h4>
-                                    </div>
+                                <div class="col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-6">
+                                    <div class="widget-box">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">教程上传</h4>
+                                        </div>
 
-                                    <div class="widget-body">
-                                        <div class="widget-main">
-                                            <div class="form-group">
-                                                <div class="col-xs-12">
-                                                    <input type="file" id="id-input-file-2"/>
+                                        <div class="widget-body">
+                                            <div class="widget-main">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <input type="file" id="id-input-file-2"/>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <div class="col-xs-12">
-                                                    <input multiple="" type="file" id="id-input-file-3"/>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <input multiple="" type="file" id="id-input-file-3"/>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <label>
-                                                <input type="checkbox" name="file-format" id="id-file-format"
-                                                       class="ace"/>
-                                                <span class="lbl"> Allow only images</span>
-                                            </label>
+                                                <!--<label>
+                                                    <input type="checkbox" name="file-format" id="id-file-format"
+                                                           class="ace"/>
+                                                    <span class="lbl"> Allow only images</span>
+                                                </label>-->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </div>
                             <div class="row">
-                                <!--<div class="col-xs-10 col-sm-8">-->
-                                    <button type="button" class="btn btn-sm btn-success" style="width:100px;">
+                                <div class="col-xs-offset-4 col-xs-10 col-sm-offset-4 col-sm-5">
+                                    <button type="button" class="btn btn-sm btn-success"
+                                            style="width:100px;margin:10px">
                                         创建
                                         <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
                                     </button>
-                                <!--</div>-->
+                                </div>
                             </div>
                         </form>
                         <!-- PAGE CONTENT ENDS -->
@@ -622,12 +624,13 @@
 
 
         $('#id-input-file-1 , #id-input-file-2').ace_file_input({
-            no_file: 'No File ...',
-            btn_choose: 'Choose',
-            btn_change: 'Change',
+            no_file: '请选择教程视频文件...',
+            btn_choose: '选择',
+            btn_change: '修改',
             droppable: false,
             onchange: null,
-            thumbnail: false //| true | large
+            thumbnail: false, //| true | large
+            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
             //whitelist:'gif|png|jpg|jpeg'
             //blacklist:'exe|php'
             //onchange:''
@@ -639,11 +642,15 @@
 
         $('#id-input-file-3').ace_file_input({
             style: 'well',
-            btn_choose: 'Drop files here or click to choose',
+            btn_choose: '点击或拖动教程封面图片到此',
             btn_change: null,
-            no_icon: 'ace-icon fa fa-cloud-upload',
+            no_icon: 'ace-icon fa fa-picture-o',
             droppable: true,
-            thumbnail: 'small'//large | fit
+            thumbnail: 'fit',//large | fit
+            /*whitelist_ext: ["jpeg", "jpg", "png", "gif", "bmp"],
+            whitelist_mime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"],*/
+            allowExt: ["jpeg", "jpg", "png", "gif", "bmp"],
+            allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
             //,icon_remove:null//set null, to hide remove/reset button
             /**,before_change:function(files, dropped) {
 						//Check an example below
@@ -654,14 +661,16 @@
 						return true;
 					}*/
             ,
-            preview_error: function (filename, error_code) {
-                //name of the file that failed
-                //error_code values
-                //1 = 'FILE_LOAD_FAILED',
-                //2 = 'IMAGE_LOAD_FAILED',
-                //3 = 'THUMBNAIL_FAILED'
-                //alert(error_code);
-            }
+            preview_error:
+
+                function (filename, error_code) {
+                    //name of the file that failed
+                    //error_code values
+                    //1 = 'FILE_LOAD_FAILED',
+                    //2 = 'IMAGE_LOAD_FAILED',
+                    //3 = 'THUMBNAIL_FAILED'
+                    //alert(error_code);
+                }
 
         }).on('change', function () {
             //console.log($(this).data('ace_input_files'));
@@ -682,7 +691,7 @@
             var btn_choose
             var no_icon
             if (this.checked) {
-                btn_choose = "点击或拖动作品封面图片到此";
+                btn_choose = "点击或拖动教程封面图片到此";
                 no_icon = "ace-icon fa fa-picture-o";
 
                 whitelist_ext = ["jpeg", "jpg", "png", "gif", "bmp"];

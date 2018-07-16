@@ -380,11 +380,11 @@
                                                 </div>
                                             </div>
 
-                                            <label>
+                                           <!-- <label>
                                                 <input type="checkbox" name="file-format" id="id-file-format"
                                                        class="ace"/>
                                                 <span class="lbl"> Allow only images</span>
-                                            </label>
+                                            </label>-->
                                         </div>
                                     </div>
                                 </div>
@@ -618,12 +618,14 @@
 
 
         $('#id-input-file-1 , #id-input-file-2').ace_file_input({
-            no_file: 'No File ...',
-            btn_choose: 'Choose',
-            btn_change: 'Change',
+            no_file: '请选择作品视频文件...',
+            btn_choose: '选择',
+            btn_change: '修改',
             droppable: false,
             onchange: null,
-            thumbnail: false //| true | large
+            thumbnail: false, //| true | large
+            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
+            //allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
             //whitelist:'gif|png|jpg|jpeg'
             //blacklist:'exe|php'
             //onchange:''
@@ -635,11 +637,13 @@
 
         $('#id-input-file-3').ace_file_input({
             style: 'well',
-            btn_choose: 'Drop files here or click to choose',
+            btn_choose: '点击或拖动教程封面图片到此',
             btn_change: null,
-            no_icon: 'ace-icon fa fa-cloud-upload',
+            no_icon: 'ace-icon fa fa-picture-o',
             droppable: true,
-            thumbnail: 'small'//large | fit
+            thumbnail: 'fit',//large | fit
+            allowExt: ["jpeg", "jpg", "png", "gif", "bmp"],
+            allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
             //,icon_remove:null//set null, to hide remove/reset button
             /**,before_change:function(files, dropped) {
 						//Check an example below
