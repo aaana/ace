@@ -282,7 +282,21 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
+                        <div style="margin-top: 20px">
+                            <form>
+                                <div class="input-group ">
+                                    <input type="text" class="form-control col-xs-3" name="workName" placeholder="作品名字" />
+                                    <!--<div class="input-group-btn">-->
+                                        <!--<button onclick="refreshData()" type="button" class="btn btn-default no-border btn-sm">-->
+                                            <!--<i class="ace-icon fa fa-search icon-on-right bigger-110"></i>-->
+                                        <!--</button>-->
+                                    <!--</div>-->
 
+                                </div>
+
+
+                            </form>
+                        </div>
 
                         <table id="grid-table"></table>
 
@@ -346,7 +360,7 @@
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
-<script src="assets/js/grid.locale-en.js"></script>
+<script src="assets/js/grid.locale-cn.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -355,6 +369,7 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    $('.input-daterange').datepicker({autoclose:true,language:'cn'});
 
 
     var grid_data =
@@ -434,13 +449,54 @@
 				})
          */
 
+        $(function(){
+
+            // workGrid.loadGrid();
+            $("#grid-table").setGridParam({datatype:'json', page:1}).trigger('reloadGrid');
+            //opGrid.reSize();
+
+            /* $(window).bind('resize', function () {
+             opGrid.reSize();
+             });  */
+
+        });
 
 
 
-
-        jQuery(grid_selector).jqGrid({
+        var workGrid = jQuery(grid_selector).jqGrid({
             //direction: "rtl",
-
+            // getParam: function() {
+            //     var rowListNum = $("#contentGroupOrderTable").jqGrid('getGridParam', 'rowNum');
+            //     if (rowListNum == undefined) {
+            //         $('#pageSize').val(15);
+            //     } else {
+            //         $('#pageSize').val(rowListNum);
+            //     }
+            //     //组装查询的条件参数
+            //     var params = {
+            //         'startTime': $("#startTime").val()
+            //         , 'endTime': $("#endTime").val()
+            //         , 'supplierName': $("#supplierName").val()
+            //         , 'groupCode': $("#groupCode").val()
+            //         , 'receiveMode': $("#receiveMode").val()
+            //         , 'orgNames': $("#orgNames").val()
+            //         , 'orgIds': $("#orgIds").val()
+            //         , 'saleOperatorName': $("#saleOperatorName").val()
+            //         , 'saleOperatorIds': $("#saleOperatorIds").val()
+            //
+            //         , 'productName': $("#productName").val()
+            //         , 'remark': $("#remark").val()
+            //         , 'operType': $("#operType").val()
+            //         , 'guestName': $("#guestName").val()
+            //         , 'gender': $("#gender").val()
+            //         , 'ageFirst': $("#ageFirst").val()
+            //         , 'ageSecond': $("#ageSecond").val()
+            //         , 'nativePlace': $("#nativePlace").val()
+            //         , 'pageSize': $("#pageSize").val()
+            //         , 'userRightType': $("#userRightType").val()
+            //     };
+            //     return params;
+            // },
             //subgrid options
             subGrid : false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
@@ -450,6 +506,7 @@
                 minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
                 openicon : "ace-icon fa fa-chevron-right center orange"
             },
+            multiSort : true,
             //for this example we are using local data
             subGridRowExpanded: function (subgridDivId, rowId) {
                 var subgridTableId = subgridDivId + "_t";
@@ -466,10 +523,14 @@
                 });
             },
 
-
-
-            data: grid_data,
+            // url: 'groupOrderGuestDataList.do',
             datatype: "local",
+            // postData:workGrid.getParam(),
+            // jsonReader:{//分页的关键
+            //     id: "group_id",
+            //     root: "result",total: "totalPage",page: "pageBean",records: "totalCount",repeatitems: false
+            // },
+            data: grid_data,
             height: 250,
             colNames:[' ', '学号','姓名','年级','班级','时间', '展示', '原制作视频','制作过程'],
             colModel:[
@@ -498,9 +559,15 @@
                 }
             ],
 
+            onSortCol: function(sidx,name,sort) {
+                //点击排序列，根据哪列排序
+                alert(sidx +" " + sort);
+                return 'stop';
+            },
             viewrecords : true,
             rowNum:10,
             rowList:[10,20,30],
+
             pager : pager_selector,
             altRows: true,
             //toppager: true,
