@@ -398,7 +398,7 @@
             data: grid_data,
             datatype: "local",
             height: 250,
-            colNames: ['序号', '教程名称', '教师名字', '发布时间', '参与人数', '最近修改', '教程详情', '学习情况', '状态'],
+            colNames: ['序号', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
             colModel: [
                 /*{
                     name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
@@ -416,72 +416,60 @@
                 {
                     name: 'course',
                     index: 'course',
-                    width: 90,
-                    editable: true,
+                    width: 150,
                     sortable: true,
-                    sorttype: "date",
-                    unformat: pickDate
                 },
                 {
                     name: 'name',
                     index: 'name',
-                    width: 150,
-                    editable: true,
+                    width: 100,
                     sortable: true,
-                    editoptions: {size: "20", maxlength: "30"}
                 },
                 {
                     name: 'publish_date',
                     index: 'publish_date',
-                    width: 70,
-                    editable: true,
+                    width: 130,
                     sortable: true,
-                    edittype: "checkbox",
-                    editoptions: {value: "Yes:No"},
-                    unformat: aceSwitch
+                    sorttype: "date",
                 },
                 {
                     name: 'count',
                     index: 'count',
-                    width: 90,
-                    editable: true,
+                    width: 100,
                     sortable: true,
-                    edittype: "select",
-                    editoptions: {value: "FE:FedEx;IN:InTime;TN:TNT;AR:ARAMEX"}
                 },
                 {
                     name: 'last_date',
                     index: 'last_date',
-                    width: 150,
+                    width: 130,
                     sortable: true,
-                    editable: true,
-                    edittype: "textarea",
-                    editoptions: {rows: "2", cols: "10"}
+                }, {
+                    name: 'difficulty',
+                    index: 'difficulty',
+                    width: 100,
+                    sortable: true,
                 },
                 {
                     name: 'detail',
                     index: 'detail',
-                    width: 150,
+                    width: 120,
                     sortable: true,
-                    editable: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">教程详情</a>"
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, {
                     name: 'analyze',
                     index: 'analyze',
-                    width: 150,
+                    width: 120,
                     sortable: true,
-                    editable: false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
                     name: 'state',
                     index: 'state',
-                    width: 150,
+                    width: 120,
                     sortable: true,
-                    editable: false,
                 }
             ],
 
@@ -563,9 +551,9 @@
                 delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon: 'ace-icon fa fa-search orange',
-                refresh: false,
+                refresh: true,
                 refreshicon: 'ace-icon fa fa-refresh green',
-                view: false,
+                view: true,
                 viewicon: 'ace-icon fa fa-search-plus grey',
             },
             {
