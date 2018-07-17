@@ -452,7 +452,7 @@
         $(function(){
 
             // workGrid.loadGrid();
-            $("#grid-table").setGridParam({datatype:'json', page:1}).trigger('reloadGrid');
+            // $("#grid-table").setGridParam({datatype:'json', page:1}).trigger('reloadGrid');
             //opGrid.reSize();
 
             /* $(window).bind('resize', function () {
@@ -498,6 +498,8 @@
             //     return params;
             // },
             //subgrid options
+
+
             subGrid : false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
             //datatype: "xml",
@@ -548,16 +550,31 @@
                 {name:'name',index:'name', width:150,editable: false},
                 {name:'grade',index:'grade', width:150,editable: false},
                 {name:'class',index:'class', width:150,editable: false},
-                {name:'sdate',index:'sdate',width:90, editable:false, sorttype:"time",unformat: pickDate},
-                {name:'display',index:'display', width:70, editable: true,edittype:"checkbox",editoptions: {value:"是:否"},unformat: aceSwitch},
-                {name:'rawVideo',index:'rawVideo', width:90, sortable:false, editable: false,
+                {name:'sdate',index:'sdate',width:90, editable:false, sorttype:"time",unformat: pickDate,search:false},
+                {name:'display',index:'display', width:70, editable: true,edittype:"checkbox",editoptions: {value:"是:否"},unformat: aceSwitch,search:false},
+                {name:'rawVideo',index:'rawVideo', width:90, sortable:false, editable: false,search:false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='"+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">下载</a>"}  },
-                {name:'processedVideo',index:'processedVideo', width:150, sortable:false,editable: false,
+                {name:'processedVideo',index:'processedVideo', width:150, sortable:false,editable: false,search:false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看（上传）</a>"}
                 }
             ],
+
+            onPaging:function(pageBtn){
+                console.log(pageBtn);
+//	    	var re_records = $jqgrid.getGridParam('records');//获取返回的记录数
+                var re_page = $(grid_selector).getGridParam('page');//获取返回的当前页
+                var re_rowNum= $(grid_selector).getGridParam('rowNum');//获取每页数
+                // var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
+                // alert(re_total);
+                if(pageBtn==="next"){
+                    $(grid_selector).setGridParam({page:re_page+1, rowNum:re_rowNum}).trigger('reloadGrid');
+                }
+                if(pageBtn==="prev"){
+                    $(grid_selector).setGridParam({page:re_page-1, rowNum:re_rowNum}).trigger('reloadGrid');
+                }
+                },
 
             onSortCol: function(sidx,name,sort) {
                 //点击排序列，根据哪列排序
@@ -702,10 +719,20 @@
                 }
                 ,
                 multipleSearch: true,
+                autoSearch:false,
+                closeAfterSearch: true,
                 /**
                  multipleGroup:true,
                  showQuery: true
                  */
+                onSearch:function () {
+                    postData = $(grid_selector).jqGrid('getGridParam', 'postData');
+                    filters = $.parseJSON(postData.filters);
+                    rules = filters.rules;
+                    console.log(filters);
+
+
+                }
             },
             {
                 //view record form

@@ -560,6 +560,12 @@
                  multipleGroup:true,
                  showQuery: true
                  */
+                onSearch:function () {
+                    postData = $(grid_selector).jqGrid('getGridParam', 'postData');
+                    filters = $.parseJSON(postData.filters);
+                    rules = filters.rules;
+                    console.log(rules);
+                }
             },
             {
                 //view record form
