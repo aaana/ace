@@ -323,9 +323,9 @@
                                     <label class="col-sm-3 control-label no-padding-right"
                                            for="form-field-workDemand">任务要求：</label>
                                     <div class="col-sm-9">
-                                        <textarea  id="form-field-workDemand"
-                                          style="width:100%;height: 100px"
-                                          placeholder="任务要求"></textarea>
+                                        <textarea id="form-field-workDemand"
+                                                  style="width:100%;height: 100px"
+                                                  placeholder="任务要求"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -979,12 +979,12 @@
     UUID.prototype.createUUID;
 
     function submitBn(type) {
-        if($("#form-field-course").val() === ''){
+        if ($("#form-field-course").val() === '') {
             alert("请输入任务名称");
             $("#form-field-course").focus();
             return;
         }
-        if($("input[name='score']")[0].value === ''){
+        if ($("input[name='score']")[0].value === '') {
             alert("请选择难度");
             return;
         }
@@ -995,7 +995,7 @@
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
                     "kindId": 1,
-                    "difficulty":$("input[name='score']")[0].value
+                    "difficulty": $("input[name='score']")[0].value
                 };
                 break;
             case 2:
@@ -1004,7 +1004,7 @@
                     "description": $("#form-field-workDemand").val(),
                     "kindId": 1,
                     "photoUrl": uploadName2,
-                    "difficulty":$("input[name='score']")[0].value
+                    "difficulty": $("input[name='score']")[0].value
                 };
                 break;
             case 3:
@@ -1013,7 +1013,7 @@
                     "description": $("#form-field-workDemand").val(),
                     "videoUrl": uploadName1,
                     "kindId": 1,
-                    "difficulty":$("input[name='score']")[0].value
+                    "difficulty": $("input[name='score']")[0].value
                 };
                 break;
             case 4:
@@ -1023,7 +1023,7 @@
                     "photoUrl": uploadName2,
                     "kindId": 1,
                     "videoUrl": uploadName1,
-                    "difficulty":$("input[name='score']")[0].value
+                    "difficulty": $("input[name='score']")[0].value
                 };
                 break;
         }
@@ -1046,14 +1046,14 @@
                 }*/
             },
             error: function (responseStr) {
-                console.log("error"+responseStr);
+                console.log("error" + responseStr);
             }
         });
     }
 
     function test() {
         var type = {
-            value : -1
+            value: -1
         }
         if ($('#id-input-file-2')[0].files[0] == null) {
             if ($('#id-input-file-3')[0].files[0] == null) {
@@ -1061,17 +1061,9 @@
                 submitBn(type);
             } else {
                 type.value = 2;
-                console.log(uploadName2);
-                console.log($('#id-input-file-3')[0].files[0].name);
-                console.log(uploadName2+$('#id-input-file-3')[0].files[0].name);
-                console.log(uploadName2);
                 var title = $('#id-input-file-3')[0].files[0].name;
                 var leng = title.split(".").length;
-                var titleName = uploadName2+"."+title.split(".")[leng-1];
-                console.log(titleName);
-
-                uploadName2 = uploadName1+$('#id-input-file-3')[0].files[0].split(".")[-1];
-                console.log(uploadName2);
+                uploadName2 = uploadName2 + "." + title.split(".")[leng - 1];
                 var form = new FormData();
                 form.append('file', $('#id-input-file-3')[0].files[0]);
                 form.append("filename", uploadName2);
@@ -1097,6 +1089,9 @@
         } else {
             if ($('#id-input-file-3')[0].files[0] == null) {
                 type.value = 3;
+                var title = $('#id-input-file-2')[0].files[0].name;
+                var leng = title.split(".").length;
+                uploadName1 = uploadName1 + "." + title.split(".")[leng - 1];
                 var form = new FormData();
                 form.append('file', $('#id-input-file-2')[0].files[0]);
                 form.append("filename", uploadName1);
@@ -1120,6 +1115,15 @@
                 });
             } else {
                 type.value = 4;
+                var title = $('#id-input-file-3')[0].files[0].name;
+                var leng = title.split(".").length;
+                uploadName2 = uploadName2 + "." + title.split(".")[leng - 1];
+
+
+                var title1 = $('#id-input-file-2')[0].files[0].name;
+                var leng1 = title1.split(".").length;
+                uploadName1 = uploadName1 + "." + title1.split(".")[leng1 - 1];
+
                 var form = new FormData();
                 form.append('file', $('#id-input-file-3')[0].files[0]);
                 form.append("filename", uploadName2);
