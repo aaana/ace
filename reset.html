@@ -142,7 +142,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="active">
+            <li class="">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建 </span>
@@ -166,8 +166,8 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
-                <a href="reset.html">
+            <li class="active">
+                <a href="#">
                     <i class="menu-icon fa fa-key" aria-hidden="true"></i>
                     <span class="menu-text"> 修改密码 </span>
                 </a>
@@ -188,39 +188,11 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-plus"></i>
-                        <a href="#">创建</a>
+                        <i class="ace-icon fa fa-key"></i>
+                        <a href="#">修改密码</a>
                     </li>
-
-                    <!--<li>-->
-                    <!--<a href="#">学习情况</a>-->
-                    <!--</li>-->
                 </ul><!-- /.breadcrumb -->
             </div>
-            <!--<div class="breadcrumbs ace-save-state" id="breadcrumbs">-->
-            <!--<ul class="breadcrumb">-->
-            <!--<li>-->
-            <!--<i class="ace-icon fa fa-search"></i>-->
-            <!--<a href="#">查询</a>-->
-            <!--</li>-->
-
-            <!--&lt;!&ndash;<li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<a href="#">学习情况</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--<li class="active">学习情况</li>-->
-            <!--</ul>&lt;!&ndash; /.breadcrumb &ndash;&gt;-->
-
-            <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<form class="form-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<span class="input-icon">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<i class="ace-icon fa fa-search nav-search-icon"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</form>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&lt;!&ndash; /.nav-search &ndash;&gt;&ndash;&gt;-->
-            <!--</div>-->
-
-
             <div class="page-content">
 
                 <div class="ace-settings-container" id="ace-settings-container">
@@ -301,85 +273,58 @@
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
                         <form class="form-horizontal" role="form">
-                            <div class="row col-sm-offset-2">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-course">
-                                        任务名称：</label>
+                            <div class="login-container">
+                                <div id="signup-box" class="signup-box widget-box no-border">
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <form>
+                                                <fieldset>
+                                                    <label class="col-sm-3 control-label no-padding-right"> 原密码：</label>
+                                                    <label class="col-sm-9 lock clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="Original Password"/>
+															<i class="ace-icon fa fa-key"></i>
+														</span>
+                                                    </label>
 
-                                    <div class="col-sm-9">
-                                        <input type="text" id="form-field-course" placeholder="任务名称"
-                                               style="width:250px;"
-                                        />
+                                                    <label class="col-sm-3 control-label no-padding-right"> 新密码：</label>
+                                                    <label class="col-sm-9 block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="New Password"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                                    </label>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row col-sm-offset-2">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-right"
-                                           for="form-field-workDemand">任务要求：</label>
-                                    <div class="col-sm-9">
-                                <textarea class="col-xs-10 col-sm-8" id="form-field-workDemand"
-                                          style="width:350px;height: 100px"
-                                          placeholder="任务要求"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row col-sm-offset-2">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-top"> 任务难度: </label>
+                                                    <label class="col-sm-3 control-label no-padding-right"> 再次输入：</label>
+                                                    <label class="col-sm-9 block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="Repeat password"/>
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+                                                    </label>
 
-                                    <div class="col-sm-9">
-                                        <div class="rating inline"></div>
+                                                    <button type="button" class="width-30 pull-left btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-calendar-check-o"></i>
+                                                        <span class="bigger-110">确认修改</span>
+                                                    </button>
 
-                                        <div class="hr hr-16 hr-dotted"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-6">
-                                    <div class="widget-box">
-                                        <div class="widget-header">
-                                            <h4 class="widget-title">任务上传</h4>
+                                                    <button type="button" class="width-30 pull-right btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-calendar-times-o"></i>
+                                                        <span class="bigger-110">取消修改</span>
+                                                    </button>
+                                                </fieldset>
+                                            </form>
                                         </div>
-
-                                        <div class="widget-body">
-                                            <div class="widget-main">
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <input type="file" id="id-input-file-2"/>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <input multiple="" type="file" id="id-input-file-3"/>
-                                                    </div>
-                                                </div>
-
-                                                <!--<label>
-                                                    <input type="checkbox" name="file-format" id="id-file-format"
-                                                           class="ace"/>
-                                                    <span class="lbl"> Allow only images</span>
-                                                </label>-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-offset-4 col-xs-10 col-sm-offset-4 col-sm-5">
-                                    <button type="button" class="btn btn-sm btn-success"
-                                            style="width:100px;margin:10px">
-                                        创建
-                                        <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
-                                    </button>
-                                </div>
-                            </div>
+                                    </div><!-- /.widget-body -->
+                                </div><!-- /.signup-box -->
+                            </div><!-- /.position-relative -->
                         </form>
                         <!-- PAGE CONTENT ENDS -->
                     </div><!-- /.col -->
-                </div><!-- /.row -->
+                </div>
             </div><!-- /.page-content -->
         </div>
     </div><!-- /.main-content -->
