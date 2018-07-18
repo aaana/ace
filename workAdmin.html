@@ -371,6 +371,7 @@
 <script type="text/javascript">
     $('.input-daterange').datepicker({autoclose:true,language:'cn'});
 
+    var data = {};
 
     var grid_data =
         [
@@ -401,21 +402,24 @@
 
         ];
 
-    // var subgrid_data =
-    //     [
-    //         {id:"1", name:"sub grid item 1", qty: 11},
-    //         {id:"2", name:"sub grid item 2", qty: 3},
-    //         {id:"3", name:"sub grid item 3", qty: 12},
-    //         {id:"4", name:"sub grid item 4", qty: 5},
-    //         {id:"5", name:"sub grid item 5", qty: 2},
-    //         {id:"6", name:"sub grid item 6", qty: 9},
-    //         {id:"7", name:"sub grid item 7", qty: 3},
-    //         {id:"8", name:"sub grid item 8", qty: 8}
-    //     ];
+    var subgrid_data =
+        [
+            {id:"1", name:"sub grid item 1", qty: 11},
+            {id:"2", name:"sub grid item 2", qty: 3},
+            {id:"3", name:"sub grid item 3", qty: 12},
+            {id:"4", name:"sub grid item 4", qty: 5},
+            {id:"5", name:"sub grid item 5", qty: 2},
+            {id:"6", name:"sub grid item 6", qty: 9},
+            {id:"7", name:"sub grid item 7", qty: 3},
+            {id:"8", name:"sub grid item 8", qty: 8}
+        ];
 
     jQuery(function($) {
+
+
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
+
 
 
         var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -448,20 +452,6 @@
 				  }
 				})
          */
-
-        $(function(){
-
-            // workGrid.loadGrid();
-            // $("#grid-table").setGridParam({datatype:'json', page:1}).trigger('reloadGrid');
-            //opGrid.reSize();
-
-            /* $(window).bind('resize', function () {
-             opGrid.reSize();
-             });  */
-
-        });
-
-
 
         var workGrid = jQuery(grid_selector).jqGrid({
             //direction: "rtl",
@@ -525,14 +515,22 @@
                 });
             },
 
-            // url: 'groupOrderGuestDataList.do',
-            datatype: "local",
-            // postData:workGrid.getParam(),
-            // jsonReader:{//分页的关键
-            //     id: "group_id",
-            //     root: "result",total: "totalPage",page: "pageBean",records: "totalCount",repeatitems: false
-            // },
-            data: grid_data,
+            url: 'http://192.168.0.153:8080/work/filterSearch',
+            datatype: "json",
+            postData:{
+                "page":{
+                    "page":0,
+                    "size":2,
+                    "sorts":[{
+                        "attr":"name",
+                        "direction":"desc"
+                    }]
+                }
+            },
+            jsonReader:{//分页的关键
+                root: "msg",total: "totalPages",page: "pageBean",records: "msg.data",repeatitems: false
+            },
+            // data: data,
             height: 250,
             colNames:[' ', '学号','姓名','年级','班级','时间', '展示', '原制作视频','制作过程'],
             colModel:[
@@ -566,10 +564,18 @@
 //	    	var re_records = $jqgrid.getGridParam('records');//获取返回的记录数
                 var re_page = $(grid_selector).getGridParam('page');//获取返回的当前页
                 var re_rowNum= $(grid_selector).getGridParam('rowNum');//获取每页数
-                // var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
+                var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
                 // alert(re_total);
                 if(pageBtn==="next"){
-                    $(grid_selector).setGridParam({page:re_page+1, rowNum:re_rowNum}).trigger('reloadGrid');
+                    $(grid_selector).jqGrid('clearGridData');
+                    $(grid_selector).jqGrid('setGridParam',{
+                        page:re_page+1,
+                        rowNum:re_rowNum,
+                        datatype:'local',
+                        data:grid_data//newData是符合格式要求的重新加载的数据
+                    }).trigger("reloadGrid");
+
+                    // $(grid_selector).jqGrid.setGridParam({page:re_page+1, rowNum:re_rowNum,data:subgrid_data,datatype:'local'}).trigger('reloadGrid');
                 }
                 if(pageBtn==="prev"){
                     $(grid_selector).setGridParam({page:re_page-1, rowNum:re_rowNum}).trigger('reloadGrid');
@@ -593,11 +599,11 @@
             //multikey: "ctrlKey",
             multiboxonly: true,
 
+
             loadComplete : function() {
                 var table = this;
                 setTimeout(function(){
                     styleCheckbox(table);
-
                     updateActionIcons(table);
                     updatePagerIcons(table);
                     enableTooltips(table);
@@ -626,8 +632,6 @@
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
-
-
         //enable search/filter toolbar
         //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
         //jQuery(grid_selector).filterToolbar({});
@@ -649,7 +653,6 @@
             }, 0);
         }
 
-
         //navButtons下面导航区
         jQuery(grid_selector).jqGrid('navGrid',pager_selector,
             { 	//navbar options
@@ -661,7 +664,7 @@
                 delicon : 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon : 'ace-icon fa fa-search orange',
-                refresh: true,
+                refresh: false,
                 refreshicon : 'ace-icon fa fa-refresh green',
                 view: true,
                 viewicon : 'ace-icon fa fa-search-plus grey',
@@ -730,8 +733,12 @@
                     filters = $.parseJSON(postData.filters);
                     rules = filters.rules;
                     console.log(filters);
-
-
+                    $(grid_selector).jqGrid('clearGridData');//清空表格
+                        $(grid_selector).jqGrid('setGridParam',{
+                            page:1,
+                            datatype:'local',
+                            data:subgrid_data//newData是符合格式要求的重新加载的数据
+                        }).trigger("reloadGrid");
                 }
             },
             {
@@ -742,8 +749,28 @@
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                 }
             }
-        )
+        );
 
+        $(grid_selector).navButtonAdd(pager_selector,
+            {
+                buttonicon: "ace-icon fa fa-refresh green",
+                title: "",
+                caption: "",
+                position: "last",
+                onClickButton: refreshFilterGrid
+            });
+
+        function refreshFilterGrid() {
+            $(grid_selector).jqGrid('clearGridData');//清空表格
+            $(grid_selector).jqGrid('setGridParam',{
+                postData:{"filters":null},
+                datatype:'local',
+                data:grid_data//newData是符合格式要求的重新加载的数据
+            }).trigger("reloadGrid");
+            console.log("refresh");
+            filters = null;
+            rules = null;
+        }
 
 
         function style_edit_form(form) {
@@ -863,6 +890,43 @@
             $('.navtable .ui-pg-button').tooltip({container:'body'});
             $(table).find('.ui-pg-div').tooltip({container:'body'});
         }
+
+
+        // $(grid_selector).jqGrid('setGridParam',{
+        //     page:1,
+        //     total:2,
+        //     records:20,
+        //     datatype:'local',
+        //     data:subgrid_data//newData是符合格式要求的重新加载的数据
+        // }).trigger("reloadGrid");
+        
+        $.ajax({
+            data:{
+
+                page:0,
+                size:2,
+                sorts:[{
+                attr:"name",
+                direction:"desc"
+            }]
+
+                // page : $(grid_selector).getGridParam('page'),//获取返回的当前页
+                // rowNum : $(grid_selector).getGridParam('rowNum')//获取每页数
+            },
+            datatype:'json',
+            url:'http://192.168.0.153:8080/work/filterSearch',
+            method:'post',
+            success:function (data) {
+                $(grid_selector).jqGrid('setGridParam',{
+                    postData:{"filters":null},
+                    datatype:'local',
+                    data:data//newData是符合格式要求的重新加载的数据
+                }).trigger("reloadGrid");
+            },
+            error:function () {
+
+            }
+        });
 
         //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
