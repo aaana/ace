@@ -67,17 +67,23 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
+															<input id="username" type="text" class="form-control" placeholder="用户名" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                            </label>
+                                            <label for="utype">用户类型</label>
+                                            <select class="form-control" id="utype">
+                                                <option value="0">老师</option>
+                                                <option value="1">学生</option>
+                                            </select>
+
+                                            <!--<label class="block clearfix">-->
+														<!--<span class="block input-icon input-icon-right">-->
+															<!--<input type="password" class="form-control" placeholder="密码" />-->
+															<!--<i class="ace-icon fa fa-lock"></i>-->
+														<!--</span>-->
+                                            <!--</label>-->
 
 
 
@@ -105,14 +111,14 @@
                                                         </li>
                                                     </ul>
                                                 </div>&lt;!&ndash; /.btn-group &ndash;&gt;-->
-                                                <button type="button" class="width-35 pull-left btn btn-sm btn-primary">
-                                                    <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">教师登录</span>
-                                                </button>
+                                                <!--<button type="button" class="width-35 pull-left btn btn-sm btn-primary">-->
+                                                    <!--<i class="ace-icon fa fa-key"></i>-->
+                                                    <!--<span class="bigger-110">教师登录</span>-->
+                                                <!--</button>-->
 
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                                <button onclick="login()" type="button" class="width-35 pull-right btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-105">管理员登录</span>
+                                                    <span class="bigger-105">登录</span>
                                                 </button>
                                             </div>
 
@@ -349,6 +355,29 @@
         });
 
     });
+
+    function login() {
+        var account = $('#username').val().trim();
+        var uType = $('#utype').val().trim();
+        $.ajax({
+            data:{
+                account:account,
+                uType:uType
+            },
+            dataType:'json',
+            method:'get',
+            url:'http://192.168.0.153:8080/user/login',
+            success:function (data) {
+                console.log(data);
+                if(data.status === 'success' ){
+                    window.location.href='userAdmin.html';
+                }
+            },
+            error:function (msg) {
+                console.log(msg);
+            }
+        });
+    }
 </script>
 </body>
 </html>
