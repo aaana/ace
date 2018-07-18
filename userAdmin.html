@@ -103,7 +103,7 @@
                         <!--<li class="divider"></li>-->
 
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -277,6 +277,10 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+
+    function logout() {
+        window.location.href = 'userLogin.html';
+    }
 
     function refreshData() {
         var grid_data =
@@ -560,6 +564,12 @@
                  multipleGroup:true,
                  showQuery: true
                  */
+                onSearch:function () {
+                    postData = $(grid_selector).jqGrid('getGridParam', 'postData');
+                    filters = $.parseJSON(postData.filters);
+                    rules = filters.rules;
+                    console.log(rules);
+                }
             },
             {
                 //view record form

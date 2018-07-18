@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
     <title>jqGrid - Ace Admin</title>
 
     <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
@@ -143,7 +142,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="active">
+            <li class="">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建 </span>
@@ -167,8 +166,8 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
-                <a href="reset.html">
+            <li class="active">
+                <a href="#">
                     <i class="menu-icon fa fa-key" aria-hidden="true"></i>
                     <span class="menu-text"> 修改密码 </span>
                 </a>
@@ -189,39 +188,11 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-plus"></i>
-                        <a href="#">创建</a>
+                        <i class="ace-icon fa fa-key"></i>
+                        <a href="#">修改密码</a>
                     </li>
-
-                    <!--<li>-->
-                    <!--<a href="#">学习情况</a>-->
-                    <!--</li>-->
                 </ul><!-- /.breadcrumb -->
             </div>
-            <!--<div class="breadcrumbs ace-save-state" id="breadcrumbs">-->
-            <!--<ul class="breadcrumb">-->
-            <!--<li>-->
-            <!--<i class="ace-icon fa fa-search"></i>-->
-            <!--<a href="#">查询</a>-->
-            <!--</li>-->
-
-            <!--&lt;!&ndash;<li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<a href="#">学习情况</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--<li class="active">学习情况</li>-->
-            <!--</ul>&lt;!&ndash; /.breadcrumb &ndash;&gt;-->
-
-            <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<form class="form-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<span class="input-icon">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<i class="ace-icon fa fa-search nav-search-icon"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</form>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&lt;!&ndash; /.nav-search &ndash;&gt;&ndash;&gt;-->
-            <!--</div>-->
-
-
             <div class="page-content">
 
                 <div class="ace-settings-container" id="ace-settings-container">
@@ -301,89 +272,59 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
-                        <form class="form-horizontal" role="form" id="form">
-                            <!-- action="/new/topicArticle/{{$params['topic']->id}}" method="post"
-                             enctype="multipart/form-data"-->
+                        <form class="form-horizontal" role="form">
+                            <div class="login-container">
+                                <div id="signup-box" class="signup-box widget-box no-border">
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            <form>
+                                                <fieldset>
+                                                    <label class="col-sm-3 control-label no-padding-right"> 原密码：</label>
+                                                    <label class="col-sm-9 lock clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="Original Password"/>
+															<i class="ace-icon fa fa-key"></i>
+														</span>
+                                                    </label>
 
-                            <div class="row col-sm-offset-2">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-right" for="form-field-course">
-                                        任务名称：</label>
+                                                    <label class="col-sm-3 control-label no-padding-right"> 新密码：</label>
+                                                    <label class="col-sm-9 block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="New Password"/>
+															<i class="ace-icon fa fa-lock"></i>
+														</span>
+                                                    </label>
 
-                                    <div class="col-sm-9">
-                                        <input type="text" id="form-field-course" placeholder="任务名称"
-                                               style="width:250px;"
-                                        />
+                                                    <label class="col-sm-3 control-label no-padding-right"> 再次输入：</label>
+                                                    <label class="col-sm-9 block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" class="form-control"
+                                                                   placeholder="Repeat password"/>
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+                                                    </label>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row col-sm-offset-2">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-right"
-                                           for="form-field-workDemand">任务要求：</label>
-                                    <div class="col-sm-9">
-                                <textarea class="col-xs-10 col-sm-8" id="form-field-workDemand"
-                                          style="width:350px;height: 100px"
-                                          placeholder="任务要求"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row col-sm-offset-2">
-                                <div class="form-group col-xs-10 col-sm-5">
-                                    <label class="col-sm-3 control-label no-padding-top"> 任务难度: </label>
+                                                    <button type="button" class="width-30 pull-left btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-calendar-check-o"></i>
+                                                        <span class="bigger-110">确认修改</span>
+                                                    </button>
 
-                                    <div class="col-sm-9">
-                                        <div class="rating inline"></div>
-
-                                        <div class="hr hr-16 hr-dotted"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-offset-2 col-xs-10 col-sm-offset-2 col-sm-6">
-                                    <div class="widget-box">
-                                        <div class="widget-header">
-                                            <h4 class="widget-title">任务上传</h4>
+                                                    <button type="button" class="width-30 pull-right btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-calendar-times-o"></i>
+                                                        <span class="bigger-110">取消修改</span>
+                                                    </button>
+                                                </fieldset>
+                                            </form>
                                         </div>
-
-                                        <div class="widget-body">
-                                            <div class="widget-main">
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <input type="file" id="id-input-file-2"/>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-xs-12">
-                                                        <input multiple="" type="file" id="id-input-file-3"/>
-                                                    </div>
-                                                </div>
-
-                                                <!--<label>
-                                                    <input type="checkbox" name="file-format" id="id-file-format"
-                                                           class="ace"/>
-                                                    <span class="lbl"> Allow only images</span>
-                                                </label>-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-offset-4 col-xs-10 col-sm-offset-4 col-sm-5">
-                                    <button type="button" class="btn btn-sm btn-success" onclick="test()"
-                                            style="width:100px;margin:10px">
-                                        创建
-                                        <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
-                                    </button>
-                                </div>
-                            </div>
+                                    </div><!-- /.widget-body -->
+                                </div><!-- /.signup-box -->
+                            </div><!-- /.position-relative -->
                         </form>
                         <!-- PAGE CONTENT ENDS -->
                     </div><!-- /.col -->
-                </div><!-- /.row -->
+                </div>
             </div><!-- /.page-content -->
         </div>
     </div><!-- /.main-content -->
@@ -444,8 +385,6 @@
 <script src="assets/js/echarts.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="assets/js/base64.js"></script>
-
 <script src="assets/js/jquery-ui.custom.min.js"></script>
 <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
@@ -485,18 +424,18 @@
         $('.rating').raty({
             'cancel': false,
             'half': false,
-            'starType': 'i',
+            'starType': 'i'
+            /**,
 
-            'click': function () {
-                //console.log($('#rating').)
-                //setRatingColors.call(this);
-            },
-            'mouseover': function () {
-                //setRatingColors.call(this);
-            },
-            'mouseout': function () {
-                //setRatingColors.call(this);
-            }
+             'click': function() {
+						setRatingColors.call(this);
+					},
+             'mouseover': function() {
+						setRatingColors.call(this);
+					},
+             'mouseout': function() {
+						setRatingColors.call(this);
+					}*/
         })//.find('i:not(.star-raty)').addClass('grey');
 
 
@@ -643,7 +582,7 @@
             droppable: false,
             onchange: null,
             thumbnail: false, //| true | large
-            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb", "pdf"],
+            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
             //whitelist:'gif|png|jpg|jpeg'
             //blacklist:'exe|php'
             //onchange:''
@@ -971,306 +910,7 @@
             $('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
         });
 
-
     });
-
-    var uploadName1 = "教程号1视频5.mp4";
-    var uploadName2 = "教程号1图片5.jpg";
-
-    function submitBn(type) {
-        if($("#form-field-course").val() === ''){
-            alert("请输入任务名称");
-            $("#form-field-course").focus();
-            return;
-        }
-        if($("input[name='score']")[0].value === ''){
-            alert("请选择难度");
-            return;
-        }
-        console.log("表单内容" + type.value);
-        switch (type.value) {
-            case 1:
-                data1 = {
-                    "name": $("#form-field-course").val(),
-                    "description": $("#form-field-workDemand").val(),
-                    "kindId": 1,
-                    "difficulty":$("input[name='score']")[0].value
-                };
-                break;
-            case 2:
-                data1 = {
-                    "name": $("#form-field-course").val(),
-                    "description": $("#form-field-workDemand").val(),
-                    "kindId": 1,
-                    "photoUrl": uploadName2,
-                    "difficulty":$("input[name='score']")[0].value
-                };
-                break;
-            case 3:
-                data1 = {
-                    "name": $("#form-field-course").val(),
-                    "description": $("#form-field-workDemand").val(),
-                    "videoUrl": uploadName1,
-                    "kindId": 1,
-                    "difficulty":$("input[name='score']")[0].value
-                };
-                break;
-            case 4:
-                data1 = {
-                    "name": $("#form-field-course").val(),
-                    "description": $("#form-field-workDemand").val(),
-                    "photoUrl": uploadName2,
-                    "kindId": 1,
-                    "videoUrl": uploadName1,
-                    "difficulty":$("input[name='score']")[0].value
-                };
-                break;
-        }
-        console.log("表单内容" + JSON.stringify(data1));
-        $.ajax({
-            url: "http://192.168.0.153:8080/course/create?token=1d44662ee7e0452a9d594841799d00ac",
-            contentType: "application/json",
-            type: 'POST',
-            data: JSON.stringify(data1),
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("正在进行表单提交，请稍候");
-            },
-            success: function (responseStr) {
-                console.log("表单提交成功!!!" + responseStr);
-                /*if (responseStr.status === 200) {
-                    console.log("表单提交成功" + responseStr);
-                } else {
-                    console.log("表单提交失败");
-                }*/
-            },
-            error: function (responseStr) {
-                console.log("error"+responseStr);
-            }
-        });
-    }
-
-    function test() {
-        var type = {
-            value : -1
-        }
-
-
-        if ($('#id-input-file-2')[0].files[0] == null) {
-            if ($('#id-input-file-3')[0].files[0] == null) {
-                type.value = 1;
-                submitBn(type);
-            } else {
-                type.value = 2;
-                var form = new FormData();
-                form.append('file', $('#id-input-file-3')[0].files[0]);
-                form.append("filename", uploadName2);
-                $.ajax({
-                    url: "http://192.168.0.153:8080/file/upload",
-                    type: "POST",
-                    cache: false,
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function () {
-                        console.log("正在进行传图片，请稍候");
-                    },
-                    success: function (data) {
-                        console.log("传图片over..");
-                        submitBn(type);
-                    },
-                    error: function (e) {
-                        console.log("传视频失败");
-                    }
-                });
-            }
-        } else {
-            if ($('#id-input-file-3')[0].files[0] == null) {
-                type.value = 3;
-                var form = new FormData();
-                form.append('file', $('#id-input-file-2')[0].files[0]);
-                form.append("filename", uploadName1);
-                $.ajax({
-                    url: "http://192.168.0.153:8080/file/upload",
-                    type: "POST",
-                    cache: false,
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function () {
-                        console.log("正在进行传视频，请稍候");
-                    },
-                    success: function (data) {
-                        console.log("传视频over.." + data.msg);
-                        submitBn(type);
-                    },
-                    error: function (e) {
-                        console.log("传视频失败");
-                    }
-                });
-            } else {
-                type.value = 4;
-                var form = new FormData();
-                form.append('file', $('#id-input-file-3')[0].files[0]);
-                form.append("filename", uploadName2);
-                $.ajax({
-                    url: "http://192.168.0.153:8080/file/upload",
-                    type: "POST",
-                    cache: false,
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function () {
-                        console.log("正在进行传图片，请稍候");
-                    },
-                    success: function (data) {
-                        console.log("传图片over..");
-                        var form = new FormData();
-                        form.append('file', $('#id-input-file-2')[0].files[0]);
-                        form.append("filename", uploadName1);
-                        $.ajax({
-                            url: "http://192.168.0.153:8080/file/upload",
-                            type: "POST",
-                            cache: false,
-                            data: form,
-                            processData: false,
-                            contentType: false,
-                            beforeSend: function () {
-                                console.log("正在进行传视频，请稍候");
-                            },
-                            success: function (data) {
-                                console.log("传视频over.." + data.msg);
-                                submitBn(type);
-                            },
-                            error: function (e) {
-                                console.log("传视频失败");
-                            }
-                        });
-                    },
-                    error: function (e) {
-                        console.log("传视频失败");
-                    }
-                });
-            }
-        }
-
-
-        /* if ($('#id-input-file-2')[0].files[0] == null) {
-             type = 1;
-             if ($('#id-input-file-3')[0].files[0] == null) {
-                 type = 2;
-             }
-             else {
-                 type = 3;
-                 var form = new FormData();
-                 form.append('file', $('#id-input-file-3')[0].files[0]);
-                 form.append("filename", "图片7.jpg");
-                 $.ajax({
-                     url: "http://192.168.0.153:8080/file/upload",
-                     type: "POST",
-                     cache: false,
-                     data: form,
-                     processData: false,
-                     contentType: false,
-                     beforeSend: function () {
-                         console.log("正在进行传图片，请稍候");
-                     },
-                     success: function (data) {
-                         console.log("传图片over..");
-                         uploadName2 = data.msg;
-
-                     },
-                     error: function (e) {
-                         console.log("传视频失败");
-                     }
-                 });
-             }
-         }
-         else {
-             type = 4;
-             var form = new FormData();
-             form.append('file', $('#id-input-file-2')[0].files[0]);
-             form.append("filename", "视频7.pdf");
-             $.ajax({
-                 url: "http://192.168.0.153:8080/file/upload",
-                 type: "POST",
-                 cache: false,
-                 data: form,
-                 processData: false,
-                 contentType: false,
-                 beforeSend: function () {
-                     console.log("正在进行传视频，请稍候");
-                 },
-                 success: function (data) {
-                     console.log("传视频over.." + data.msg);
-                     uploadName1 = data.msg;
-                     if ($('#id-input-file-3')[0].files[0] == null) {
-                     }
-                     else {
-                         var form = new FormData();
-                         form.append('file', $('#id-input-file-3')[0].files[0]);
-                         form.append("filename", "图片7.jpg");
-                         $.ajax({
-                             url: "http://192.168.0.153:8080/file/upload",
-                             type: "POST",
-                             cache: false,
-                             data: form,
-                             processData: false,
-                             contentType: false,
-                             beforeSend: function () {
-                                 console.log("正在进行传图片，请稍候");
-                             },
-                             success: function (data) {
-                                 console.log("传图片over..");
-                                 uploadName2 = data.msg;
-                             },
-                             error: function (e) {
-                                 console.log("传视频失败");
-                             }
-                         });
-                     }
-                 },
-                 error: function (e) {
-                     console.log("传视频失败");
-                 }
-             });
-         }
-
-
-         if (upload1 > -1 && upload2 > -1) {
-             data1 = {
-                 "name": $("#form-field-course").val(),
-                 "description": "description111",
-                 "photoUrl": uploadName2,
-                 "kindId": 1,
-                 "videoUrl": uploadName1,
-             };
-             $.ajax({
-                 url: "http://192.168.0.167:8080/course/create?token=1d44662ee7e0452a9d594841799d00ac",
-                 contentType: "application/json",
-                 type: 'POST',
-                 data: JSON.stringify(data1),
-                 dataType: 'json',
-                 beforeSend: function () {
-                     console.log("正在进行表单提交，请稍候");
-                 },
-                 success: function (responseStr) {
-                     console.log("表单提交!!!" + responseStr.status);
-                     if (responseStr.status === 200) {
-                         console.log("表单提交成功" + responseStr);
-                     } else {
-                         console.log("表单提交失败");
-                     }
-                 },
-                 error: function (responseStr) {
-                     console.log("error");
-                 }
-             });
-         }*/
-
-
-        /*get();*///此处为上传文件的进度条
-    }
 </script>
 </body>
 </html>
