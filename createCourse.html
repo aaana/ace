@@ -433,6 +433,7 @@
     if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/uuid.js"></script>
 
 <!-- page specific plugin scripts -->
 <script src="assets/js/jquery.jqGrid.min.js"></script>
@@ -974,8 +975,10 @@
 
     });
 
-    var uploadName1 = "教程号1视频5.mp4";
-    var uploadName2 = "教程号1图片5.jpg";
+    var uploadName1 = UUID.prototype.createUUID();
+    var uploadName2 = UUID.prototype.createUUID();
+
+    UUID.prototype.createUUID;
 
     function submitBn(type) {
         if($("#form-field-course").val() === ''){
@@ -1054,14 +1057,23 @@
         var type = {
             value : -1
         }
-
-
         if ($('#id-input-file-2')[0].files[0] == null) {
             if ($('#id-input-file-3')[0].files[0] == null) {
                 type.value = 1;
                 submitBn(type);
             } else {
                 type.value = 2;
+                console.log(uploadName2);
+                console.log($('#id-input-file-3')[0].files[0].name);
+                console.log(uploadName2+$('#id-input-file-3')[0].files[0].name);
+                console.log(uploadName2);
+                var title = $('#id-input-file-3')[0].files[0].name;
+                var leng = title.split(".").length;
+                var titleName = uploadName2+"."+title.split(".")[leng-1];
+                console.log(titleName);
+
+                uploadName2 = uploadName1+$('#id-input-file-3')[0].files[0].split(".")[-1];
+                console.log(uploadName2);
                 var form = new FormData();
                 form.append('file', $('#id-input-file-3')[0].files[0]);
                 form.append("filename", uploadName2);
