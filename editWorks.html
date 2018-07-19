@@ -318,6 +318,7 @@
                                         作品ID：</label>
                                     <div class="col-sm-9 col-xs-12">
                                         <input style="width: 100%" type="text" id="form-field-workID" placeholder="作品ID"
+                                               disabled=true
                                         />
                                     </div>
                                 </div>
@@ -328,7 +329,7 @@
                                         学生姓名：</label>
 
                                     <div class="col-sm-9 col-xs-12">
-                                        <input style="width: 100%" type="text" id="form-field-student"
+                                        <input style="width: 100%" type="text" id="form-field-student" disabled=true
                                                placeholder="学生姓名"
                                         />
                                     </div>
@@ -337,7 +338,7 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-studentID">
                                         学生ID：</label>
                                     <div class="col-sm-9 col-xs-12">
-                                        <input style="width: 100%" type="text" id="form-field-studentID"
+                                        <input style="width: 100%" type="text" id="form-field-studentID" disabled=true
                                                placeholder="学生ID"
                                         />
                                     </div>
@@ -360,6 +361,9 @@
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <input type="file" id="id-input-file-3"/>
+                                                <img id="image"
+                                                     src=""
+                                                     style="width:100%" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -374,7 +378,7 @@
                                     <div class="col-sm-9 col-xs-12">
                                         <div class="input-group">
                                             <input style="width:100%;" class="form-control date-picker"
-                                                   id="id-date-picker-1" type="text"
+                                                   id="id-date-picker-1" type="text" disabled=true
                                                    data-date-format="yyyy-mm-dd"/>
                                             <span class="input-group-addon">
                                             <i class="fa fa-calendar bigger-110"></i>
@@ -389,6 +393,7 @@
                                     <div class="col-sm-9 col-xs-12">
 
                                         <button type="button" class="btn btn-sm btn-success " id="id-sp"
+                                                onclick="submitVedio()"
                                                 style="width:100%;background-color: #6FB3E0!important;border-color:#6FB3E0">
                                             查看与编辑
                                             <!--<i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>-->
@@ -399,13 +404,14 @@
 
                             <div class="row">
                                 <div class="col-xs-offset-4 col-xs-10 col-sm-offset-5 col-sm-5">
-                                    <button type="button" class="btn btn-sm btn-success"
+                                    <button type="button" class="btn btn-sm btn-success" onclick="submitForm()"
                                             style="width:100px;margin:10px">
                                         提交
                                         <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
                                     </button>
                                 </div>
                             </div>
+
                         </form>
                         <!-- PAGE CONTENT ENDS -->
                     </div><!-- /.col -->
@@ -641,7 +647,7 @@
         });
 
         data1 = {
-            "id": 2,
+            "id": 1,
         };
 
         $.ajax({
@@ -670,23 +676,10 @@
                     console.log("no photo");
                 } else {
                     console.log(" photo");
-                    var xmlhttp;
-                    xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("GET", url+"?token=1d44662ee7e0452a9d594841799d00ac", true);
-                    xmlhttp.responseType = "blob";
-                    xmlhttp.onload = function () {
-                        console.log(this);
-                        if (this.status == 200) {
-                            var blob = this.response;
-                            var img = document.createElement("img");
-                            img.onload = function (e) {
-                                window.URL.revokeObjectURL(img.src);
-                            };
-                            img.src = window.URL.createObjectURL(blob);
-                            document.body.appendChild(img);
-                        }
-                    }
-                    xmlhttp.send();
+                    // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
+                    var photoURL = responseStr.msg.photoUrl;
+                    console.log(photoURL);
+                    $("#image").attr("src", photoURL);
                 }
                 if (responseStr.msg.videoUrl1 == null) {
                     //$("#id-sp")
@@ -695,13 +688,110 @@
                 } else {
                     $("#id-sp").attr("disabled", false);
                 }
-            },
+            }
+            ,
             error: function (responseStr) {
                 console.log("error" + responseStr);
             }
         });
 
     });
+
+
+    function submitForm() {
+        submitAll();
+        window.location.href = 'editWorks.html';
+    }
+
+    function submitVedio() {
+        submitAll();
+        //window.location.href = 'workAdmin.html';
+    }
+
+    var uploadName = UUID.prototype.createUUID();
+
+    function submitBn2(type) {
+
+        console.log("表单内容" + type.value);
+        switch (type.value) {
+            case 1:
+                data1 = {
+                    "id": 1,
+                    "name": $("#form-field-work").val(),
+                    "description": $("#form-field-workDetail").val(),
+                };
+                break;
+            case 2:
+                data1 = {
+                    "id": 1,
+                    "name": $("#form-field-work").val(),
+                    "description": $("#form-field-workDetail").val(),
+                    "photoUrl": uploadName,
+                };
+                break;
+        }
+        console.log("表单内容" + JSON.stringify(data1));
+        $.ajax({
+            url: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify(data1),
+            dataType: 'json',
+            beforeSend: function () {
+                console.log("正在进行表单提交，请稍候");
+            },
+            success: function (responseStr) {
+                console.log("表单提交成功!!!" + responseStr);
+                return 1;
+
+                /*if (responseStr.status === 200) {
+                    console.log("表单提交成功" + responseStr);
+                } else {
+                    console.log("表单提交失败");
+                }*/
+            },
+            error: function (responseStr) {
+                console.log("error" + responseStr);
+                return 0;
+            }
+        });
+    }
+
+    function submitAll() {
+        var type = {
+            value: -1
+        }
+        if ($('#id-input-file-3')[0].files[0] == null) {
+            type.value = 1;
+            submitBn2(type);
+        } else {
+            type.value = 2;
+            var title = $('#id-input-file-3')[0].files[0].name;
+            var leng = title.split(".").length;
+            uploadName = uploadName + "." + title.split(".")[leng - 1];
+            var form = new FormData();
+            form.append('file', $('#id-input-file-3')[0].files[0]);
+            form.append("filename", uploadName);
+            $.ajax({
+                url: "http://192.168.0.153:8080/file/upload",
+                type: "POST",
+                cache: false,
+                data: form,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    console.log("正在进行传图片，请稍候");
+                },
+                success: function (data) {
+                    console.log("传图片over..");
+                    submitBn2(type);
+                },
+                error: function (e) {
+                    console.log("传视频失败");
+                }
+            });
+        }
+    }
 </script>
 </body>
 </html>
