@@ -338,7 +338,7 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="form-field-studentID">
                                         学生ID：</label>
                                     <div class="col-sm-9 col-xs-12">
-                                        <input style="width: 100%" type="text" id="form-field-studentID" disabled=true
+                                        <input style="width: 100%" type="text" id="form-field-studentID" disabled
                                                placeholder="学生ID"
                                         />
                                     </div>
@@ -356,14 +356,23 @@
                                 <!--<div class="row col-sm-offset-1">-->
                                 <div class="form-group col-xs-12 col-sm-5">
                                     <label class="col-sm-3 control-label no-padding-right"
-                                           for="id-input-file-3">封面：</label>
+                                           for="photoInput">封面：</label>
                                     <div class="col-sm-9 col-xs-12">
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <input type="file" id="id-input-file-3"/>
-                                                <img id="image"
-                                                     src=""
-                                                     style="width:100%" alt="">
+                                                <input type="hidden">
+                                                <div class="pic" style="text-align: center">
+                                                    <div id="img-preview" style="text-align: center;cursor: pointer" onclick="pressUploadFileBtn()">
+                                                        <img class="img-responsive" style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"  src="assets/images/default.jpg" />
+                                                    </div>
+                                                    <input name="file" id="photoInput" accept="image/*" type="file" multiple="multiple" style="display: none">
+                                                    <br/>
+                                                    <!--<button type="submit" id="create" class="">修改头像</button>-->
+                                                </div>
+                                                <!--<input type="file" id="photoInput"/>-->
+                                                <!--<img id="image"-->
+                                                     <!--src=""-->
+                                                     <!--style="width:100%" alt="">-->
                                             </div>
                                         </div>
                                     </div>
@@ -490,61 +499,101 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    var pressUploadFileBtn = function () {
+        $("#photoInput").click();
+    };
+
+    var picSrc = null;
     jQuery(function ($) {
 
-        $('#id-input-file-1 , #id-input-file-2').ace_file_input({
-            no_file: '请选择作品视频文件...',
-            btn_choose: '选择',
-            btn_change: '修改',
-            droppable: false,
-            onchange: null,
-            thumbnail: false, //| true | large
-            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
-            //allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
-            //whitelist:'gif|png|jpg|jpeg'
-            //blacklist:'exe|php'
-            //onchange:''
-            //
-        });
+        $("#photoInput").change(function () {
+            if (typeof (FileReader) !== "undefined") {
+                var dvPreview = $("#img-preview");
+                var regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (picSrc){
+                    dvPreview.html('<img class="img-responsive" style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"  src="'+picSrc+'" />');
+                }else{
+                    dvPreview.html('<img class="img-responsive" style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"  src="assets/images/default.jpg" />');
+                }
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var img = $("<img />");
+                            img.attr("src", e.target.result);
+                            img.attr("class", "img-responsive");
+                            img.attr("style", "width: 100%;height: 150px;display: inline-block;vertical-align: middle");
+                            dvPreview.html("");
+                            // $('#imgSrc').val($("#photoInput").val());
+                            dvPreview.append(img);
+                        };
+                        var src = reader.readAsDataURL(file[0]);
+
+                    } else {
+                        alert(file[0].name + " is not a valid image file.");
+                        dvPreview.html("");
+                        return false;
+                    }
+                });
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        // });
+
+        // $('#id-input-file-2').ace_file_input({
+        //     no_file: '请选择作品视频文件...',
+        //     btn_choose: '选择',
+        //     btn_change: '修改',
+        //     droppable: false,
+        //     onchange: null,
+        //     thumbnail: false, //| true | large
+        //     allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
+        //     //allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
+        //     //whitelist:'gif|png|jpg|jpeg'
+        //     //blacklist:'exe|php'
+        //     //onchange:''
+        //     //
+        // });
         //pre-show a file name, for example a previously selected file
         //$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
 
 
-        $('#id-input-file-3').ace_file_input({
-            style: 'well',
-            btn_choose: '点击或拖动作品封面图片到此',
-            btn_change: null,
-            no_icon: 'ace-icon fa fa-picture-o',
-            droppable: true,
-            thumbnail: 'fit',//large | fit
-            allowExt: ["jpeg", "jpg", "png", "gif", "bmp"],
-            allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
-            //,icon_remove:null//set null, to hide remove/reset button
-            /**,before_change:function(files, dropped) {
-						//Check an example below
-						//or examples/file-upload.html
-						return true;
-					}*/
-            /**,before_remove : function() {
-						return true;
-					}*/
-            ,
-            preview_error: function (filename, error_code) {
-                //name of the file that failed
-                //error_code values
-                //1 = 'FILE_LOAD_FAILED',
-                //2 = 'IMAGE_LOAD_FAILED',
-                //3 = 'THUMBNAIL_FAILED'
-                //alert(error_code);
-            }
+        // $('#photoInput').ace_file_input({
+        //     style: 'well',
+        //     btn_choose: '点击或拖动作品封面图片到此',
+        //     btn_change: null,
+        //     no_icon: 'ace-icon fa fa-picture-o',
+        //     droppable: true,
+        //     thumbnail: 'fit',//large | fit
+        //     allowExt: ["jpeg", "jpg", "png", "gif", "bmp"],
+        //     allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
+        //     //,icon_remove:null//set null, to hide remove/reset button
+        //     /**,before_change:function(files, dropped) {
+			// 			//Check an example below
+			// 			//or examples/file-upload.html
+			// 			return true;
+			// 		}*/
+        //     /**,before_remove : function() {
+			// 			return true;
+			// 		}*/
+        //     ,
+        //     preview_error: function (filename, error_code) {
+        //         //name of the file that failed
+        //         //error_code values
+        //         //1 = 'FILE_LOAD_FAILED',
+        //         //2 = 'IMAGE_LOAD_FAILED',
+        //         //3 = 'THUMBNAIL_FAILED'
+        //         //alert(error_code);
+        //     }
+        //
+        // }).on('change', function () {
+        //     //console.log($(this).data('ace_input_files'));
+        //     //console.log($(this).data('ace_input_method'));
+        // });
 
-        }).on('change', function () {
-            //console.log($(this).data('ace_input_files'));
-            //console.log($(this).data('ace_input_method'));
-        });
 
-
-        //$('#id-input-file-3')
+        //$('#photoInput')
         //.ace_file_input('show_file_list', [
         //{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
         //{type: 'file', name: 'hello.txt'}
@@ -552,38 +601,38 @@
 
 
         //dynamically change allowed formats by changing allowExt && allowMime function
-        $('#id-file-format').removeAttr('checked').on('change', function () {
-            var whitelist_ext, whitelist_mime;
-            var btn_choose
-            var no_icon
-            if (this.checked) {
-                btn_choose = "点击或拖动作品封面图片到此";
-                no_icon = "ace-icon fa fa-picture-o";
-
-                whitelist_ext = ["jpeg", "jpg", "png", "gif", "bmp"];
-                whitelist_mime = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"];
-            }
-            else {
-                btn_choose = "Drop files here or click to choose";
-                no_icon = "ace-icon fa fa-cloud-upload";
-
-                whitelist_ext = null;//all extensions are acceptable
-                whitelist_mime = null;//all mimes are acceptable
-            }
-            var file_input = $('#id-input-file-3');
-            file_input
-                .ace_file_input('update_settings',
-                    {
-                        'btn_choose': btn_choose,
-                        'no_icon': no_icon,
-                        'allowExt': whitelist_ext,
-                        'allowMime': whitelist_mime
-                    })
-            file_input.ace_file_input('reset_input');
-
-            file_input
-                .off('file.error.ace')
-                .on('file.error.ace', function (e, info) {
+        // $('#id-file-format').removeAttr('checked').on('change', function () {
+        //     var whitelist_ext, whitelist_mime;
+        //     var btn_choose
+        //     var no_icon
+        //     if (this.checked) {
+        //         btn_choose = "点击或拖动作品封面图片到此";
+        //         no_icon = "ace-icon fa fa-picture-o";
+        //
+        //         whitelist_ext = ["jpeg", "jpg", "png", "gif", "bmp"];
+        //         whitelist_mime = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"];
+        //     }
+        //     else {
+        //         btn_choose = "Drop files here or click to choose";
+        //         no_icon = "ace-icon fa fa-cloud-upload";
+        //
+        //         whitelist_ext = null;//all extensions are acceptable
+        //         whitelist_mime = null;//all mimes are acceptable
+        //     }
+        //     var file_input = $('#photoInput');
+        //     file_input
+        //         .ace_file_input('update_settings',
+        //             {
+        //                 'btn_choose': btn_choose,
+        //                 'no_icon': no_icon,
+        //                 'allowExt': whitelist_ext,
+        //                 'allowMime': whitelist_mime
+        //             })
+        //     file_input.ace_file_input('reset_input');
+        //
+        //     file_input
+        //         .off('file.error.ace')
+        //         .on('file.error.ace', function (e, info) {
                     //console.log(info.file_count);//number of selected files
                     //console.log(info.invalid_count);//number of invalid files
                     //console.log(info.error_list);//a list of errors in the following format
@@ -624,7 +673,7 @@
 					});
              */
 
-        });
+        // });
 
 
         //datepicker plugin
@@ -679,7 +728,8 @@
                     // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
                     var photoURL = responseStr.msg.photoUrl;
                     console.log(photoURL);
-                    $("#image").attr("src", photoURL);
+                    picSrc = photoURL;
+                    $("#img-preview img").attr("src", photoURL);
                 }
                 if (responseStr.msg.videoUrl1 == null) {
                     //$("#id-sp")
@@ -700,7 +750,7 @@
 
     function submitForm() {
         submitAll();
-        window.location.href = 'editWorks.html';
+        // window.location.href = 'editWorks.html';
     }
 
     function submitVedio() {
@@ -761,16 +811,16 @@
         var type = {
             value: -1
         }
-        if ($('#id-input-file-3')[0].files[0] == null) {
+        if ($('#photoInput')[0].files[0] == null) {
             type.value = 1;
             submitBn2(type);
         } else {
             type.value = 2;
-            var title = $('#id-input-file-3')[0].files[0].name;
+            var title = $('#photoInput')[0].files[0].name;
             var leng = title.split(".").length;
             uploadName = uploadName + "." + title.split(".")[leng - 1];
             var form = new FormData();
-            form.append('file', $('#id-input-file-3')[0].files[0]);
+            form.append('file', $('#photoInput')[0].files[0]);
             form.append("filename", uploadName);
             $.ajax({
                 url: "http://192.168.0.153:8080/file/upload",

@@ -295,6 +295,18 @@
 
     var grid_selector = "#grid-table";
     var pager_selector = "#grid-pager";
+    var jsonOptions = {
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    };
+
+    function createJSON(postdata) {
+        if (postdata.id === '_empty')
+            postdata.id = null; // rest api expects int or null
+        return JSON.stringify(postdata)
+    }
+
     jQuery(function ($) {
 
         var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -313,10 +325,22 @@
             }
         })
         jQuery(grid_selector).jqGrid({
-            url:"http://127.0.0.1:8080/jqgrid/user/search?token=1d44662ee7e0452a9d594841799d00ac",
-            mtype:"post",
+            url: "http://127.0.0.1:8080/jqgrid/user/search?token=1d44662ee7e0452a9d594841799d00ac",
+            editurl: "http://127.0.0.1:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            mtype: "post",
             datatype: "json",
             height: 400,
+            ajaxRowOptions: {contentType: "application/json", dataType: "json"},
+            serializeRowData: function (data) {
+                return JSON.stringify(data);
+            },
+            ajaxGridOptions: {contentType: 'application/json; charset=utf-8'},
+            serializeGridData: function (postData) {
+                if (postData.searchField === undefined) postData.searchField = null;
+                if (postData.searchString === undefined) postData.searchString = null;
+                if (postData.searchOper === undefined) postData.searchOper = null;
+                return JSON.stringify(postData);
+            },
             colNames: [' ', '账号', '姓名', '类型', '管理员'],
             colModel: [
                 {
@@ -336,8 +360,9 @@
                     width: 70,
                     editable: true,
                     edittype: "checkbox",
-                    editoptions: {value: "是:否"},
-                    unformat: aceSwitch
+                    editoptions: {value: "true:false"},
+                    unformat: aceSwitch,
+                    formatter: managerFormatter
                 },
 
             ],
@@ -348,20 +373,20 @@
             altRows: true,
             multiselect: true,
             multiboxonly: true,
-            multiSort:true,
-            sortname : 'id',
-            sortorder : "desc",
-            prmNames : {
+            multiSort: true,
+            // sortname : 'id',
+            // sortorder : "desc",
+            prmNames: {
                 page: "page",
                 rows: "rows",
                 sort: "sidx",
                 order: "sord",
                 search: "search",
-                filters:"filters"
+                filters: "filters"
             },
-            jsonReader:{
+            jsonReader: {
                 root: "msg.data",
-               // page: "msg.page",
+                // page: "msg.page",
                 total: "msg.totalPages",
                 records: "msg.totalElements",
                 repeatitems: false
@@ -376,12 +401,19 @@
                     enableTooltips(table);
                 }, 0);
             },
-
-           // editurl: "./dummy.php",//nothing is saved
             caption: "jqGrid with inline editing"
-
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+        function managerFormatter(cellvalue, options, rowObject) {
+            if (cellvalue === true || cellvalue==="true") {
+                return "是";
+            }
+            else if (cellvalue === false || cellvalue=="false") {
+                return "否";
+            }
+            return "未知";
+        }
 
         function aceSwitch(cellvalue, options, cell) {
             setTimeout(function () {
