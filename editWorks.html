@@ -133,16 +133,20 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success">
+                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info">
+                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning">
+                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
                     <i class="ace-icon fa fa-search"></i>
+                </button>
+
+                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
+                    <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
             </div>
@@ -154,35 +158,44 @@
 
                 <span class="btn btn-warning"></span>
 
+                <span class="btn btn-danger"></span>
+
             </div>
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="">
+            <li>
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
-                    <span class="menu-text"> 创建 </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="myCreate.html">
-                    <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 我的创建 </span>
+                    <span class="menu-text"> 创建任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="active">
-                <a href="index.html">
-                    <i class="menu-icon fa fa-search" aria-hidden="true"></i>
-                    <span class="menu-text"> 查询 </span>
+                <a href="myCreate.html">
+                    <i class="menu-icon fa fa-list"></i>
+                    <span class="menu-text"> 我创建的任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
+            <li class="">
+                <a href="searchCourse.html">
+                    <i class="menu-icon fa fa-search" aria-hidden="true"></i>
+                    <span class="menu-text"> 查询任务 </span>
+                </a>
 
+                <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a href="workWOCourseAdmin.html">
+                    <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
+                    <span class="menu-text"> 无教程作品管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
 
         </ul><!-- /.nav-list -->
 
