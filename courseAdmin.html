@@ -327,6 +327,8 @@
         };
         $.ajax({
             url: "http://192.168.0.153:8080/course/updateStatus?token=1d44662ee7e0452a9d594841799d00ac",
+            editurl: "http://192.168.0.153:8080/course/updateStatus?token=1d44662ee7e0452a9d594841799d00ac",
+
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(data3),
@@ -391,7 +393,7 @@
 
         jQuery(grid_selector).jqGrid({
             url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac",
-            //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            editurl: "http://192.168.0.153:8080/course/updateStatus?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
             height: 400,
@@ -406,15 +408,15 @@
                 if (postData.searchOper === undefined) postData.searchOper = null;
                 return JSON.stringify(postData);
             },
-            colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
+            colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
             colModel: [
                 {
-                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false, search: false,
+                    name: 'myac', index: '', width: 60, fixed: true, sortable: false, resize: false, search: false,
                     formatter: 'actions',
                     formatoptions: {
                         keys: true,
-                        delbutton: true,//disable delete button
-                        editbutton: false,
+                        delbutton: false,//disable delete button
+                        editbutton: true,
 
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                     }
@@ -433,14 +435,14 @@
                     index: 'author.name',
                     search: false,
                     width: 100,
-                    sortable: true,
+                    sortable: false,
                     searchoptions: {sopt: ["eq"]},
                 },
                 {
                     name: 'publishedAt',
                     index: 'publishedAt',
                     width: 200,
-                    sortable: true,
+                    sortable: false,
                     sorttype: "date",
                     search: false,
                 },
@@ -448,14 +450,14 @@
                     name: 'participantCount',
                     index: 'participantCount',
                     width: 100,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                 },
                 {
                     name: 'updatedAt',
                     index: 'updatedAt',
                     width: 200,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                 }, {
                     name: 'difficulty',
@@ -470,25 +472,25 @@
                     index: 'fuzzy',
                     searchoptions: {sopt: ["eq"]},
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: true,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
-                }, {
+                }, /*{
                     name: 'editWork',
                     index: 'editWork',
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">修改任务</a>"
                     }
-                }, {
+                }, */{
                     name: 'id',
                     index: 'id',
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='studySituation.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
@@ -498,15 +500,20 @@
                     index: 'status',
                     width: 120,
                     search: true,
+                    editable: true,
                     stype: "select",
+                    edittype: "select",
+                    editoptions: {value: "1:已发布;0:未发布;-1:已删除"},
+                    // unformat: aceSwitch,
                     formatter: displayFormat,
-                    searchoptions: {sopt: ["eq"], value: "1:已发布;0:未发布"},
+                    stype: "select",
+                    searchoptions: {sopt: ["eq"], value: "1:已发布;0:未发布;-1:已删除"},
                     sortable: true,
-                }, {
+                }, /*{
                     name: 'id',
                     index: 'id',
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
                         if (rows.status === 0 || rows.status === "0") {
@@ -517,7 +524,7 @@
                         }
                         //return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">取消发布</a>"
                     }
-                },
+                },*/
             ],
             viewrecords: true,
             rowNum: 10,
@@ -582,11 +589,13 @@
         }
 
         function displayFormat(cellvalue, options, rowObject) {
-            if (cellvalue === 0 || cellvalue === "0") {
-                return "未发布";
+            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "未发布" || cellvalue === "<a style=\"color:#0726ff\">未发布</a>") {
+                return "<a style=\"color:#0726ff\">未发布</a>"
             }
-            else if (cellvalue === 1 || cellvalue == "1") {
-                return "已发布";
+            else if (cellvalue === 1 || cellvalue == "1" || cellvalue === "已发布" || cellvalue === "<a style=\"color:#18ff4a\">已发布</a>") {
+                return "<a style=\"color:#18ff4a\">已发布</a>"
+            } else if (cellvalue === -1 || cellvalue == "-1" || cellvalue === "已删除" || cellvalue === "<a style=\"color:#ff293c\">已删除</a>") {
+                return "<a style=\"color:#ff293c\">已删除</a>"
             }
             return "未知";
         }
@@ -598,7 +607,7 @@
                 editicon: 'ace-icon fa fa-pencil blue',
                 add: false,
                 addicon: 'ace-icon fa fa-plus-circle purple',
-                del: true,
+                del: false,
                 delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon: 'ace-icon fa fa-search orange',
