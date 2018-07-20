@@ -203,12 +203,12 @@
                 <b class="arrow"></b>
             </li>
             <!--<li class="">-->
-                <!--<a href="reset.html">-->
-                    <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
-                    <!--<span class="menu-text"> 修改密码 </span>-->
-                <!--</a>-->
+            <!--<a href="reset.html">-->
+            <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
+            <!--<span class="menu-text"> 修改密码 </span>-->
+            <!--</a>-->
 
-                <!--<b class="arrow"></b>-->
+            <!--<b class="arrow"></b>-->
             <!--</li>-->
 
         </ul><!-- /.nav-list -->
@@ -312,7 +312,6 @@
 <script type="text/javascript">
     courseId = -1;
 
-
     function publish(value) {
         data2 = {
             "status": 1,
@@ -328,8 +327,12 @@
                 console.log("正在发布，请稍候");
             },
             success: function (responseStr) {
-                console.log("发布成功!!!" + responseStr.msg);
-                window.location.href = 'myCreate.html';
+                if (responseStr.status == "success") {
+                    console.log("发布成功!!!" + responseStr.msg);
+                    window.location.href = 'myCreate.html';
+                } else {
+                    console.log("error" + responseStr);
+                }
             },
             error: function (responseStr) {
                 console.log("error" + responseStr);
@@ -352,60 +355,18 @@
                 console.log("取消正在发布，请稍候");
             },
             success: function (responseStr) {
-                console.log("取消发布成功!!!" + responseStr.msg);
-                window.location.href = 'myCreate.html';
+                if (responseStr.status == "success") {
+                    console.log("取消发布成功!!!" + responseStr.msg);
+                    window.location.href = 'myCreate.html';
+                } else {
+                    console.log("error" + responseStr);
+                }
             },
             error: function (responseStr) {
                 console.log("error" + responseStr);
             }
         });
     }
-
-    /*    var grid_data =
-            [
-                {
-                    id: "1",
-                    course: "插画",
-                    name: "张三",
-                    publish_date: "2015-11-15",
-                    count: "15",
-                    last_date: "2007-12-03",
-                    state: '已发布',
-                    difficulty: 5
-                },
-                {
-                    id: "2",
-                    course: "Laptop",
-                    name: "李四",
-                    publish_date: "2016-03-05",
-                    count: "20",
-                    last_date: "2007-12-03",
-                    state: '已发布',
-                    difficulty: 3
-                },
-                {
-                    id: "3",
-                    course: "LCD Monitor",
-                    name: "王五",
-                    publish_date: "2018-02-18",
-                    count: "30",
-                    last_date: "2007-12-03",
-                    state: '已发布',
-                    difficulty: 2
-                },
-            ];*/
-
-    /*    var subgrid_data =
-            [
-                {id: "1", name: "sub grid item 1", qty: 11},
-                {id: "2", name: "sub grid item 2", qty: 3},
-                {id: "3", name: "sub grid item 3", qty: 12},
-                {id: "4", name: "sub grid item 4", qty: 5},
-                {id: "5", name: "sub grid item 5", qty: 2},
-                {id: "6", name: "sub grid item 6", qty: 9},
-                {id: "7", name: "sub grid item 7", qty: 3},
-                {id: "8", name: "sub grid item 8", qty: 8}
-            ];*/
 
     jQuery(function ($) {
         var grid_selector = "#grid-table1";
@@ -464,7 +425,6 @@
                 my: true
             },
 
-            //colNames: [' ', '账号', '姓名', '类型', '管理员'],
             colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
             colModel: [
                 {
@@ -498,7 +458,7 @@
                 {
                     name: 'publishedAt',
                     index: 'publishedAt',
-                    width: 130,
+                    width: 200,
                     sortable: true,
                     sorttype: "date",
                     search: false,
@@ -513,7 +473,7 @@
                 {
                     name: 'updatedAt',
                     index: 'updatedAt',
-                    width: 130,
+                    width: 200,
                     sortable: true,
                     search: false,
                 }, {

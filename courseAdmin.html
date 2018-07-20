@@ -289,48 +289,65 @@
 <script src="assets/js/ace.min.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    var grid_data =
-        [
-            {
-                id: "1",
-                course: "插画",
-                name: "张三",
-                publish_date: "2015-11-15",
-                count: "15",
-                last_date: "2007-12-03",
-                state: '已发布'
-            },
-            {
-                id: "2",
-                course: "Laptop",
-                name: "李四",
-                publish_date: "2016-03-05",
-                count: "20",
-                last_date: "2007-12-03",
-                state: '已发布'
-            },
-            {
-                id: "3",
-                course: "LCD Monitor",
-                name: "王五",
-                publish_date: "2018-02-18",
-                count: "30",
-                last_date: "2007-12-03",
-                state: '已发布'
-            },
-        ];
+    courseId = -1;
 
-    var subgrid_data =
-        [
-            {id: "1", name: "sub grid item 1", qty: 11},
-            {id: "2", name: "sub grid item 2", qty: 3},
-            {id: "3", name: "sub grid item 3", qty: 12},
-            {id: "4", name: "sub grid item 4", qty: 5},
-            {id: "5", name: "sub grid item 5", qty: 2},
-            {id: "6", name: "sub grid item 6", qty: 9},
-            {id: "7", name: "sub grid item 7", qty: 3},
-            {id: "8", name: "sub grid item 8", qty: 8}
-        ];
+    function publish(value) {
+        data2 = {
+            "status": 1,
+            "id": value,
+        };
+        $.ajax({
+            url: "http://192.168.0.153:8080/course/updateStatus?token=1d44662ee7e0452a9d594841799d00ac",
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify(data2),
+            dataType: 'json',
+            beforeSend: function () {
+                console.log("正在发布，请稍候");
+            },
+            success: function (responseStr) {
+                if (responseStr.status == "success") {
+                    console.log("发布成功!!!" + responseStr.msg);
+                    window.location.href = 'courseAdmin.html';
+                } else {
+                    console.log("error" + responseStr);
+                }
+
+            },
+            error: function (responseStr) {
+                console.log("error" + responseStr);
+            }
+        });
+    }
+
+    function canclePublish(value) {
+        data3 = {
+            "status": 0,
+            "id": value,
+        };
+        $.ajax({
+            url: "http://192.168.0.153:8080/course/updateStatus?token=1d44662ee7e0452a9d594841799d00ac",
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify(data3),
+            dataType: 'json',
+            beforeSend: function () {
+                console.log("取消正在发布，请稍候");
+            },
+            success: function (responseStr) {
+                if (responseStr.status == "success") {
+                    console.log("取消发布成功!!!" + responseStr.msg);
+                    window.location.href = 'courseAdmin.html';
+                } else {
+                    console.log("error" + responseStr);
+                }
+
+            },
+            error: function (responseStr) {
+                console.log("error" + responseStr);
+            }
+        });
+    }
 
     jQuery(function ($) {
         var grid_selector = "#grid-table1";
@@ -373,7 +390,7 @@
 
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac&&my=false",
+            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac",
             //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
@@ -389,11 +406,10 @@
                 if (postData.searchOper === undefined) postData.searchOper = null;
                 return JSON.stringify(postData);
             },
-            //colNames: [' ', '账号', '姓名', '类型', '管理员'],
             colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
             colModel: [
                 {
-                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
+                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false, search: false,
                     formatter: 'actions',
                     formatoptions: {
                         keys: true,
@@ -409,90 +425,99 @@
                     index: 'name',
                     width: 150,
                     sortable: true,
+                    search: true,
+                    searchoptions: {sopt: ["eq"]},
                 },
                 {
                     name: 'user.name',
-                    index: 'user.name',
+                    index: 'author.name',
+                    search: false,
                     width: 100,
                     sortable: true,
+                    searchoptions: {sopt: ["eq"]},
                 },
                 {
                     name: 'publishedAt',
                     index: 'publishedAt',
-                    width: 130,
+                    width: 200,
                     sortable: true,
                     sorttype: "date",
+                    search: false,
                 },
                 {
-                    name: 'count',
-                    index: 'count',
+                    name: 'participantCount',
+                    index: 'participantCount',
                     width: 100,
                     sortable: true,
+                    search: false,
                 },
                 {
                     name: 'updatedAt',
                     index: 'updatedAt',
-                    width: 130,
+                    width: 200,
                     sortable: true,
+                    search: false,
                 }, {
                     name: 'difficulty',
                     index: 'difficulty',
                     width: 100,
                     sortable: true,
+                    search: true,
+                    searchoptions: {sopt: ["eq"]},
                 },
                 {
-                    name: 'detail',
-                    index: 'detail',
+                    name: 'description',
+                    index: 'fuzzy',
+                    searchoptions: {sopt: ["eq"]},
                     width: 120,
                     sortable: true,
+                    search: true,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, {
                     name: 'editWork',
                     index: 'editWork',
                     width: 120,
                     sortable: true,
+                    search: false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">修改任务</a>"
                     }
                 }, {
-                    name: 'analyze',
-                    index: 'analyze',
+                    name: 'id',
+                    index: 'id',
                     width: 120,
                     sortable: true,
+                    search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                        return "<a href='studySituation.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
                     name: 'status',
                     index: 'status',
                     width: 120,
+                    search: true,
+                    stype: "select",
+                    formatter: displayFormat,
+                    searchoptions: {sopt: ["eq"], value: "1:已发布;0:未发布"},
                     sortable: true,
                 }, {
-                    name: 'opt',
-                    index: 'opt',
+                    name: 'id',
+                    index: 'id',
                     width: 120,
                     sortable: true,
+                    search: false,
                     formatter: function (value, grid, rows, state) {
-                        //if()
-                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">取消发布</a>"
+                        if (rows.status === 0 || rows.status === "0") {
+                            return "<a style=\"color:#f60\" onclick=\"publish(" + value + ")\">发布</a>"
+                        }
+                        else if (rows.status === 1 || rows.status == "1") {
+                            return "<a style=\"color:#0726ff\" onclick=\"canclePublish(" + value + ")\">取消发布</a>"
+                        }
+                        //return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">取消发布</a>"
                     }
                 },
-                /*{name: 'id', index: 'id', width: 60, sorttype: "int", editable: false},
-                {name: 'name', index: 'name', width: 80, editable: false},
-                {name: 'type', index: 'type', width: 80, editable: false},
-                {
-                    name: 'isManager',
-                    index: 'isManager',
-                    width: 70,
-                    editable: true,
-                    edittype: "checkbox",
-                    editoptions: {value: "true:false"},
-                    unformat: aceSwitch,
-                    formatter: managerFormatter
-                },*/
-
             ],
             viewrecords: true,
             rowNum: 10,
@@ -556,6 +581,15 @@
             }, 0);
         }
 
+        function displayFormat(cellvalue, options, rowObject) {
+            if (cellvalue === 0 || cellvalue === "0") {
+                return "未发布";
+            }
+            else if (cellvalue === 1 || cellvalue == "1") {
+                return "已发布";
+            }
+            return "未知";
+        }
 
         //navButtons
         jQuery(grid_selector).jqGrid('navGrid', pager_selector,
