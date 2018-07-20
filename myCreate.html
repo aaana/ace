@@ -224,9 +224,12 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-list"></i>
-                        <a href="#">我的创建</a>
+                        <i class="ace-icon fa fa-home"></i>
+                        <a href="#">主页</a>
                     </li>
+
+                    <li class="active">我的创建</li>
+
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
@@ -422,10 +425,12 @@
                 return JSON.stringify(postData);
             },
             postData: {
-                my: true
+                others: {
+                    my: true
+                }
             },
 
-            colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
+            colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态', '操作'],
             colModel: [
                 {
                     name: 'myac', index: '', width: 60, fixed: true, sortable: false, resize: false, search: false,
@@ -452,14 +457,14 @@
                     index: 'author.name',
                     search: false,
                     width: 100,
-                    sortable: true,
+                    sortable: false,
                     searchoptions: {sopt: ["eq"]},
                 },
                 {
                     name: 'publishedAt',
                     index: 'publishedAt',
                     width: 200,
-                    sortable: true,
+                    sortable: false,
                     sorttype: "date",
                     search: false,
                 },
@@ -467,14 +472,14 @@
                     name: 'participantCount',
                     index: 'participantCount',
                     width: 100,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                 },
                 {
                     name: 'updatedAt',
                     index: 'updatedAt',
                     width: 200,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                 }, {
                     name: 'difficulty',
@@ -489,12 +494,12 @@
                     index: 'fuzzy',
                     searchoptions: {sopt: ["eq"]},
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: true,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
-                }, {
+                }, /*{
                     name: 'editWork',
                     index: 'editWork',
                     width: 120,
@@ -503,11 +508,11 @@
                     formatter: function (value, grid, rows, state) {
                         return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">修改任务</a>"
                     }
-                }, {
+                },*/ {
                     name: 'id',
                     index: 'id',
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='studySituation.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
@@ -525,7 +530,7 @@
                     name: 'id',
                     index: 'id',
                     width: 120,
-                    sortable: true,
+                    sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
                         if (rows.status === 0 || rows.status === "0") {
@@ -618,7 +623,7 @@
                 editicon: 'ace-icon fa fa-pencil blue',
                 add: false,
                 addicon: 'ace-icon fa fa-plus-circle purple',
-                del: true,
+                del: false,
                 delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon: 'ace-icon fa fa-search orange',

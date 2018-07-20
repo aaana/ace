@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
     <title>jqGrid - Ace Admin</title>
 
-    <meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
-    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
-    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css" />
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css"/>
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
     <![endif]-->
-    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -75,7 +75,7 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
 									系统管理员
@@ -108,12 +108,18 @@
 
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
-        try{ace.settings.loadState('main-container')}catch(e){}
+        try {
+            ace.settings.loadState('main-container')
+        } catch (e) {
+        }
     </script>
 
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
-            try{ace.settings.loadState('sidebar')}catch(e){}
+            try {
+                ace.settings.loadState('sidebar')
+            } catch (e) {
+            }
         </script>
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -185,7 +191,8 @@
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
+               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
 
@@ -201,7 +208,7 @@
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
-                    <li class="active">无教程作品管理</li>
+                    <li class="active">查询任务</li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -237,7 +244,7 @@
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
 
@@ -256,56 +263,26 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    $('.input-daterange').datepicker({autoclose:true,language:'cn'});
+    $('.input-daterange').datepicker({autoclose: true, language: 'cn'});
 
 
     var grid_selector = "#grid-table";
     var pager_selector = "#grid-pager";
 
 
-    // var grid_data =
-    //     [
-    //         //id name grade class sdate display rawVideo processedVideo
-    //         {id:"1",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 08:00:00"},
-    //         {id:"2",name:"王同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 09:00:00"},
-    //         {id:"3",name:"赵同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 10:00:00"},
-    //         {id:"4",name:"朱同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 11:00:00"},
-    //         {id:"5",name:"黄同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"6",name:"丁同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"7",name:"邓同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"8",name:"秦同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"9",name:"江同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"10",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"11",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"12",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"13",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"14",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"15",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"16",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"17",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"18",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"19",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"20",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"21",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //         {id:"22",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-    //     ];
-
-
-    jQuery(function($) {
-
-
+    jQuery(function ($) {
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
-            $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+            $(grid_selector).jqGrid('setGridWidth', parent_column.width());
         })
 
         //resize on sidebar collapse/expand
-        $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
-            if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+        $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+            if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
                 //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
-                setTimeout(function() {
-                    $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                setTimeout(function () {
+                    $(grid_selector).jqGrid('setGridWidth', parent_column.width());
                 }, 20);
             }
         })
@@ -324,45 +301,12 @@
 				  }
 				})
          */
-
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=1d44662ee7e0452a9d594841799d00ac",
-            editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac",
+            //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
-
-            subGrid : false,
-            //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
-            //datatype: "xml",
-            subGridOptions : {
-                plusicon : "ace-icon fa fa-plus center bigger-110 blue",
-                minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
-                openicon : "ace-icon fa fa-chevron-right center orange"
-            },
-            multiSort : true,
-            //for this example we are using local data
-            subGridRowExpanded: function (subgridDivId, rowId) {
-                var subgridTableId = subgridDivId + "_t";
-                $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
-                $("#" + subgridTableId).jqGrid({
-                    datatype: 'local',
-                    data: subgrid_data,
-                    colNames: ['No','Item Name','Qty'],
-                    colModel: [
-                        { name: 'id', width: 50 },
-                        { name: 'name', width: 150 },
-                        { name: 'qty', width: 50 }
-                    ]
-                });
-            },
-            jsonReader:{//分页的关键
-                root: "msg.data",
-                total: "msg.totalPages",
-                // page: "",
-                records: "msg.totalElements",
-                repeatitems: false
-            },
-            height: 250,
+            height: 400,
             ajaxRowOptions: {contentType: "application/json", dataType: "json"},
             serializeRowData: function (data) {
                 return JSON.stringify(data);
@@ -374,6 +318,104 @@
                 if (postData.searchOper === undefined) postData.searchOper = null;
                 return JSON.stringify(postData);
             },
+            colNames: ['任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
+            colModel: [
+
+                // {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
+                {
+                    name: 'name',
+                    index: 'name',
+                    width: 150,
+                    sortable: true,
+                    search: true,
+                    searchoptions: {sopt: ["eq"]},
+                },
+                {
+                    name: 'user.name',
+                    index: 'author.name',
+                    search: false,
+                    width: 100,
+                    sortable: false,
+                    searchoptions: {sopt: ["eq"]},
+                },
+                {
+                    name: 'publishedAt',
+                    index: 'publishedAt',
+                    width: 200,
+                    sortable: false,
+                    sorttype: "date",
+                    search: false,
+                },
+                {
+                    name: 'participantCount',
+                    index: 'participantCount',
+                    width: 100,
+                    sortable: false,
+                    search: false,
+                },
+                {
+                    name: 'updatedAt',
+                    index: 'updatedAt',
+                    width: 200,
+                    sortable: false,
+                    search: false,
+                }, {
+                    name: 'difficulty',
+                    index: 'difficulty',
+                    width: 100,
+                    sortable: true,
+                    search: true,
+                    searchoptions: {sopt: ["eq"]},
+                },
+                {
+                    name: 'description',
+                    index: 'fuzzy',
+                    searchoptions: {sopt: ["eq"]},
+                    width: 120,
+                    sortable: false,
+                    search: true,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                    }
+                }, /*{
+                    name: 'editWork',
+                    index: 'editWork',
+                    width: 120,
+                    sortable: true,
+                    search: false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">修改任务</a>"
+                    }
+                },*/ {
+                    name: 'id',
+                    index: 'id',
+                    width: 120,
+                    sortable: false,
+                    search: false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='studySituation.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                    }
+                }, {
+                    name: 'status',
+                    index: 'status',
+                    width: 120,
+                    search: true,
+                    stype: "select",
+                    formatter: displayFormat,
+                    searchoptions: {sopt: ["eq"], value: "1:已发布;0:未发布"},
+                    sortable: true,
+                },
+            ],
+            viewrecords: true,
+            rowNum: 10,
+            rowList: [10, 20],
+            pager: pager_selector,
+            altRows: true,
+            multiselect: true,
+            multiboxonly: true,
+            multiSort: true,
+            // sortname : 'id',
+            // sortorder : "desc",
             prmNames: {
                 page: "page",
                 rows: "rows",
@@ -382,53 +424,24 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames:[' ','作品ID','作品', '作者ID','姓名','年级','时间', '是否展示','查看与编辑'],
-            colModel:[
-                {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
-                    formatter:'actions',
-                    formatoptions:{
-                        keys:true,
-                        delbutton: false,//disable delete button
-                        delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
-                        //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
-                    }
-                },
-                {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
-                {name:'name',index:'name', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.account',index:'userAccount', width:60, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.name',index:'user.name', width:150,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
-                {name:'grade',index:'grade', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
-                // {name:'class',index:'class', width:150,editable: false},
-                {name:'createdAt',index:'createdAt',width:90, editable:false, sorttype:"time",unformat: pickDate,search:false},
-                {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
-                    stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
-                {name:'id',index:'view', width:90, sortable:false, editable: false,search:false,
-                    formatter: function (value, grid, rows, state) {
-                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看与编辑</a>"}  },
-            ],
-            viewrecords : true,
-            rowNum:10,
-            rowList:[10,20,30],
-
-            pager : pager_selector,
-            altRows: true,
-            //toppager: true,
-            multiselect: true,
-            //multikey: "ctrlKey",
-            multiboxonly: true,
-            loadComplete : function() {
+            jsonReader: {
+                root: "msg.data",
+                // page: "msg.page",
+                total: "msg.totalPages",
+                records: "msg.totalElements",
+                repeatitems: false
+            },
+            loadComplete: function () {
                 var table = this;
-                setTimeout(function(){
+                setTimeout(function () {
                     styleCheckbox(table);
+
                     updateActionIcons(table);
                     updatePagerIcons(table);
                     enableTooltips(table);
                 }, 0);
             },
-
-            caption: "所有任务"
-
-
+            caption: "查询任务"
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
@@ -438,53 +451,55 @@
 
 
         //switch element when editing inline
-        function aceSwitch( cellvalue, options, cell ) {
-            setTimeout(function(){
-                $(cell) .find('input[type=checkbox]')
+        function aceSwitch(cellvalue, options, cell) {
+            setTimeout(function () {
+                $(cell).find('input[type=checkbox]')
                     .addClass('ace ace-switch ace-switch-5')
                     .after('<span class="lbl"></span>');
             }, 0);
         }
+
         //enable datepicker
-        function pickDate( cellvalue, options, cell ) {
-            setTimeout(function(){
-                $(cell) .find('input[type=text]')
-                    .datepicker({format:'yyyy-mm-dd hh:mm:ss' , autoclose:true});
+        function pickDate(cellvalue, options, cell) {
+            setTimeout(function () {
+                $(cell).find('input[type=text]')
+                    .datepicker({format: 'yyyy-mm-dd hh:mm:ss', autoclose: true});
             }, 0);
         }
 
 
         function displayFormat(cellvalue, options, rowObject) {
-            if (cellvalue === true || cellvalue==="true" || cellvalue==="是") {
-                return "是";
+            if (cellvalue === 0 || cellvalue === "0") {
+                return "未发布";
             }
-            else if (cellvalue === false || cellvalue=="false" || cellvalue==="否") {
-                return "否";
+            else if (cellvalue === 1 || cellvalue == "1") {
+                return "已发布";
             }
             return "未知";
         }
+
         //navButtons下面导航区
-        jQuery(grid_selector).jqGrid('navGrid',pager_selector,
+        jQuery(grid_selector).jqGrid('navGrid', pager_selector,
             { 	//navbar options
                 edit: false,
-                editicon : 'ace-icon fa fa-pencil blue',
+                editicon: 'ace-icon fa fa-pencil blue',
                 add: false,
-                addicon : 'ace-icon fa fa-plus-circle purple',
+                addicon: 'ace-icon fa fa-plus-circle purple',
                 del: false,
-                delicon : 'ace-icon fa fa-trash-o red',
+                delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
-                searchicon : 'ace-icon fa fa-search orange',
+                searchicon: 'ace-icon fa fa-search orange',
                 refresh: true,
-                refreshicon : 'ace-icon fa fa-refresh green',
+                refreshicon: 'ace-icon fa fa-refresh green',
                 view: true,
-                viewicon : 'ace-icon fa fa-search-plus grey',
+                viewicon: 'ace-icon fa fa-search-plus grey',
             },
             {
                 //edit record form
                 //closeAfterEdit: true,
                 //width: 700,
                 recreateForm: true,
-                beforeShowForm : function(e) {
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                     style_edit_form(form);
@@ -496,7 +511,7 @@
                 closeAfterAdd: true,
                 recreateForm: true,
                 viewPagerButtons: false,
-                beforeShowForm : function(e) {
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
                         .wrapInner('<div class="widget-header" />')
@@ -506,40 +521,40 @@
             {
                 //delete record form
                 recreateForm: true,
-                beforeShowForm : function(e) {
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
-                    if(form.data('styled')) return false;
+                    if (form.data('styled')) return false;
 
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                     style_delete_form(form);
 
                     form.data('styled', true);
                 },
-                onClick : function(e) {
+                onClick: function (e) {
                     //alert(1);
                 }
             },
             {
                 //search form
                 recreateForm: true,
-                afterShowSearch: function(e){
+                afterShowSearch: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                     style_search_form(form);
                 },
-                afterRedraw: function(){
+                afterRedraw: function () {
                     style_search_filters($(this));
                 }
                 ,
                 multipleSearch: true,
-                autoSearch:false,
-                groupOps: [{op: "AND", text: "满足所有条件" }],
+                autoSearch: false,
+                groupOps: [{op: "AND", text: "满足所有条件"}],
                 closeAfterSearch: true
             },
             {
                 //view record form
                 recreateForm: true,
-                beforeShowForm: function(e){
+                beforeShowForm: function (e) {
                     var form = $(e[0]);
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
                 }
@@ -549,7 +564,7 @@
 
         function style_edit_form(form) {
             //enable datepicker on "createdAt" field and switches for "stock" field
-            form.find('input[name=createdAt]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+            form.find('input[name=createdAt]').datepicker({format: 'yyyy-mm-dd', autoclose: true})
 
             form.find('input[name=isShowed]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
             //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
@@ -581,6 +596,7 @@
             form.find('.add-group').addClass('btn btn-xs btn-success');
             form.find('.delete-group').addClass('btn btn-xs btn-danger');
         }
+
         function style_search_form(form) {
             var dialog = form.closest('.ui-jqdialog');
             var buttons = dialog.find('.EditTable')
@@ -591,7 +607,7 @@
 
         function beforeDeleteCallback(e) {
             var form = $(e[0]);
-            if(form.data('styled')) return false;
+            if (form.data('styled')) return false;
 
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_delete_form(form);
@@ -604,7 +620,6 @@
             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
             style_edit_form(form);
         }
-
 
 
         //it causes some flicker when reloading or navigating grid
@@ -647,22 +662,22 @@
         function updatePagerIcons(table) {
             var replacement =
                 {
-                    'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
-                    'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
-                    'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
-                    'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
                 };
-            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
                 var icon = $(this);
                 var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
 
-                if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+                if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
             })
         }
 
         function enableTooltips(table) {
-            $('.navtable .ui-pg-button').tooltip({container:'body'});
-            $(table).find('.ui-pg-div').tooltip({container:'body'});
+            $('.navtable .ui-pg-button').tooltip({container: 'body'});
+            $(table).find('.ui-pg-div').tooltip({container: 'body'});
         }
 
 
@@ -677,7 +692,7 @@
 
         //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
-        $(document).one('ajaxloadstart.page', function(e) {
+        $(document).one('ajaxloadstart.page', function (e) {
             $.jgrid.gridDestroy(grid_selector);
             $('.ui-jqdialog').remove();
         });
