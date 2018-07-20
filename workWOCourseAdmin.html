@@ -66,7 +66,7 @@
             <a href="index.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    系统管理
+                    蔷薇小学教师和作品管理后台
                 </small>
             </a>
         </div>
@@ -330,7 +330,9 @@
             editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
-
+            postData:{
+                
+            },
             subGrid : false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
             //datatype: "xml",
@@ -382,9 +384,9 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames:[' ','作品ID','作品', '作者ID','姓名','年级','时间', '是否展示','查看与编辑'],
+            colNames:[' ','作品', '作者ID','姓名','年级','时间', '是否展示','查看与编辑'],
             colModel:[
-                {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
+                {name:'myac',index:'', width:60, fixed:true, sortable:false, resize:false,
                     formatter:'actions',
                     formatoptions:{
                         keys:true,
@@ -393,16 +395,16 @@
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
                 },
-                {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
-                {name:'name',index:'name', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.account',index:'userAccount', width:60, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.name',index:'user.name', width:150,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
-                {name:'grade',index:'grade', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
+                // {name:'id',index:'id', width:100, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
+                {name:'name',index:'name', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.account',index:'userAccount', width:100, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.name',index:'user.name', width:100,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
+                {name:'grade',index:'grade', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
                 // {name:'class',index:'class', width:150,editable: false},
-                {name:'createdAt',index:'createdAt',width:90, editable:false, sorttype:"time",unformat: pickDate,search:false},
-                {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
+                {name:'createdAt',index:'createdAt',width:100, editable:false, sorttype:"time",unformat: pickDate,search:false},
+                {name:'isShowed',index:'isShowed', width:100, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
                     stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
-                {name:'id',index:'view', width:90, sortable:false, editable: false,search:false,
+                {name:'id',index:'view', width:100, sortable:false, editable: false,search:false,
                     formatter: function (value, grid, rows, state) {
                         return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看与编辑</a>"}  },
             ],
