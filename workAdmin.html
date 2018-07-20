@@ -495,9 +495,9 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames:[' ','作品ID','作品名', '作者学号','姓名','年级','时间', '是否展示','查看与编辑'],
+            colNames:[' ','作品名', '作者学号','姓名','年级','指导老师','时间', '是否展示','查看/编辑'],
             colModel:[
-                {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
+                {name:'myac',index:'', width:70, fixed:true, sortable:false, resize:false,
                     formatter:'actions',
                     formatoptions:{
                         keys:true,
@@ -506,18 +506,19 @@
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
                 },
-                {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
-                {name:'name',index:'name', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.account',index:'userAccount', width:60, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.name',index:'user.name', width:150,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
-                {name:'grade',index:'grade', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
-                // {name:'class',index:'class', width:150,editable: false},
-                {name:'createdAt',index:'createdAt',width:90, editable:false, sorttype:"time",unformat: pickDate,search:false},
+                // {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
+                {name:'name',index:'name', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.account',index:'userAccount', width:100, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.name',index:'user.name', width:100,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
+                {name:'grade',index:'grade', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'helper.account',index:'helperAvvount', width:100,editable: false},
+                {name:'createdAt',index:'createdAt',width:120, editable:false, sorttype:"time",unformat: pickDate,search:false},
                 {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
                     stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
-                {name:'id',index:'view', width:90, sortable:false, editable: false,search:false,
+                {name:'id',index:'view', width:120, sortable:false, editable: false,search:false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看与编辑</a>"}  },
+                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks.html?workId=\"+ value + \"' style=\\\"color:#f60\\\" onclick=\\\"Modify(\" + value + \")\\\">编辑作品</a>"}  },
+
             ],
 
 //             onPaging:function(pageBtn){
