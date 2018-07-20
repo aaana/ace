@@ -284,6 +284,8 @@
 <script src="assets/js/grid.locale-en.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
 
+<script src="assets/js/grid.locale-cn.js"></script>
+
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
@@ -541,8 +543,8 @@
 
         });*/
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac&&my=true",
-            editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/course/search?token=aa653c73bd324ef0961405e4c5f8001e",
+            //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
             height: 400,
@@ -579,14 +581,14 @@
                     sortable: true,
                 },
                 {
-                    name: 'author.name',
+                    name: 'user.name',
                     index: 'author.name',
                     width: 100,
                     sortable: true,
                 },
                 {
-                    name: 'publish_date',
-                    index: 'publish_date',
+                    name: 'publishedAt',
+                    index: 'publishedAt',
                     width: 130,
                     sortable: true,
                     sorttype: "date",
@@ -598,8 +600,8 @@
                     sortable: true,
                 },
                 {
-                    name: 'last_date',
-                    index: 'last_date',
+                    name: 'updatedAt',
+                    index: 'updatedAt',
                     width: 130,
                     sortable: true,
                 },{

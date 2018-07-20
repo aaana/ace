@@ -373,41 +373,27 @@
 
 
         jQuery(grid_selector).jqGrid({
-            //direction: "rtl",
-
-            //subgrid options
-            subGrid: false,
-            //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
-            //datatype: "xml",
-            subGridOptions: {
-                plusicon: "ace-icon fa fa-plus center bigger-110 blue",
-                minusicon: "ace-icon fa fa-minus center bigger-110 blue",
-                openicon: "ace-icon fa fa-chevron-right center orange"
+            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac&&my=false",
+            //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            mtype: "post",
+            datatype: "json",
+            height: 400,
+            ajaxRowOptions: {contentType: "application/json", dataType: "json"},
+            serializeRowData: function (data) {
+                return JSON.stringify(data);
             },
-            //for this example we are using local data
-            subGridRowExpanded: function (subgridDivId, rowId) {
-                var subgridTableId = subgridDivId + "_t";
-                $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
-                $("#" + subgridTableId).jqGrid({
-                    datatype: 'local',
-                    data: subgrid_data,
-                    colNames: ['No', 'Item Name', 'Qty'],
-                    colModel: [
-                        {name: 'id', width: 50},
-                        {name: 'name', width: 150},
-                        {name: 'qty', width: 50}
-                    ]
-                });
+            ajaxGridOptions: {contentType: 'application/json; charset=utf-8'},
+            serializeGridData: function (postData) {
+                if (postData.searchField === undefined) postData.searchField = null;
+                if (postData.searchString === undefined) postData.searchString = null;
+                if (postData.searchOper === undefined) postData.searchOper = null;
+                return JSON.stringify(postData);
             },
-
-
-            data: grid_data,
-            datatype: "local",
-            height: 250,
-            colNames: ['', '序号', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
+            //colNames: [' ', '账号', '姓名', '类型', '管理员'],
+            colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
             colModel: [
                 {
-                    name: ' ', index: '', width: 80, fixed: true, sortable: false, resize: false,
+                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
                     formatter: 'actions',
                     formatoptions: {
                         keys: true,
@@ -415,25 +401,24 @@
                         editbutton: false,
 
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
-                        //editformbutton:false, //editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
                 },
-                {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
+                // {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
                 {
-                    name: 'course',
-                    index: 'course',
+                    name: 'name',
+                    index: 'name',
                     width: 150,
                     sortable: true,
                 },
                 {
-                    name: 'name',
-                    index: 'name',
+                    name: 'user.name',
+                    index: 'user.name',
                     width: 100,
                     sortable: true,
                 },
                 {
-                    name: 'publish_date',
-                    index: 'publish_date',
+                    name: 'publishedAt',
+                    index: 'publishedAt',
                     width: 130,
                     sortable: true,
                     sorttype: "date",
@@ -445,8 +430,8 @@
                     sortable: true,
                 },
                 {
-                    name: 'last_date',
-                    index: 'last_date',
+                    name: 'updatedAt',
+                    index: 'updatedAt',
                     width: 130,
                     sortable: true,
                 }, {
@@ -480,8 +465,8 @@
                         return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
-                    name: 'state',
-                    index: 'state',
+                    name: 'status',
+                    index: 'status',
                     width: 120,
                     sortable: true,
                 }, {
@@ -490,22 +475,50 @@
                     width: 120,
                     sortable: true,
                     formatter: function (value, grid, rows, state) {
+                        //if()
                         return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">取消发布</a>"
                     }
-                }
-            ],
+                },
+                /*{name: 'id', index: 'id', width: 60, sorttype: "int", editable: false},
+                {name: 'name', index: 'name', width: 80, editable: false},
+                {name: 'type', index: 'type', width: 80, editable: false},
+                {
+                    name: 'isManager',
+                    index: 'isManager',
+                    width: 70,
+                    editable: true,
+                    edittype: "checkbox",
+                    editoptions: {value: "true:false"},
+                    unformat: aceSwitch,
+                    formatter: managerFormatter
+                },*/
 
+            ],
             viewrecords: true,
             rowNum: 10,
-            rowList: [10, 20, 30],
+            rowList: [10, 20],
             pager: pager_selector,
             altRows: true,
-            //toppager: true,
-
             multiselect: true,
-            //multikey: "ctrlKey",
             multiboxonly: true,
-
+            multiSort: true,
+            // sortname : 'id',
+            // sortorder : "desc",
+            prmNames: {
+                page: "page",
+                rows: "rows",
+                sort: "sidx",
+                order: "sord",
+                search: "search",
+                filters: "filters"
+            },
+            jsonReader: {
+                root: "msg.data",
+                // page: "msg.page",
+                total: "msg.totalPages",
+                records: "msg.totalElements",
+                repeatitems: false
+            },
             loadComplete: function () {
                 var table = this;
                 setTimeout(function () {
@@ -516,25 +529,7 @@
                     enableTooltips(table);
                 }, 0);
             },
-
-            editurl: "./dummy.php",//nothing is saved
             caption: "任务管理"
-
-            //,autowidth: true,
-
-
-            /**
-             ,
-             grouping:true,
-             groupingView : {
-						 groupField : ['name'],
-						 groupDataSorted : true,
-						 plusicon : 'fa fa-chevron-down bigger-110',
-						 minusicon : 'fa fa-chevron-up bigger-110'
-					},
-             caption: "Grouping"
-             */
-
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
