@@ -152,7 +152,7 @@
 
         <ul class="nav nav-list">
             <li class="">
-                <a href="userAdmin.html">
+                <a href="userAdmin2.html">
                     <i class="menu-icon fa fa-users" aria-hidden="true"></i>
                     <span class="menu-text"> 用户管理 </span>
                 </a>
@@ -284,15 +284,15 @@
                         <!-- PAGE CONTENT BEGINS -->
                         <div style="margin-top: 20px">
                             <form>
-                                <div class="input-group ">
-                                    <input type="text" class="form-control col-xs-3" name="workName" placeholder="作品名字" />
-                                    <!--<div class="input-group-btn">-->
-                                        <!--<button onclick="refreshData()" type="button" class="btn btn-default no-border btn-sm">-->
-                                            <!--<i class="ace-icon fa fa-search icon-on-right bigger-110"></i>-->
-                                        <!--</button>-->
-                                    <!--</div>-->
+                                <!--<div class="input-group ">-->
+                                    <!--<input type="text" class="form-control col-xs-3" name="workName" placeholder="作品名字" />-->
+                                    <!--&lt;!&ndash;<div class="input-group-btn">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<button onclick="refreshData()" type="button" class="btn btn-default no-border btn-sm">&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<i class="ace-icon fa fa-search icon-on-right bigger-110"></i>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-                                </div>
+                                <!--</div>-->
 
 
                             </form>
@@ -371,55 +371,40 @@
 <script type="text/javascript">
     $('.input-daterange').datepicker({autoclose:true,language:'cn'});
 
-    var data = {};
 
-    var grid_data =
-        [
-            //id name grade class sdate display rawVideo processedVideo
-            {id:"1",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 08:00:00"},
-            {id:"2",name:"王同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 09:00:00"},
-            {id:"3",name:"赵同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 10:00:00"},
-            {id:"4",name:"朱同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 11:00:00"},
-            {id:"5",name:"黄同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"6",name:"丁同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"7",name:"邓同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"8",name:"秦同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"9",name:"江同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"10",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"11",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"12",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"13",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"14",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"15",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"16",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"17",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"18",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"19",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"20",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"21",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
-            {id:"22",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    var grid_selector = "#grid-table";
+    var pager_selector = "#grid-pager";
 
 
-        ];
+    // var grid_data =
+    //     [
+    //         //id name grade class sdate display rawVideo processedVideo
+    //         {id:"1",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 08:00:00"},
+    //         {id:"2",name:"王同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 09:00:00"},
+    //         {id:"3",name:"赵同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 10:00:00"},
+    //         {id:"4",name:"朱同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 11:00:00"},
+    //         {id:"5",name:"黄同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"6",name:"丁同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"7",name:"邓同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"8",name:"秦同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"9",name:"江同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"10",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"11",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"12",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"13",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"14",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"15",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"16",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"17",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"18",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"19",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"20",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"21",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //         {id:"22",name:"张同学",grade:"一年级",class:"一班",display:'是',ship:"FedEx",rawVideo:"#",processedVideo:"#",sdate:"2007-12-03 12:00:00"},
+    //     ];
 
-    var subgrid_data =
-        [
-            {id:"1", name:"sub grid item 1", qty: 11},
-            {id:"2", name:"sub grid item 2", qty: 3},
-            {id:"3", name:"sub grid item 3", qty: 12},
-            {id:"4", name:"sub grid item 4", qty: 5},
-            {id:"5", name:"sub grid item 5", qty: 2},
-            {id:"6", name:"sub grid item 6", qty: 9},
-            {id:"7", name:"sub grid item 7", qty: 3},
-            {id:"8", name:"sub grid item 8", qty: 8}
-        ];
 
     jQuery(function($) {
-
-
-        var grid_selector = "#grid-table";
-        var pager_selector = "#grid-pager";
-
 
 
         var parent_column = $(grid_selector).closest('[class*="col-"]');
@@ -453,42 +438,11 @@
 				})
          */
 
-        var workGrid = jQuery(grid_selector).jqGrid({
-            //direction: "rtl",
-            // getParam: function() {
-            //     var rowListNum = $("#contentGroupOrderTable").jqGrid('getGridParam', 'rowNum');
-            //     if (rowListNum == undefined) {
-            //         $('#pageSize').val(15);
-            //     } else {
-            //         $('#pageSize').val(rowListNum);
-            //     }
-            //     //组装查询的条件参数
-            //     var params = {
-            //         'startTime': $("#startTime").val()
-            //         , 'endTime': $("#endTime").val()
-            //         , 'supplierName': $("#supplierName").val()
-            //         , 'groupCode': $("#groupCode").val()
-            //         , 'receiveMode': $("#receiveMode").val()
-            //         , 'orgNames': $("#orgNames").val()
-            //         , 'orgIds': $("#orgIds").val()
-            //         , 'saleOperatorName': $("#saleOperatorName").val()
-            //         , 'saleOperatorIds': $("#saleOperatorIds").val()
-            //
-            //         , 'productName': $("#productName").val()
-            //         , 'remark': $("#remark").val()
-            //         , 'operType': $("#operType").val()
-            //         , 'guestName': $("#guestName").val()
-            //         , 'gender': $("#gender").val()
-            //         , 'ageFirst': $("#ageFirst").val()
-            //         , 'ageSecond': $("#ageSecond").val()
-            //         , 'nativePlace': $("#nativePlace").val()
-            //         , 'pageSize': $("#pageSize").val()
-            //         , 'userRightType': $("#userRightType").val()
-            //     };
-            //     return params;
-            // },
-            //subgrid options
-
+        jQuery(grid_selector).jqGrid({
+            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=1d44662ee7e0452a9d594841799d00ac",
+            editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
+            mtype: "post",
+            datatype: "json",
 
             subGrid : false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
@@ -514,79 +468,86 @@
                     ]
                 });
             },
-
-            url: 'http://192.168.0.153:8080/work/filterSearch',
-            datatype: "json",
-            postData:{
-                "page":{
-                    "page":0,
-                    "size":2,
-                    "sorts":[{
-                        "attr":"name",
-                        "direction":"desc"
-                    }]
-                }
-            },
             jsonReader:{//分页的关键
-                root: "msg",total: "totalPages",page: "pageBean",records: "msg.data",repeatitems: false
+                root: "msg.data",
+                total: "msg.totalPages",
+                // page: "",
+                records: "msg.totalElements",
+                repeatitems: false
             },
-            // data: data,
             height: 250,
-            colNames:[' ', '学号','姓名','年级','班级','时间', '展示', '原制作视频','制作过程'],
+            ajaxRowOptions: {contentType: "application/json", dataType: "json"},
+            serializeRowData: function (data) {
+                return JSON.stringify(data);
+            },
+            ajaxGridOptions: {contentType: 'application/json; charset=utf-8'},
+            serializeGridData: function (postData) {
+                if (postData.searchField === undefined) postData.searchField = null;
+                if (postData.searchString === undefined) postData.searchString = null;
+                if (postData.searchOper === undefined) postData.searchOper = null;
+                return JSON.stringify(postData);
+            },
+            prmNames: {
+                page: "page",
+                rows: "rows",
+                sort: "sidx",
+                order: "sord",
+                search: "search",
+                filters: "filters"
+            },
+            colNames:[' ','作品ID','作品', '作者ID','姓名','年级','时间', '是否展示','查看与编辑'],
             colModel:[
                 {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
                     formatter:'actions',
                     formatoptions:{
                         keys:true,
-                        //delbutton: false,//disable delete button
-
+                        delbutton: false,//disable delete button
                         delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     }
                 },
-                {name:'id',index:'id', width:60, sorttype:"int", editable: false},
-                {name:'name',index:'name', width:150,editable: false},
-                {name:'grade',index:'grade', width:150,editable: false},
-                {name:'class',index:'class', width:150,editable: false},
-                {name:'sdate',index:'sdate',width:90, editable:false, sorttype:"time",unformat: pickDate,search:false},
-                {name:'display',index:'display', width:70, editable: true,edittype:"checkbox",editoptions: {value:"是:否"},unformat: aceSwitch,search:false},
-                {name:'rawVideo',index:'rawVideo', width:90, sortable:false, editable: false,search:false,
+                {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
+                {name:'name',index:'name', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.account',index:'userAccount', width:60, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.name',index:'user.name', width:150,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
+                {name:'grade',index:'grade', width:150,editable: false,searchoptions: {sopt: ["eq"]}},
+                // {name:'class',index:'class', width:150,editable: false},
+                {name:'createdAt',index:'createdAt',width:90, editable:false, sorttype:"time",unformat: pickDate,search:false},
+                {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
+                    stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
+                {name:'id',index:'view', width:90, sortable:false, editable: false,search:false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='"+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">下载</a>"}  },
-                {name:'processedVideo',index:'processedVideo', width:150, sortable:false,editable: false,search:false,
-                    formatter: function (value, grid, rows, state) {
-                        return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看（上传）</a>"}
-                }
+                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看与编辑</a>"}  },
             ],
 
-            onPaging:function(pageBtn){
-                console.log(pageBtn);
-//	    	var re_records = $jqgrid.getGridParam('records');//获取返回的记录数
-                var re_page = $(grid_selector).getGridParam('page');//获取返回的当前页
-                var re_rowNum= $(grid_selector).getGridParam('rowNum');//获取每页数
-                var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
-                // alert(re_total);
-                if(pageBtn==="next"){
-                    $(grid_selector).jqGrid('clearGridData');
-                    $(grid_selector).jqGrid('setGridParam',{
-                        page:re_page+1,
-                        rowNum:re_rowNum,
-                        datatype:'local',
-                        data:grid_data//newData是符合格式要求的重新加载的数据
-                    }).trigger("reloadGrid");
-
-                    // $(grid_selector).jqGrid.setGridParam({page:re_page+1, rowNum:re_rowNum,data:subgrid_data,datatype:'local'}).trigger('reloadGrid');
-                }
-                if(pageBtn==="prev"){
-                    $(grid_selector).setGridParam({page:re_page-1, rowNum:re_rowNum}).trigger('reloadGrid');
-                }
-                },
-
-            onSortCol: function(sidx,name,sort) {
-                //点击排序列，根据哪列排序
-                alert(sidx +" " + sort);
-                return 'stop';
-            },
+//             onPaging:function(pageBtn){
+//                 console.log(pageBtn);
+// //	    	var re_records = $jqgrid.getGridParam('records');//获取返回的记录数
+//                 var re_page = $(grid_selector).getGridParam('page');//获取返回的当前页
+//                 var re_rowNum= $(grid_selector).getGridParam('rowNum');//获取每页数
+//                 var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
+//                 // alert(re_total);
+//                 if(pageBtn==="next"){
+//                     $(grid_selector).jqGrid('clearGridData');
+//                     $(grid_selector).jqGrid('setGridParam',{
+//                         page:re_page+1,
+//                         rowNum:re_rowNum,
+//                         datatype:'local',
+//                         data:grid_data//newData是符合格式要求的重新加载的数据
+//                     }).trigger("reloadGrid");
+//
+//                     // $(grid_selector).jqGrid.setGridParam({page:re_page+1, rowNum:re_rowNum,data:subgrid_data,datatype:'local'}).trigger('reloadGrid');
+//                 }
+//                 if(pageBtn==="prev"){
+//                     $(grid_selector).setGridParam({page:re_page-1, rowNum:re_rowNum}).trigger('reloadGrid');
+//                 }
+//                 },
+//
+//             onSortCol: function(sidx,name,sort) {
+//                 //点击排序列，根据哪列排序
+//                 alert(sidx +" " + sort);
+//                 return 'stop';
+//             },
             viewrecords : true,
             rowNum:10,
             rowList:[10,20,30],
@@ -610,8 +571,6 @@
                 }, 0);
             },
 
-            //todo 保存
-            editurl: "./dummy.php",//nothing is saved
             caption: "学生作品"
 
             //,autowidth: true,
@@ -653,6 +612,16 @@
             }, 0);
         }
 
+
+        function displayFormat(cellvalue, options, rowObject) {
+            if (cellvalue === true || cellvalue==="true" || cellvalue==="是") {
+                return "是";
+            }
+            else if (cellvalue === false || cellvalue=="false" || cellvalue==="否") {
+                return "否";
+            }
+            return "未知";
+        }
         //navButtons下面导航区
         jQuery(grid_selector).jqGrid('navGrid',pager_selector,
             { 	//navbar options
@@ -660,11 +629,11 @@
                 editicon : 'ace-icon fa fa-pencil blue',
                 add: false,
                 addicon : 'ace-icon fa fa-plus-circle purple',
-                del: true,
+                del: false,
                 delicon : 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon : 'ace-icon fa fa-search orange',
-                refresh: false,
+                refresh: true,
                 refreshicon : 'ace-icon fa fa-refresh green',
                 view: true,
                 viewicon : 'ace-icon fa fa-search-plus grey',
@@ -723,23 +692,24 @@
                 ,
                 multipleSearch: true,
                 autoSearch:false,
+                groupOps: [{op: "AND", text: "满足所有条件" }],
                 closeAfterSearch: true,
                 /**
                  multipleGroup:true,
                  showQuery: true
                  */
-                onSearch:function () {
-                    postData = $(grid_selector).jqGrid('getGridParam', 'postData');
-                    filters = $.parseJSON(postData.filters);
-                    rules = filters.rules;
-                    console.log(filters);
-                    $(grid_selector).jqGrid('clearGridData');//清空表格
-                        $(grid_selector).jqGrid('setGridParam',{
-                            page:1,
-                            datatype:'local',
-                            data:subgrid_data//newData是符合格式要求的重新加载的数据
-                        }).trigger("reloadGrid");
-                }
+                // onSearch:function () {
+                //     postData = $(grid_selector).jqGrid('getGridParam', 'postData');
+                //     filters = $.parseJSON(postData.filters);
+                //     rules = filters.rules;
+                //     console.log(filters);
+                //     $(grid_selector).jqGrid('clearGridData');//清空表格
+                //         $(grid_selector).jqGrid('setGridParam',{
+                //             page:1,
+                //             datatype:'local',
+                //             data:subgrid_data//newData是符合格式要求的重新加载的数据
+                //         }).trigger("reloadGrid");
+                // }
             },
             {
                 //view record form
@@ -751,33 +721,33 @@
             }
         );
 
-        $(grid_selector).navButtonAdd(pager_selector,
-            {
-                buttonicon: "ace-icon fa fa-refresh green",
-                title: "",
-                caption: "",
-                position: "last",
-                onClickButton: refreshFilterGrid
-            });
+        // $(grid_selector).navButtonAdd(pager_selector,
+        //     {
+        //         buttonicon: "ace-icon fa fa-refresh green",
+        //         title: "",
+        //         caption: "",
+        //         position: "last",
+        //         onClickButton: refreshFilterGrid
+        //     });
 
-        function refreshFilterGrid() {
-            $(grid_selector).jqGrid('clearGridData');//清空表格
-            $(grid_selector).jqGrid('setGridParam',{
-                postData:{"filters":null},
-                datatype:'local',
-                data:grid_data//newData是符合格式要求的重新加载的数据
-            }).trigger("reloadGrid");
-            console.log("refresh");
-            filters = null;
-            rules = null;
-        }
+        // function refreshFilterGrid() {
+        //     $(grid_selector).jqGrid('clearGridData');//清空表格
+        //     $(grid_selector).jqGrid('setGridParam',{
+        //         postData:{"filters":null},
+        //         datatype:'local',
+        //         data:grid_data//newData是符合格式要求的重新加载的数据
+        //     }).trigger("reloadGrid");
+        //     console.log("refresh");
+        //     filters = null;
+        //     rules = null;
+        // }
 
 
         function style_edit_form(form) {
-            //enable datepicker on "sdate" field and switches for "stock" field
-            form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+            //enable datepicker on "createdAt" field and switches for "stock" field
+            form.find('input[name=createdAt]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
 
-            form.find('input[name=display]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+            form.find('input[name=isShowed]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
             //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
             //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
 
@@ -899,34 +869,7 @@
         //     datatype:'local',
         //     data:subgrid_data//newData是符合格式要求的重新加载的数据
         // }).trigger("reloadGrid");
-        
-        $.ajax({
-            data:{
 
-                page:0,
-                size:2,
-                sorts:[{
-                attr:"name",
-                direction:"desc"
-            }]
-
-                // page : $(grid_selector).getGridParam('page'),//获取返回的当前页
-                // rowNum : $(grid_selector).getGridParam('rowNum')//获取每页数
-            },
-            datatype:'json',
-            url:'http://192.168.0.153:8080/work/filterSearch',
-            method:'post',
-            success:function (data) {
-                $(grid_selector).jqGrid('setGridParam',{
-                    postData:{"filters":null},
-                    datatype:'local',
-                    data:data//newData是符合格式要求的重新加载的数据
-                }).trigger("reloadGrid");
-            },
-            error:function () {
-
-            }
-        });
 
         //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 

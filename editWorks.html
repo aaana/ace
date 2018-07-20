@@ -499,6 +499,24 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+
+
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    var req = GetRequest();
+    var workId = req['workId'];
+
     var pressUploadFileBtn = function () {
         $("#photoInput").click();
     };
@@ -696,7 +714,7 @@
         });
 
         data1 = {
-            "id": 1,
+            "id": workId
         };
 
         $.ajax({
@@ -766,14 +784,14 @@
         switch (type.value) {
             case 1:
                 data1 = {
-                    "id": 1,
+                    "id": workId,
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
                 };
                 break;
             case 2:
                 data1 = {
-                    "id": 1,
+                    "id": workId,
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
                     "photoUrl": uploadName,

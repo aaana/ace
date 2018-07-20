@@ -285,9 +285,9 @@
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
 
-    function MyArray(data) {
-        this.data = data;
-    }
+    // function MyArray(data) {
+    //     this.data = data;
+    // }
 
     function logout() {
         window.location.href = 'userLogin.html';
@@ -295,17 +295,17 @@
 
     var grid_selector = "#grid-table";
     var pager_selector = "#grid-pager";
-    var jsonOptions = {
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
-    };
-
-    function createJSON(postdata) {
-        if (postdata.id === '_empty')
-            postdata.id = null; // rest api expects int or null
-        return JSON.stringify(postdata)
-    }
+    // var jsonOptions = {
+    //     type: "POST",
+    //     contentType: "application/json; charset=utf-8",
+    //     dataType: "json"
+    // };
+    //
+    // function createJSON(postdata) {
+    //     if (postdata.id === '_empty')
+    //         postdata.id = null; // rest api expects int or null
+    //     return JSON.stringify(postdata)
+    // }
 
     jQuery(function ($) {
 
@@ -325,8 +325,8 @@
             }
         })
         jQuery(grid_selector).jqGrid({
-            url: "http://127.0.0.1:8080/jqgrid/user/search?token=1d44662ee7e0452a9d594841799d00ac",
-            editurl: "http://127.0.0.1:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/user/search?token=1d44662ee7e0452a9d594841799d00ac",
+            editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
             height: 400,
@@ -348,6 +348,7 @@
                     formatter: 'actions',
                     formatoptions: {
                         keys: true,
+                        delbutton: false,//disable delete button
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                     }
                 },
@@ -406,10 +407,10 @@
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
         function managerFormatter(cellvalue, options, rowObject) {
-            if (cellvalue === true || cellvalue==="true") {
+            if (cellvalue === true || cellvalue==="true" || cellvalue==="是") {
                 return "是";
             }
-            else if (cellvalue === false || cellvalue=="false") {
+            else if (cellvalue === false || cellvalue=="false" || cellvalue === "否") {
                 return "否";
             }
             return "未知";
@@ -603,24 +604,24 @@
             $('.ui-jqdialog').remove();
         });
     });
-
-    function refreshData() {
-        var grid_data =
-            [
-                //id name grade class sdate display rawVideo processedVideo
-                {id: "8", name: "张同学", type: "教师", admin: '是'},
-                {id: "9", name: "张同学", type: "教师", admin: '是'},
-                {id: "10", name: "张老师", type: "教师", admin: '是'},
-                {id: "11", name: "张同学", type: "教师", admin: '是'},
-                {id: "12", name: "张同学", type: "教师", admin: '是'}
-            ];
-        $("#grid-table").jqGrid('clearGridData');//清空表格
-        $("#grid-table").jqGrid('setGridParam', {
-            data: grid_data,//newData是符合格式要求的重新加载的数据
-            page: 2//哪一页的值
-        }).trigger("reloadGrid");
-        console.log("refresh")
-    }
+    //
+    // function refreshData() {
+    //     var grid_data =
+    //         [
+    //             //id name grade class sdate display rawVideo processedVideo
+    //             {id: "8", name: "张同学", type: "教师", admin: '是'},
+    //             {id: "9", name: "张同学", type: "教师", admin: '是'},
+    //             {id: "10", name: "张老师", type: "教师", admin: '是'},
+    //             {id: "11", name: "张同学", type: "教师", admin: '是'},
+    //             {id: "12", name: "张同学", type: "教师", admin: '是'}
+    //         ];
+    //     $("#grid-table").jqGrid('clearGridData');//清空表格
+    //     $("#grid-table").jqGrid('setGridParam', {
+    //         data: grid_data,//newData是符合格式要求的重新加载的数据
+    //         page: 2//哪一页的值
+    //     }).trigger("reloadGrid");
+    //     console.log("refresh")
+    // }
 </script>
 </body>
 </html>
