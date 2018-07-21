@@ -294,11 +294,12 @@
     jQuery(function($) {
 
 
+
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
             $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
-        })
+        });
 
         //resize on sidebar collapse/expand
         $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
@@ -326,12 +327,14 @@
          */
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.167:8080/jqgrid/work/filterSearch?token=1d44662ee7e0452a9d594841799d00ac",
             editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
             postData:{
-                
+                others:{
+                    courseId:0
+                }
             },
             subGrid : false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
@@ -384,29 +387,30 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames:[' ','作品', '作者ID','姓名','年级','时间', '是否展示','查看与编辑'],
+            colNames:[' ','作品', '作者ID','姓名','年级','指导老师','时间', '是否展示','查看/编辑'],
             colModel:[
-                {name:'myac',index:'', width:60, fixed:true, sortable:false, resize:false,
+                {name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
                     formatter:'actions',
                     formatoptions:{
                         keys:true,
                         delbutton: false,//disable delete button
                         delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
-                    }
+                    },
+                    search:false
                 },
                 // {name:'id',index:'id', width:100, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
                 {name:'name',index:'name', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
                 {name:'user.account',index:'userAccount', width:100, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
                 {name:'user.name',index:'user.name', width:100,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
                 {name:'grade',index:'grade', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
-                // {name:'class',index:'class', width:150,editable: false},
-                {name:'createdAt',index:'createdAt',width:100, editable:false, sorttype:"time",unformat: pickDate,search:false},
-                {name:'isShowed',index:'isShowed', width:100, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
+                {name:'helper.account',index:'helperAvvount', width:100,editable: false},
+                {name:'createdAt',index:'createdAt',width:120, editable:false, sorttype:"time",unformat: pickDate,search:false},
+                {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
                     stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
-                {name:'id',index:'view', width:100, sortable:false, editable: false,search:false,
+                {name:'id',index:'view', width:120, sortable:false, editable: false,search:false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看与编辑</a>"}  },
+                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks.html?workId="+ value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"}  },
             ],
             viewrecords : true,
             rowNum:10,

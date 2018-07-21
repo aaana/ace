@@ -6,8 +6,9 @@
     color: #2679B5;
 }
 
-.page-header span{
-    margin: 0 8px;
+#courseName,#courseId{
+    /*color: black;*/
+    margin-right: 10px;
 }
 
 a.btn-scroll-up{

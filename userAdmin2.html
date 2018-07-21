@@ -197,14 +197,14 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-home"></i>
-                        <a href="#">主页</a>
+                        <i class="ace-icon fa fa-users"></i>
+                        <a href="#">用户管理</a>
                     </li>
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
-                    <li class="active">用户管理</li>
+                    <!--<li class="active">用户管理</li>-->
                 </ul><!-- /.breadcrumb -->
 
                 <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
@@ -220,19 +220,19 @@
 
             <div class="page-content">
                 <div class="row">
-                    <div class="col-xs-offset-10 col-xs-2" style="margin-top: 20px">
-                        <form>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="keywords" placeholder="搜索"/>
-                                <div class="input-group-btn">
-                                    <button onclick="refreshData()" type="button"
-                                            class="btn btn-default no-border btn-sm">
-                                        <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <!--<div class="col-xs-offset-10 col-xs-2" style="margin-top: 20px">-->
+                        <!--<form>-->
+                            <!--<div class="input-group">-->
+                                <!--<input type="text" class="form-control" id="username" placeholder="搜索"/>-->
+                                <!--<div class="input-group-btn">-->
+                                    <!--<button onclick="searchUser()" type="button"-->
+                                            <!--class="btn btn-default no-border btn-sm">-->
+                                        <!--<i class="ace-icon fa fa-search icon-on-right bigger-110"></i>-->
+                                    <!--</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
 
@@ -275,7 +275,7 @@
 <!-- inline scripts related to this page -->
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/grid.locale-en.js"></script>
+<script src="assets/js/grid.locale-cn.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -287,6 +287,23 @@
 
     // function MyArray(data) {
     //     this.data = data;
+    // }
+
+    // function searchUser() {
+    //     var username = $('#username').val();
+    //     $.ajax({
+    //         url: "http://192.168.0.153:8080/user/search?token=1d44662ee7e0452a9d594841799d00ac",
+    //         contentType: "application/json",
+    //         type: 'POST',
+    //         data: JSON.stringify({"fuzzy":username}),
+    //         dataType: 'json',
+    //         success: function (responseStr) {
+    //
+    //         },
+    //         error: function (responseStr) {
+    //             console.log("error" + responseStr);
+    //         }
+    //     });
     // }
 
     function logout() {
@@ -313,7 +330,7 @@
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
             $(grid_selector).jqGrid('setGridWidth', parent_column.width());
-        })
+        });
 
         //resize on sidebar collapse/expand
         $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
@@ -323,7 +340,7 @@
                     $(grid_selector).jqGrid('setGridWidth', parent_column.width());
                 }, 20);
             }
-        })
+        });
 
         jQuery(grid_selector).jqGrid({
             url: "http://192.168.0.153:8080/jqgrid/user/search?token=1d44662ee7e0452a9d594841799d00ac",
@@ -351,11 +368,15 @@
                         keys: true,
                         delbutton: false,//disable delete button
                         delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
-                    }
+                    },
+                    search: false
                 },
-                {name: 'id', index: 'id', width: 60, sorttype: "int", editable: false},
-                {name: 'name', index: 'name', width: 80, editable: false},
-                {name: 'type', index: 'type', width: 80, editable: false},
+                {name: 'id', index: 'id', width: 60, sorttype: "int", editable: false, searchoptions: {sopt: ["eq"]}},
+                {name: 'name', index: 'name', width: 80, editable: false, searchoptions: {sopt: ["eq"]}},
+                {
+                    name: 'type', index: 'type', width: 80, editable: false, stype: "select", formatter: typeFormatter,
+                    searchoptions: {sopt: ["eq"], value: "0:老师;1:学生"}
+                },
                 {
                     name: 'isManager',
                     index: 'isManager',
@@ -363,6 +384,8 @@
                     editable: true,
                     edittype: "checkbox",
                     editoptions: {value: "true:false"},
+                    stype: "select",
+                    searchoptions: {sopt: ["eq"], value: "true:是;false:否"},
                     unformat: aceSwitch,
                     formatter: managerFormatter
                 },
@@ -408,11 +431,21 @@
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
         function managerFormatter(cellvalue, options, rowObject) {
-            if (cellvalue === true || cellvalue==="true" || cellvalue==="是") {
+            if (cellvalue === true || cellvalue === "true" || cellvalue === "是") {
                 return "是";
             }
-            else if (cellvalue === false || cellvalue=="false" || cellvalue === "否") {
+            else if (cellvalue === false || cellvalue == "false" || cellvalue === "否") {
                 return "否";
+            }
+            return "未知";
+        }
+
+        function typeFormatter(cellvalue, options, rowObject) {
+            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "老师") {
+                return "老师";
+            }
+            else if (cellvalue === 1 || cellvalue == "1" || cellvalue === "学生") {
+                return "学生";
             }
             return "未知";
         }
@@ -437,18 +470,18 @@
         //navButtons
         jQuery(grid_selector).jqGrid('navGrid', pager_selector,
             { 	//navbar options
-                edit: true,
+                edit: false,
                 editicon: 'ace-icon fa fa-pencil blue',
-                add: true,
+                add: false,
                 addicon: 'ace-icon fa fa-plus-circle purple',
-                del: true,
+                del: false,
                 delicon: 'ace-icon fa fa-trash-o red',
                 search: true,
                 searchicon: 'ace-icon fa fa-search orange',
                 refresh: true,
                 refreshicon: 'ace-icon fa fa-refresh green',
                 view: true,
-                viewicon: 'ace-icon fa fa-search-plus grey',
+                viewicon: 'ace-icon fa fa-search-plus grey'
             },
             {
                 //edit record form

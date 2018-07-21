@@ -327,10 +327,10 @@
 
                         <div class="page-header">
                             <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                            <span>教程名称：</span>
+                            <span>任务名称：</span><span id="courseName"></span>
 
                             <i class="fa fa-info" aria-hidden="true"></i>
-                            <span>教程ID：</span>
+                            <span>任务ID：</span><span id="courseId"></span>
                         </div><!-- /.page-header -->
                         <div id="lineChart" style="width: 90%;height:400px;margin: auto;margin-bottom: 40px"></div>
 
@@ -525,10 +525,27 @@
     };
     lineChart.setOption(option);
 
-    $.ajax({});
-
-
     jQuery(function ($) {
+        $('#courseId').html(courseId);
+        var course = {
+            "id":courseId
+        };
+        $.ajax({
+            data: JSON.stringify(course),
+            dataType:'json',
+            contentType: "application/json",
+            method:'post',
+            url:'http://192.168.0.153:8080/course/search?token=1d44662ee7e0452a9d594841799d00ac',
+            success:function (data) {
+                console.log(data);
+                if(data.status === 'success' ){
+                    $('#courseName').html(data.msg.name);
+                }
+            },
+            error:function (msg) {
+                console.log(msg);
+            }
+        });
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
 
@@ -569,11 +586,47 @@
 
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=aa653c73bd324ef0961405e4c5f8001e",
-            //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=1d44662ee7e0452a9d594841799d00ac",
+            editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
-            height: 400,
+            postData:{
+                others:{
+                    courseId:courseId
+                }
+            },
+            subGrid : false,
+            //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+            //datatype: "xml",
+            subGridOptions : {
+                plusicon : "ace-icon fa fa-plus center bigger-110 blue",
+                minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
+                openicon : "ace-icon fa fa-chevron-right center orange"
+            },
+            multiSort : true,
+            //for this example we are using local data
+            subGridRowExpanded: function (subgridDivId, rowId) {
+                var subgridTableId = subgridDivId + "_t";
+                $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
+                $("#" + subgridTableId).jqGrid({
+                    datatype: 'local',
+                    data: subgrid_data,
+                    colNames: ['No','Item Name','Qty'],
+                    colModel: [
+                        { name: 'id', width: 50 },
+                        { name: 'name', width: 150 },
+                        { name: 'qty', width: 50 }
+                    ]
+                });
+            },
+            jsonReader:{//分页的关键
+                root: "msg.data",
+                total: "msg.totalPages",
+                // page: "",
+                records: "msg.totalElements",
+                repeatitems: false
+            },
+            height: 250,
             ajaxRowOptions: {contentType: "application/json", dataType: "json"},
             serializeRowData: function (data) {
                 return JSON.stringify(data);
@@ -585,69 +638,6 @@
                 if (postData.searchOper === undefined) postData.searchOper = null;
                 return JSON.stringify(postData);
             },
-            postData: {
-                my: true
-            },
-            //colNames: [' ', '账号', '姓名', '类型', '管理员'],
-            //colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改','任务难度', '任务详情', '修改任务', '学习情况', '状态', '操作'],
-            colNames: [' ', '学号', '姓名', '年级', '班级', '时间', '展示', '原制作视频', '制作过程'],
-            colModel: [
-                {
-                    name: 'myac', index: '', width: 80, fixed: true, sortable: false, resize: false,
-                    formatter: 'actions',
-                    formatoptions: {
-                        keys: true,
-                        //delbutton: false,//disable delete button
-
-                        delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
-                        //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
-                    }
-                },
-                {name: 'user.id', index: 'user.id', width: 60, sorttype: "int", editable: false},
-                {name: 'user.name', index: 'user.name', width: 150, editable: false},
-                {name: 'grade', index: 'grade', width: 150, editable: false},
-                {name: 'class', index: 'class', width: 150, editable: false},
-                {
-                    name: 'createdAt',
-                    index: 'createdAt',
-                    width: 90,
-                    editable: false,
-                    sorttype: "time",
-                    unformat: pickDate
-                },
-                {
-                    name: 'isShowed',
-                    index: 'isShowed',
-                    width: 70,
-                    editable: true,
-                    edittype: "checkbox",
-                    editoptions: {value: "是:否"},
-                    unformat: aceSwitch
-                },
-                {
-                    name: 'rawVideo', index: 'rawVideo', width: 90, sortable: false, editable: false,
-                    formatter: function (value, grid, rows, state) {
-                        return "<a href='" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">下载</a>"
-                    }
-                },
-                {
-                    name: 'processedVideo', index: 'processedVideo', width: 150, sortable: false, editable: false,
-                    formatter: function (value, grid, rows, state) {
-                        return "<a href=\"#\" style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看（上传）</a>"
-                    }
-                }
-
-            ],
-            viewrecords: true,
-            rowNum: 10,
-            rowList: [10, 20],
-            pager: pager_selector,
-            altRows: true,
-            multiselect: true,
-            multiboxonly: true,
-            multiSort: true,
-            // sortname : 'id',
-            // sortorder : "desc",
             prmNames: {
                 page: "page",
                 rows: "rows",
@@ -656,27 +646,66 @@
                 search: "search",
                 filters: "filters"
             },
-            jsonReader: {
-                root: "msg.data",
-                // page: "msg.page",
-                total: "msg.totalPages",
-                records: "msg.totalElements",
-                repeatitems: false
-            },
-            loadComplete: function () {
-                var table = this;
-                setTimeout(function () {
-                    styleCheckbox(table);
+            colNames:[' ','作品', '作者ID','姓名','年级','指导老师','时间', '是否展示','查看/编辑'],
+            colModel:[
+                {name:'myac',index:'', width:70, fixed:true, sortable:false, resize:false,
+                    formatter:'actions',
+                    formatoptions:{
+                        keys:true,
+                        delbutton: false,//disable delete button
+                        delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
+                        //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+                    },
+                    search:false
+                },
+                // {name:'id',index:'id', width:100, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
+                {name:'name',index:'name', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.account',index:'userAccount', width:100, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'user.name',index:'user.name', width:100,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
+                {name:'grade',index:'grade', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
+                {name:'helper.account',index:'helperAvvount', width:100,editable: false},
+                {name:'createdAt',index:'createdAt',width:120, editable:false, sorttype:"time",unformat: pickDate,search:false},
+                {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
+                    stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
+                {name:'id',index:'view', width:120, sortable:false, editable: false,search:false,
+                    formatter: function (value, grid, rows, state) {
+                        return "<a href='editWorks.html?workId="+ value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks.html?workId="+ value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"}  },
 
+            ],
+            viewrecords : true,
+            rowNum:10,
+            rowList:[10,20,30],
+
+            pager : pager_selector,
+            altRows: true,
+            //toppager: true,
+            multiselect: true,
+            //multikey: "ctrlKey",
+            multiboxonly: true,
+            loadComplete : function() {
+                var table = this;
+                setTimeout(function(){
+                    styleCheckbox(table);
                     updateActionIcons(table);
                     updatePagerIcons(table);
                     enableTooltips(table);
                 }, 0);
             },
-            caption: "学生作品"
+
+            caption: "作品"
+
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
+        function displayFormat(cellvalue, options, rowObject) {
+            if (cellvalue === true || cellvalue==="true" || cellvalue==="是") {
+                return "是";
+            }
+            else if (cellvalue === false || cellvalue=="false" || cellvalue==="否") {
+                return "否";
+            }
+            return "未知";
+        }
 
         //enable search/filter toolbar
         //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
