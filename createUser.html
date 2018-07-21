@@ -438,8 +438,10 @@
                 $('#enterYear').datepicker({
                     autoclose: true,
                     todayHighlight: true,
-                    startView: 2,
-                    minView: 2,
+                    startView: 'decade',
+                    minView: 'decade',
+                    maxViewMode: 2,
+                    minViewMode:2,
                     format: 'yyyy'
                 })
                 //show datepicker when clicking on the icon
