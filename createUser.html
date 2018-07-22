@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootoast.css">
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
@@ -421,6 +422,7 @@
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
+<script src="assets/js/bootoast.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -512,17 +514,41 @@
             success: function (data) {
                 if (data.status == "success") {
                     console.log("创建成功..");
-                    alert("创建成功！");
+                    bootoast({
+                        "message": "创建成功",
+                        "type": "success",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": false
+                    });
+                    // alert("创建成功！");
                     window.location.href = 'createUser.html';
                 } else {
-                    alert("创建失败！请重新创建");
-                    console.log("创建失败");
+                    bootoast({
+                        "message": "创建失败！请重新创建",
+                        "type": "danger",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": false
+                    });                    console.log("创建失败");
                     window.location.href = 'createUser.html';
                 }
             },
             error: function (msg) {
-                 alert("创建失败！请重新创建");
-                 window.location.href = 'createUser.html';
+                bootoast({
+                    "message": "创建失败！请重新创建",
+                    "type": "danger",
+                    "position": "bottom-right",
+                    "icon": "",
+                    "timeout":2,
+                    "animationDuration": "300",
+                    "dismissable": false
+                });
+                window.location.href = 'createUser.html';
             }
         })
     }
@@ -549,16 +575,40 @@
                 if (data.status == "success") {
                     console.log("导入成功..");
                     $('#uploadFileBtn').attr("disabled", true);
-                    alert("批量导入成功！");
+                    bootoast({
+                        "message": "批量导入成功",
+                        "type": "success",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": false
+                    });
                     window.location.href = 'createUser.html';
                 } else {
-                    alert("批量导入失败！请确认文件格式");
+                    bootoast({
+                        "message": "批量导入失败！请确认文件格式",
+                        "type": "danger",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": false
+                    });
                     console.log("导入失败");
                     window.location.href = 'createUser.html';
                 }
             },
             error: function (e) {
-                alert("批量导入失败！请确认文件格式");
+                bootoast({
+                    "message": "批量导入失败！请确认文件格式",
+                    "type": "danger",
+                    "position": "bottom-right",
+                    "icon": "",
+                    "timeout":2,
+                    "animationDuration": "300",
+                    "dismissable": false
+                });
                 console.log("导入失败");
                 window.location.href = 'createUser.html';
             }

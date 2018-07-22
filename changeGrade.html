@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootoast.css">
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
@@ -305,6 +306,7 @@
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
+<script src="assets/js/bootoast.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -330,12 +332,11 @@
                     $(grid_selector).jqGrid('setGridWidth', parent_column.width());
                 }, 20);
             }
-        })
+        });
 
 
         jQuery(grid_selector).jqGrid({
             url: "http://192.168.0.153:8080/jqgrid/user/gradeList?token=1d44662ee7e0452a9d594841799d00ac",
-            editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
 
@@ -409,46 +410,16 @@
                     name: 'grade',
                     index: 'grade',
                     width: 100,
-                    editable: false,
-                    editable: false,
+                    editable: false
                 },
                 {
                     name: 'enterYear',
                     index: 'enterYear',
                     width: 100,
                     editable: false,
-                    search: false,
-                },
+                    search: false
+                }
             ],
-
-//             onPaging:function(pageBtn){
-//                 console.log(pageBtn);
-// //	    	var re_records = $jqgrid.getGridParam('records');//获取返回的记录数
-//                 var re_page = $(grid_selector).getGridParam('page');//获取返回的当前页
-//                 var re_rowNum= $(grid_selector).getGridParam('rowNum');//获取每页数
-//                 var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
-//                 // alert(re_total);
-//                 if(pageBtn==="next"){
-//                     $(grid_selector).jqGrid('clearGridData');
-//                     $(grid_selector).jqGrid('setGridParam',{
-//                         page:re_page+1,
-//                         rowNum:re_rowNum,
-//                         datatype:'local',
-//                         data:grid_data//newData是符合格式要求的重新加载的数据
-//                     }).trigger("reloadGrid");
-//
-//                     // $(grid_selector).jqGrid.setGridParam({page:re_page+1, rowNum:re_rowNum,data:subgrid_data,datatype:'local'}).trigger('reloadGrid');
-//                 }
-//                 if(pageBtn==="prev"){
-//                     $(grid_selector).setGridParam({page:re_page-1, rowNum:re_rowNum}).trigger('reloadGrid');
-//                 }
-//                 },
-//
-//             onSortCol: function(sidx,name,sort) {
-//                 //点击排序列，根据哪列排序
-//                 alert(sidx +" " + sort);
-//                 return 'stop';
-//             },
             viewrecords: true,
             rowNum: 10,
             rowList: [10, 20, 30],
@@ -492,158 +463,6 @@
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
-        //enable search/filter toolbar
-        //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-        //jQuery(grid_selector).filterToolbar({});
-
-
-        //switch element when editing inline
-        function aceSwitch(cellvalue, options, cell) {
-            setTimeout(function () {
-                $(cell).find('input[type=checkbox]')
-                    .addClass('ace ace-switch ace-switch-5')
-                    .after('<span class="lbl"></span>');
-            }, 0);
-        }
-
-        //enable datepicker
-        function pickDate(cellvalue, options, cell) {
-            setTimeout(function () {
-                $(cell).find('input[type=text]')
-                    .datepicker({format: 'yyyy-mm-dd hh:mm:ss', autoclose: true});
-            }, 0);
-        }
-
-
-        function displayFormat(cellvalue, options, rowObject) {
-            if (cellvalue === true || cellvalue === "true" || cellvalue === "是") {
-                return "是";
-            }
-            else if (cellvalue === false || cellvalue == "false" || cellvalue === "否") {
-                return "否";
-            }
-            return "未知";
-        }
-
-        //navButtons下面导航区
-        /*jQuery(grid_selector).jqGrid('navGrid', pager_selector,
-            { 	//navbar options
-                edit: false,
-                editicon: 'ace-icon fa fa-pencil blue',
-                add: false,
-                addicon: 'ace-icon fa fa-plus-circle purple',
-                del: false,
-                delicon: 'ace-icon fa fa-trash-o red',
-                search: true,
-                searchicon: 'ace-icon fa fa-search orange',
-                refresh: true,
-                refreshicon: 'ace-icon fa fa-refresh green',
-                view: true,
-                viewicon: 'ace-icon fa fa-search-plus grey',
-            },
-            {
-                //edit record form
-                //closeAfterEdit: true,
-                //width: 700,
-                recreateForm: true,
-                beforeShowForm: function (e) {
-                    var form = $(e[0]);
-                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                    style_edit_form(form);
-                }
-            },
-            {
-                //new record form
-                //width: 700,
-                closeAfterAdd: true,
-                recreateForm: true,
-                viewPagerButtons: false,
-                beforeShowForm: function (e) {
-                    var form = $(e[0]);
-                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-                        .wrapInner('<div class="widget-header" />')
-                    style_edit_form(form);
-                }
-            },
-            {
-                //delete record form
-                recreateForm: true,
-                beforeShowForm: function (e) {
-                    var form = $(e[0]);
-                    if (form.data('styled')) return false;
-
-                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
-                    style_delete_form(form);
-
-                    form.data('styled', true);
-                },
-                onClick: function (e) {
-                    //alert(1);
-                }
-            },
-            {
-                //search form
-                recreateForm: true,
-                afterShowSearch: function (e) {
-                    var form = $(e[0]);
-                    form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-                    style_search_form(form);
-                },
-                afterRedraw: function () {
-                    style_search_filters($(this));
-                }
-                ,
-                multipleSearch: true,
-                autoSearch: false,
-                groupOps: [{op: "AND", text: "满足所有条件"}],
-                closeAfterSearch: true,
-                /!**
-                 multipleGroup:true,
-                 showQuery: true
-                 *!/
-                // onSearch:function () {
-                //     postData = $(grid_selector).jqGrid('getGridParam', 'postData');
-                //     filters = $.parseJSON(postData.filters);
-                //     rules = filters.rules;
-                //     console.log(filters);
-                //     $(grid_selector).jqGrid('clearGridData');//清空表格
-                //         $(grid_selector).jqGrid('setGridParam',{
-                //             page:1,
-                //             datatype:'local',
-                //             data:subgrid_data//newData是符合格式要求的重新加载的数据
-                //         }).trigger("reloadGrid");
-                // }
-            },
-            {
-                //view record form
-                recreateForm: true,
-                beforeShowForm: function (e) {
-                    var form = $(e[0]);
-                    form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
-                }
-            }
-        );*/
-
-        // $(grid_selector).navButtonAdd(pager_selector,
-        //     {
-        //         buttonicon: "ace-icon fa fa-refresh green",
-        //         title: "",
-        //         caption: "",
-        //         position: "last",
-        //         onClickButton: refreshFilterGrid
-        //     });
-
-        // function refreshFilterGrid() {
-        //     $(grid_selector).jqGrid('clearGridData');//清空表格
-        //     $(grid_selector).jqGrid('setGridParam',{
-        //         postData:{"filters":null},
-        //         datatype:'local',
-        //         data:grid_data//newData是符合格式要求的重新加载的数据
-        //     }).trigger("reloadGrid");
-        //     console.log("refresh");
-        //     filters = null;
-        //     rules = null;
-        // }
 
 
         function style_edit_form(form) {
@@ -793,17 +612,44 @@
             success: function (data) {
                 if (data.status == "success") {
                     console.log("全体升年级..");
-                    alert("全体升年级成功！");
+                    // alert("全体升年级成功！");
+                    bootoast({
+                        "message": "全体升年级成功!",
+                        "type": "success",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": false
+                    });
                     window.location.href = 'changeGrade.html';
                 } else {
-                    alert("全体升年级失败！");
+                    // alert("全体升年级失败！");
+                    bootoast({
+                        "message": "全体升年级失败！",
+                        "type": "danger",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": false
+                    });
                     console.log("全体升年级失败");
                     window.location.href = 'changeGrade.html';
                 }
 
             },
             error: function (msg) {
-                alert("全体升年级失败！");
+                // alert("全体升年级失败！");
+                bootoast({
+                    "message": "全体升年级失败！",
+                    "type": "danger",
+                    "position": "bottom-right",
+                    "icon": "",
+                    "timeout":2,
+                    "animationDuration": "300",
+                    "dismissable": false
+                });
                 window.location.href = 'changeGrade.html';
             }
         })
