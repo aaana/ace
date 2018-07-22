@@ -237,7 +237,34 @@
                     <div class="col-xs-12">
 
                         <!-- PAGE CONTENT BEGINS -->
-
+                        <div class="row" style="text-align: center">
+                            <form class="form-horizontal" role="form">
+                                <div class="row col-sm-offset-1">
+                                    <div class="form-group col-sm-12 col-xs-12" style="display: flex;flex-direction: row;align-items: center;">
+                                        <div class="col-sm-9 col-xs-12">
+                                            <label class="control-label no-padding-right">
+                                                <i class="fa fa-arrows-v icon-on-left bigger-110"
+                                                   aria-hidden="true"></i>
+                                                年级变更</label>
+                                            <button id="chooseFileBtn" type="button" class="btn btn-sm btn-info"
+                                                    onclick="increaseGrade()"
+                                                    style="width:100px;margin:10px">
+                                                <i class="fa fa-arrow-up icon-on-left bigger-110"
+                                                   aria-hidden="true"></i>
+                                                全体升年级
+                                            </button>
+                                            <span id="filenamePrev"></span>
+                                            <button id="uploadFileBtn" type="button" class="btn btn-sm btn-info"
+                                                    onclick="decreaseGrade()"
+                                                    style="width:100px;margin:10px">
+                                                <i class="fa fa-arrow-down icon-on-left bigger-110" aria-hidden="true"></i>
+                                                全体降年级
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
 
                         <!-- PAGE CONTENT ENDS -->
@@ -283,6 +310,39 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    function increaseGrade() {
+        $.ajax({
+            url: "http://192.168.0.153:8080/user/incrementGrade?token=1d44662ee7e0452a9d594841799d00ac",
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function () {
+                console.log("升年级");
+            },
+            success: function (data) {
+
+            },
+            error: function (msg) {
+
+            }
+        })
+    }
+
+    function decreaseGrade() {
+        $.ajax({
+            url: "http://192.168.0.153:8080/user/decrementGrade?token=1d44662ee7e0452a9d594841799d00ac",
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function () {
+                console.log("降年级");
+            },
+            success: function (data) {
+
+            },
+            error: function (msg) {
+
+            }
+        })
+    }
 
 
 </script>
