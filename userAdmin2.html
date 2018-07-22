@@ -86,22 +86,6 @@
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <!--<li>-->
-                        <!--<a href="#">-->
-                        <!--<i class="ace-icon fa fa-cog"></i>-->
-                        <!--Settings-->
-                        <!--</a>-->
-                        <!--</li>-->
-
-                        <!--<li>-->
-                        <!--<a href="profile.html">-->
-                        <!--<i class="ace-icon fa fa-user"></i>-->
-                        <!--Profile-->
-                        <!--</a>-->
-                        <!--</li>-->
-
-                        <!--<li class="divider"></li>-->
-
                         <li>
                             <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
@@ -184,6 +168,13 @@
 
                         <b class="arrow"></b>
                     </li>
+                    <li class="">
+                        <a href="changeGrade.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            年级变更
+                        </a>
+                    <b class="arrow"></b>
+                </li>
 
                 </ul>
             </li>
@@ -659,24 +650,7 @@
             $('.ui-jqdialog').remove();
         });
     });
-    //
-    // function refreshData() {
-    //     var grid_data =
-    //         [
-    //             //id name grade class sdate display rawVideo processedVideo
-    //             {id: "8", name: "张同学", type: "教师", admin: '是'},
-    //             {id: "9", name: "张同学", type: "教师", admin: '是'},
-    //             {id: "10", name: "张老师", type: "教师", admin: '是'},
-    //             {id: "11", name: "张同学", type: "教师", admin: '是'},
-    //             {id: "12", name: "张同学", type: "教师", admin: '是'}
-    //         ];
-    //     $("#grid-table").jqGrid('clearGridData');//清空表格
-    //     $("#grid-table").jqGrid('setGridParam', {
-    //         data: grid_data,//newData是符合格式要求的重新加载的数据
-    //         page: 2//哪一页的值
-    //     }).trigger("reloadGrid");
-    //     console.log("refresh")
-    // }
+
 </script>
 </body>
 </html>
