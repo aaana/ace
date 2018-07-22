@@ -565,23 +565,7 @@
         });
     }
 
-    $('#importUser').change(function () {
-        if (typeof (FileReader) != "undefined") {
-            var filePrev = $('#filenamePrev');
-            filePrev.html("");
-            var regex = /(.csv|.CSV)$/;
-            $($(this)[0].files).each(function () {
-                var file = $(this);
-                if (regex.test(file[0].name.toLowerCase())) {
-                    filePrev.append(file[0].name + "&nbsp;&nbsp;");
-                    $('#uploadFileBtn').attr("disabled", false);
-                } else {
-                    alert("请选择csv文件");
-                }
-            });
-        }
 
-    });
 
 
     $(function () {
@@ -608,6 +592,25 @@
                 $('#studentInfo').remove();
             }
         })
+
+        $('#importUser').change(function () {
+            if (typeof (FileReader) != "undefined") {
+                var filePrev = $('#filenamePrev');
+                filePrev.html("");
+                var regex = /(.csv|.CSV)$/;
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    if (regex.test(file[0].name.toLowerCase())) {
+                        filePrev.append(file[0].name + "&nbsp;&nbsp;");
+                        $('#uploadFileBtn').attr("disabled", false);
+                    } else {
+                        alert("请选择csv文件");
+                        $('#uploadFileBtn').attr("disabled", true);
+                    }
+                });
+            }
+
+        });
     })
 
 </script>
