@@ -244,7 +244,8 @@
                         <div class="row" style="text-align: center">
                             <form class="form-horizontal" role="form">
                                 <div class="row col-sm-offset-1">
-                                    <div class="form-group col-sm-12 col-xs-12" style="display: flex;flex-direction: row;align-items: center;">
+                                    <div class="form-group col-sm-12 col-xs-12"
+                                         style="display: flex;flex-direction: row;align-items: center;">
                                         <div class="col-sm-9 col-xs-12">
                                             <label class="control-label no-padding-right" for="importUser">
                                                 <i class="fa fa-cloud-upload icon-on-left bigger-110"
@@ -311,10 +312,17 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="gender">
                                         性别：</label>
                                     <div class="col-sm-9 col-xs-12">
+                                        <select style="width: 100%" type="text" id="gender"
+                                                placeholder="性别">
+                                            <option value="0">男</option>
+                                            <option value="1">女</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="col-sm-9 col-xs-12">
                                         <input style="width: 100%" type="text" id="gender"
                                                placeholder="性别"
                                         />
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                             <div class="row col-sm-offset-1">
@@ -347,8 +355,8 @@
                                     <div class="col-sm-9 col-xs-12">
                                         <select style="width: 100%" type="text" id="isManager"
                                                 placeholder="管理员">
-                                            <option value="0">否</option>
-                                            <option value="1">是</option>
+                                            <option value="false">否</option>
+                                            <option value="true">是</option>
                                         </select>
                                     </div>
                                 </div>
@@ -490,8 +498,8 @@
             userInfo.enterYear = $('#enterYear').val();
             userInfo.grade = $('#grade').val();
             userInfo.classNo = $('#classNo').val();
-
         }
+        console.log(userInfo);
         $.ajax({
             url: "http://192.168.0.153:8080/user/create?token=1d44662ee7e0452a9d594841799d00ac",
             contentType: "application/json",
@@ -502,10 +510,19 @@
                 console.log("正在获取信息，请稍候");
             },
             success: function (data) {
-
+                if (data.status == "success") {
+                    console.log("创建成功..");
+                    alert("创建成功！");
+                    window.location.href = 'createUser.html';
+                } else {
+                    alert("创建失败！请重新创建");
+                    console.log("创建失败");
+                    window.location.href = 'createUser.html';
+                }
             },
             error: function (msg) {
-
+                 alert("创建失败！请重新创建");
+                 window.location.href = 'createUser.html';
             }
         })
     }
@@ -517,8 +534,9 @@
     function upload() {
         var form = new FormData();
         form.append('file', $('#importUser')[0].files[0]);
+        form.append('charset', 'gbk');
         $.ajax({
-            url: "http://192.168.0.153:8080/user/importStudentUser",
+            url: "http://192.168.0.153:8080/user/importStudentUser?token=1d44662ee7e0452a9d594841799d00ac",
             type: "POST",
             cache: false,
             data: form,
@@ -528,12 +546,21 @@
                 console.log("正在导入文件，请稍候");
             },
             success: function (data) {
-                console.log("导入成功..");
-                $('#uploadFileBtn').attr("disabled", true);
-
+                if (data.status == "success") {
+                    console.log("导入成功..");
+                    $('#uploadFileBtn').attr("disabled", true);
+                    alert("批量导入成功！");
+                    window.location.href = 'createUser.html';
+                } else {
+                    alert("批量导入失败！请确认文件格式");
+                    console.log("导入失败");
+                    window.location.href = 'createUser.html';
+                }
             },
             error: function (e) {
-                console.log("传视频失败");
+                alert("批量导入失败！请确认文件格式");
+                console.log("导入失败");
+                window.location.href = 'createUser.html';
             }
         });
     }
@@ -542,14 +569,14 @@
         if (typeof (FileReader) != "undefined") {
             var filePrev = $('#filenamePrev');
             filePrev.html("");
-            var regex = /(.xls|.XLS)$/;
+            var regex = /(.csv|.CSV)$/;
             $($(this)[0].files).each(function () {
                 var file = $(this);
                 if (regex.test(file[0].name.toLowerCase())) {
                     filePrev.append(file[0].name + "&nbsp;&nbsp;");
                     $('#uploadFileBtn').attr("disabled", false);
                 } else {
-                    alert("请选择xls文件");
+                    alert("请选择csv文件");
                 }
             });
         }
