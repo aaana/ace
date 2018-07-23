@@ -10,6 +10,15 @@ function GetRequest() {
     }
     return theRequest;
 }
-
 var req = GetRequest();
 var globalToken = req['token'];
+function tokenInit()
+{
+
+var allA=$("a");
+for(var a in allA){
+    var element=$(allA[a]);
+    console.log(element);
+    element.attr("href",element.attr("href")+"?token="+globalToken);
+}
+}
