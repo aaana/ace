@@ -306,6 +306,8 @@
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
+<script src="assets/js/custom/helper.js"></script>
+
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -321,7 +323,7 @@
             "id": value,
         };
         $.ajax({
-            url: "http://192.168.0.153:8080/course/updateStatus?token=aa653c73bd324ef0961405e4c5f8001e",
+            url: "http://192.168.0.153:8080/course/updateStatus?token="+globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(data2),
@@ -408,7 +410,7 @@
          */
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/course/search",
             editurl: "http://192.168.0.153:8080/course/updateStatus?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",

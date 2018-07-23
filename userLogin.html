@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="">
 
     <title>Floating labels example for Bootstrap</title>
 
@@ -19,28 +19,38 @@
 <body>
 <form class="form-signin">
     <div class="text-center mb-4">
-        <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <img class="mb-4" src="" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">后台管理系统</h1>
     </div>
 
     <div class="form-label-group">
-        <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
-        <label for="username">用户名</label>
+        <input type="text" id="account" class="form-control" placeholder="用户名" required autofocus>
+        <label for="account">帐号</label>
     </div>
 
-    <!--<div class="form-label-group">-->
-        <!--<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
-        <!--<label for="inputPassword">Password</label>-->
-    <!--</div>-->
+    <div class="form-label-group">
+        <input type="password" id="password" class="form-control" placeholder="Password" required>
+        <label for="password">密码</label>
+    </div>
     <!--<label for="utype"></label>-->
-        <select class="form-control" id="utype">
-            <option value="0">老师</option>
-            <option value="1">学生</option>
-        </select>
+        <!--<select class="form-control" id="utype">-->
+            <!--<option value="0">老师</option>-->
+            <!--<option value="1">学生</option>-->
+        <!--</select>-->
 
     <div class="space"></div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">登录</button>
+
+    <button type="button" onclick="login()" class="pull-left btn btn-sm btn-primary">
+        <!--<i class="ace-icon fa fa-calendar-check-o"></i>-->
+        <span class="bigger-110">用户登录</span>
+    </button>
+
+    <button type="button" onclick="managerLogin()" class="pull-right btn btn-sm btn-primary">
+        <!--<i class="ace-icon fa fa-calendar-times-o"></i>-->
+        <span class="bigger-110">管理员登录</span>
+    </button>
+
     <!--<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>-->
 </form>
 </body>
@@ -49,20 +59,47 @@
 
 <script>
     function login() {
-        var account = $('#username').val().trim();
-        var uType = $('#utype').val().trim();
+        var account = $('#account').val().trim();
+        var password = $('#password').val().trim();
+        var uType = 0;
         $.ajax({
             data:{
                 account:account,
+                password:password,
                 uType:uType
             },
             dataType:'json',
             method:'get',
-            url:'http://192.168.0.153:8080/user/login',
+            url:'http://192.168.0.153:8080/user/accountLogin',
             success:function (data) {
                 console.log(data);
                 if(data.status === 'success' ){
-                    window.location.href='userAdmin.html';
+                    window.location.href='createCourse.html?token='+data.msg.token;
+                }
+            },
+            error:function (msg) {
+                console.log(msg);
+            }
+        });
+    }
+
+    function managerLogin() {
+        var account = $('#account').val().trim();
+        var password = $('#password').val().trim();
+        var uType = $('#utype').val().trim();
+        $.ajax({
+            data:{
+                account:account,
+                password:password,
+                uType:uType
+            },
+            dataType:'json',
+            method:'get',
+            url:'http://192.168.0.153:8080/user/accountLogin',
+            success:function (data) {
+                console.log(data);
+                if(data.status === 'success' && data.msg.isManager === true  ){
+                    window.location.href='userAdmin.html'+data.msg.token;
                 }
             },
             error:function (msg) {

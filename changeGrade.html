@@ -620,9 +620,10 @@
                         "icon": "",
                         "timeout":2,
                         "animationDuration": "300",
-                        "dismissable": false
+                        "dismissable": true
                     });
-                    window.location.href = 'changeGrade.html';
+                    $(grid_selector).trigger("reloadGrid");
+                    // window.location.href = 'changeGrade.html';
                 } else {
                     // alert("全体升年级失败！");
                     bootoast({
@@ -632,10 +633,12 @@
                         "icon": "",
                         "timeout":2,
                         "animationDuration": "300",
-                        "dismissable": false
+                        "dismissable": true
                     });
                     console.log("全体升年级失败");
-                    window.location.href = 'changeGrade.html';
+                    $(grid_selector).trigger("reloadGrid");
+
+                    // window.location.href = 'changeGrade.html';
                 }
 
             },
@@ -648,9 +651,9 @@
                     "icon": "",
                     "timeout":2,
                     "animationDuration": "300",
-                    "dismissable": false
+                    "dismissable": true
                 });
-                window.location.href = 'changeGrade.html';
+                // window.location.href = 'changeGrade.html';
             }
         })
     }
@@ -666,17 +669,41 @@
             success: function (data) {
                 if (data.status == "success") {
                     console.log("全体降年级..");
-                    alert("全体降年级成功！");
-                    window.location.href = 'changeGrade.html';
+                    bootoast({
+                        "message": "全体降年级成功!",
+                        "type": "success",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": true
+                    });
+                    $(grid_selector).trigger("reloadGrid");
                 } else {
-                    alert("全体降年级失败！");
+                    bootoast({
+                        "message": "全体降年级成功!",
+                        "type": "success",
+                        "position": "bottom-right",
+                        "icon": "",
+                        "timeout":2,
+                        "animationDuration": "300",
+                        "dismissable": true
+                    });
                     console.log("全体降年级失败");
-                    window.location.href = 'changeGrade.html';
+                    $(grid_selector).trigger("reloadGrid");
                 }
             },
             error: function (msg) {
-                alert("全体降年级失败！");
-                window.location.href = 'changeGrade.html';
+                bootoast({
+                    "message": "全体降年级失败！",
+                    "type": "danger",
+                    "position": "bottom-right",
+                    "icon": "",
+                    "timeout":2,
+                    "animationDuration": "300",
+                    "dismissable": true
+                });
+                $(grid_selector).trigger("reloadGrid");
             }
         })
     }

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css"/>
     <link rel="stylesheet" href="assets/css/bootoast.css">
+    <link rel="stylesheet" href="assets/css/custom/loading.css">
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
@@ -278,14 +279,14 @@
 
 
                         <!-- PAGE CONTENT BEGINS -->
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" onsubmit="createUser();return false;">
                             <div class="row col-sm-offset-1">
                                 <div class="form-group col-xs-12 col-sm-5">
                                     <label class="col-sm-3 control-label no-padding-right" for="account">
                                         帐号：</label>
 
                                     <div class="col-sm-9 col-xs-12">
-                                        <input style="width: 100%" type="text" id="account" placeholder="帐号"
+                                        <input style="width: 100%" type="text" id="account" placeholder="帐号" required
                                         />
 
                                     </div>
@@ -294,7 +295,7 @@
                                     <label class="col-sm-3 control-label no-padding-right" for="password">
                                         密码：</label>
                                     <div class="col-sm-9 col-xs-12">
-                                        <input style="width: 100%" type="password" id="password" placeholder="密码"/>
+                                        <input style="width: 100%" type="text" id="password" placeholder="密码" required/>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +306,7 @@
 
                                     <div class="col-sm-9 col-xs-12">
                                         <input style="width: 100%" type="text" id="name"
-                                               placeholder="姓名"
+                                               placeholder="姓名" required
                                         />
                                     </div>
                                 </div>
@@ -342,7 +343,7 @@
                                         学校：</label>
                                     <div class="col-sm-9 col-xs-12">
                                         <input style="width: 100%" type="text" id="school"
-                                               placeholder="学校" value="蔷薇小学"
+                                               placeholder="学校" value="蔷薇校区"
                                         />
                                     </div>
                                 </div>
@@ -376,7 +377,7 @@
 
                             <div class="row" id="createDiv">
                                 <div class="col-xs-offset-4 col-xs-10 col-sm-offset-5 col-sm-5">
-                                    <button type="button" class="btn btn-sm btn-success" onclick="createUser()"
+                                    <button type="submit" class="btn btn-sm btn-success"
                                             style="width:100px;margin:10px">
                                         创建
                                         <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
@@ -423,6 +424,7 @@
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
 <script src="assets/js/bootoast.js"></script>
+<script src="assets/js/custom/helper.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -431,6 +433,7 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+
 
     function createStuInfoDiv() {
         var studentInfoDiv = '<div id = "studentInfo" xmlns="http://www.w3.org/1999/html">' +
@@ -485,6 +488,18 @@
 
     //todo
     function createUser() {
+        if($("#account").val() == '' || $('#password').val() == '' || $('#name').val() == ''){
+            bootoast({
+                "message": "请完整填写信息",
+                "type": "info",
+                "position": "top-center",
+                "icon": "",
+                "timeout":1.5,
+                "animationDuration": "300",
+                "dismissable": true
+            });
+            return;
+        }
         var userInfo = {
             "account": $("#account").val(),
             "password": $('#password').val(),
@@ -503,7 +518,7 @@
         }
         console.log(userInfo);
         $.ajax({
-            url: "http://192.168.0.153:8080/user/create?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/user/create?token="+globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(userInfo),
@@ -514,55 +529,35 @@
             success: function (data) {
                 if (data.status == "success") {
                     console.log("创建成功..");
-                    bootoast({
-                        "message": "创建成功",
-                        "type": "success",
-                        "position": "bottom-right",
-                        "icon": "",
-                        "timeout":2,
-                        "animationDuration": "300",
-                        "dismissable": false
-                    });
+                    showToast("创建成功","success");
+                    reset();
                     // alert("创建成功！");
-                    window.location.href = 'createUser.html';
+                    // window.location.href = 'createUser.html';
                 } else {
-                    bootoast({
-                        "message": "创建失败！请重新创建",
-                        "type": "danger",
-                        "position": "bottom-right",
-                        "icon": "",
-                        "timeout":2,
-                        "animationDuration": "300",
-                        "dismissable": false
-                    });                    console.log("创建失败");
-                    window.location.href = 'createUser.html';
+                    showToast("创建失败！请重新创建","danger");
+                    console.log("创建失败");
+                    // window.location.href = 'createUser.html';
                 }
             },
             error: function (msg) {
-                bootoast({
-                    "message": "创建失败！请重新创建",
-                    "type": "danger",
-                    "position": "bottom-right",
-                    "icon": "",
-                    "timeout":2,
-                    "animationDuration": "300",
-                    "dismissable": false
-                });
-                window.location.href = 'createUser.html';
+                showToast("创建失败！请重新创建","danger");
+                // window.location.href = 'createUser.html';
             }
         })
     }
 
     function chooseFile() {
         $('#importUser').click();
+
     }
 
     function upload() {
         var form = new FormData();
         form.append('file', $('#importUser')[0].files[0]);
         form.append('charset', 'gbk');
+        $('#uploadFileBtn').after('<img id="loadingImg" src="assets/images/loading.gif" width="45px" height="45px">');
         $.ajax({
-            url: "http://192.168.0.153:8080/user/importStudentUser?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/user/importStudentUser?token="+globalToken,
             type: "POST",
             cache: false,
             data: form,
@@ -572,50 +567,38 @@
                 console.log("正在导入文件，请稍候");
             },
             success: function (data) {
+                $('#loadingImg').remove();
                 if (data.status == "success") {
                     console.log("导入成功..");
                     $('#uploadFileBtn').attr("disabled", true);
-                    bootoast({
-                        "message": "批量导入成功",
-                        "type": "success",
-                        "position": "bottom-right",
-                        "icon": "",
-                        "timeout":2,
-                        "animationDuration": "300",
-                        "dismissable": false
-                    });
-                    window.location.href = 'createUser.html';
+                    showToast("批量导入成功","success");
+                    // window.location.href = 'createUser.html';
                 } else {
-                    bootoast({
-                        "message": "批量导入失败！请确认文件格式",
-                        "type": "danger",
-                        "position": "bottom-right",
-                        "icon": "",
-                        "timeout":2,
-                        "animationDuration": "300",
-                        "dismissable": false
-                    });
+                    showToast("批量导入失败！请确认文件格式","danger");
                     console.log("导入失败");
-                    window.location.href = 'createUser.html';
+                    // window.location.href = 'createUser.html';
                 }
             },
             error: function (e) {
-                bootoast({
-                    "message": "批量导入失败！请确认文件格式",
-                    "type": "danger",
-                    "position": "bottom-right",
-                    "icon": "",
-                    "timeout":2,
-                    "animationDuration": "300",
-                    "dismissable": false
-                });
+                $('#loadingImg').remove();
+                showToast("批量导入失败！请确认文件格式","danger");
                 console.log("导入失败");
-                window.location.href = 'createUser.html';
+                // window.location.href = 'createUser.html';
             }
         });
     }
 
-
+    function showToast(msg,type) {
+        bootoast({
+            "message": msg,
+            "type": type,
+            "position": "bottom-right",
+            "icon": "",
+            "timeout":2,
+            "animationDuration": "300",
+            "dismissable": true
+        });
+    }
 
 
     $(function () {
@@ -641,27 +624,44 @@
             } else {
                 $('#studentInfo').remove();
             }
-        })
+        });
 
         $('#importUser').change(function () {
             if (typeof (FileReader) != "undefined") {
                 var filePrev = $('#filenamePrev');
                 filePrev.html("");
-                var regex = /(.csv|.CSV)$/;
+                var regex = /(.csv|.CSV|.txt|.TXT)$/;
                 $($(this)[0].files).each(function () {
                     var file = $(this);
                     if (regex.test(file[0].name.toLowerCase())) {
                         filePrev.append(file[0].name + "&nbsp;&nbsp;");
                         $('#uploadFileBtn').attr("disabled", false);
                     } else {
-                        alert("请选择csv文件");
+                        bootoast({
+                            "message": "请选择csv/txt文件",
+                            "type": "info",
+                            "position": "top-center",
+                            "icon": "",
+                            "timeout":2,
+                            "animationDuration": "300",
+                            "dismissable": true
+                        });
                         $('#uploadFileBtn').attr("disabled", true);
                     }
                 });
             }
 
         });
-    })
+
+    });
+
+    function reset() {
+        $("input").val('');
+        $('#school').val("蔷薇校区");
+        $('#grade').val("1");
+        $('#classNo').val("1");
+    }
+
 
 </script>
 </body>
