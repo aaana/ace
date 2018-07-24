@@ -50,7 +50,7 @@
 </head>
 
 <body class="no-skin">
-<div id="navbar" class="navbar navbar-default          ace-save-state">
+<div id="navbar" class="navbar navbar-default ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">Toggle sidebar</span>
@@ -74,7 +74,8 @@
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Settings-->
+                        <!--</a>-->
                         <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
 									<small>Welcome,</small>
@@ -88,8 +89,7 @@
                         <!--<li>-->
                         <!--<a href="#">-->
                         <!--<i class="ace-icon fa fa-cog"></i>-->
-                        <!--Settings-->
-                        <!--</a>-->
+                        <!--
                         <!--</li>-->
 
                         <!--<li>-->
@@ -187,30 +187,118 @@
 
     <div class="main-content">
         <div class="main-content-inner">
+            <div class="widget-body">
+                <div class="widget-main padding-24">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                    <b>教程视频</b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
+                                    <video src="http://www.w3school.com.cn/i/movie.ogg" width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div><!-- /.col -->
 
-            <!--<div class="breadcrumbs ace-save-state" id="breadcrumbs">-->
-            <!--<ul class="breadcrumb">-->
-            <!--<li>-->
-            <!--<i class="ace-icon fa fa-search"></i>-->
-            <!--<a href="#">查询</a>-->
-            <!--</li>-->
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
+                                    <b>任务信息</b>
+                                </div>
+                            </div>
 
-            <!--&lt;!&ndash;<li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<a href="#">学习情况</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--<li class="active">学习情况</li>-->
-            <!--</ul>&lt;!&ndash; /.breadcrumb &ndash;&gt;-->
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="profile-user-info profile-user-info-striped">
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 任务名称 </div>
 
-            <!--&lt;!&ndash;<div class="nav-search" id="nav-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<form class="form-search">&ndash;&gt;-->
-            <!--&lt;!&ndash;<span class="input-icon">&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<i class="ace-icon fa fa-search nav-search-icon"></i>&ndash;&gt;-->
-            <!--&lt;!&ndash;</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</form>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&lt;!&ndash; /.nav-search &ndash;&gt;&ndash;&gt;-->
-            <!--</div>-->
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="courseName"></span>
+                                            </div>
+                                        </div>
 
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 任务ID </div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="courseId"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 任务难度 </div>
+
+                                            <div class="profile-info-value">
+                                                <!--<i class="fa fa-map-marker light-orange bigger-110"></i>-->
+                                                <!--<span class="editable" id="courseLevel">00001</span>-->
+                                                <div class="rating inline" style="cursor: pointer;">
+                                                    <i data-alt="1"  id="star1" title=""></i>&nbsp
+                                                </div>
+                                                <div class="rating inline" style="cursor: pointer;">
+                                                    <i data-alt="1"  id="star2" title=""></i>&nbsp
+                                                </div>
+                                                <div class="rating inline" style="cursor: pointer;">
+                                                    <i data-alt="1"  id="star3" title=""></i>&nbsp
+                                                </div>
+                                                <div class="rating inline" style="cursor: pointer;">
+                                                    <i data-alt="1"  id="star4" title=""></i>&nbsp
+                                                </div>
+                                                <div class="rating inline" style="cursor: pointer;">
+                                                    <i data-alt="1"  id="star5" title=""></i>&nbsp
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 教师姓名 </div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="teacherName"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 教师ID </div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="teacherId"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 参与人数 </div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="participationNum"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 发布时间 </div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="publishDate"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 任务要求 </div>
+
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="courseDetail"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div>
+            </div>
 
             <div class="page-content">
 
@@ -300,31 +388,6 @@
         </div>
     </div><!-- /.main-content -->
 
-    <!--<div class="footer">-->
-    <!--<div class="footer-inner">-->
-    <!--<div class="footer-content">-->
-    <!--<span class="bigger-120">-->
-    <!--<span class="blue bolder">Ace</span>-->
-    <!--Application &copy; 2013-2014-->
-    <!--</span>-->
-
-    <!--&nbsp; &nbsp;-->
-    <!--<span class="action-buttons">-->
-    <!--<a href="#">-->
-    <!--<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>-->
-    <!--</a>-->
-
-    <!--<a href="#">-->
-    <!--<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>-->
-    <!--</a>-->
-
-    <!--<a href="#">-->
-    <!--<i class="ace-icon fa fa-rss-square orange bigger-150"></i>-->
-    <!--</a>-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
 
     <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
         <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
@@ -360,6 +423,39 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.0.153:8080/course/findById?token=1d44662ee7e0452a9d594841799d00ac",
+            contentType: "application/json",
+            data: JSON.stringify({"id":1}),
+            async: true,
+            success: function(data, state){
+                console.log(data);
+                $('#courseName').text(data.msg.name);
+                $('#courseId').text(data.msg.id);
+                $('#teacherName').text(data.msg.user.name);
+                $('#teacherId').text(data.msg.user.id);
+                $('#participationNum').text(data.msg.participantCount);
+                $('#publishDate').text(data.msg.publishedAt);
+                $('#courseDetail').text(data.msg.description);
+
+                var dif_i = 1;
+                for(; dif_i<=data.msg.difficulty; dif_i++){
+                    $('#star'+dif_i).attr("class", "star-on-png");
+                }
+                for(;dif_i<6;dif_i++){
+                    $('#star'+dif_i).attr("class", "star-off-png");
+                }
+
+                //set video Url
+            },
+            error: function (data, state) {
+                console.log(data);
+                console.log(state);
+            }
+        });
+    });
 
 </script>
 </body>
