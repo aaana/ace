@@ -47,7 +47,7 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" href="assets/css/custom/studySituation.css"/>
-
+    <script src="assets/js/custom/helper.js"></script>
 </head>
 
 <body class="no-skin">
@@ -189,12 +189,12 @@
                 <b class="arrow"></b>
             </li>
             <!--<li class="">-->
-                <!--<a href="reset.html">-->
-                    <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
-                    <!--<span class="menu-text"> 修改密码 </span>-->
-                <!--</a>-->
+            <!--<a href="reset.html">-->
+            <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
+            <!--<span class="menu-text"> 修改密码 </span>-->
+            <!--</a>-->
 
-                <!--<b class="arrow"></b>-->
+            <!--<b class="arrow"></b>-->
             <!--</li>-->
 
         </ul><!-- /.nav-list -->
@@ -508,7 +508,7 @@
             droppable: false,
             onchange: null,
             thumbnail: false, //| true | large
-            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb", "pdf"],
+            allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
             //whitelist:'gif|png|jpg|jpeg'
             //blacklist:'exe|php'
             //onchange:''
@@ -639,7 +639,6 @@
         });
 
 
-
         $(document).one('ajaxloadstart.page', function (e) {
             autosize.destroy('textarea[class*=autosize]')
 
@@ -706,7 +705,7 @@
         }
         console.log("表单内容" + JSON.stringify(data1));
         $.ajax({
-            url: "http://192.168.0.153:8080/course/create?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/course/create?token=" + globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(data1),
@@ -717,7 +716,7 @@
             success: function (responseStr) {
                 console.log("表单提交成功!!!" + responseStr);
 
-                window.location.href='myCreate.html';
+                window.location.href = 'myCreate.html?token=' + globalToken
                 /*if (responseStr.status === 200) {
                     console.log("表单提交成功" + responseStr);
                 } else {
@@ -731,6 +730,8 @@
     }
 
     function test() {
+        uploadName1 = UUID.prototype.createUUID();
+        uploadName2 = UUID.prototype.createUUID();
         var type = {
             value: -1
         }
@@ -747,7 +748,7 @@
                 form.append('file', $('#id-input-file-3')[0].files[0]);
                 form.append("filename", uploadName2);
                 $.ajax({
-                    url: "http://192.168.0.153:8080/file/upload",
+                    url: "http://192.168.0.153:8080/file/upload?token=" + globalToken,
                     type: "POST",
                     cache: false,
                     data: form,
@@ -775,7 +776,7 @@
                 form.append('file', $('#id-input-file-2')[0].files[0]);
                 form.append("filename", uploadName1);
                 $.ajax({
-                    url: "http://192.168.0.153:8080/file/upload",
+                    url: "http://192.168.0.153:8080/file/upload?token=" + globalToken,
                     type: "POST",
                     cache: false,
                     data: form,
@@ -807,7 +808,7 @@
                 form.append('file', $('#id-input-file-3')[0].files[0]);
                 form.append("filename", uploadName2);
                 $.ajax({
-                    url: "http://192.168.0.153:8080/file/upload",
+                    url: "http://192.168.0.153:8080/file/upload?token=" + globalToken,
                     type: "POST",
                     cache: false,
                     data: form,
@@ -822,7 +823,7 @@
                         form.append('file', $('#id-input-file-2')[0].files[0]);
                         form.append("filename", uploadName1);
                         $.ajax({
-                            url: "http://192.168.0.153:8080/file/upload",
+                            url: "http://192.168.0.153:8080/file/upload?token=" + globalToken,
                             type: "POST",
                             cache: false,
                             data: form,
