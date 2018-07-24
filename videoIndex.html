@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Video.js 6.2.8</title>
+	<link href="assets/css/video-js.css" rel="stylesheet">
+	<script src="assets/js/jquery-2.1.4.min.js"></script>
+	<script src="assets/js/video.min.js"></script>
+    <script src="assets/js/uuid.js"></script>
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+	<style>
+		body{background-color: #191919}
+		.m{ width: 740px; height: 400px; margin-left: auto; margin-right: auto; margin-top: 100px; }
+	</style>
+</head>
+
+<body>
+<div class="m">
+	<video id="my-video" class="video-js" controls preload="auto" width="740" height="400"
+		   poster="assets/images/test/m.png">
+		<source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+		<source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+		<source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+		<p class="vjs-no-js">
+			To view this video please enable JavaScript, and consider upgrading to a web browser that
+			<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+		</p>
+	</video>
+    <div>
+        <button type="button" onclick="downloadEventLog()">提交</button>
+    </div>
+
+    <script src="assets/js/custom/FileSaver.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://192.168.0.162:8000",
+                type: 'GET',
+                data: JSON.stringify({}),
+                dataType: 'json',
+                beforeSend: function () {
+                    console.log("正在进行表单提交，请稍候");
+                },
+                success: function (responseStr) {
+                    console.log("表单提交成功!!!" + responseStr);
+
+                },
+                error: function (responseStr) {
+                    console.log("error" + responseStr);
+                }
+            });
+        });
+        var myPlayer = videojs('my-video',{
+            controlBar: {
+                playbackRateMenuButton: true,
+                remainingTimeDisplay: true
+            },
+            playbackRates: [0.5, 1, 1.5, 2],
+            volumeMenuButton: {
+                inline: false,
+                vertical: true
+            }
+        });
+
+        var videoTime = 0;
+        var play = 0;
+        var pause = 0;
+        var fastForward = 0;
+        var rewind = 0;
+        var forwardSkip = 0;
+        var reverseSkip = 0;
+        var fullScreen = 0;
+        var playTime = 1;
+        var rate = 1.0;
+
+        var skip = 5;
+        var DATA_i = 0;
+        var eventData = new Array();
+        var timer;
+
+        myPlayer.ready(function() {
+            var controlBar = document.getElementsByClassName("vjs-control-bar")[0];
+            var playNode = document.getElementsByClassName('vjs-play-control')[0];
+            var volumeNode = document.getElementsByClassName('vjs-volume-panel')[0];
+
+            //Create forwardBtn
+            var forwardBtn = document.createElement("button");
+            forwardBtn.className ='vjs-play-control vjs-control vjs-button vjs-paused';
+            forwardBtn.title = "Forward" ;
+            var forwardSpan = document.createElement("span");
+            forwardSpan.className = "glyphicon glyphicon-forward";
+            forwardBtn.appendChild(forwardSpan);
+            controlBar.insertBefore(forwardBtn, volumeNode);
+
+            //Create backwardBtn
+            var backwardBtn = document.createElement("button");
+            backwardBtn.title = "Backward";
+            backwardBtn.className ='vjs-play-control vjs-control vjs-button vjs-paused';
+            var backwardSpan = document.createElement("span");
+            backwardSpan.className = "glyphicon glyphicon-backward";
+            backwardBtn.appendChild(backwardSpan);
+            controlBar.insertBefore(backwardBtn, playNode);
+            //play event
+            myPlayer.on('play', function () {
+                play = 1;
+                pause = 0;
+                console.log("play:1 pause:0");
+            });
+            //pause event
+            myPlayer.on('pause',function () {
+                pause = 1;
+                play = 0;
+                console.log("play:0 pause:1");
+            });
+            rate = myPlayer.defaultPlaybackRate();
+            //play rate change event
+            myPlayer.on("ratechange", function () {
+                rate = myPlayer.playbackRate();
+            });
+            //forward event
+            forwardBtn.onclick = function () {
+                var curTime = myPlayer.currentTime();
+                curTime = curTime + skip;
+                if(curTime>myPlayer.duration()){
+                    curTime = myPlayer.duration();
+                }
+                myPlayer.currentTime(curTime);
+                // videoTime = parseInt(curTime);
+                fastForward = 1;
+            };
+            //backward event
+            backwardBtn.onclick = function(){
+                var curTime = myPlayer.currentTime();
+                curTime = curTime -skip;
+                if(curTime<0){
+                    curTime = 0;
+                }
+                myPlayer.currentTime(curTime);
+                // videoTime = parseInt(curTime);
+                rewind = 1;
+            };
+            //draw progress bar
+            myPlayer.on('seeking',function () {
+                console.log("cur:"+myPlayer.currentTime());
+                console.log("vi:"+videoTime);
+                if(myPlayer.currentTime()>videoTime) {
+                    forwardSkip = 1;
+                    reverseSkip = 0;
+                } else {
+                    forwardSkip = 0;
+                    reverseSkip = 1;
+                }
+            });
+            myPlayer.on("seeked",function () {
+                if(myPlayer.currentTime()>videoTime) {
+                    forwardSkip = 1;
+                    reverseSkip = 0;
+                } else {
+                    forwardSkip = 0;
+                    reverseSkip = 1;
+                }
+                // videoTime = parseInt(myPlayer.currentTime());
+                console.log("seeked"+myPlayer.currentTime());
+            });
+            // fullscreen event
+            myPlayer.on('fullscreenchange',function () {
+                fullScreen=fullScreen?0:1;
+            });
+            //fist play
+            myPlayer.on("firstplay", function () {
+                eventData[DATA_i++] = new Date().getTime();
+                timer = window.setInterval("logEvent();", 1000);
+
+                $.ajax({
+                    url: "http://192.168.0.162:8000?type=start",
+                    contentType: "application/x-www-form-urlencoded",
+                    type: 'POST',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        console.log("正在进行表单提交，请稍候");
+                    },
+                    success: function (responseStr) {
+                        console.log("表单提交成功!!!" + responseStr);
+
+                    },
+                    error: function (responseStr) {
+                        console.log("error" + responseStr);
+                    }
+                });
+            });
+        });
+        var uploadName = UUID.prototype.createUUID();
+        console.log(uploadName);
+
+        var logEvent = function(){
+            videoTime = parseInt(myPlayer.currentTime());
+            if((fastForward==1 || rewind == 1) && (forwardSkip ==1 || reverseSkip==1)) {
+                forwardSkip = 0;
+                reverseSkip = 0;
+            }
+            console.log("videoTime: "+ videoTime+ " play:"+play+" pause:"+pause+" fastForward:"+fastForward+" rewind:"+rewind+" forwardSkip:"+forwardSkip
+                +" reverseSkip:"+reverseSkip+" fullScreen:"+fullScreen+" playTime:"+playTime+" rate:"+rate);
+            eventData[DATA_i++] = [videoTime, play, pause, fastForward, rewind, forwardSkip, reverseSkip, fullScreen, playTime, rate];
+            if(fastForward==1){
+                fastForward = 0;
+            }
+            if(rewind==1){
+                rewind = 0;
+            }
+            if(forwardSkip==1){
+                forwardSkip = 0;
+            }
+            if(reverseSkip == 1){
+                reverseSkip = 0;
+            }
+        }
+
+        function downloadEventLog() {
+
+            $.ajax({
+                url: "http://192.168.0.162:8000?type=stop",
+                contentType: "application/x-www-form-urlencoded",
+                type: 'POST',
+                dataType: 'json',
+                beforeSend: function () {
+                    console.log("正在进行表单提交，请稍候");
+                },
+                success: function (responseStr) {
+                    console.log("表单提交成功!!!" + responseStr);
+
+                },
+                error: function (responseStr) {
+                    console.log("error" + responseStr);
+                }
+            });
+
+            window.clearInterval(timer);
+            // var JsonStr = JSON.stringify(eventData);
+            var str = eventData[0]+'\r\n';
+            for(var i=1;i<eventData.length;i++){
+                for(var j=0;j<10;j++){
+                    str = str + eventData[i][j]+" ";
+                }
+                str = str + "\r\n";
+            }
+            downloadTextFile(str);
+        }
+
+        var downloadTextFile = function(mobileCode) {
+            var file = new File([mobileCode],"eventLog.txt", { type: "text/plain;charset=utf-8" });
+            saveAs(file);
+        }
+
+	</script>
+</div>
+
+</body>
+</html>

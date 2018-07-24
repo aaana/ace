@@ -198,7 +198,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
-                                    <video src="http://www.w3school.com.cn/i/movie.ogg" width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">
+                                    <!--<video id="courseVideo" src="http://www.w3school.com.cn/i/movie.ogg" width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">-->
+                                        <!--Your browser does not support the video tag.-->
+                                    </video>
+                                    <video id="courseVideo"  width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -424,6 +427,7 @@
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     $(document).ready(function () {
+
         $.ajax({
             type: "POST",
             url: "http://192.168.0.153:8080/course/findById?token=1d44662ee7e0452a9d594841799d00ac",
@@ -448,7 +452,11 @@
                     $('#star'+dif_i).attr("class", "star-off-png");
                 }
 
+                var coursePlayer = document.getElementById("courseVideo");
+                //set poster Url
+                coursePlayer.poster = data.msg.photoUrl;
                 //set video Url
+                coursePlayer.src = data.msg.videoUrl;
             },
             error: function (data, state) {
                 console.log(data);
