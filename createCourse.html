@@ -47,7 +47,6 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" href="assets/css/custom/studySituation.css"/>
-    <script src="assets/js/custom/helper.js"></script>
 </head>
 
 <body class="no-skin">
@@ -356,6 +355,17 @@
 
                                     <div class="col-sm-9">
                                         <div class="rating inline"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-sm-offset-2">
+                                <div class="form-group col-xs-12 col-sm-8">
+                                    <label class="col-sm-3 control-label no-padding-top"> 任务类别: </label>
+
+                                    <div class="col-sm-9">
+                                        <select id="parentKind" class="col-sm-6 col-xs-6">
+                                        </select>
+                                        <select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>
 
                                         <div class="hr hr-16 hr-dotted"></div>
                                     </div>
@@ -468,6 +478,8 @@
 <script src="assets/js/bootstrap-tag.min.js"></script>
 <script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
 <script src="assets/js/jquery.raty.min.js"></script>
+<script src="assets/js/custom/helper.js"></script>
+
 
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
@@ -499,6 +511,79 @@
                 //setRatingColors.call(this);
             }
         })//.find('i:not(.star-raty)').addClass('grey');
+
+        var kindParam = {
+          'parentId':-1
+        };
+
+        function initOption(value,label) {
+            var option = '<option value="'+value+'">'+label+'</option>';
+            return option;
+        }
+
+        $.ajax({
+            url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify(kindParam),
+            dataType: 'json',
+            success: function (response) {
+                if(response.status === 'success'){
+                    $.each(response.msg.data,function (key,value) {
+                        $('#parentKind').append(initOption(value.id,value.name));
+                    });
+                    var childKindParam = {
+                        "parentId":0
+                    };
+                    $.ajax({
+                        url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                        contentType: "application/json",
+                        type: 'POST',
+                        data: JSON.stringify(childKindParam),
+                        dataType: 'json',
+                        success: function (response) {
+                            if(response.status === 'success'){
+                                $('#childKind').html('');
+                                $.each(response.msg.data,function (key,value) {
+                                    $('#childKind').append(initOption(value.id,value.name));
+                                })
+                            }
+                        },
+                        error: function (responseStr) {
+                            console.log("error" + responseStr);
+                        }
+                    });
+                }
+            },
+            error: function (responseStr) {
+                console.log("error" + responseStr);
+            }
+        });
+
+        $('#parentKind').change(function () {
+            var parentId =  $('#parentKind').val();
+            childKindParam = {
+              "parentId":parentId
+            };
+            $.ajax({
+                url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                contentType: "application/json",
+                type: 'POST',
+                data: JSON.stringify(childKindParam),
+                dataType: 'json',
+                success: function (response) {
+                    if(response.status === 'success'){
+                        $('#childKind').html('');
+                        $.each(response.msg.data,function (key,value) {
+                            $('#childKind').append(initOption(value.id,value.name));
+                        })
+                    }
+                },
+                error: function (responseStr) {
+                    console.log("error" + responseStr);
+                }
+            });
+        });
 
 
         $('#id-input-file-1 , #id-input-file-2').ace_file_input({
@@ -670,7 +755,7 @@
                 data1 = {
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
-                    "kindId": 1,
+                    "kindId": $('#childKind').val(),
                     "difficulty": $("input[name='score']")[0].value
                 };
                 break;
@@ -678,7 +763,7 @@
                 data1 = {
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
-                    "kindId": 1,
+                    "kindId": $('#childKind').val(),
                     "photoUrl": uploadName2,
                     "difficulty": $("input[name='score']")[0].value
                 };
@@ -688,7 +773,7 @@
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
                     "videoUrl": uploadName1,
-                    "kindId": 1,
+                    "kindId": $('#childKind').val(),
                     "difficulty": $("input[name='score']")[0].value
                 };
                 break;
@@ -697,7 +782,7 @@
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
                     "photoUrl": uploadName2,
-                    "kindId": 1,
+                    "kindId": $('#childKind').val(),
                     "videoUrl": uploadName1,
                     "difficulty": $("input[name='score']")[0].value
                 };
