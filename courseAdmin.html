@@ -210,6 +210,14 @@
 
                 <b class="arrow"></b>
             </li>
+            <li class="">
+                <a href="typeAdmin.html">
+                    <i class="menu-icon fa fa-tags" aria-hidden="true"></i>
+                    <span class="menu-text"> 类别管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
 
 
         </ul><!-- /.nav-list -->
@@ -312,7 +320,7 @@
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
-
+<script src="assets/js/custom/helper.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -382,6 +390,7 @@
     }
 
     jQuery(function ($) {
+        tokenInit();
         var grid_selector = "#grid-table1";
         var pager_selector = "#grid-pager1";
 
@@ -498,14 +507,14 @@
                     searchoptions: {sopt: ["eq"]},
                 },
                 {
-                    name: 'description',
-                    index: 'fuzzy',
+                    name: 'id',
+                    index: 'id',
                     searchoptions: {sopt: ["eq"]},
                     width: 120,
                     sortable: false,
-                    search: true,
+                    search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='courseDetailManage2.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, /*{
                     name: 'editWork',
@@ -523,7 +532,7 @@
                     sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='studySituation.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                        return "<a href='studySituation2.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
                     name: 'status',

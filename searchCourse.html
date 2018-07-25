@@ -124,19 +124,19 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
+                <button class="btn btn-success" onclick="window.location.href='createCourse.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
+                <button class="btn btn-info" onclick="window.location.href='myCreate.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
+                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-search"></i>
                 </button>
 
-                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
+                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
@@ -255,7 +255,7 @@
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
-
+<script src="assets/js/custom/helper.js"></script>
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
@@ -271,6 +271,7 @@
 
 
     jQuery(function ($) {
+        tokenInit();
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
@@ -302,7 +303,7 @@
 				})
          */
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/course/search?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/course/search?token=" + globalToken,
             //editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
@@ -368,14 +369,14 @@
                     searchoptions: {sopt: ["eq"]},
                 },
                 {
-                    name: 'description',
+                    name: 'id',
                     index: 'fuzzy',
                     searchoptions: {sopt: ["eq"]},
                     width: 120,
                     sortable: false,
                     search: true,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='courseDetailManage.html?token=" + globalToken + "&courseId="+value+"' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, /*{
                     name: 'editWork',

@@ -210,6 +210,14 @@
 
                 <b class="arrow"></b>
             </li>
+            <li class="">
+                <a href="typeAdmin.html">
+                    <i class="menu-icon fa fa-tags" aria-hidden="true"></i>
+                    <span class="menu-text"> 类别管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
 
 
         </ul><!-- /.nav-list -->
@@ -307,6 +315,7 @@
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/grid.locale-cn.js"></script>
 <script src="assets/js/bootoast.js"></script>
+<script src="assets/js/custom/helper.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -318,6 +327,7 @@
     var grid_selector = "#grid-table1";
     // var pager_selector = "#grid-pager1";
     jQuery(function ($) {
+        tokenInit();
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
@@ -336,7 +346,7 @@
 
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/user/gradeList?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/user/gradeList?token="+globalToken,
             mtype: "post",
             datatype: "json",
 
@@ -603,7 +613,7 @@
 
     function increaseGrade() {
         $.ajax({
-            url: "http://192.168.0.153:8080/user/incrementGrade?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/user/incrementGrade?token="+globalToken,
             type: 'GET',
             dataType: 'json',
             beforeSend: function () {
@@ -660,7 +670,7 @@
 
     function decreaseGrade() {
         $.ajax({
-            url: "http://192.168.0.153:8080/user/decrementGrade?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/user/decrementGrade?token="+globalToken,
             type: 'GET',
             dataType: 'json',
             beforeSend: function () {

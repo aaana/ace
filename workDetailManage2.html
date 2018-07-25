@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
     <title>jqGrid - Ace Admin</title>
 
-    <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
-    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css" />
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
+    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
     <![endif]-->
-    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -45,12 +45,12 @@
     <![endif]-->
 
     <!--Custom styles-->
-    <link rel="stylesheet" href="assets/css/custom/studySituation.css"/>
+    <link rel="stylesheet" href="assets/css/custom/studySituation.css" />
 
 </head>
 
 <body class="no-skin">
-<div id="navbar" class="navbar navbar-default ace-save-state">
+<div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">Toggle sidebar</span>
@@ -74,8 +74,7 @@
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Settings-->
-                        <!--</a>-->
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
@@ -86,21 +85,14 @@
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <!--<li>-->
-                        <!--<a href="#">-->
-                        <!--<i class="ace-icon fa fa-cog"></i>-->
-                        <!--
-                        <!--</li>-->
 
-                        <!--<li>-->
-                        <!--<a href="profile.html">-->
-                        <!--<i class="ace-icon fa fa-user"></i>-->
-                        <!--Profile-->
-                        <!--</a>-->
-                        <!--</li>-->
-
-                        <!--<li class="divider"></li>-->
-
+                        <li>
+                            <a href="reset.html">
+                                <i class="ace-icon fa fa-key"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li class="divider"></li>
                         <li>
                             <a href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
@@ -116,32 +108,30 @@
 
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
-        try {
-            ace.settings.loadState('main-container')
-        } catch (e) {
-        }
+        try{ace.settings.loadState('main-container')}catch(e){}
     </script>
 
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
-            try {
-                ace.settings.loadState('sidebar')
-            } catch (e) {
-            }
+            try{ace.settings.loadState('sidebar')}catch(e){}
         </script>
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success">
+                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info">
+                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning">
+                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
                     <i class="ace-icon fa fa-search"></i>
+                </button>
+
+                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
+                    <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
             </div>
@@ -153,6 +143,8 @@
 
                 <span class="btn btn-warning"></span>
 
+                <span class="btn btn-danger"></span>
+
             </div>
         </div><!-- /.sidebar-shortcuts -->
 
@@ -160,34 +152,48 @@
             <li class="active">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
-                    <span class="menu-text"> 创建 </span>
+                    <span class="menu-text"> 创建任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="#">
+                <a href="myCreate.html">
                     <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 我的创建 </span>
+                    <span class="menu-text"> 我创建的任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="studySituation.html">
+                <a href="searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
-                    <span class="menu-text"> 查询 </span>
+                    <span class="menu-text"> 查询任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
+            <li>
+                <a href="workWOCourseAdmin.html">
+                    <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
+                    <span class="menu-text"> 无教程作品管理 </span>
+                </a>
 
+                <b class="arrow"></b>
+            </li>
+            <!--<li class="">-->
+            <!--<a href="reset.html">-->
+            <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
+            <!--<span class="menu-text"> 修改密码 </span>-->
+            <!--</a>-->
+
+            <!--<b class="arrow"></b>-->
+            <!--</li>-->
 
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
 
@@ -199,16 +205,12 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
-                                    <b>教程视频</b>
+                                    <b>作品视频</b>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
-                                    <!--<video id="courseVideo" src="http://www.w3school.com.cn/i/movie.ogg" width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">-->
-                                    <!--Your browser does not support the video tag.-->
-                                    </video>
-                                    <video id="courseVideo" width="400px" height="225px" controls="controls"
-                                           poster="http://www.w3school.com.cn/i/eg_tulip.jpg">
+                                    <video id="workVideo" width="400px" height="225px" controls="controls" >
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -218,7 +220,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
-                                    <b>任务信息</b>
+                                    <b>作品信息</b>
                                 </div>
                             </div>
 
@@ -226,80 +228,67 @@
                                 <div class="col-sm-10 col-sm-offset-1">
                                     <div class="profile-user-info profile-user-info-striped">
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务名称</div>
+                                            <div class="profile-info-name"> 作品名称 </div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable" id="courseName"></span>
+                                                <span class="editable" id="workName"></span>
                                             </div>
                                         </div>
 
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务ID</div>
+                                            <div class="profile-info-name"> 作品ID </div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable" id="courseId"></span>
+                                                <span class="editable" id="workId"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务难度</div>
-
+                                            <div class="profile-info-name"> 作品年级 </div>
                                             <div class="profile-info-value">
-                                                <!--<i class="fa fa-map-marker light-orange bigger-110"></i>-->
-                                                <!--<span class="editable" id="courseLevel">00001</span>-->
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1" id="star1" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1" id="star2" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1" id="star3" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1" id="star4" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1" id="star5" title=""></i>&nbsp
-                                                </div>
+                                                <span class="editable" id="workGrade"></span>
                                             </div>
                                         </div>
 
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 教师姓名</div>
+                                            <div class="profile-info-name"> 作者姓名 </div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable" id="teacherName"></span>
+                                                <span class="editable" id="studentName"></span>
                                             </div>
                                         </div>
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 教师ID</div>
+                                            <div class="profile-info-name"> 作者ID </div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable" id="teacherId"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 参与人数</div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="participationNum"></span>
+                                                <span class="editable" id="studentId"></span>
                                             </div>
                                         </div>
 
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 发布时间</div>
+                                            <div class="profile-info-name"> 作者班级 </div>
 
                                             <div class="profile-info-value">
-                                                <span class="editable" id="publishDate"></span>
+                                                <span class="editable" id="studentClass"></span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 点赞人数 </div>
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="likeCount"></span>
                                             </div>
                                         </div>
 
                                         <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务要求</div>
-
+                                            <div class="profile-info-name"> 完成时间 </div>
                                             <div class="profile-info-value">
-                                                <span class="editable" id="courseDetail"></span>
+                                                <span class="editable" id="makeDate"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="profile-info-row">
+                                            <div class="profile-info-name"> 作品简介 </div>
+                                            <div class="profile-info-value">
+                                                <span class="editable" id="workDetail"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +300,6 @@
             </div>
 
             <div class="page-content">
-
                 <div class="ace-settings-container" id="ace-settings-container">
                     <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
                         <i class="ace-icon fa fa-cog bigger-130"></i>
@@ -332,32 +320,27 @@
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-navbar" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-sidebar" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-breadcrumbs" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-add-container" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-add-container">
                                     Inside
                                     <b>.container</b>
@@ -367,20 +350,17 @@
 
                         <div class="pull-left width-50">
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
                             </div>
                         </div><!-- /.pull-left -->
@@ -423,7 +403,7 @@
 <script src="assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
 
@@ -432,56 +412,86 @@
 <!-- inline scripts related to this page -->
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/grid.locale-en.js"></script>
-<script src="assets/js/custom/helper.js"></script>
+<script src="assets/js/grid.locale-cn.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
+<script src="assets/js/custom/helper.js"></script>
+
 
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    var req = GetRequest();
-    var courseId = req['courseId'];
-    console.log(courseId)
-
-    jQuery(function ($) {
-
-    });
-
+    var workId = req['workId'];
     $(document).ready(function () {
-
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/course/findById?token=" + globalToken,
+            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
             contentType: "application/json",
-            data: JSON.stringify({"id": courseId}),
+            data: JSON.stringify({"id":workId}),
             async: true,
-            success: function (data, state) {
+            success: function(data, state){
                 console.log(data);
-                $('#courseName').text(data.msg.name);
-                $('#courseId').text(data.msg.id);
-                $('#teacherName').text(data.msg.user.name);
-                $('#teacherId').text(data.msg.user.id);
-                $('#participationNum').text(data.msg.workCount);
-                $('#publishDate').text(data.msg.publishedAt);
-                $('#courseDetail').text(data.msg.description);
+                $('#workName').text(data.msg.name);
+                // $('#workId').text(data.msg.id);
+                $('#workGrade').text(data.msg.grade);
+                $('#studentName').text(data.msg.user.name);
+                // $('#studentId').text(data.msg.user.id);
+                // $('#studentClass').text(data.msg.user.grade);
+                $('#likeCount').text(data.msg.likeCount);
+                $('#makeDate').text(data.msg.createdAt);
+                $('#workDetail').text(data.msg.description);
 
-                var dif_i = 1;
-                for (; dif_i <= data.msg.difficulty; dif_i++) {
-                    $('#star' + dif_i).attr("class", "star-on-png");
+                //int id to the string of 8 chars
+                $('#workId').text(idTo8Chars(data.msg.id));
+                $('#studentId').text(idTo8Chars(data.msg.user.id));
+
+                //set author grade and class
+                var GRADE = ['零','一','二','三','四','五','六','七','八','九','十'];
+                if(data.msg.user.grade != null){
+                    var gradeClass = GRADE[data.msg.user.grade]+"年级";
+                    if(data.msg.user.classNo != null) {
+                        gradeClass = gradeClass + "  (" + data.msg.user.classNo + ")班";
+                    }
+                    $('#studentClass').text(gradeClass);
                 }
-                for (; dif_i < 6; dif_i++) {
-                    $('#star' + dif_i).attr("class", "star-off-png");
-                }
 
-                var coursePlayer = document.getElementById("courseVideo");
+                var workVideoPlayer = document.getElementById("workVideo");
+                //set poster
+                workVideoPlayer.poster = data.msg.photoUrl;
 
-                //set poster Url
-                coursePlayer.poster = data.msg.photoUrl;
                 //set video Url
-                coursePlayer.src = data.msg.videoUrl;
+                var videoUrlList = new Array();
+                var V_i = 0;
+                if(null != data.msg.videoUrl1) {
+                    videoUrlList[V_i++] = data.msg.videoUrl1;
+                }
+                if(null != data.msg.videoUrl2) {
+                    videoUrlList[V_i++] = data.msg.videoUrl2;
+                }
+                if(null != data.msg.videoUrl3) {
+                    videoUrlList[V_i++] = data.msg.videoUrl3;
+                }
+                if(null != videoUrlList) {
+                    workVideoPlayer.src = videoUrlList[0];
+                }
+                workVideoPlayer.addEventListener("ended",function () {
+                    playNext();
+                });
+
+                var curVideo_i = 1;
+                function playNext() {
+                    if( curVideo_i == videoUrlList.length){
+                        curVideo_i = 0;
+                        workVideoPlayer.src = videoUrlList[curVideo_i++];
+                    } else {
+                        console.log(curVideo_i);
+                        workVideoPlayer.src = videoUrlList[curVideo_i++];
+                        workVideoPlayer.play();
+                    }
+                }
+
             },
             error: function (data, state) {
                 console.log(data);
@@ -489,6 +499,15 @@
             }
         });
     });
+
+    function idTo8Chars(id) {
+        var str = id.toString();
+        var s = 8 - str.length;
+        for(var i = 0;i<s;i++){
+            str = "0"+str;
+        }
+        return str;
+    }
 
 </script>
 </body>

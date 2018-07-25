@@ -1,0 +1,12 @@
+.childKind{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+}
+
+#childKind{
+    margin-top: 10px;
+}

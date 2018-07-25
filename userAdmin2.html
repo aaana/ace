@@ -195,6 +195,14 @@
 
                 <b class="arrow"></b>
             </li>
+            <li class="">
+                <a href="typeAdmin.html">
+                    <i class="menu-icon fa fa-tags" aria-hidden="true"></i>
+                    <span class="menu-text"> 类别管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
 
 
         </ul><!-- /.nav-list -->
@@ -491,6 +499,8 @@
 
     jQuery(function ($) {
 
+        tokenInit();
+
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
@@ -508,8 +518,8 @@
         });
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/user/search?token=1d44662ee7e0452a9d594841799d00ac",
-            editurl: "http://192.168.0.153:8080/user/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/user/search?token="+globalToken,
+            editurl: "http://192.168.0.153:8080/user/update?token="+globalToken,
             mtype: "post",
             datatype: "json",
             height: 400,

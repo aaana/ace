@@ -193,6 +193,7 @@
                         <b class="arrow"></b>
                     </li>
 
+
                 </ul>
             </li>
             <li class="">
@@ -207,6 +208,14 @@
                 <a href="workAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 作品管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+            <li class="">
+                <a href="typeAdmin.html">
+                    <i class="menu-icon fa fa-tags" aria-hidden="true"></i>
+                    <span class="menu-text"> 类别管理 </span>
                 </a>
 
                 <b class="arrow"></b>
@@ -334,7 +343,7 @@
 
                                     <div class="col-sm-9 col-xs-12">
                                         <input style="width: 100%" type="text" id="cardNo"
-                                               placeholder="卡号"
+                                               placeholder="卡号" required
                                         />
                                     </div>
                                 </div>
@@ -343,7 +352,7 @@
                                         学校：</label>
                                     <div class="col-sm-9 col-xs-12">
                                         <input style="width: 100%" type="text" id="school"
-                                               placeholder="学校" value="蔷薇校区"
+                                               placeholder="学校" value="蔷薇校区" required
                                         />
                                     </div>
                                 </div>
@@ -444,7 +453,7 @@
             '                                    <div class="col-sm-9 col-xs-12">' +
             '                                        <div class="input-group">' +
             '                                           <input style="width:100%;" class="form-control date-picker"' +
-            '                                               id="enterYear"' +
+            '                                               id="enterYear" required' +
             '                                                   data-date-format="yyyy"/>' +
             '                                           <span class="input-group-addon">' +
             '                                                <i class="fa fa-calendar bigger-110"></i>' +
@@ -472,7 +481,7 @@
             '                                        班级：</label>' +
             '                                    <div class="col-sm-9 col-xs-12">' +
             '                                        <input style="width: 100%" type="number" id="classNo"' +
-            '                                               placeholder="班级" value="1"' +
+            '                                               placeholder="班级" value="1" required' +
             '                                        />' +
             '                                    </div>' +
             '                                </div>' +
@@ -603,6 +612,7 @@
 
     $(function () {
 
+        tokenInit();
         $('#type').change(function () {
             console.log($('#type').val());
             if ($('#type').val() == 1) {

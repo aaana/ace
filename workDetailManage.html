@@ -50,7 +50,7 @@
 </head>
 
 <body class="no-skin">
-<div id="navbar" class="navbar navbar-default ace-save-state">
+<div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">Toggle sidebar</span>
@@ -66,7 +66,7 @@
             <a href="index.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    蔷薇小学教师和作品管理后台
+                    系统管理
                 </small>
             </a>
         </div>
@@ -74,12 +74,11 @@
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
-                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Settings-->
-                        <!--</a>-->
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									系统管理员
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
@@ -89,7 +88,8 @@
                         <!--<li>-->
                         <!--<a href="#">-->
                         <!--<i class="ace-icon fa fa-cog"></i>-->
-                        <!--
+                        <!--Settings-->
+                        <!--</a>-->
                         <!--</li>-->
 
                         <!--<li>-->
@@ -124,18 +124,49 @@
             try{ace.settings.loadState('sidebar')}catch(e){}
         </script>
 
+        <!--<div class="sidebar-shortcuts" id="sidebar-shortcuts">-->
+            <!--<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">-->
+                <!--<button class="btn btn-success">-->
+                    <!--<i class="ace-icon fa fa-plus"></i>-->
+                <!--</button>-->
+
+                <!--<button class="btn btn-info">-->
+                    <!--<i class="ace-icon fa fa-list"></i>-->
+                <!--</button>-->
+
+                <!--<button class="btn btn-warning">-->
+                    <!--<i class="ace-icon fa fa-search"></i>-->
+                <!--</button>-->
+
+            <!--</div>-->
+
+            <!--<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">-->
+                <!--<span class="btn btn-success"></span>-->
+
+                <!--<span class="btn btn-info"></span>-->
+
+                <!--<span class="btn btn-warning"></span>-->
+
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.sidebar-shortcuts &ndash;&gt;-->
+
+
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success">
+                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info">
+                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning">
+                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
                     <i class="ace-icon fa fa-search"></i>
+                </button>
+
+                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
+                    <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
             </div>
@@ -147,6 +178,8 @@
 
                 <span class="btn btn-warning"></span>
 
+                <span class="btn btn-danger"></span>
+
             </div>
         </div><!-- /.sidebar-shortcuts -->
 
@@ -154,29 +187,43 @@
             <li class="active">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
-                    <span class="menu-text"> 创建 </span>
+                    <span class="menu-text"> 创建任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="#">
+                <a href="myCreate.html">
                     <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 我的创建 </span>
+                    <span class="menu-text"> 我创建的任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="studySituation.html">
+                <a href="searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
-                    <span class="menu-text"> 查询 </span>
+                    <span class="menu-text"> 查询任务 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
+            <li>
+                <a href="workWOCourseAdmin.html">
+                    <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
+                    <span class="menu-text"> 无教程作品管理 </span>
+                </a>
 
+                <b class="arrow"></b>
+            </li>
+            <!--<li class="">-->
+            <!--<a href="reset.html">-->
+            <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
+            <!--<span class="menu-text"> 修改密码 </span>-->
+            <!--</a>-->
 
+            <!--<b class="arrow"></b>-->
+            <!--</li>-->
 
         </ul><!-- /.nav-list -->
 
@@ -400,21 +447,25 @@
 <!-- inline scripts related to this page -->
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/js/grid.locale-en.js"></script>
+<script src="assets/js/grid.locale-cn.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
+<script src="assets/js/custom/helper.js"></script>
+
 
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    var workId = req['workId'];
     $(document).ready(function () {
+        tokenInit();
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
             contentType: "application/json",
-            data: JSON.stringify({"id":1}),
+            data: JSON.stringify({"id":workId}),
             async: true,
             success: function(data, state){
                 console.log(data);

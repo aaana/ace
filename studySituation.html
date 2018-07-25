@@ -32,6 +32,7 @@
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
+    <script src="assets/js/custom/helper.js"></script>
 
     <!-- inline styles related to this page -->
 
@@ -139,19 +140,19 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
+                <button class="btn btn-success" onclick="window.location.href='createCourse.html?token='+globalToken;">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
+                <button class="btn btn-info" onclick="window.location.href='myCreate.html?token='+globalToken;">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
+                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html?token='+globalToken;">
                     <i class="ace-icon fa fa-search"></i>
                 </button>
 
-                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
+                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html?token='+globalToken;">
                     <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
@@ -186,7 +187,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="active">
+            <li class="">
                 <a href="searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
                     <span class="menu-text"> 查询任务 </span>
@@ -397,7 +398,6 @@
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
 <script src="assets/js/grid.locale-en.js"></script>
-<script src="assets/js/custom/helper.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -575,7 +575,7 @@
 
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=030e4e10c8d447fa8e5ef9a34b97bc0c",
             editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
             mtype: "post",
             datatype: "json",
@@ -660,9 +660,10 @@
                     name: 'id', index: 'view', width: 120, sortable: false, editable: false, search: false,
                     formatter: function (value, grid, row, state) {
                         if(row.my){
-                            return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
+                            return "<a href='workDetailManage2.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
                         }else{
-                            return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
+                            $('.ui-pg-div .ui-inline-edit').remove();
+                            return "<a href='workDetailManage2.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
                         }
                     }
                 }
