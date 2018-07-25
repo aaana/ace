@@ -377,7 +377,7 @@
                                         <div class="col-sm-9 col-xs-12">
                                             <select id="parentKind" class="col-sm-6 col-xs-6">
                                             </select>
-                                            <select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>
+                                            <!--<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>-->
                                         </div>
                                     </div>
 
@@ -555,6 +555,12 @@
     var picSrc = null;
     jQuery(function ($) {
         tokenInit();
+
+        function initChildSelect() {
+            var childSelect = '<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>';
+            return childSelect;
+        }
+
         $("#photoInput").change(function () {
             if (typeof (FileReader) !== "undefined") {
                 var dvPreview = $("#img-preview");
@@ -745,7 +751,8 @@
         });
 
         var kindParam = {
-            'parentId':-1
+            'parentId':-1,
+            'status':0
         };
 
         function initOption(value,label) {
@@ -765,7 +772,8 @@
                         $('#parentKind').append(initOption(value.id,value.name));
                     });
                     var childKindParam = {
-                        "parentId":0
+                        "parentId":0,
+                        'status':0
                     };
                     $.ajax({
                         url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
@@ -775,7 +783,8 @@
                         dataType: 'json',
                         success: function (response) {
                             if(response.status === 'success'){
-                                $('#childKind').html('');
+                                $('#parentKind').after(initChildSelect());
+                                // $('#childKind').html('');
                                 $.each(response.msg.data,function (key,value) {
                                     $('#childKind').append(initOption(value.id,value.name));
                                 })
@@ -798,6 +807,7 @@
                 "parentId":parentId,
                 "status":0
             };
+            $('#childKind').remove();
             $.ajax({
                 url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
                 contentType: "application/json",
@@ -806,10 +816,13 @@
                 dataType: 'json',
                 success: function (response) {
                     if(response.status === 'success'){
-                        $('#childKind').html('');
-                        $.each(response.msg.data,function (key,value) {
-                            $('#childKind').append(initOption(value.id,value.name));
-                        })
+                        if(response.msg.data.length>0) {
+                            $('#parentKind').after(initChildSelect());
+                            $.each(response.msg.data,function (key,value) {
+                                $('#childKind').append(initOption(value.id,value.name));
+                            })
+                        }
+
                     }
                 },
                 error: function (responseStr) {
@@ -886,7 +899,7 @@
     var uploadName = UUID.prototype.createUUID();
 
     function submitBn2(type) {
-
+        var kindId = $('#childKind').val()?$('#childKind').val():$('#parentKind').val();
         console.log("表单内容" + type.value);
         switch (type.value) {
             case 1:
@@ -894,7 +907,7 @@
                     "id": workId,
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
-                    'kindId':$('#childKind').val()
+                    'kindId':kindId
                 };
                 break;
             case 2:
@@ -903,7 +916,7 @@
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
                     "photoUrl": uploadName,
-                    'kindId':$('#childKind').val()
+                    'kindId':kindId
 
                 };
                 break;

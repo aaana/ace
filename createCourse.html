@@ -374,7 +374,6 @@
                                     <div class="col-sm-9">
                                         <select id="parentKind" class="col-sm-6 col-xs-6">
                                         </select>
-                                        <select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>
 
                                         <div class="hr hr-16 hr-dotted"></div>
                                     </div>
@@ -522,12 +521,18 @@
         })//.find('i:not(.star-raty)').addClass('grey');
 
         var kindParam = {
-            'parentId': -1
+            'parentId': -1,
+            'status':0
         };
 
         function initOption(value, label) {
             var option = '<option value="' + value + '">' + label + '</option>';
             return option;
+        }
+
+        function initChildSelect() {
+            var childSelect = '<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>';
+            return childSelect;
         }
 
         $.ajax({
@@ -542,7 +547,8 @@
                         $('#parentKind').append(initOption(value.id, value.name));
                     });
                     var childKindParam = {
-                        "parentId": 0
+                        "parentId": 0,
+                        "status":0
                     };
                     $.ajax({
                         url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
@@ -551,7 +557,9 @@
                         data: JSON.stringify(childKindParam),
                         dataType: 'json',
                         success: function (response) {
+                            // $('#parentKind').after(initChildSelect());
                             if (response.status === 'success') {
+                                $('#parentKind').after(initChildSelect());
                                 $('#childKind').html('');
                                 $.each(response.msg.data, function (key, value) {
                                     $('#childKind').append(initOption(value.id, value.name));
@@ -575,6 +583,7 @@
                 "parentId": parentId,
                 "status":0
             };
+            $('#childKind').remove();
             $.ajax({
                 url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
                 contentType: "application/json",
@@ -583,10 +592,18 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.status === 'success') {
-                        $('#childKind').html('');
-                        $.each(response.msg.data, function (key, value) {
-                            $('#childKind').append(initOption(value.id, value.name));
-                        })
+                        // $('#childKind').html('');
+                        if(response.msg.data.length>0){
+                            $('#parentKind').after(initChildSelect());
+                            $.each(response.msg.data, function (key, value) {
+                                $('#childKind').append(initOption(value.id, value.name));
+                                if(value.id == '4'){
+                                    $('#childKind').css('style','displat:none');
+                                }
+                            })
+                        }
+
+
                     }
                 },
                 error: function (responseStr) {
@@ -761,6 +778,7 @@
     }
 
     function submitBn(type) {
+        var kindId = $('#childKind').val()?$('#childKind').val():$('#parentKind').val();
         if ($("#form-field-course").val() === '') {
             //alert("请输入任务名称");
             showToast("请输入任务名称","danger");
@@ -778,7 +796,7 @@
                 data1 = {
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
-                    "kindId": $('#childKind').val(),
+                    "kindId": kindId,
                     "difficulty": $("input[name='score']")[0].value
                 };
                 break;
@@ -786,7 +804,7 @@
                 data1 = {
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
-                    "kindId": $('#childKind').val(),
+                    "kindId": kindId,
                     "photoUrl": uploadName2,
                     "difficulty": $("input[name='score']")[0].value
                 };
@@ -796,7 +814,7 @@
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
                     "videoUrl": uploadName1,
-                    "kindId": $('#childKind').val(),
+                    "kindId": kindId,
                     "difficulty": $("input[name='score']")[0].value
                 };
                 break;
@@ -805,7 +823,7 @@
                     "name": $("#form-field-course").val(),
                     "description": $("#form-field-workDemand").val(),
                     "photoUrl": uploadName2,
-                    "kindId": $('#childKind').val(),
+                    "kindId": kindId,
                     "videoUrl": uploadName1,
                     "difficulty": $("input[name='score']")[0].value
                 };

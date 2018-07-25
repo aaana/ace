@@ -554,7 +554,9 @@
             success: function (response) {
                 if(response.status === 'success'){
                     $.each(response.msg.data,function (key,value) {
-                        $('#parentKind').append(initOption(value.id,value.name));
+                        if(value.id!=4){
+                            $('#parentKind').append(initOption(value.id,value.name));
+                        }
                     });
                     // var childKindParam = {
                     //     "parentId":0
