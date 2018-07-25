@@ -15,6 +15,8 @@
     <!-- page specific plugin styles -->
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="assets/css/custom/typeAdmin.css">
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.min.css">
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
@@ -317,6 +319,65 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- PAGE CONTENT BEGINS -->
+                        <div class="row" style="text-align: center">
+                            <form class="form-horizontal" role="form">
+                                <div class="row col-sm-offset-1">
+                                    <div class="form-group col-sm-12 col-xs-12"
+                                         style="display: flex;flex-direction: row;align-items: center;">
+                                        <div class="col-sm-9 col-xs-12">
+                                            <label class="control-label no-padding-right">
+                                                <i class="fa fa-tag icon-on-left bigger-110"
+                                                   aria-hidden="true"></i>
+                                                添加子类</label>
+                                            <select style="margin-left: 25px" id="parentKind">
+                                            </select>
+                                            <input type="text" style="border: none;border-bottom: 1px solid" id="childName" placeholder="子类别名称"/>
+                                            <button id="uploadFileBtn" type="button" class="btn btn-sm btn-info"
+                                                    onclick="addKind()"
+                                                    style="width:80px;margin:10px">
+                                                <i class="fa fa-plus icon-on-left bigger-110" aria-hidden="true"></i>
+                                                添加
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hr hr-16 hr-dotted"></div>
+                        <!--<form class="form-horizontal" role="form" id="form">-->
+                            <!--&lt;!&ndash; action="/new/topicArticle/{{$params['topic']->id}}" method="post"-->
+                             <!--enctype="multipart/form-data"&ndash;&gt;-->
+
+                            <!--<div class="row col-sm-offset-2">-->
+                                <!--<div class="form-group col-xs-12 col-sm-8">-->
+                                    <!--<label class="col-sm-3 control-label no-padding-right" for="parentKind">-->
+                                        <!--一级类别：</label>-->
+
+                                    <!--<div class="col-sm-9">-->
+                                        <!--<select style="width: 100%" id="parentKind">-->
+                                        <!--</select>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row col-sm-offset-2">-->
+                                <!--<div class="form-group col-xs-12 col-sm-8">-->
+                                    <!--<label class="col-sm-3 control-label no-padding-right" for="parentKind">-->
+                                        <!--二级类别：</label>-->
+
+                                    <!--<div class="col-sm-9">-->
+                                        <!--<div id="childKind">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</form>-->
+
+
+
+                        <table id="grid-table"></table>
+
+                        <div id="grid-pager"></div>
 
                         <!-- PAGE CONTENT ENDS -->
                     </div><!-- /.col -->
@@ -389,6 +450,9 @@
 <script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
 <script src="assets/js/jquery.raty.min.js"></script>
 <script src="assets/js/bootoast.js"></script>
+<script src="assets/js/jquery.jqGrid.min.js"></script>
+<script src="assets/js/grid.locale-cn.js"></script>
+
 
 
 <!-- page specific plugin scripts -->
@@ -397,7 +461,594 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    // function initRadioBox(id,value,label){
+    //     var radio = ' <label class="radio-inline">' +
+    //         '                <input type="radio" name="parentKind" id="parentKind'+id+'" value="'+value+'"checked>'+label+
+    //         '         </label>';
+    //     return radio;
+    // }
 
+    function initOption(value,label) {
+        var option = '<option value="'+value+'">'+label+'</option>';
+        return option;
+    }
+
+    function addKind() {
+        var parentId = $("#parentKind").val();
+        var kindName = $("#childName").val();
+        var childKindParam = {
+            "parentId":parentId,
+            "name":kindName
+        };
+        $.ajax({
+            url: "http://192.168.0.153:8080/kind/create?token=" + globalToken,
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify(childKindParam),
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+
+                }
+            },
+            error: function (responseStr) {
+                console.log("error" + responseStr);
+            }
+        });
+    }
+
+    // function initChildSpan(name) {
+    //     var span = '<span style="margin-right: 5px" class="childKind">'+name+'</span>';
+    //     return span;
+    // }
+    //
+    // function initAddChildKind() {
+    //     var newChildKind = '<input type="text" style="border: none;border-bottom: 1px solid" id="childName" placeholder="子类别名称"/>';
+    //     return newChildKind;
+    // }
+
+    var grid_selector = "#grid-table";
+    var pager_selector = "#grid-pager";
+    
+    $(function () {
+        var kindParam = {
+            'parentId':-1
+        };
+
+        $.ajax({
+            url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify(kindParam),
+            dataType: 'json',
+            success: function (response) {
+                if(response.status === 'success'){
+                    $.each(response.msg.data,function (key,value) {
+                        $('#parentKind').append(initOption(value.id,value.name));
+                    });
+                    // var childKindParam = {
+                    //     "parentId":0
+                    // };
+                    // $.ajax({
+                    //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                    //     contentType: "application/json",
+                    //     type: 'POST',
+                    //     data: JSON.stringify(childKindParam),
+                    //     dataType: 'json',
+                    //     success: function (response) {
+                    //         if(response.status === 'success'){
+                    //             $('#childKind').html('');
+                    //             $.each(response.msg.data,function (key,value) {
+                    //                 $('#childKind').append(initChildSpan(value.name));
+                    //             });
+                    //
+                    //             $('#childKind').append(initAddChildKind());
+                    //         }
+                    //     },
+                    //     error: function (responseStr) {
+                    //         console.log("error" + responseStr);
+                    //     }
+                    // });
+                }
+            },
+            error: function (responseStr) {
+                console.log("error" + responseStr);
+            }
+        });
+
+
+        // $('#parentKind').change(function () {
+        //     var parentId =  $('#parentKind').val();
+        //     childKindParam = {
+        //         "parentId":parentId
+        //     };
+        //     $.ajax({
+        //         url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+        //         contentType: "application/json",
+        //         type: 'POST',
+        //         data: JSON.stringify(childKindParam),
+        //         dataType: 'json',
+        //         success: function (response) {
+        //             if(response.status === 'success'){
+        //                 $('#childKind').html('');
+        //                 $.each(response.msg.data,function (key,value) {
+        //                     $('#childKind').append(initChildSpan(value.name));
+        //                 });
+        //                 $('#childKind').append(initChildSpan(value.name));
+        //             }
+        //         },
+        //         error: function (responseStr) {
+        //             console.log("error" + responseStr);
+        //         }
+        //     });
+        // })
+
+        var parent_column = $(grid_selector).closest('[class*="col-"]');
+        //resize to fit page size
+        $(window).on('resize.jqGrid', function () {
+            $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+        })
+
+        //resize on sidebar collapse/expand
+        $(document).on('settings.ace.jqGrid', function (ev, event_name, collapsed) {
+            if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
+                //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                setTimeout(function () {
+                    $(grid_selector).jqGrid('setGridWidth', parent_column.width());
+                }, 20);
+            }
+        })
+
+
+        jQuery(grid_selector).jqGrid({
+            url: "http://192.168.0.153:8080/jqgrid/kind/search?token=3f90a47d84934c318607d0cd21fc3c10",
+            editurl: "http://192.168.0.153:8080/kind/update?token=3f90a47d84934c318607d0cd21fc3c10",
+            mtype: "post",
+            datatype: "json",
+
+            subGrid: false,
+            //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+            //datatype: "xml",
+            subGridOptions: {
+                plusicon: "ace-icon fa fa-plus center bigger-110 blue",
+                minusicon: "ace-icon fa fa-minus center bigger-110 blue",
+                openicon: "ace-icon fa fa-chevron-right center orange"
+            },
+            multiSort: true,
+            //for this example we are using local data
+            subGridRowExpanded: function (subgridDivId, rowId) {
+                var subgridTableId = subgridDivId + "_t";
+                $("#" + subgridDivId).html("<table id='" + subgridTableId + "'></table>");
+                $("#" + subgridTableId).jqGrid({
+                    datatype: 'local',
+                    data: subgrid_data,
+                    colNames: ['No', 'Item Name', 'Qty'],
+                    colModel: [
+                        {name: 'id', width: 50},
+                        {name: 'name', width: 150},
+                        {name: 'qty', width: 50}
+                    ]
+                });
+            },
+            jsonReader: {//分页的关键
+                root: "msg.data",
+                total: "msg.totalPages",
+                // page: "",
+                records: "msg.totalElements",
+                repeatitems: false
+            },
+            height: 300,
+            ajaxRowOptions: {contentType: "application/json", dataType: "json"},
+            serializeRowData: function (data) {
+                return JSON.stringify(data);
+            },
+            ajaxGridOptions: {contentType: 'application/json; charset=utf-8'},
+            serializeGridData: function (postData) {
+                if (postData.searchField === undefined) postData.searchField = null;
+                if (postData.searchString === undefined) postData.searchString = null;
+                if (postData.searchOper === undefined) postData.searchOper = null;
+                return JSON.stringify(postData);
+            },
+            prmNames: {
+                page: "page",
+                rows: "rows",
+                sort: "sidx",
+                order: "sord",
+                search: "search",
+                filters: "filters"
+            },
+            colNames: [' ', '类别名称', '父类别','状态'],
+            colModel: [
+                {
+                    name: 'myac', index: '', width: 70, fixed: true, sortable: false, resize: false,
+                    formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
+                        delbutton: false,//disable delete button
+                        delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
+                        //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+                    },
+                },
+                // {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
+                {
+                    name: 'name',
+                    index: 'name',
+                    width: 100,
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {
+                    name: 'parentName',
+                    index: 'parentName',
+                    width: 100,
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]},
+                },
+                {
+                    name: 'status',
+                    index: 'status',
+                    width: 70,
+                    editable: true,
+                    edittype: "select",
+                    editoptions: {value: "0:正常;-1:已删除"},
+                    stype: "select",
+                    searchoptions: {sopt: ["eq"], value: "0:正常;-1:已删除"},
+                    formatter: statusFormatter
+                }
+
+            ],
+
+//             onPaging:function(pageBtn){
+//                 console.log(pageBtn);
+// //	    	var re_records = $jqgrid.getGridParam('records');//获取返回的记录数
+//                 var re_page = $(grid_selector).getGridParam('page');//获取返回的当前页
+//                 var re_rowNum= $(grid_selector).getGridParam('rowNum');//获取每页数
+//                 var re_total= $(grid_selector).getGridParam('lastpage');//获取总页数
+//                 // alert(re_total);
+//                 if(pageBtn==="next"){
+//                     $(grid_selector).jqGrid('clearGridData');
+//                     $(grid_selector).jqGrid('setGridParam',{
+//                         page:re_page+1,
+//                         rowNum:re_rowNum,
+//                         datatype:'local',
+//                         data:grid_data//newData是符合格式要求的重新加载的数据
+//                     }).trigger("reloadGrid");
+//
+//                     // $(grid_selector).jqGrid.setGridParam({page:re_page+1, rowNum:re_rowNum,data:subgrid_data,datatype:'local'}).trigger('reloadGrid');
+//                 }
+//                 if(pageBtn==="prev"){
+//                     $(grid_selector).setGridParam({page:re_page-1, rowNum:re_rowNum}).trigger('reloadGrid');
+//                 }
+//                 },
+//
+//             onSortCol: function(sidx,name,sort) {
+//                 //点击排序列，根据哪列排序
+//                 alert(sidx +" " + sort);
+//                 return 'stop';
+//             },
+            viewrecords: true,
+            rowNum: 10,
+            rowList: [10, 20, 30],
+
+            pager: pager_selector,
+            altRows: true,
+            //toppager: true,
+
+            multiselect: true,
+            //multikey: "ctrlKey",
+            multiboxonly: true,
+
+
+            loadComplete: function () {
+                var table = this;
+                setTimeout(function () {
+                    styleCheckbox(table);
+                    updateActionIcons(table);
+                    updatePagerIcons(table);
+                    enableTooltips(table);
+                }, 0);
+            },
+
+            caption: "类别管理"
+
+            //,autowidth: true,
+
+
+            /**
+             ,
+             grouping:true,
+             groupingView : {
+						 groupField : ['name'],
+						 groupDataSorted : true,
+						 plusicon : 'fa fa-chevron-down bigger-110',
+						 minusicon : 'fa fa-chevron-up bigger-110'
+					},
+             caption: "Grouping"
+             */
+
+        });
+        $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+        //enable search/filter toolbar
+        //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
+        //jQuery(grid_selector).filterToolbar({});
+
+
+        //switch element when editing inline
+        // function aceSwitch(cellvalue, options, cell) {
+        //     setTimeout(function () {
+        //         $(cell).find('input[type=checkbox]')
+        //             .addClass('ace ace-switch ace-switch-5')
+        //             .after('<span class="lbl"></span>');
+        //     }, 0);
+        // }
+
+        //enable datepicker
+        function statusFormatter(cellvalue, options, rowObject) {
+            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "正常") {
+                return "正常";
+            }
+            else if (cellvalue === -1 || cellvalue == "-1" || cellvalue === "已删除") {
+                return "已删除";
+            }
+            return "未知";
+        }
+        //navButtons下面导航区
+        jQuery(grid_selector).jqGrid('navGrid', pager_selector,
+            { 	//navbar options
+                edit: false,
+                editicon: 'ace-icon fa fa-pencil blue',
+                add: false,
+                addicon: 'ace-icon fa fa-plus-circle purple',
+                del: false,
+                delicon: 'ace-icon fa fa-trash-o red',
+                search: true,
+                searchicon: 'ace-icon fa fa-search orange',
+                refresh: true,
+                refreshicon: 'ace-icon fa fa-refresh green',
+                view: true,
+                viewicon: 'ace-icon fa fa-search-plus grey',
+            },
+            {
+                //edit record form
+                //closeAfterEdit: true,
+                //width: 700,
+                recreateForm: true,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                    style_edit_form(form);
+                }
+            },
+            {
+                //new record form
+                //width: 700,
+                closeAfterAdd: true,
+                recreateForm: true,
+                viewPagerButtons: false,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                        .wrapInner('<div class="widget-header" />')
+                    style_edit_form(form);
+                }
+            },
+            {
+                //delete record form
+                recreateForm: true,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    if (form.data('styled')) return false;
+
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                    style_delete_form(form);
+
+                    form.data('styled', true);
+                },
+                onClick: function (e) {
+                    //alert(1);
+                }
+            },
+            {
+                //search form
+                recreateForm: true,
+                afterShowSearch: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                    style_search_form(form);
+                },
+                afterRedraw: function () {
+                    style_search_filters($(this));
+                }
+                ,
+                multipleSearch: true,
+                autoSearch: false,
+                groupOps: [{op: "AND", text: "满足所有条件"}],
+                closeAfterSearch: true,
+                /**
+                 multipleGroup:true,
+                 showQuery: true
+                 */
+                // onSearch:function () {
+                //     postData = $(grid_selector).jqGrid('getGridParam', 'postData');
+                //     filters = $.parseJSON(postData.filters);
+                //     rules = filters.rules;
+                //     console.log(filters);
+                //     $(grid_selector).jqGrid('clearGridData');//清空表格
+                //         $(grid_selector).jqGrid('setGridParam',{
+                //             page:1,
+                //             datatype:'local',
+                //             data:subgrid_data//newData是符合格式要求的重新加载的数据
+                //         }).trigger("reloadGrid");
+                // }
+            },
+            {
+                //view record form
+                recreateForm: true,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                }
+            }
+        );
+
+        // $(grid_selector).navButtonAdd(pager_selector,
+        //     {
+        //         buttonicon: "ace-icon fa fa-refresh green",
+        //         title: "",
+        //         caption: "",
+        //         position: "last",
+        //         onClickButton: refreshFilterGrid
+        //     });
+
+        // function refreshFilterGrid() {
+        //     $(grid_selector).jqGrid('clearGridData');//清空表格
+        //     $(grid_selector).jqGrid('setGridParam',{
+        //         postData:{"filters":null},
+        //         datatype:'local',
+        //         data:grid_data//newData是符合格式要求的重新加载的数据
+        //     }).trigger("reloadGrid");
+        //     console.log("refresh");
+        //     filters = null;
+        //     rules = null;
+        // }
+
+
+        function style_edit_form(form) {
+            //enable datepicker on "createdAt" field and switches for "stock" field
+            form.find('input[name=createdAt]').datepicker({format: 'yyyy-mm-dd', autoclose: true})
+
+            form.find('input[name=isShowed]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+            //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
+            //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+
+
+            //update buttons classes
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+            buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+            buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+
+            buttons = form.next().find('.navButton a');
+            buttons.find('.ui-icon').hide();
+            buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+            buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+        }
+
+        function style_delete_form(form) {
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+            buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+            buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+        }
+
+        function style_search_filters(form) {
+            form.find('.delete-rule').val('X');
+            form.find('.add-rule').addClass('btn btn-xs btn-primary');
+            form.find('.add-group').addClass('btn btn-xs btn-success');
+            form.find('.delete-group').addClass('btn btn-xs btn-danger');
+        }
+
+        function style_search_form(form) {
+            var dialog = form.closest('.ui-jqdialog');
+            var buttons = dialog.find('.EditTable')
+            buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+            buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+            buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+        }
+
+        function beforeDeleteCallback(e) {
+            var form = $(e[0]);
+            if (form.data('styled')) return false;
+
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_delete_form(form);
+
+            form.data('styled', true);
+        }
+
+        function beforeEditCallback(e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_edit_form(form);
+        }
+
+
+        //it causes some flicker when reloading or navigating grid
+        //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
+        //or go back to default browser checkbox styles for the grid
+        function styleCheckbox(table) {
+            /**
+             $(table).find('input:checkbox').addClass('ace')
+             .wrap('<label />')
+             .after('<span class="lbl align-top" />')
+
+
+             $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+             .find('input.cbox[type=checkbox]').addClass('ace')
+             .wrap('<label />').after('<span class="lbl align-top" />');
+             */
+        }
+
+
+        //unlike navButtons icons, action icons in rows seem to be hard-coded
+        //you can change them like this in here if you want
+        function updateActionIcons(table) {
+            /**
+             var replacement =
+             {
+                 'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
+                 'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
+                 'ui-icon-disk' : 'ace-icon fa fa-check green',
+                 'ui-icon-cancel' : 'ace-icon fa fa-times red'
+             };
+             $(table).find('.ui-pg-div span.ui-icon').each(function(){
+						var icon = $(this);
+						var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+						if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+					})
+             */
+        }
+
+        //replace icons with FontAwesome icons like above
+        function updatePagerIcons(table) {
+            var replacement =
+                {
+                    'ui-icon-seek-first': 'ace-icon fa fa-angle-double-left bigger-140',
+                    'ui-icon-seek-prev': 'ace-icon fa fa-angle-left bigger-140',
+                    'ui-icon-seek-next': 'ace-icon fa fa-angle-right bigger-140',
+                    'ui-icon-seek-end': 'ace-icon fa fa-angle-double-right bigger-140'
+                };
+            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+                var icon = $(this);
+                var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+            })
+        }
+
+        function enableTooltips(table) {
+            $('.navtable .ui-pg-button').tooltip({container: 'body'});
+            $(table).find('.ui-pg-div').tooltip({container: 'body'});
+        }
+
+
+        // $(grid_selector).jqGrid('setGridParam',{
+        //     page:1,
+        //     total:2,
+        //     records:20,
+        //     datatype:'local',
+        //     data:subgrid_data//newData是符合格式要求的重新加载的数据
+        // }).trigger("reloadGrid");
+
+
+        //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+        $(document).one('ajaxloadstart.page', function (e) {
+            $.jgrid.gridDestroy(grid_selector);
+            $('.ui-jqdialog').remove();
+        });
+    })
 </script>
 </body>
 </html>
