@@ -374,8 +374,8 @@
                                         <div class="col-sm-9 col-xs-12">
                                             <select id="parentKind" class="col-sm-6 col-xs-6">
                                             </select>
-                                            <select id="childKind" class="col-sm-6 col-xs-6"
-                                                    style="float:right;"></select>
+                                            <!--<select id="childKind" class="col-sm-6 col-xs-6"-->
+                                                    <!--style="float:right;"></select>-->
                                         </div>
                                     </div>
                                 </div>
@@ -533,20 +533,20 @@
 <script type="text/javascript">
 
 
-    function GetRequest() {
-        var url = location.search; //获取url中"?"符后的字串
-        var theRequest = new Object();
-        if (url.indexOf("?") != -1) {
-            var str = url.substr(1);
-            strs = str.split("&");
-            for (var i = 0; i < strs.length; i++) {
-                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-            }
-        }
-        return theRequest;
-    }
-
-    var req = GetRequest();
+    // function GetRequest() {
+    //     var url = location.search; //获取url中"?"符后的字串
+    //     var theRequest = new Object();
+    //     if (url.indexOf("?") != -1) {
+    //         var str = url.substr(1);
+    //         strs = str.split("&");
+    //         for (var i = 0; i < strs.length; i++) {
+    //             theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+    //         }
+    //     }
+    //     return theRequest;
+    // }
+    //
+    // var req = GetRequest();
     var workId = req['workId'];
     //workId = 1;
 
@@ -570,6 +570,10 @@
 
     jQuery(function ($) {
         tokenInit();
+        function initChildSelect() {
+            var childSelect = '<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>';
+            return childSelect;
+        }
         $("#photoInput").change(function () {
             if (typeof (FileReader) !== "undefined") {
                 var dvPreview = $("#img-preview");
@@ -770,6 +774,9 @@
             return option;
         }
 
+        data1 = {
+            "id": workId
+        };
 
         $.ajax({
             url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
@@ -778,31 +785,114 @@
             data: JSON.stringify(kindParam),
             dataType: 'json',
             success: function (response) {
-                if (response.status === 'success') {
-                    $.each(response.msg.data, function (key, value) {
-                        $('#parentKind').append(initOption(value.id, value.name));
+                if(response.status === 'success'){
+                    $.each(response.msg.data,function (key,value) {
+                        $('#parentKind').append(initOption(value.id,value.name));
                     });
-                    var childKindParam = {
-                        "parentId": 0
-                    };
                     $.ajax({
-                        url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                        url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
                         contentType: "application/json",
                         type: 'POST',
-                        data: JSON.stringify(childKindParam),
+                        data: JSON.stringify(data1),
                         dataType: 'json',
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                $('#childKind').html('');
-                                $.each(response.msg.data, function (key, value) {
-                                    $('#childKind').append(initOption(value.id, value.name));
-                                })
-                            }
+                        beforeSend: function () {
+                            console.log("正在获取信息，请稍候");
                         },
+                        success: function (responseStr) {
+                            console.log("获取信息成功!!!" + responseStr);
+                            $('#childKind').remove();
+                            $("#form-field-workID").val(responseStr.msg.id);
+                            $("#form-field-work").val(responseStr.msg.name);
+                            $("#form-field-workDetail").val(responseStr.msg.description);
+                            var t = responseStr.msg.createdAt;
+                            $("#id-date-picker-1").val(t.split(" ")[0]);
+                            $("#form-field-studentID").val(responseStr.msg.user.id);
+                            $("#form-field-student").val(responseStr.msg.user.name);
+                            if(responseStr.msg.kind.id == 4){
+                                $('#parentKind').val(responseStr.msg.kind.id);
+                                $('#childKind').remove();
+                            }else{
+                                $('#parentKind').val(responseStr.msg.kind.parentId);
+                                // $('#parentKind').after(initChildSelect());
+                                var childKindParam = {
+                                    "parentId":responseStr.msg.kind.parentId,
+                                    'status':0
+                                };
+                                var childKindId = responseStr.msg.kind.id;
+                                $.ajax({
+                                    url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                                    contentType: "application/json",
+                                    type: 'POST',
+                                    data: JSON.stringify(childKindParam),
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        if(response.status === 'success'){
+                                            $('#childKind').remove();
+                                            $('#parentKind').after(initChildSelect());
+                                            // $('#childKind').html('');
+                                            $.each(response.msg.data,function (key,value) {
+                                                $('#childKind').append(initOption(value.id,value.name));
+                                            })
+                                            $('#childKind').val(childKindId);
+
+                                        }
+                                    },
+                                    error: function (responseStr) {
+                                        console.log("error" + responseStr);
+                                    }
+                                });
+                                // $('#childKind').val(responseStr.msg.kind.id);
+                            }
+                            url = responseStr.msg.photoUrl;
+                            l = url.split("/").length
+                            if (url.split("/")[l - 1] == "null") {
+                                //$("#id-sp")
+                                console.log("no photo");
+                            } else {
+                                console.log(" photo");
+                                // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
+                                var photoURL = responseStr.msg.photoUrl;
+                                console.log(photoURL);
+                                picSrc = photoURL;
+                                $("#img-preview img").attr("src", photoURL);
+                            }
+                            if (responseStr.msg.videoUrl1 == null) {
+                                //$("#id-sp")
+                                console.log("no vedio");
+                                $("#id-sp").attr("disabled", true);
+                            } else {
+                                $("#id-sp").attr("disabled", false);
+                            }
+                        }
+                        ,
                         error: function (responseStr) {
                             console.log("error" + responseStr);
                         }
                     });
+                    // var childKindParam = {
+                    //     "parentId":0,
+                    //     'status':0
+                    // };
+                    // $.ajax({
+                    //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                    //     contentType: "application/json",
+                    //     type: 'POST',
+                    //     data: JSON.stringify(childKindParam),
+                    //     dataType: 'json',
+                    //     success: function (response) {
+                    //         if(response.status === 'success'){
+                    //             $('#childKind').remove();
+                    //             $('#parentKind').after(initChildSelect());
+                    //             // $('#childKind').html('');
+                    //             $.each(response.msg.data,function (key,value) {
+                    //                 $('#childKind').append(initOption(value.id,value.name));
+                    //             })
+                    //         }
+                    //     },
+                    //     error: function (responseStr) {
+                    //         console.log("error" + responseStr);
+                    //     }
+                    // });
                 }
             },
             error: function (responseStr) {
@@ -811,11 +901,12 @@
         });
 
         $('#parentKind').change(function () {
-            var parentId = $('#parentKind').val();
+            var parentId =  $('#parentKind').val();
             childKindParam = {
-                "parentId": parentId,
-                "status": 0
+                "parentId":parentId,
+                "status":0
             };
+            $('#childKind').remove();
             $.ajax({
                 url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
                 contentType: "application/json",
@@ -823,11 +914,14 @@
                 data: JSON.stringify(childKindParam),
                 dataType: 'json',
                 success: function (response) {
-                    if (response.status === 'success') {
-                        $('#childKind').html('');
-                        $.each(response.msg.data, function (key, value) {
-                            $('#childKind').append(initOption(value.id, value.name));
-                        })
+                    if(response.status === 'success'){
+                        if(response.msg.data.length>0) {
+                            $('#parentKind').after(initChildSelect());
+                            $.each(response.msg.data,function (key,value) {
+                                $('#childKind').append(initOption(value.id,value.name));
+                            })
+                        }
+
                     }
                 },
                 error: function (responseStr) {
@@ -836,59 +930,185 @@
             });
         });
 
-        data1 = {
-            "id": workId
-        };
 
-        $.ajax({
-            url: "http://192.168.0.153:8080/work/findById?token=" + globalToken,
-            contentType: "application/json",
-            type: 'POST',
-            data: JSON.stringify(data1),
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("正在获取信息，请稍候");
-            },
-            success: function (responseStr) {
-                console.log("获取信息成功!!!" + responseStr);
 
-                $("#form-field-workID").val(responseStr.msg.id);
-                $("#form-field-work").val(responseStr.msg.name);
-                $("#form-field-workDetail").val(responseStr.msg.description);
-                var t = responseStr.msg.createdAt;
-                $("#id-date-picker-1").val(t.split(" ")[0]);
-                $("#form-field-studentID").val(responseStr.msg.user.id);
-                $("#form-field-student").val(responseStr.msg.user.name);
-                $('#parentKind').val(responseStr.msg.kind.parentId);
-                $('#childKind').val(responseStr.msg.kind.id);
-                url = responseStr.msg.photoUrl;
-                l = url.split("/").length
-                if (url.split("/")[l - 1] == "null") {
-                    //$("#id-sp")
-                    console.log("no photo");
-                } else {
-                    console.log(" photo");
-                    // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
-                    var photoURL = responseStr.msg.photoUrl;
-                    console.log(photoURL);
-                    picSrc = photoURL;
-                    $("#img-preview img").attr("src", photoURL);
-                }
-                if (responseStr.msg.videoUrl1 == null) {
-                    //$("#id-sp")
-                    console.log("no vedio");
-                    $("#id-sp").attr("disabled", true);
-                } else {
-                    $("#id-sp").attr("disabled", false);
-                }
-            }
-            ,
-            error: function (responseStr) {
-                console.log("error" + responseStr);
-            }
-        });
+        // $.ajax({
+        //     url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
+        //     contentType: "application/json",
+        //     type: 'POST',
+        //     data: JSON.stringify(data1),
+        //     dataType: 'json',
+        //     beforeSend: function () {
+        //         console.log("正在获取信息，请稍候");
+        //     },
+        //     success: function (responseStr) {
+        //         console.log("获取信息成功!!!" + responseStr);
+        //         $('#childKind').remove();
+        //         $("#form-field-workID").val(responseStr.msg.id);
+        //         $("#form-field-work").val(responseStr.msg.name);
+        //         $("#form-field-workDetail").val(responseStr.msg.description);
+        //         var t = responseStr.msg.createdAt;
+        //         $("#id-date-picker-1").val(t.split(" ")[0]);
+        //         $("#form-field-studentID").val(responseStr.msg.user.id);
+        //         $("#form-field-student").val(responseStr.msg.user.name);
+        //         if(responseStr.msg.kind.id == 4){
+        //             $('#parentKind').val(responseStr.msg.kind.id);
+        //             $('#childKind').remove();
+        //         }else{
+        //             $('#parentKind').val(responseStr.msg.kind.parentId);
+        //             $('#parentKind').after(initChildSelect());
+        //             $('#childKind').val(responseStr.msg.kind.id);
+        //         }
+        //         url = responseStr.msg.photoUrl;
+        //         l = url.split("/").length
+        //         if (url.split("/")[l - 1] == "null") {
+        //             //$("#id-sp")
+        //             console.log("no photo");
+        //         } else {
+        //             console.log(" photo");
+        //             // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
+        //             var photoURL = responseStr.msg.photoUrl;
+        //             console.log(photoURL);
+        //             picSrc = photoURL;
+        //             $("#img-preview img").attr("src", photoURL);
+        //         }
+        //         if (responseStr.msg.videoUrl1 == null) {
+        //             //$("#id-sp")
+        //             console.log("no vedio");
+        //             $("#id-sp").attr("disabled", true);
+        //         } else {
+        //             $("#id-sp").attr("disabled", false);
+        //         }
+        //     }
+        //     ,
+        //     error: function (responseStr) {
+        //         console.log("error" + responseStr);
+        //     }
+        // });
 
     });
+    //
+    //     data1 = {
+    //         "id": workId
+    //     };
+    //
+    //
+    //     $.ajax({
+    //         url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+    //         contentType: "application/json",
+    //         type: 'POST',
+    //         data: JSON.stringify(kindParam),
+    //         dataType: 'json',
+    //         success: function (response) {
+    //             if (response.status === 'success') {
+    //                 $.each(response.msg.data, function (key, value) {
+    //                     $('#parentKind').append(initOption(value.id, value.name));
+    //                 });
+    //                 var childKindParam = {
+    //                     "parentId": 0
+    //                 };
+    //                 $.ajax({
+    //                     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+    //                     contentType: "application/json",
+    //                     type: 'POST',
+    //                     data: JSON.stringify(childKindParam),
+    //                     dataType: 'json',
+    //                     success: function (response) {
+    //                         if (response.status === 'success') {
+    //                             $('#childKind').html('');
+    //                             $.each(response.msg.data, function (key, value) {
+    //                                 $('#childKind').append(initOption(value.id, value.name));
+    //                             })
+    //                         }
+    //                     },
+    //                     error: function (responseStr) {
+    //                         console.log("error" + responseStr);
+    //                     }
+    //                 });
+    //             }
+    //         },
+    //         error: function (responseStr) {
+    //             console.log("error" + responseStr);
+    //         }
+    //     });
+    //
+    //     $('#parentKind').change(function () {
+    //         var parentId = $('#parentKind').val();
+    //         childKindParam = {
+    //             "parentId": parentId,
+    //             "status": 0
+    //         };
+    //         $.ajax({
+    //             url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+    //             contentType: "application/json",
+    //             type: 'POST',
+    //             data: JSON.stringify(childKindParam),
+    //             dataType: 'json',
+    //             success: function (response) {
+    //                 if (response.status === 'success') {
+    //                     $('#childKind').html('');
+    //                     $.each(response.msg.data, function (key, value) {
+    //                         $('#childKind').append(initOption(value.id, value.name));
+    //                     })
+    //                 }
+    //             },
+    //             error: function (responseStr) {
+    //                 console.log("error" + responseStr);
+    //             }
+    //         });
+    //     });
+    //
+    //
+    //
+    //     $.ajax({
+    //         url: "http://192.168.0.153:8080/work/findById?token=" + globalToken,
+    //         contentType: "application/json",
+    //         type: 'POST',
+    //         data: JSON.stringify(data1),
+    //         dataType: 'json',
+    //         beforeSend: function () {
+    //             console.log("正在获取信息，请稍候");
+    //         },
+    //         success: function (responseStr) {
+    //             console.log("获取信息成功!!!" + responseStr);
+    //
+    //             $("#form-field-workID").val(responseStr.msg.id);
+    //             $("#form-field-work").val(responseStr.msg.name);
+    //             $("#form-field-workDetail").val(responseStr.msg.description);
+    //             var t = responseStr.msg.createdAt;
+    //             $("#id-date-picker-1").val(t.split(" ")[0]);
+    //             $("#form-field-studentID").val(responseStr.msg.user.id);
+    //             $("#form-field-student").val(responseStr.msg.user.name);
+    //             $('#parentKind').val(responseStr.msg.kind.parentId);
+    //             $('#childKind').val(responseStr.msg.kind.id);
+    //             url = responseStr.msg.photoUrl;
+    //             l = url.split("/").length
+    //             if (url.split("/")[l - 1] == "null") {
+    //                 //$("#id-sp")
+    //                 console.log("no photo");
+    //             } else {
+    //                 console.log(" photo");
+    //                 // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
+    //                 var photoURL = responseStr.msg.photoUrl;
+    //                 console.log(photoURL);
+    //                 picSrc = photoURL;
+    //                 $("#img-preview img").attr("src", photoURL);
+    //             }
+    //             if (responseStr.msg.videoUrl1 == null) {
+    //                 //$("#id-sp")
+    //                 console.log("no vedio");
+    //                 $("#id-sp").attr("disabled", true);
+    //             } else {
+    //                 $("#id-sp").attr("disabled", false);
+    //             }
+    //         }
+    //         ,
+    //         error: function (responseStr) {
+    //             console.log("error" + responseStr);
+    //         }
+    //     });
+    //
+    // });
 
 
     function submitForm() {

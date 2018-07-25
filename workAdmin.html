@@ -580,9 +580,9 @@
                     name: 'id', index: 'view', width: 120, sortable: false, editable: false, search: false,
                     formatter: function (value, grid, row, state) {
                         if(row.my){
-                            return "<a href='workDetailManage.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
+                            return "<a href='workDetailManage.html?token="+globalToken+"&workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?token="+globalToken+"&workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
                         }else{
-                            return "<a href='workDetailManage.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
+                            return "<a href='workDetailManage.html?token="+globalToken+"&workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
                         }
                     }
                 },
