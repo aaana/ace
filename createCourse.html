@@ -19,6 +19,7 @@
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="assets/css/custom/loading.css"/>
 
     <!-- ace styles -->
     <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
@@ -52,6 +53,29 @@
 </head>
 
 <body class="no-skin">
+<div class="ui-widget-overlay" id="loading"
+     style="height: 100%; width: 100%; position: fixed; left: 0px; top: 0px; z-index: 1049; opacity: 0.3;display: none;">
+    <div class="spinner">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+    </div>
+</div>
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -779,17 +803,6 @@
 
     function submitBn(type) {
         var kindId = $('#childKind').val()?$('#childKind').val():$('#parentKind').val();
-        if ($("#form-field-course").val() === '') {
-            //alert("请输入任务名称");
-            showToast("请输入任务名称","danger");
-            $("#form-field-course").focus();
-            return;
-        }
-        if ($("input[name='score']")[0].value === '') {
-            //alert("请选择难度");
-            showToast("请选择难度","danger");
-            return;
-        }
         console.log("表单内容" + type.value);
         switch (type.value) {
             case 1:
@@ -842,6 +855,7 @@
             success: function (responseStr) {
                 console.log("表单提交成功!!!" + responseStr);
                 showToast("创建成功！","success");
+                $("#loading").css("display", "none");
 
                 window.location.href = 'myCreate.html?token=' + globalToken
                 /*if (responseStr.status === 200) {
@@ -853,11 +867,24 @@
             error: function (responseStr) {
                 console.log("error" + responseStr);
                 showToast("创建失败！","danger");
+                $("#loading").css("display", "none");
             }
         });
     }
 
     function test() {
+        if ($("#form-field-course").val() === '') {
+            //alert("请输入任务名称");
+            showToast("请输入任务名称","danger");
+            $("#form-field-course").focus();
+            return;
+        }
+        if ($("input[name='score']")[0].value === '') {
+            //alert("请选择难度");
+            showToast("请选择难度","danger");
+            return;
+        }
+        $("#loading").css("display", "block");
         $('#submitForm').after('<img id="loadingImg" src="assets/images/loading.gif" width="45px" height="45px">');
         uploadName1 = UUID.prototype.createUUID();
         uploadName2 = UUID.prototype.createUUID();
@@ -892,6 +919,7 @@
                     },
                     error: function (e) {
                         console.log("传视频失败");
+                        $("#loading").css("display", "none");
                     }
                 });
             }
@@ -920,6 +948,7 @@
                     },
                     error: function (e) {
                         console.log("传视频失败");
+                        $("#loading").css("display", "none");
                     }
                 });
             } else {
@@ -967,6 +996,7 @@
                             },
                             error: function (e) {
                                 console.log("传视频失败");
+                                $("#loading").css("display", "none");
                             }
                         });
                     },
