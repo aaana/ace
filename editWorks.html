@@ -859,6 +859,8 @@
                 $("#id-date-picker-1").val(t.split(" ")[0]);
                 $("#form-field-studentID").val(responseStr.msg.user.id);
                 $("#form-field-student").val(responseStr.msg.user.name);
+                $('#parentKind').val(responseStr.msg.kind.parentId);
+                $('#childKind').val(responseStr.msg.kind.id);
                 url = responseStr.msg.photoUrl;
                 l = url.split("/").length
                 if (url.split("/")[l - 1] == "null") {
@@ -910,6 +912,7 @@
                     "id": workId,
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
+                    'kindId':$('#childKind').val()
                 };
                 break;
             case 2:
@@ -918,6 +921,7 @@
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
                     "photoUrl": uploadName,
+                    'kindId':$('#childKind').val()
                 };
                 break;
         }
