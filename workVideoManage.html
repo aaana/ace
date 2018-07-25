@@ -190,121 +190,118 @@
             <div class="widget-body">
                 <div class="widget-main padding-24">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
-                                    <b>教程视频</b>
+                                    <b>作品视频</b>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
-                                    <!--<video id="courseVideo" src="http://www.w3school.com.cn/i/movie.ogg" width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">-->
-                                        <!--Your browser does not support the video tag.-->
-                                    </video>
-                                    <video id="courseVideo"  width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">
+                                    <video id="workVideo" width="100%" height="100%" controls="controls" >
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                             </div>
                         </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-                        <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
-                                    <b>任务信息</b>
-                                </div>
-                            </div>
+                                <div class="col-sm-10 col-sm-offset-1 pricing-box">
+                                    <!--<div class="profile-user-info profile-user-info-striped" style="border: 1px ">-->
 
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1">
-                                    <div class="profile-user-info profile-user-info-striped">
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务名称 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="courseName"></span>
-                                            </div>
+                                    <!--<div class="col-xs-6 col-sm-3 pricing-box">-->
+                                    <div class="widget-box widget-color-green">
+                                        <div class="widget-header">
+                                            <h5 class="widget-title bigger lighter">编辑视频</h5>
                                         </div>
 
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务ID </div>
+                                        <div class="widget-body">
+                                            <div class="widget-main" align="center">
 
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="courseId"></span>
+                                                <p>
+                                                    <button class="btn" onclick="video1Click()">
+                                                        <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp材料准备</i>
+                                                    </button>
+
+                                                    <button class="btn btn-primary" onclick="upload1Click()">
+                                                        <i id="upload1i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                        <input type="file" id="videoUrl1" accept="video/*" style="display: none"/>
+                                                    </button>
+
+                                                    <button class="btn btn-info" onclick="download1Click()">
+                                                        <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+
+                                                    </button>
+
+                                                    <button class="btn btn-danger" onclick="delete1Click()">
+                                                        <i id="delete1i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
+                                                    </button>
+                                                </p>
+                                                <hr/>
+                                                <p>
+                                                    <button class="btn">
+                                                        <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp作品制作</i>
+                                                    </button>
+
+                                                    <!--<button class="btn btn-primary">-->
+                                                    <!--<i class="ace-icon fa fa-upload align-top bigger-125"></i>-->
+                                                    <!--上传-->
+                                                    </button>
+                                                    <button class="btn btn-primary" onclick="videoUrl2Click()">
+                                                        <i id="upload2i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                        <input type="file" id="videoUrl2" accept="video/*" style="display: none"/>
+                                                    </button>
+                                                    <button class="btn btn-info">
+                                                        <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
+                                                    </button>
+
+                                                    <button class="btn btn-danger">
+                                                        <i id="delete2i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
+                                                    </button>
+                                                </p>
+                                                <hr/>
+                                                <p>
+                                                    <button class="btn">
+                                                        <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp作品简介</i>
+                                                    </button>
+
+                                                    <button class="btn btn-primary" onclick="videoUrl3Click()">
+                                                        <i id="upload3i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                        <input type="file" id="videoUrl3" accept="video/*" style="display: none"/>
+                                                    </button>
+
+                                                    <button class="btn btn-info">
+                                                        <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
+                                                    </button>
+
+                                                    <button class="btn btn-danger">
+                                                        <i id="delete3i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
+                                                    </button>
+                                                </p>
                                             </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务难度 </div>
 
-                                            <div class="profile-info-value">
-                                                <!--<i class="fa fa-map-marker light-orange bigger-110"></i>-->
-                                                <!--<span class="editable" id="courseLevel">00001</span>-->
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1"  id="star1" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1"  id="star2" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1"  id="star3" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1"  id="star4" title=""></i>&nbsp
-                                                </div>
-                                                <div class="rating inline" style="cursor: pointer;">
-                                                    <i data-alt="1"  id="star5" title=""></i>&nbsp
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 教师姓名 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="teacherName"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 教师ID </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="teacherId"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 参与人数 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="participationNum"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 发布时间 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="publishDate"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 任务要求 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="courseDetail"></span>
+                                            <div>
+                                                <a href="#" class="btn btn-block btn-success">
+                                                    <i class="ace-icon fa fa-save bigger-110"></i>
+                                                    <span>保存</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
+                                    <!--</div>-->
+
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </div><!-- /.col -->
-                    </div><!-- /.row -->
+                    </div>
                 </div>
             </div>
 
             <div class="page-content">
-
                 <div class="ace-settings-container" id="ace-settings-container">
                     <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
                         <i class="ace-icon fa fa-cog bigger-130"></i>
@@ -426,45 +423,72 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    $(document).ready(function () {
+    var videoUrl1;
+    var videoUrl2;
+    var videoUrl3;
+    var videoUrl1_R;
+    var videoUrl2_R;
+    var videoUrl3_R;
+    var VU_1 = 0;//0:no change; 1: change; 2: delete
+    var VU_2 = 0;//0:no change; 1: change; 2: delete
+    var VU_3 = 0;//0:no change; 1: change; 2: delete
+    var STR_UPLOAD = "&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp";
+    var STR_UPLOAD_C = "取消上传";
+    var STR_DELETE = "&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp";
+    var STR_DELETE_C = "取消删除";
 
+    $(document).ready(function () {
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/course/findById?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
             contentType: "application/json",
             data: JSON.stringify({"id":1}),
             async: true,
-            success: function(data, state){
+            success: function(data, state) {
                 console.log(data);
-                $('#courseName').text(data.msg.name);
-                $('#courseId').text(data.msg.id);
-                $('#teacherName').text(data.msg.user.name);
-                $('#teacherId').text(data.msg.user.id);
-                $('#participationNum').text(data.msg.workCount);
-                $('#publishDate').text(data.msg.publishedAt);
-                $('#courseDetail').text(data.msg.description);
-
-                var dif_i = 1;
-                for(; dif_i<=data.msg.difficulty; dif_i++){
-                    $('#star'+dif_i).attr("class", "star-on-png");
+                if(null!=data.msg.videoUrl1) {
+                    videoUrl1 = data.msg.videoUrl1;
+                    videoUrl1_R = data.msg.videoUrl1;
                 }
-                for(;dif_i<6;dif_i++){
-                    $('#star'+dif_i).attr("class", "star-off-png");
+                if(null!=data.msg.videoUrl2) {
+                    videoUrl2 = data.msg.videoUrl2;
+                    videoUrl2_R = data.msg.videoUrl2;
                 }
-
-                var coursePlayer = document.getElementById("courseVideo");
-
-                //set poster Url
-                coursePlayer.poster = data.msg.photoUrl;
-                //set video Url
-                coursePlayer.src = data.msg.videoUrl;
+                if(null!=data.msg.videoUrl3) {
+                    videoUrl3 = data.msg.videoUrl3;
+                    videoUrl3_R = data.msg.videoUrl3;
+                }
+                if(null != data.msg.photoUrl) {
+                    document.getElementById('workVideo').poster = data.msg.photoUrl;
+                }
             },
-            error: function (data, state) {
-                console.log(data);
-                console.log(state);
-            }
         });
+
     });
+
+    function video1Click(){
+        if(null == videoUrl1) {
+            alert("视频不存在！");
+        } else {
+            document.getElementById('workVideo').src = videoUrl1;
+            document.getElementById('workVideo').play();
+        }
+    }
+    function upload1Click() {
+       // $('#videoUrl1').click();
+        document.getElementById('videoUrl1').click();
+    }
+    document.getElementById("videoUrl1").onchange = function () {
+      console.log("upload");
+      console.log($(this)[0].files);
+    };
+    function download1Click() {
+        
+    }
+    function delete1Click() {
+
+    }
+
 
 </script>
 </body>
