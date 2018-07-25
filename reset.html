@@ -15,6 +15,7 @@
     <!-- page specific plugin styles -->
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootoast.css"/>
 
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
@@ -332,7 +333,7 @@
                                                         <span class="bigger-110">确认修改</span>
                                                     </button>
 
-                                                    <button type="button" onclick="cancelUpdate()" class="width-30 pull-right btn btn-sm btn-primary">
+                                                    <button type="button" class="width-30 pull-right btn btn-sm btn-primary">
                                                         <i class="ace-icon fa fa-calendar-times-o"></i>
                                                         <span class="bigger-110">取消修改</span>
                                                     </button>
@@ -405,35 +406,72 @@
 <script src="assets/js/echarts.js"></script>
 
 <!-- page specific plugin scripts -->
+<script src="assets/js/bootoast.js"></script>
 
 
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/grid.locale-en.js"></script>
+<script src="assets/js/custom/helper.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     $(document).ready(function () {
-       $('#oldPsw').blur(function () {
-           console.log("blur");
-           checkOldPsw();
-       });
+       // $('#oldPsw').blur(function () {
+       //     console.log("blur");
+       //     checkOldPsw();
+       // });
 
     });
-   function checkOldPsw(){
-
-   }
+    tokenInit();
+   // function checkOldPsw(){
+   //
+   // }
    function updatePsw() {
        var repeatPsw = $('#repeatPsw');
+       var pswParam = {
+           "oldPassword":$('#oldPsw'),
+           'newPassword':$('#newPsw')
+       };
        if($('#newPsw').val() !== repeatPsw.val()){
-           alert("密码");
+           showToast("重复密码与新密码不同",'info');
            repeatPsw.focus();
+       }else{
+           $.ajax({
+               url: "http://192.168.0.153:8080/user/importStudentUser?token="+globalToken,
+               type: "POST",
+               data: JSON.stringify(pswParam),
+               contentType: "application/json",
+               success: function (data) {
+                   if (data.status == "success") {
+                       showToast("修改成功",'success');
+                       window.location.href = 'reset.html?token='+data.msg.token;
+
+                   } else {
+                       showToast("原密码错误",'danger');
+                       $('#oldPsw').focus();
+
+                   }
+               },
+               error: function (e) {
+                  showToast("修改失败",'danger');
+               }
+           });
        }
    }
-   
-   function cancelUpdate() {
-       
+
+   function showToast(msg,type) {
+       bootoast({
+           "message": msg,
+           "type": type,
+           "position": "top-center",
+           "icon": "",
+           "timeout":2,
+           "animationDuration": "300",
+           "dismissable": true
+       });
    }
+
 </script>
 </body>
 </html>

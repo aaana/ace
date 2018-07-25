@@ -541,7 +541,7 @@
 
     var picSrc = null;
     jQuery(function ($) {
-
+        tokenInit();
         $("#photoInput").change(function () {
             if (typeof (FileReader) !== "undefined") {
                 var dvPreview = $("#img-preview");

@@ -66,7 +66,7 @@
             <a href="index.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    系统管理
+                    蔷薇小学教师和作品管理后台
                 </small>
             </a>
         </div>
@@ -78,29 +78,21 @@
                         <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
-									系统管理员
+									Jason
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <!--<li>-->
-                        <!--<a href="#">-->
-                        <!--<i class="ace-icon fa fa-cog"></i>-->
-                        <!--Settings-->
-                        <!--</a>-->
-                        <!--</li>-->
 
-                        <!--<li>-->
-                        <!--<a href="profile.html">-->
-                        <!--<i class="ace-icon fa fa-user"></i>-->
-                        <!--Profile-->
-                        <!--</a>-->
-                        <!--</li>-->
-
-                        <!--<li class="divider"></li>-->
-
+                        <li>
+                            <a href="reset.html">
+                                <i class="ace-icon fa fa-key"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li class="divider"></li>
                         <li>
                             <a href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
@@ -123,33 +115,6 @@
         <script type="text/javascript">
             try{ace.settings.loadState('sidebar')}catch(e){}
         </script>
-
-        <!--<div class="sidebar-shortcuts" id="sidebar-shortcuts">-->
-            <!--<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">-->
-                <!--<button class="btn btn-success">-->
-                    <!--<i class="ace-icon fa fa-plus"></i>-->
-                <!--</button>-->
-
-                <!--<button class="btn btn-info">-->
-                    <!--<i class="ace-icon fa fa-list"></i>-->
-                <!--</button>-->
-
-                <!--<button class="btn btn-warning">-->
-                    <!--<i class="ace-icon fa fa-search"></i>-->
-                <!--</button>-->
-
-            <!--</div>-->
-
-            <!--<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">-->
-                <!--<span class="btn btn-success"></span>-->
-
-                <!--<span class="btn btn-info"></span>-->
-
-                <!--<span class="btn btn-warning"></span>-->
-
-            <!--</div>-->
-        <!--</div>&lt;!&ndash; /.sidebar-shortcuts &ndash;&gt;-->
-
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
@@ -460,10 +425,9 @@
 <script type="text/javascript">
     var workId = req['workId'];
     $(document).ready(function () {
-        tokenInit();
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
+            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
             contentType: "application/json",
             data: JSON.stringify({"id":workId}),
             async: true,

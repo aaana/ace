@@ -448,8 +448,7 @@
 
 
     jQuery(function ($) {
-
-
+        tokenInit();
         var parent_column = $(grid_selector).closest('[class*="col-"]');
         //resize to fit page size
         $(window).on('resize.jqGrid', function () {
@@ -468,8 +467,8 @@
 
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=030e4e10c8d447fa8e5ef9a34b97bc0c",
-            editurl: "http://192.168.0.153:8080/work/update?token=030e4e10c8d447fa8e5ef9a34b97bc0c",
+            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token="+globalToken,
+            editurl: "http://192.168.0.153:8080/work/update?token="+globalToken,
             mtype: "post",
             datatype: "json",
 
@@ -581,9 +580,9 @@
                     name: 'id', index: 'view', width: 120, sortable: false, editable: false, search: false,
                     formatter: function (value, grid, row, state) {
                         if(row.my){
-                            return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
+                            return "<a href='workDetailManage.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
                         }else{
-                            return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
+                            return "<a href='workDetailManage.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
                         }
                     }
                 },

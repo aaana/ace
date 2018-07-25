@@ -554,7 +554,7 @@
 
     var picSrc = null;
     jQuery(function ($) {
-
+        tokenInit();
         $("#photoInput").change(function () {
             if (typeof (FileReader) !== "undefined") {
                 var dvPreview = $("#img-preview");
@@ -822,7 +822,7 @@
         };
 
         $.ajax({
-            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(data1),
@@ -909,7 +909,7 @@
         }
         console.log("表单内容" + JSON.stringify(data1));
         $.ajax({
-            url: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/work/update?token="+globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(data1),
