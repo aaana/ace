@@ -94,7 +94,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -136,7 +136,8 @@
                     <i class="ace-icon fa fa-search"></i>
                 </button>
 
-                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html?token='+ globalToken;">
+                <button class="btn btn-danger"
+                        onclick="window.location.href='workWOCourseAdmin.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
@@ -376,7 +377,7 @@
                     sortable: false,
                     search: true,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='courseDetailManage.html?token=" + globalToken + "&courseId="+value+"' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='courseDetailManage.html?token=" + globalToken + "&courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, /*{
                     name: 'editWork',
@@ -394,7 +395,7 @@
                     sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='studySituation.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                        return "<a href='studySituation.html?token=" + globalToken + "&courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
                     name: 'status',
@@ -470,11 +471,11 @@
 
 
         function displayFormat(cellvalue, options, rowObject) {
-            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "未发布" || cellvalue === "<a style=\"color:#0726ff\">未发布</a>") {
-                return "<a style=\"color:#0726ff\">未发布</a>"
+            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "未发布" || cellvalue === "<a style=\"color:#478FCA\">未发布</a>") {
+                return "<a style=\"color:#478FCA\">未发布</a>"
             }
-            else if (cellvalue === 1 || cellvalue == "1" || cellvalue === "已发布" || cellvalue === "<a style=\"color:#18ff4a\">已发布</a>") {
-                return "<a style=\"color:#18ff4a\">已发布</a>"
+            else if (cellvalue === 1 || cellvalue == "1" || cellvalue === "已发布" || cellvalue === "<a style=\"color:#69AA46\">已发布</a>") {
+                return "<a style=\"color:#69AA46\">已发布</a>"
             } else if (cellvalue === -1 || cellvalue == "-1" || cellvalue === "已删除" || cellvalue === "<a style=\"color:#ff293c\">已删除</a>") {
                 return "<a style=\"color:#ff293c\">已删除</a>"
             }

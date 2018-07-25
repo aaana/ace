@@ -20,6 +20,8 @@
     <!-- text fonts -->
     <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
 
+    <link rel="stylesheet" href="assets/css/bootoast.css">
+
     <!-- ace styles -->
     <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
@@ -110,7 +112,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -152,7 +154,8 @@
                     <i class="ace-icon fa fa-search"></i>
                 </button>
 
-                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html?token='+globalToken;">
+                <button class="btn btn-danger"
+                        onclick="window.location.href='workWOCourseAdmin.html?token='+globalToken;">
                     <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
@@ -204,12 +207,12 @@
                 <b class="arrow"></b>
             </li>
             <!--<li class="">-->
-                <!--<a href="reset.html">-->
-                    <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
-                    <!--<span class="menu-text"> 修改密码 </span>-->
-                <!--</a>-->
+            <!--<a href="reset.html">-->
+            <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
+            <!--<span class="menu-text"> 修改密码 </span>-->
+            <!--</a>-->
 
-                <!--<b class="arrow"></b>-->
+            <!--<b class="arrow"></b>-->
             <!--</li>-->
 
         </ul><!-- /.nav-list -->
@@ -403,6 +406,8 @@
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 
+<script src="assets/js/bootoast.js"></script>
+
 <script src="assets/js/echarts.js"></script>
 
 <!-- inline scripts related to this page -->
@@ -517,21 +522,21 @@
     jQuery(function ($) {
         $('#courseId').html(courseId);
         var course = {
-            "id":courseId
+            "id": courseId
         };
         $.ajax({
             data: JSON.stringify(course),
-            dataType:'json',
+            dataType: 'json',
             contentType: "application/json",
-            method:'post',
-            url:'http://192.168.0.153:8080/course/search?token=1d44662ee7e0452a9d594841799d00ac',
-            success:function (data) {
+            method: 'post',
+            url: 'http://192.168.0.153:8080/course/search?token=' + globalToken,
+            success: function (data) {
                 console.log(data);
-                if(data.status === 'success' ){
+                if (data.status === 'success') {
                     $('#courseName').html(data.msg.name);
                 }
             },
-            error:function (msg) {
+            error: function (msg) {
                 console.log(msg);
             }
         });
@@ -575,24 +580,24 @@
 
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=030e4e10c8d447fa8e5ef9a34b97bc0c",
-            editurl: "http://192.168.0.153:8080/work/update?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/jqgrid/work/filterSearch?token=" + globalToken,
+            editurl: "http://192.168.0.153:8080/work/update?token=" + globalToken,
             mtype: "post",
             datatype: "json",
-            postData:{
-                others:{
-                    courseId:courseId
+            postData: {
+                others: {
+                    courseId: courseId
                 }
             },
-            subGrid : false,
+            subGrid: false,
             //subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
             //datatype: "xml",
-            subGridOptions : {
-                plusicon : "ace-icon fa fa-plus center bigger-110 blue",
-                minusicon  : "ace-icon fa fa-minus center bigger-110 blue",
-                openicon : "ace-icon fa fa-chevron-right center orange"
+            subGridOptions: {
+                plusicon: "ace-icon fa fa-plus center bigger-110 blue",
+                minusicon: "ace-icon fa fa-minus center bigger-110 blue",
+                openicon: "ace-icon fa fa-chevron-right center orange"
             },
-            multiSort : true,
+            multiSort: true,
             //for this example we are using local data
             subGridRowExpanded: function (subgridDivId, rowId) {
                 var subgridTableId = subgridDivId + "_t";
@@ -600,15 +605,15 @@
                 $("#" + subgridTableId).jqGrid({
                     datatype: 'local',
                     data: subgrid_data,
-                    colNames: ['No','Item Name','Qty'],
+                    colNames: ['No', 'Item Name', 'Qty'],
                     colModel: [
-                        { name: 'id', width: 50 },
-                        { name: 'name', width: 150 },
-                        { name: 'qty', width: 50 }
+                        {name: 'id', width: 50},
+                        {name: 'name', width: 150},
+                        {name: 'qty', width: 50}
                     ]
                 });
             },
-            jsonReader:{//分页的关键
+            jsonReader: {//分页的关键
                 root: "msg.data",
                 total: "msg.totalPages",
                 // page: "",
@@ -635,52 +640,86 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames:[' ','作品', '作者ID','姓名','年级','指导老师','时间', '是否展示','查看/编辑'],
-            colModel:[
-                {name:'myac',index:'', width:70, fixed:true, sortable:false, resize:false,
-                    formatter:'actions',
-                    formatoptions:{
-                        keys:true,
+            colNames: [' ', '作品', '作者ID', '姓名', '年级', '指导老师', '时间', '是否展示', '查看/编辑'],
+            colModel: [
+                {
+                    name: 'myac', index: '', width: 70, fixed: true, sortable: false, resize: false,
+                    formatter: 'actions',
+                    formatoptions: {
+                        keys: true,
                         delbutton: false,//disable delete button
-                        delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
+                        delOptions: {recreateForm: true, beforeShowForm: beforeDeleteCallback},
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
                     },
-                    search:false
+                    search: false
                 },
                 // {name:'id',index:'id', width:100, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
-                {name:'name',index:'name', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.account',index:'userAccount', width:100, sorttype:"int", editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'user.name',index:'user.name', width:100,editable: false,search:false,searchoptions: {sopt: ["eq"]}},
-                {name:'grade',index:'grade', width:100,editable: false,searchoptions: {sopt: ["eq"]}},
-                {name:'helper.account',index:'helperAvvount', width:100,editable: false},
-                {name:'createdAt',index:'createdAt',width:120, editable:false, sorttype:"time",unformat: pickDate,search:false},
-                {name:'isShowed',index:'isShowed', width:70, editable: true,edittype:"checkbox",editoptions: {value:"true:false"},unformat: aceSwitch,formatter:displayFormat,search:true,
-                    stype: "select",searchoptions: {sopt: ["eq"],value:"true:是;false:否"}},
+                {name: 'name', index: 'name', width: 100, editable: false, searchoptions: {sopt: ["eq"]}},
+                {
+                    name: 'user.account',
+                    index: 'userAccount',
+                    width: 100,
+                    sorttype: "int",
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {
+                    name: 'user.name',
+                    index: 'user.name',
+                    width: 100,
+                    editable: false,
+                    search: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {name: 'grade', index: 'grade', width: 100, editable: false, searchoptions: {sopt: ["eq"]}},
+                {name: 'helper.account', index: 'helperAvvount', width: 100, editable: false},
+                {
+                    name: 'createdAt',
+                    index: 'createdAt',
+                    width: 120,
+                    editable: false,
+                    sorttype: "time",
+                    unformat: pickDate,
+                    search: false
+                },
+                {
+                    name: 'isShowed',
+                    index: 'isShowed',
+                    width: 70,
+                    editable: true,
+                    edittype: "checkbox",
+                    editoptions: {value: "true:false"},
+                    unformat: aceSwitch,
+                    formatter: displayFormat,
+                    search: true,
+                    stype: "select",
+                    searchoptions: {sopt: ["eq"], value: "true:是;false:否"}
+                },
                 {
                     name: 'id', index: 'view', width: 120, sortable: false, editable: false, search: false,
                     formatter: function (value, grid, row, state) {
-                        if(row.my){
-                            return "<a href='workDetailManage2.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
-                        }else{
+                        if (row.my) {
+                            return "<a href='workDetailManage.html?token=" + globalToken + "&workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks.html?token=" + globalToken + "&workId=" + value + "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
+                        } else {
                             $('.ui-pg-div .ui-inline-edit').remove();
-                            return "<a href='workDetailManage2.html?workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
+                            return "<a href='workDetailManage.html?token=" + globalToken + "&workId=" + value + "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
                         }
                     }
                 }
             ],
-            viewrecords : true,
-            rowNum:10,
-            rowList:[10,20,30],
+            viewrecords: true,
+            rowNum: 10,
+            rowList: [10, 20, 30],
 
-            pager : pager_selector,
+            pager: pager_selector,
             altRows: true,
             //toppager: true,
             multiselect: true,
             //multikey: "ctrlKey",
             multiboxonly: true,
-            loadComplete : function() {
+            loadComplete: function () {
                 var table = this;
-                setTimeout(function(){
+                setTimeout(function () {
                     styleCheckbox(table);
                     updateActionIcons(table);
                     updatePagerIcons(table);
@@ -694,10 +733,10 @@
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
         function displayFormat(cellvalue, options, rowObject) {
-            if (cellvalue === true || cellvalue==="true" || cellvalue==="是") {
+            if (cellvalue === true || cellvalue === "true" || cellvalue === "是") {
                 return "是";
             }
-            else if (cellvalue === false || cellvalue=="false" || cellvalue==="否") {
+            else if (cellvalue === false || cellvalue == "false" || cellvalue === "否") {
                 return "否";
             }
             return "未知";

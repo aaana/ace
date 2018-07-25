@@ -103,7 +103,7 @@
                         <!--<li class="divider"></li>-->
 
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -514,7 +514,7 @@
                     sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='courseDetailManage2.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='courseDetailManage2.html?token="+globalToken+"&courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, /*{
                     name: 'editWork',
@@ -532,7 +532,7 @@
                     sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='studySituation2.html?courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                        return "<a href='studySituation2.html?token="+globalToken+"&courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
                     name: 'status',
