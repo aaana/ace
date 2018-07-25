@@ -226,13 +226,13 @@
                                                         <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp材料准备</i>
                                                     </button>
 
-                                                    <button class="btn btn-primary" onclick="upload1Click()">
+                                                    <button id="upload1b" class="btn btn-primary" onclick="upload1Click()">
                                                         <i id="upload1i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
-                                                        <input type="file" id="videoUrl1" accept="video/*" style="display: none"/>
+                                                        <input type="file" id="videoUrl1" accept="video/mp4" style="display: none"/>
                                                     </button>
 
-                                                    <button class="btn btn-info" onclick="download1Click()">
-                                                        <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                    <button  class="btn btn-info" onclick="download1Click()">
+                                                        <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
 
                                                     </button>
 
@@ -242,7 +242,7 @@
                                                 </p>
                                                 <hr/>
                                                 <p>
-                                                    <button class="btn">
+                                                    <button class="btn" onclick="video2Click()">
                                                         <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp作品制作</i>
                                                     </button>
 
@@ -250,44 +250,44 @@
                                                     <!--<i class="ace-icon fa fa-upload align-top bigger-125"></i>-->
                                                     <!--上传-->
                                                     </button>
-                                                    <button class="btn btn-primary" onclick="videoUrl2Click()">
+                                                    <button id="upload2b" class="btn btn-primary" onclick="upload2Click()">
                                                         <i id="upload2i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
-                                                        <input type="file" id="videoUrl2" accept="video/*" style="display: none"/>
+                                                        <input type="file" id="videoUrl2" accept="video/mp4" style="display: none"/>
                                                     </button>
-                                                    <button class="btn btn-info">
+                                                    <button class="btn btn-info" onclick="download2Click()">
                                                         <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
                                                     </button>
 
-                                                    <button class="btn btn-danger">
+                                                    <button class="btn btn-danger" onclick="delete2Click()">
                                                         <i id="delete2i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
                                                     </button>
                                                 </p>
                                                 <hr/>
                                                 <p>
-                                                    <button class="btn">
+                                                    <button class="btn" onclick="video3Click()">
                                                         <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp作品简介</i>
                                                     </button>
 
-                                                    <button class="btn btn-primary" onclick="videoUrl3Click()">
+                                                    <button id="upload3b" class="btn btn-primary" onclick="upload3Click()">
                                                         <i id="upload3i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
-                                                        <input type="file" id="videoUrl3" accept="video/*" style="display: none"/>
+                                                        <input type="file" id="videoUrl3" accept="video/mp4" style="display: none"/>
                                                     </button>
 
-                                                    <button class="btn btn-info">
+                                                    <button class="btn btn-info" onclick="download3Click()">
                                                         <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
                                                     </button>
 
-                                                    <button class="btn btn-danger">
+                                                    <button class="btn btn-danger" onclick="delete3Click()">
                                                         <i id="delete3i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
                                                     </button>
                                                 </p>
                                             </div>
 
                                             <div>
-                                                <a href="#" class="btn btn-block btn-success">
+                                                <button class="btn btn-block btn-success" onclick="saveAll()">
                                                     <i class="ace-icon fa fa-save bigger-110"></i>
                                                     <span>保存</span>
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -410,6 +410,8 @@
 <script src="assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
+<script src="assets/js/custom/helper.js"></script>
+<script src="assets/js/uuid.js"></script>
 
 <!-- inline scripts related to this page -->
 <!-- page specific plugin scripts -->
@@ -426,37 +428,38 @@
     var videoUrl1;
     var videoUrl2;
     var videoUrl3;
-    var videoUrl1_R;
-    var videoUrl2_R;
-    var videoUrl3_R;
-    var VU_1 = 0;//0:no change; 1: change; 2: delete
-    var VU_2 = 0;//0:no change; 1: change; 2: delete
-    var VU_3 = 0;//0:no change; 1: change; 2: delete
+    // var videoUrl1_R;
+    // var videoUrl2_R;
+    // var videoUrl3_R;
+    var VU = [0,0,0];
     var STR_UPLOAD = "&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp";
     var STR_UPLOAD_C = "取消上传";
     var STR_DELETE = "&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp";
     var STR_DELETE_C = "取消删除";
 
+    var workId = 1;
+
     $(document).ready(function () {
+
         $.ajax({
             type: "POST",
             url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
             contentType: "application/json",
-            data: JSON.stringify({"id":1}),
+            data: JSON.stringify({"id":workId}),
             async: true,
             success: function(data, state) {
                 console.log(data);
                 if(null!=data.msg.videoUrl1) {
                     videoUrl1 = data.msg.videoUrl1;
-                    videoUrl1_R = data.msg.videoUrl1;
+                    // videoUrl1_R = data.msg.videoUrl1;
                 }
                 if(null!=data.msg.videoUrl2) {
                     videoUrl2 = data.msg.videoUrl2;
-                    videoUrl2_R = data.msg.videoUrl2;
+                    // videoUrl2_R = data.msg.videoUrl2;
                 }
                 if(null!=data.msg.videoUrl3) {
                     videoUrl3 = data.msg.videoUrl3;
-                    videoUrl3_R = data.msg.videoUrl3;
+                    // videoUrl3_R = data.msg.videoUrl3;
                 }
                 if(null != data.msg.photoUrl) {
                     document.getElementById('workVideo').poster = data.msg.photoUrl;
@@ -465,9 +468,10 @@
         });
 
     });
-
+    //video 1
     function video1Click(){
-        if(null == videoUrl1) {
+        console.log(videoUrl1);
+        if(null == videoUrl1 || " " == videoUrl1[videoUrl1.length-1]) {
             alert("视频不存在！");
         } else {
             document.getElementById('workVideo').src = videoUrl1;
@@ -475,20 +479,271 @@
         }
     }
     function upload1Click() {
-       // $('#videoUrl1').click();
-        document.getElementById('videoUrl1').click();
+        if(1 == VU[0]) {//取消上传
+            VU[0] = 0;
+            document.getElementById('upload1i').innerHTML = STR_UPLOAD;
+        } else {
+            document.getElementById('videoUrl1').click();
+        }
     }
+
     document.getElementById("videoUrl1").onchange = function () {
-      console.log("upload");
-      console.log($(this)[0].files);
+        VU[0] = 1;
+        console.log(document.getElementById("videoUrl1").files[0].name);
+        console.log(document.getElementById("videoUrl1").value);
+        document.getElementById('upload1i').innerHTML = STR_UPLOAD_C;
     };
+
     function download1Click() {
-        
+        if(null == videoUrl1||" " == videoUrl1[videoUrl1.length-1]) {
+            alert("视频不存在！");
+        } else {
+            window.open(videoUrl1);
+        }
     }
     function delete1Click() {
-
+        if(null == videoUrl1 || " " == videoUrl1[videoUrl1.length-1]) {
+            alert("视频不存在！");
+        } else {
+            if(2 == VU[0]){//取消删除
+                VU[0] = 0;
+                document.getElementById('delete1i').innerHTML = STR_DELETE;
+                document.getElementById("upload1b").disabled = false;
+            } else {//删除
+                VU[0] = 2;
+                document.getElementById('delete1i').innerHTML = STR_DELETE_C;
+                document.getElementById('upload1i').innerHTML = STR_UPLOAD;
+                document.getElementById("upload1b").disabled = "disabled";
+            }
+        }
     }
 
+    //video 2
+    function video2Click(){
+        if(null == videoUrl2 || " " == videoUrl2[videoUrl2.length-1]) {
+            alert("视频不存在！");
+        } else {
+            document.getElementById('workVideo').src = videoUrl2;
+            document.getElementById('workVideo').play();
+        }
+    }
+    function upload2Click() {
+        if(1 == VU[1]) {//取消上传
+            VU[1] = 0;
+            document.getElementById('upload2i').innerHTML = STR_UPLOAD;
+        } else {
+            document.getElementById('videoUrl2').click();
+        }
+    }
+
+    document.getElementById("videoUrl2").onchange = function () {
+        VU[1] = 1;
+        console.log(document.getElementById("videoUrl2").files[0].name);
+        console.log(document.getElementById("videoUrl2").value);
+        document.getElementById('upload2i').innerHTML = STR_UPLOAD_C;
+    };
+
+    function download2Click() {
+        if(null == videoUrl2|| " " == videoUrl2[videoUrl2.length-1]) {
+            alert("视频不存在！");
+        } else {
+            window.open(videoUrl2);
+        }
+    }
+    function delete2Click() {
+        if(null == videoUrl2 || " " == videoUrl2[videoUrl2.length-1]) {
+            alert("视频不存在！");
+        } else {
+            if(2 == VU[1]){//取消删除
+                VU[1] = 0;
+                document.getElementById('delete2i').innerHTML = STR_DELETE;
+                document.getElementById("upload2b").disabled = false;
+            } else {//删除
+                VU[1] = 2;
+                document.getElementById('delete2i').innerHTML = STR_DELETE_C;
+                document.getElementById('upload2i').innerHTML = STR_UPLOAD;
+                document.getElementById("upload2b").disabled = "disabled";
+            }
+        }
+    }
+
+    //video 3
+    function video3Click(){
+        if(null == videoUrl3 || " " == videoUrl3[videoUrl3.length-1]) {
+            alert("视频不存在！");
+        } else {
+            document.getElementById('workVideo').src = videoUrl3;
+            document.getElementById('workVideo').play();
+        }
+    }
+    function upload3Click() {
+        if(1 == VU[2]) {//取消上传
+            VU[2] = 0;
+            document.getElementById('upload3i').innerHTML = STR_UPLOAD;
+        } else {
+            document.getElementById('videoUrl3').click();
+        }
+    }
+
+    document.getElementById("videoUrl3").onchange = function () {
+        VU[2] = 1;
+        console.log(document.getElementById("videoUrl3").files[0].name);
+        console.log(document.getElementById("videoUrl3").value);
+        document.getElementById('upload3i').innerHTML = STR_UPLOAD_C;
+    };
+
+    function download3Click() {
+        if(null == videoUrl3||" " == videoUrl3[videoUrl3.length-1]) {
+            alert("视频不存在！");
+        } else {
+            window.open(videoUrl3);
+        }
+    }
+    function delete3Click() {
+        if(null == videoUrl3 || " " == videoUrl3[videoUrl3.length-1]) {
+            alert("视频不存在！");
+        } else {
+            if(2 == VU[2]){//取消删除
+                VU[2] = 0;
+                document.getElementById('delete3i').innerHTML = STR_DELETE;
+                document.getElementById("upload3b").disabled = false;
+            } else {//删除
+                VU[2] = 2;
+                document.getElementById('delete3i').innerHTML = STR_DELETE_C;
+                document.getElementById('upload3i').innerHTML = STR_UPLOAD;
+                document.getElementById("upload3b").disabled = "disabled";
+            }
+        }
+    }
+
+    var baseUploadName = UUID.prototype.createUUID();
+    var uploadName=[null,null,null];
+
+    // var UPS_1 = 0;//1:上传成功；-1:上传失败；0：未上传
+    // var UPS_2 = 0;//1:上传成功；-1:上传失败；0：未上传
+    // var UPS_3 = 0;//1:上传成功；-1:上传失败；0：未上传
+    function saveAll() {
+        //没有修改
+        console.log(VU[0]+","+VU[1]+","+VU[2]);
+        if(0 == VU[0] && 0 == VU[1] && 0 == VU[2]) {
+            alert("您没有做修改！")
+        } else {
+            for(var VU_i = 0;VU_i<3;VU_i++){
+                var uploadUrlId = '#videoUrl'+(1+VU_i);
+                if(VU[VU_i] == 1) {
+                    var title = $(uploadUrlId)[0].files[0].name;
+                    var leng = title.split(".").length;
+                    uploadName[VU_i] = baseUploadName +"_"+ (1+VU_i) +"." + title.split(".")[leng - 1];
+                    var form = new FormData();
+                    form.append('file', $(uploadUrlId)[0].files[0]);
+                    form.append("filename", uploadName[VU_i]);
+                    $.ajax({
+                        // url: "http://192.168.0.153:8080/file/upload?token=" + globalToken,
+                        url: "http://192.168.0.153:8080/file/upload?token=" + "1d44662ee7e0452a9d594841799d00ac",
+                        type: "POST",
+                        cache: false,
+                        data: form,
+                        processData: false,
+                        contentType: false,
+                        for_i: VU_i,
+                        beforeSend: function () {
+                            console.log("正在上传video 1，请稍候");
+                            console.log("video1:"+uploadName[VU_i]);
+                        },
+                        success: function (data) {
+                            console.log("上传video 1完成");
+                            console.log(data);
+                            var paramData = new Object();
+                            paramData.id = workId;
+                            if(0 == this.for_i){
+                                paramData.videoUrl1 = uploadName[this.for_i];
+                            } else if(1 == this.for_i) {
+                                paramData.videoUrl2 = uploadName[this.for_i];
+                            } else if(2 == this.for_i) {
+                                paramData.videoUrl3 = uploadName[this.for_i];
+                            }
+                            console.log(JSON.stringify(paramData));
+                            $.ajax({
+                                url: "http://192.168.0.153:8080/work/update?token=" + "1d44662ee7e0452a9d594841799d00ac",
+                                contentType: "application/json",
+                                type: 'POST',
+                                data: JSON.stringify(paramData),
+                                dataType: 'json',
+                                for_i: this.for_i,
+                                beforeSend: function () {
+                                    console.log("正在进行表单提交，请稍候");
+                                },
+                                success: function (data,state) {
+                                    console.log("表单提交成功!!!");
+                                    console.log( state);
+                                    VU[this.for_i] = 0;
+                                    document.getElementById('upload'+(this.for_i+1)+'i').innerHTML = STR_UPLOAD;
+                                    switch (this.for_i){
+                                        case 0: videoUrl1 = data.msg.videoUrl1;
+                                            break;
+                                        case 1: videoUrl2 = data.msg.videoUrl2;
+                                            break;
+                                        case 2: videoUrl3 = data.msg.videoUrl3;
+                                            break;
+                                    }
+                                },
+                                error: function (responseStr) {
+                                    console.log("提交表单失败error" + responseStr);
+                                }
+                            });
+                        },
+                        error: function (e) {
+                            console.log("上传video 1 失败");
+                        }
+                    });
+                } else if(2 == VU[VU_i]) {
+                    var paramData = new Object();
+                    paramData.id = workId;
+                    switch (VU_i){
+                        case 0: paramData.videoUrl1 = ' ';
+                            break;
+                        case 1: paramData.videoUrl2 = ' ';
+                            break;
+                        case 2: paramData.videoUrl3 = ' ';
+                            break;
+                    }
+                    console.log(JSON.stringify(paramData));
+                    $.ajax({
+                        url: "http://192.168.0.153:8080/work/update?token=" + "1d44662ee7e0452a9d594841799d00ac",
+                        contentType: "application/json",
+                        type: 'POST',
+                        data: JSON.stringify(paramData),
+                        dataType: 'json',
+                        for_i: VU_i,
+                        beforeSend: function () {
+                            console.log("正在进行删除提交，请稍候");
+                        },
+                        success: function (responseStr) {
+                            console.log("删除提交成功!!!");
+                            console.log(responseStr);
+                            console.log('for_i:'+this.for_i);
+                            VU[this.for_i] = 0;
+                            document.getElementById('delete'+(this.for_i+1)+'i').innerHTML = STR_DELETE;
+                            document.getElementById('upload'+(this.for_i+1)+'b').disabled = false;
+                            switch (this.for_i){
+                                case 0: videoUrl1 = null;
+                                    break;
+                                case 1: videoUrl2 = null;
+                                    break;
+                                case 2: videoUrl3 = null;
+                                    break;
+                            }
+                        },
+                        error: function (responseStr) {
+                            console.log("删除失败error");
+                            console.log(responseStr);
+                        }
+                    });
+                }
+            }
+        }
+
+    }
 
 </script>
 </body>
