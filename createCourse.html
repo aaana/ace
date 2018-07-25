@@ -572,7 +572,8 @@
         $('#parentKind').change(function () {
             var parentId = $('#parentKind').val();
             childKindParam = {
-                "parentId": parentId
+                "parentId": parentId,
+                "status":0
             };
             $.ajax({
                 url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
