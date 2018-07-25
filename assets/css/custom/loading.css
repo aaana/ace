@@ -1,14 +1,15 @@
 .spinner {
-    margin: 100px auto;
-    width: 20px;
-    height: 20px;
+    margin:300px auto;
+    width: 40px;
+    height: 40px;
     position: relative;
+    z-index: 1000;
 }
 
 .container1 > div, .container2 > div, .container3 > div {
-    width: 6px;
-    height: 6px;
-    background-color: #333;
+    width: 10px;
+    height: 10px;
+    background-color: #1d6fa6;
 
     border-radius: 100%;
     position: absolute;
