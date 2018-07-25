@@ -138,19 +138,19 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
+                <button class="btn btn-success" onclick="window.location.href='createCourse.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
+                <button class="btn btn-info" onclick="window.location.href='myCreate.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
+                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-search"></i>
                 </button>
 
-                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
+                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html?token='+ globalToken;">
                     <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
@@ -316,62 +316,6 @@
 <script type="text/javascript">
     courseId = -1;
 
-    function publish(value) {
-        data2 = {
-            "status": 1,
-            "id": value,
-        };
-        $.ajax({
-            url: "http://192.168.0.153:8080/course/updateStatus?token=" + globalToken,
-            contentType: "application/json",
-            type: 'POST',
-            data: JSON.stringify(data2),
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("正在发布，请稍候");
-            },
-            success: function (responseStr) {
-                if (responseStr.status == "success") {
-                    console.log("发布成功!!!" + responseStr.msg);
-                    window.location.href = 'myCreate.html';
-                } else {
-                    console.log("error" + responseStr);
-                }
-            },
-            error: function (responseStr) {
-                console.log("error" + responseStr);
-            }
-        });
-    }
-
-    function canclePublish(value) {
-        data3 = {
-            "status": 0,
-            "id": value,
-        };
-        $.ajax({
-            url: "http://192.168.0.153:8080/course/updateStatus?token=" + globalToken,
-            contentType: "application/json",
-            type: 'POST',
-            data: JSON.stringify(data3),
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("取消正在发布，请稍候");
-            },
-            success: function (responseStr) {
-                if (responseStr.status == "success") {
-                    console.log("取消发布成功!!!" + responseStr.msg);
-                    window.location.href = 'myCreate.html';
-                } else {
-                    console.log("error" + responseStr);
-                }
-            },
-            error: function (responseStr) {
-                console.log("error" + responseStr);
-            }
-        });
-    }
-
     jQuery(function ($) {
         tokenInit();
         var grid_selector = "#grid-table1";
@@ -410,7 +354,7 @@
          */
 
         jQuery(grid_selector).jqGrid({
-            url: "http://192.168.0.153:8080/jqgrid/course/search",
+            url: "http://192.168.0.153:8080/jqgrid/course/search?token=" + globalToken,
             editurl: "http://192.168.0.153:8080/course/updateStatus?token=" + globalToken,
             mtype: "post",
             datatype: "json",
@@ -492,14 +436,14 @@
                     searchoptions: {sopt: ["eq"]},
                 },
                 {
-                    name: 'description',
+                    name: 'id',
                     index: 'fuzzy',
                     searchoptions: {sopt: ["eq"]},
                     width: 120,
                     sortable: false,
                     search: true,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='editWorks.html?workId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='courseDetailManage.html?token=" + globalToken + "&courseId="+value+"' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, /*{
                     name: 'editWork',
