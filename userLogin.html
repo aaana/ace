@@ -86,12 +86,12 @@
     function managerLogin() {
         var account = $('#account').val().trim();
         var password = $('#password').val().trim();
-        var uType = $('#utype').val().trim();
+        var uType = 0;
         $.ajax({
             data:{
                 account:account,
                 password:password,
-                uType:uType
+                uType:0
             },
             dataType:'json',
             method:'get',
@@ -99,7 +99,7 @@
             success:function (data) {
                 console.log(data);
                 if(data.status === 'success' && data.msg.isManager === true  ){
-                    window.location.href='userAdmin.html'+data.msg.token;
+                    window.location.href='userAdmin2.html?token='+data.msg.token;
                 }
             },
             error:function (msg) {
