@@ -24,3 +24,7 @@ function tokenInit()
     //     element.attr("href",element.attr("href")+"?token="+globalToken);
     // }
 }
+
+function logout() {
+    window.location.href = 'userLogin.html';
+}
