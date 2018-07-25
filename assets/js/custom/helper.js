@@ -15,7 +15,6 @@ var globalToken = req['token'];
 function tokenInit()
 {
     $.each($("a"),function (key,value) {
-        console.log(value);
         $(value).attr("href",$(value).attr("href")+"?token="+globalToken);
     });
     // var allA=$("a");
