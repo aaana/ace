@@ -279,6 +279,7 @@
                                                 <i class="fa fa-upload icon-on-left bigger-110" aria-hidden="true"></i>
                                                 导入
                                             </button>
+                                            <img id="loadingImg" style="display: none" src="assets/images/loading4.gif" width="23px" height="23px">
                                         </div>
                                     </div>
                                 </div>
@@ -562,7 +563,7 @@
         var form = new FormData();
         form.append('file', $('#importUser')[0].files[0]);
         form.append('charset', 'gbk');
-        $('#uploadFileBtn').after('<img id="loadingImg" src="assets/images/loading.gif" width="45px" height="45px">');
+        $('#loadingImg').css('display','inline');
         $.ajax({
             url: "http://192.168.0.153:8080/user/importStudentUser?token="+globalToken,
             type: "POST",
@@ -574,7 +575,7 @@
                 console.log("正在导入文件，请稍候");
             },
             success: function (data) {
-                $('#loadingImg').remove();
+                $('#loadingImg').css('display','none');
                 if (data.status == "success") {
                     console.log("导入成功..");
                     $('#uploadFileBtn').attr("disabled", true);
@@ -587,7 +588,7 @@
                 }
             },
             error: function (e) {
-                $('#loadingImg').remove();
+                $('#loadingImg').css('display','none');
                 showToast("批量导入失败！请确认文件格式","danger");
                 console.log("导入失败");
                 // window.location.href = 'createUser.html';
