@@ -34,6 +34,7 @@
     <![endif]-->
 
     <!-- inline styles related to this page -->
+    <link rel="stylesheet" href="assets/css/custom/loading.css"/>
 
 
     <!-- ace settings handler -->
@@ -52,6 +53,30 @@
 </head>
 
 <body class="no-skin">
+<div class="ui-widget-overlay" id="loading"
+     style="height: 100%; width: 100%; position: fixed; left: 0px; top: 0px; z-index: 1049; opacity: 0.3;display: none;">
+    <div class="spinner">
+        <div class="spinner-container container1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+        </div>
+    </div>
+</div>
+
 <div id="navbar" class="navbar navbar-default          ace-save-state">
     <div class="navbar-container ace-save-state" id="navbar-container">
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -104,7 +129,7 @@
                         <!--<li class="divider"></li>-->
 
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -375,7 +400,7 @@
                                             <select id="parentKind" class="col-sm-6 col-xs-6">
                                             </select>
                                             <!--<select id="childKind" class="col-sm-6 col-xs-6"-->
-                                                    <!--style="float:right;"></select>-->
+                                            <!--style="float:right;"></select>-->
                                         </div>
                                     </div>
                                 </div>
@@ -452,6 +477,7 @@
                             </div>
 
                         </form>
+
                         <!-- PAGE CONTENT ENDS -->
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -570,10 +596,12 @@
 
     jQuery(function ($) {
         tokenInit();
+
         function initChildSelect() {
             var childSelect = '<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>';
             return childSelect;
         }
+
         $("#photoInput").change(function () {
             if (typeof (FileReader) !== "undefined") {
                 var dvPreview = $("#img-preview");
@@ -785,12 +813,12 @@
             data: JSON.stringify(kindParam),
             dataType: 'json',
             success: function (response) {
-                if(response.status === 'success'){
-                    $.each(response.msg.data,function (key,value) {
-                        $('#parentKind').append(initOption(value.id,value.name));
+                if (response.status === 'success') {
+                    $.each(response.msg.data, function (key, value) {
+                        $('#parentKind').append(initOption(value.id, value.name));
                     });
                     $.ajax({
-                        url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
+                        url: "http://192.168.0.153:8080/work/findById?token=" + globalToken,
                         contentType: "application/json",
                         type: 'POST',
                         data: JSON.stringify(data1),
@@ -808,15 +836,15 @@
                             $("#id-date-picker-1").val(t.split(" ")[0]);
                             $("#form-field-studentID").val(responseStr.msg.user.id);
                             $("#form-field-student").val(responseStr.msg.user.name);
-                            if(responseStr.msg.kind.id == 4){
+                            if (responseStr.msg.kind.id == 4) {
                                 $('#parentKind').val(responseStr.msg.kind.id);
                                 $('#childKind').remove();
-                            }else{
+                            } else {
                                 $('#parentKind').val(responseStr.msg.kind.parentId);
                                 // $('#parentKind').after(initChildSelect());
                                 var childKindParam = {
-                                    "parentId":responseStr.msg.kind.parentId,
-                                    'status':0
+                                    "parentId": responseStr.msg.kind.parentId,
+                                    'status': 0
                                 };
                                 var childKindId = responseStr.msg.kind.id;
                                 $.ajax({
@@ -826,12 +854,12 @@
                                     data: JSON.stringify(childKindParam),
                                     dataType: 'json',
                                     success: function (response) {
-                                        if(response.status === 'success'){
+                                        if (response.status === 'success') {
                                             $('#childKind').remove();
                                             $('#parentKind').after(initChildSelect());
                                             // $('#childKind').html('');
-                                            $.each(response.msg.data,function (key,value) {
-                                                $('#childKind').append(initOption(value.id,value.name));
+                                            $.each(response.msg.data, function (key, value) {
+                                                $('#childKind').append(initOption(value.id, value.name));
                                             })
                                             $('#childKind').val(childKindId);
 
@@ -901,10 +929,10 @@
         });
 
         $('#parentKind').change(function () {
-            var parentId =  $('#parentKind').val();
+            var parentId = $('#parentKind').val();
             childKindParam = {
-                "parentId":parentId,
-                "status":0
+                "parentId": parentId,
+                "status": 0
             };
             $('#childKind').remove();
             $.ajax({
@@ -914,11 +942,11 @@
                 data: JSON.stringify(childKindParam),
                 dataType: 'json',
                 success: function (response) {
-                    if(response.status === 'success'){
-                        if(response.msg.data.length>0) {
+                    if (response.status === 'success') {
+                        if (response.msg.data.length > 0) {
                             $('#parentKind').after(initChildSelect());
-                            $.each(response.msg.data,function (key,value) {
-                                $('#childKind').append(initOption(value.id,value.name));
+                            $.each(response.msg.data, function (key, value) {
+                                $('#childKind').append(initOption(value.id, value.name));
                             })
                         }
 
@@ -929,7 +957,6 @@
                 }
             });
         });
-
 
 
         // $.ajax({
@@ -1112,11 +1139,13 @@
 
 
     function submitForm() {
+        $("#loading").css("display", "block");
         submitAll();
         //window.location.href = 'editWorks.html?token=' + globalToken+'&workId = '+workId;
     }
 
     function submitVedio() {
+        $("#loading").css("display", "block");
         submitAll();
         //window.location.href = 'workAdmin.html';
     }
@@ -1132,7 +1161,7 @@
                     "id": workId,
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
-                    'kindId':$('#childKind').val()
+                    'kindId': $('#childKind').val()
                 };
                 break;
             case 2:
@@ -1141,7 +1170,7 @@
                     "name": $("#form-field-work").val(),
                     "description": $("#form-field-workDetail").val(),
                     "photoUrl": uploadName,
-                    'kindId':$('#childKind').val()
+                    'kindId': $('#childKind').val()
                 };
                 break;
         }
@@ -1158,6 +1187,7 @@
             success: function (responseStr) {
                 console.log("表单提交成功!!!" + responseStr);
                 showToast("修改成功！", "success");
+                $("#loading").css("display", "none");
                 return 1;
 
                 /*if (responseStr.status === 200) {
@@ -1169,6 +1199,7 @@
             error: function (responseStr) {
                 console.log("error" + responseStr);
                 showToast("修改失败！", "danger");
+                $("#loading").css("display", "none");
                 return 0;
             }
         });
