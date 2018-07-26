@@ -452,9 +452,10 @@
 <script type="text/javascript">
     var workId = req['workId'];
     $(document).ready(function () {
+        tokenInit();
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
             contentType: "application/json",
             data: JSON.stringify({"id":workId}),
             async: true,
