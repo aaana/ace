@@ -472,27 +472,50 @@
             async: true,
             success: function(data, state){
                 console.log(data);
-                $('#courseName').text(data.msg.name);
-                $('#courseId').text(data.msg.id);
-                $('#teacherName').text(data.msg.user.name);
-                $('#teacherId').text(data.msg.user.id);
-                $('#participationNum').text(data.msg.participantCount);
-                $('#publishDate').text(data.msg.publishedAt);
-                $('#courseDetail').text(data.msg.description);
+                if('failure' != data.status){
+                    if(!isNullOrUndefine(data.msg.name)){
+                        $('#courseName').text(data.msg.name);
+                    }
+                    if(!isNullOrUndefine(data.msg.id)){
+                        $('#courseId').text(data.msg.id);
+                    }
+                    if(!isNullOrUndefine(data.msg.user.name)){
+                        $('#teacherName').text(data.msg.user.name);
+                    }
+                    if(!isNullOrUndefine(data.msg.user.id)){
+                        $('#teacherId').text(data.msg.user.id);
+                    }
+                    if(!isNullOrUndefine(data.msg.participantCount)){
+                        $('#participationNum').text(data.msg.participantCount);
+                    }
+                    if(!isNullOrUndefine(data.msg.publishedAt)){
+                        $('#publishDate').text(data.msg.publishedAt);
+                    }
+                    if(!isNullOrUndefine(data.msg.description)){
+                        $('#courseDetail').text(data.msg.description);
+                    }
 
-                var dif_i = 1;
-                for(; dif_i<=data.msg.difficulty; dif_i++){
-                    $('#star'+dif_i).attr("class", "star-on-png");
-                }
-                for(;dif_i<6;dif_i++){
-                    $('#star'+dif_i).attr("class", "star-off-png");
-                }
+                    if(!isNullOrUndefine(data.msg.difficulty)){
+                        var dif_i = 1;
+                        for(; dif_i<=data.msg.difficulty; dif_i++){
+                            $('#star'+dif_i).attr("class", "star-on-png");
+                        }
+                        for(;dif_i<6;dif_i++){
+                            $('#star'+dif_i).attr("class", "star-off-png");
+                        }
+                    }
 
-                var coursePlayer = document.getElementById("courseVideo");
-                //set poster Url
-                coursePlayer.poster = data.msg.photoUrl;
-                //set video Url
-                coursePlayer.src = data.msg.videoUrl;
+                    var coursePlayer = document.getElementById("courseVideo");
+                    //set poster Url
+                    if(!isNullOrUndefine(data.msg.photoUrl)){
+                        coursePlayer.poster = data.msg.photoUrl;
+                    }
+
+                    //set video Url
+                    if(!isNullOrUndefine(data.msg.videoUrl)){
+                        coursePlayer.src = data.msg.videoUrl;
+                    }
+                }
             },
             error: function (data, state) {
                 console.log(data);
@@ -500,6 +523,14 @@
             }
         });
     });
+
+    function isNullOrUndefine(v) {
+        if(null == v || undefined == v) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 </script>
 </body>

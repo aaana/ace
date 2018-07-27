@@ -176,7 +176,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="active">
+            <li class="">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建任务 </span>
@@ -184,7 +184,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="myCreateCourseLi" class="">
                 <a href="myCreate.html">
                     <i class="menu-icon fa fa-list"></i>
                     <span class="menu-text"> 我创建的任务 </span>
@@ -192,7 +192,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="searchCourseLi" class="">
                 <a href="searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
                     <span class="menu-text"> 查询任务 </span>
@@ -200,7 +200,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li>
+            <li id="noCourseLi">
                 <a href="workWOCourseAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 无教程作品管理 </span>
@@ -228,13 +228,13 @@
         <div class="main-content-inner">
 
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
+                <ul id="workUl" class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home"></i>
                         <a href="#">主页</a>
                     </li>
 
-                    <li class="active">作品详情</li>
+                    <li id="workLi" class="active">作品详情</li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -249,9 +249,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
-                                    <video id="workVideo" width="400px" height="225px" controls="controls" >
-                                        Your browser does not support the video tag.
-                                    </video>
+                                    <div>
+                                        <video id="workVideo" controls="controls" width="50px" height="40px" >
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
                                 </div>
                             </div>
                         </div><!-- /.col -->
@@ -465,6 +467,61 @@
     var workId = req['workId'];
     $(document).ready(function () {
         tokenInit();
+
+        if("workWOCourse" == req["from"]){
+            document.getElementById('noCourseLi').setAttribute('class', 'active');
+
+            var a_ele = document.createElement("a");
+            a_ele.setAttribute("href", "workWOCourseAdmim.html?token=" + globalToken);
+            a_ele.innerText = "无教程作品管理";
+            var i_ele = document.createElement("i");
+            i_ele.setAttribute("class", "ace-icon fa fa-cubes");
+            var li_ele = document.createElement("li");
+            i_ele.appendChild(a_ele);
+            li_ele.appendChild(i_ele);
+            li_ele.setAttribute("id", "li_ele_id");
+
+            document.getElementById("workUl").insertBefore(li_ele, document.getElementById("workLi"));
+
+        } else {
+            if ("searchCourse" == req["from"]) {
+                document.getElementById('searchCourseLi').setAttribute('class', 'active');
+
+                var a_ele = document.createElement("a");
+                a_ele.setAttribute("href", "searchCourse.html?token=" + globalToken);
+                a_ele.innerText = "查询任务";
+                var i_ele = document.createElement("i");
+                i_ele.setAttribute("class", "ace-icon fa fa-search");
+                var li_ele = document.createElement("li");
+                i_ele.appendChild(a_ele);
+                li_ele.appendChild(i_ele);
+                li_ele.setAttribute("id", "li_ele_id");
+
+                document.getElementById("workUl").insertBefore(li_ele, document.getElementById("workLi"));
+
+            } else if ("myCreate" == req["from"]) {
+                document.getElementById('myCreateCourseLi').setAttribute('class', 'active');
+
+                var a_ele = document.createElement("a");
+                a_ele.setAttribute("href", "myCreate.html?token=" + globalToken);
+                a_ele.innerText = "  我创建的任务";
+                var i_ele = document.createElement("i");
+                i_ele.setAttribute("class", "ace-icon fa fa-list");
+                var li_ele = document.createElement("li");
+                i_ele.appendChild(a_ele);
+                li_ele.appendChild(i_ele);
+                li_ele.setAttribute("id", "li_ele_id");
+                document.getElementById("workUl").insertBefore(li_ele, document.getElementById("workLi"));
+            }
+
+            var stu_li_ele = li_ele.cloneNode(true);
+            stu_li_ele.firstChild.setAttribute("class", "ace-icon fa");
+            stu_li_ele.firstChild.firstChild.innerText = "学习情况";
+            stu_li_ele.firstChild.firstChild.setAttribute("href", "studySituation.html?token=" + globalToken + "&workId=" + workId + "&from=" + req["from"]);
+            document.getElementById("workUl").insertBefore(stu_li_ele, document.getElementById("workLi"));
+
+        }
+
         $.ajax({
             type: "POST",
             url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
@@ -473,83 +530,85 @@
             async: true,
             success: function(data, state){
                 console.log(data);
-                if(null != data.msg.name){
-                    $('#workName').text(data.msg.name);
-                }
 
-                if(null != data.msg.user.name){
-                    $('#studentName').text(data.msg.user.name);
-                }
-                if(null != data.msg.likeCount){
-                    $('#likeCount').text(data.msg.likeCount);
-                }
-                if(null != data.msg.createdAt){
-                    $('#makeDate').text(data.msg.createdAt);
-                }
-                if(null != data.msg.description){
-                    $('#workDetail').text(data.msg.description);
-                }
-
-                //int id to the string of 8 chars
-                if(null != data.msg.id){
-                    $('#workId').text(idTo8Chars(data.msg.id));
-                }
-                if(null != data.msg.user.id){
-                    $('#studentId').text(idTo8Chars(data.msg.user.id));
-                }
-
-                //set author grade and class
-                var GRADE = ['零','一','二','三','四','五','六','七','八','九','十'];
-                if(null != data.msg.user.grade){
-                    var gradeClass = GRADE[data.msg.user.grade]+"年级";
-                    if(data.msg.user.classNo != null) {
-                        gradeClass = gradeClass + "  (" + data.msg.user.classNo + ")班";
+                if('failure' != data.status){
+                    if(!isNullOrUndefine(data.msg.name)){
+                        $('#workName').text(data.msg.name);
                     }
-                    $('#studentClass').text(gradeClass);
-                }
-                //set work grade
-                if(null != data.msg.grade){
-                    var workGrade = GRADE[data.msg.grade]+"年级";
-                    $('#workGrade').text(workGrade);
-                }
 
-                var workVideoPlayer = document.getElementById("workVideo");
-                //set poster
-                if(null != data.msg.photoUrl){
-                    workVideoPlayer.poster = data.msg.photoUrl;
-                }
+                    if(!isNullOrUndefine(data.msg.user.name)){
+                        $('#studentName').text(data.msg.user.name);
+                    }
+                    if(!isNullOrUndefine(data.msg.likeCount)){
+                        $('#likeCount').text(data.msg.likeCount);
+                    }
+                    if(!isNullOrUndefine(data.msg.createdAt)){
+                        $('#makeDate').text(data.msg.createdAt);
+                    }
+                    if(!isNullOrUndefine(data.msg.description)){
+                        $('#workDetail').text(data.msg.description);
+                    }
 
-                //set video Url
-                var videoUrlList = new Array();
-                var V_i = 0;
-                if(null != data.msg.videoUrl1) {
-                    videoUrlList[V_i++] = data.msg.videoUrl1;
-                }
-                if(null != data.msg.videoUrl2) {
-                    videoUrlList[V_i++] = data.msg.videoUrl2;
-                }
-                if(null != data.msg.videoUrl3) {
-                    videoUrlList[V_i++] = data.msg.videoUrl3;
-                }
-                if(null != videoUrlList) {
-                    workVideoPlayer.src = videoUrlList[0];
-                }
-                workVideoPlayer.addEventListener("ended",function () {
-                    playNext();
-                });
+                    //int id to the string of 8 chars
+                    if(!isNullOrUndefine(data.msg.id)){
+                        $('#workId').text(idTo8Chars(data.msg.id));
+                    }
+                    if(!isNullOrUndefine(data.msg.user.id)){
+                        $('#studentId').text(idTo8Chars(data.msg.user.id));
+                    }
 
-                var curVideo_i = 1;
-                function playNext() {
-                    if( curVideo_i == videoUrlList.length){
-                        curVideo_i = 0;
-                        workVideoPlayer.src = videoUrlList[curVideo_i++];
-                    } else {
-                        console.log(curVideo_i);
-                        workVideoPlayer.src = videoUrlList[curVideo_i++];
-                        workVideoPlayer.play();
+                    //set author grade and class
+                    var GRADE = ['零','一','二','三','四','五','六','七','八','九','十'];
+                    if(!isNullOrUndefine(data.msg.user.grade)){
+                        var gradeClass = GRADE[data.msg.user.grade]+"年级";
+                        if(!isNullOrUndefine(data.msg.user.classNo)) {
+                            gradeClass = gradeClass + "  (" + data.msg.user.classNo + ")班";
+                        }
+                        $('#studentClass').text(gradeClass);
+                    }
+                    //set work grade
+                    if(!isNullOrUndefine(data.msg.grade)){
+                        var workGrade = GRADE[data.msg.grade]+"年级";
+                        $('#workGrade').text(workGrade);
+                    }
+
+                    var workVideoPlayer = document.getElementById("workVideo");
+                    //set poster
+                    if(!isNullOrUndefine(data.msg.photoUrl)){
+                        workVideoPlayer.poster = data.msg.photoUrl;
+                    }
+
+                    //set video Url
+                    var videoUrlList = new Array();
+                    var V_i = 0;
+                    if(!isNullOrUndefine(data.msg.videoUrl1)) {
+                        videoUrlList[V_i++] = data.msg.videoUrl1;
+                    }
+                    if(!isNullOrUndefine(data.msg.videoUrl2)) {
+                        videoUrlList[V_i++] = data.msg.videoUrl2;
+                    }
+                    if(!isNullOrUndefine(data.msg.videoUrl3)) {
+                        videoUrlList[V_i++] = data.msg.videoUrl3;
+                    }
+                    if(null != videoUrlList) {
+                        workVideoPlayer.src = videoUrlList[0];
+                    }
+                    workVideoPlayer.addEventListener("ended",function () {
+                        playNext();
+                    });
+
+                    var curVideo_i = 1;
+                    function playNext() {
+                        if( curVideo_i == videoUrlList.length){
+                            curVideo_i = 0;
+                            workVideoPlayer.src = videoUrlList[curVideo_i++];
+                        } else {
+                            console.log(curVideo_i);
+                            workVideoPlayer.src = videoUrlList[curVideo_i++];
+                            workVideoPlayer.play();
+                        }
                     }
                 }
-
             },
             error: function (data, state) {
                 console.log(data);
@@ -565,6 +624,14 @@
             str = "0"+str;
         }
         return str;
+    }
+
+    function isNullOrUndefine(v) {
+        if(null == v || undefined == v) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 </script>

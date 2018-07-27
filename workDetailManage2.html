@@ -452,72 +452,94 @@
 <script type="text/javascript">
     var workId = req['workId'];
     $(document).ready(function () {
+        tokenInit();
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",
+            url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
             contentType: "application/json",
             data: JSON.stringify({"id":workId}),
             async: true,
             success: function(data, state){
                 console.log(data);
-                $('#workName').text(data.msg.name);
-                // $('#workId').text(data.msg.id);
-                $('#workGrade').text(data.msg.grade);
-                $('#studentName').text(data.msg.user.name);
-                // $('#studentId').text(data.msg.user.id);
-                // $('#studentClass').text(data.msg.user.grade);
-                $('#likeCount').text(data.msg.likeCount);
-                $('#makeDate').text(data.msg.createdAt);
-                $('#workDetail').text(data.msg.description);
-
-                //int id to the string of 8 chars
-                $('#workId').text(idTo8Chars(data.msg.id));
-                $('#studentId').text(idTo8Chars(data.msg.user.id));
-
-                //set author grade and class
-                var GRADE = ['零','一','二','三','四','五','六','七','八','九','十'];
-                if(data.msg.user.grade != null){
-                    var gradeClass = GRADE[data.msg.user.grade]+"年级";
-                    if(data.msg.user.classNo != null) {
-                        gradeClass = gradeClass + "  (" + data.msg.user.classNo + ")班";
+                if('failure' != data.status){
+                    if(!isNullOrUndefine(data.msg.name)){
+                        $('#workName').text(data.msg.name);
                     }
-                    $('#studentClass').text(gradeClass);
-                }
 
-                var workVideoPlayer = document.getElementById("workVideo");
-                //set poster
-                workVideoPlayer.poster = data.msg.photoUrl;
+                    if(!isNullOrUndefine(data.msg.user.name)){
+                        $('#studentName').text(data.msg.user.name);
+                    }
+                    if(!isNullOrUndefine(data.msg.likeCount)){
+                        $('#likeCount').text(data.msg.likeCount);
+                    }
+                    if(!isNullOrUndefine(data.msg.createdAt)){
+                        $('#makeDate').text(data.msg.createdAt);
+                    }
+                    if(!isNullOrUndefine(data.msg.description)){
+                        $('#workDetail').text(data.msg.description);
+                    }
 
-                //set video Url
-                var videoUrlList = new Array();
-                var V_i = 0;
-                if(null != data.msg.videoUrl1) {
-                    videoUrlList[V_i++] = data.msg.videoUrl1;
-                }
-                if(null != data.msg.videoUrl2) {
-                    videoUrlList[V_i++] = data.msg.videoUrl2;
-                }
-                if(null != data.msg.videoUrl3) {
-                    videoUrlList[V_i++] = data.msg.videoUrl3;
-                }
-                if(null != videoUrlList) {
-                    workVideoPlayer.src = videoUrlList[0];
-                }
-                workVideoPlayer.addEventListener("ended",function () {
-                    playNext();
-                });
+                    //int id to the string of 8 chars
+                    if(!isNullOrUndefine(data.msg.id)){
+                        $('#workId').text(idTo8Chars(data.msg.id));
+                    }
+                    if(!isNullOrUndefine(data.msg.user.id)){
+                        $('#studentId').text(idTo8Chars(data.msg.user.id));
+                    }
 
-                var curVideo_i = 1;
-                function playNext() {
-                    if( curVideo_i == videoUrlList.length){
-                        curVideo_i = 0;
-                        workVideoPlayer.src = videoUrlList[curVideo_i++];
-                    } else {
-                        console.log(curVideo_i);
-                        workVideoPlayer.src = videoUrlList[curVideo_i++];
-                        workVideoPlayer.play();
+                    //set author grade and class
+                    var GRADE = ['零','一','二','三','四','五','六','七','八','九','十'];
+                    if(!isNullOrUndefine(data.msg.user.grade)){
+                        var gradeClass = GRADE[data.msg.user.grade]+"年级";
+                        if(!isNullOrUndefine(data.msg.user.classNo)) {
+                            gradeClass = gradeClass + "  (" + data.msg.user.classNo + ")班";
+                        }
+                        $('#studentClass').text(gradeClass);
+                    }
+                    //set work grade
+                    if(!isNullOrUndefine(data.msg.grade)){
+                        var workGrade = GRADE[data.msg.grade]+"年级";
+                        $('#workGrade').text(workGrade);
+                    }
+
+                    var workVideoPlayer = document.getElementById("workVideo");
+                    //set poster
+                    if(!isNullOrUndefine(data.msg.photoUrl)){
+                        workVideoPlayer.poster = data.msg.photoUrl;
+                    }
+
+                    //set video Url
+                    var videoUrlList = new Array();
+                    var V_i = 0;
+                    if(!isNullOrUndefine(data.msg.videoUrl1)) {
+                        videoUrlList[V_i++] = data.msg.videoUrl1;
+                    }
+                    if(!isNullOrUndefine(data.msg.videoUrl2)) {
+                        videoUrlList[V_i++] = data.msg.videoUrl2;
+                    }
+                    if(!isNullOrUndefine(data.msg.videoUrl3)) {
+                        videoUrlList[V_i++] = data.msg.videoUrl3;
+                    }
+                    if(null != videoUrlList) {
+                        workVideoPlayer.src = videoUrlList[0];
+                    }
+                    workVideoPlayer.addEventListener("ended",function () {
+                        playNext();
+                    });
+
+                    var curVideo_i = 1;
+                    function playNext() {
+                        if( curVideo_i == videoUrlList.length){
+                            curVideo_i = 0;
+                            workVideoPlayer.src = videoUrlList[curVideo_i++];
+                        } else {
+                            console.log(curVideo_i);
+                            workVideoPlayer.src = videoUrlList[curVideo_i++];
+                            workVideoPlayer.play();
+                        }
                     }
                 }
+
 
             },
             error: function (data, state) {
@@ -534,6 +556,14 @@
             str = "0"+str;
         }
         return str;
+    }
+
+    function isNullOrUndefine(v) {
+        if(null == v || undefined == v) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 </script>

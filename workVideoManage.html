@@ -467,10 +467,11 @@
     var STR_DELETE = "&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp";
     var STR_DELETE_C = "取消删除";
 
-    var workId = 1;
+    var workId = req['workId'];
+    console.log(workId);
 
     $(document).ready(function () {
-
+        tokenInit();
         $.ajax({
             type: "POST",
             url: "http://192.168.0.153:8080/work/findById?token=1d44662ee7e0452a9d594841799d00ac",

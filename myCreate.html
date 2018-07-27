@@ -444,7 +444,7 @@
                     sortable: false,
                     search: true,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='courseDetailManage.html?token=" + globalToken + "&courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
+                        return "<a href='courseDetailManage.html?token=" + globalToken + "&courseId=" + value + "&from=myCreate'style=\"color:#f60\" onclick=\"Modify(" + value + ")\">查看任务</a>"
                     }
                 }, /*{
                     name: 'editWork',
@@ -462,7 +462,7 @@
                     sortable: false,
                     search: false,
                     formatter: function (value, grid, rows, state) {
-                        return "<a href='studySituation.html?token=" + globalToken + "&courseId=" + value + "' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
+                        return "<a href='studySituation.html?token=" + globalToken + "&courseId=" + value + "&from=myCreate' style=\"color:#f60\" onclick=\"Modify(" + value + ")\">学习情况</a>"
                     }
                 }, {
                     name: 'status',

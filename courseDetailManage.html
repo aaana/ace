@@ -155,7 +155,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li class="active">
+            <li>
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建任务 </span>
@@ -163,7 +163,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="myCreateCourseLi" class="">
                 <a href="myCreate.html">
                     <i class="menu-icon fa fa-list"></i>
                     <span class="menu-text"> 我创建的任务 </span>
@@ -171,7 +171,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="searchCourseLi" class="">
                 <a href="searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
                     <span class="menu-text"> 查询任务 </span>
@@ -201,13 +201,13 @@
         <div class="main-content-inner">
 
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
+                <ul id="courseUl" class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home"></i>
                         <a href="#">主页</a>
                     </li>
 
-                    <li class="active">任务详情</li>
+                    <li id="courseLi" class="active">任务详情</li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -225,8 +225,7 @@
                                     <!--<video id="courseVideo" src="http://www.w3school.com.cn/i/movie.ogg" width="400px" height="225px" controls="controls" poster="http://www.w3school.com.cn/i/eg_tulip.jpg">-->
                                     <!--Your browser does not support the video tag.-->
                                     </video>
-                                    <video id="courseVideo" width="400px" height="225px" controls="controls"
-                                           poster="http://www.w3school.com.cn/i/eg_tulip.jpg">
+                                    <video id="courseVideo" width="400px" height="225px" controls="controls">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -469,37 +468,88 @@
     });
 
     $(document).ready(function () {
+        tokenInit();
+        console.log(req["from"]);
+        if("searchCourse" == req["from"]) {
+            document.getElementById('searchCourseLi').setAttribute('class', 'active');
+
+            var a_ele = document.createElement("a");
+            a_ele.setAttribute("href", "searchCourse.html?token=" + globalToken);
+            a_ele.innerText = "查询任务";
+            var i_ele = document.createElement("i");
+            i_ele.setAttribute("class", "ace-icon fa fa-search");
+            var li_ele = document.createElement("li");
+            i_ele.appendChild(a_ele);
+            li_ele.appendChild(i_ele);
+            document.getElementById("courseUl").insertBefore(li_ele, document.getElementById("courseLi"));
+
+        } else if("myCreate" == req["from"] ){
+            document.getElementById('myCreateCourseLi').setAttribute('class', 'active');
+
+            var a_ele = document.createElement("a");
+            a_ele.setAttribute("href", "myCreate.html?token=" + globalToken);
+            a_ele.innerText = "  我创建的任务";
+            var i_ele = document.createElement("i");
+            i_ele.setAttribute("class", "ace-icon fa fa-list");
+            var li_ele = document.createElement("li");
+            i_ele.appendChild(a_ele);
+            li_ele.appendChild(i_ele);
+            document.getElementById("courseUl").insertBefore(li_ele, document.getElementById("courseLi"));
+        }
 
         $.ajax({
             type: "POST",
-            url: "http://192.168.0.153:8080/course/findById?token=" + globalToken,
+            url: "http://192.168.0.153:8080/course/findById?token="+globalToken,
             contentType: "application/json",
-            data: JSON.stringify({"id": courseId}),
+            data: JSON.stringify({"id":courseId}),
             async: true,
-            success: function (data, state) {
+            success: function(data, state){
                 console.log(data);
-                $('#courseName').text(data.msg.name);
-                $('#courseId').text(data.msg.id);
-                $('#teacherName').text(data.msg.user.name);
-                $('#teacherId').text(data.msg.user.id);
-                $('#participationNum').text(data.msg.workCount);
-                $('#publishDate').text(data.msg.publishedAt);
-                $('#courseDetail').text(data.msg.description);
+                if("failure" != data.status){
+                    if(!isNullOrUndefine(data.msg.name)){
+                        $('#courseName').text(data.msg.name);
+                    }
+                    if(!isNullOrUndefine(data.msg.id)){
+                        $('#courseId').text(data.msg.id);
+                    }
+                    if(!isNullOrUndefine(data.msg.user.name)){
+                        $('#teacherName').text(data.msg.user.name);
+                    }
+                    if(!isNullOrUndefine(data.msg.user.id)){
+                        $('#teacherId').text(data.msg.user.id);
+                    }
+                    if(!isNullOrUndefine(data.msg.participantCount)){
+                        $('#participationNum').text(data.msg.participantCount);
+                    }
+                    if(!isNullOrUndefine(data.msg.publishedAt)){
+                        $('#publishDate').text(data.msg.publishedAt);
+                    }
+                    if(!isNullOrUndefine(data.msg.description)){
+                        $('#courseDetail').text(data.msg.description);
+                    }
 
-                var dif_i = 1;
-                for (; dif_i <= data.msg.difficulty; dif_i++) {
-                    $('#star' + dif_i).attr("class", "star-on-png");
+                    if(!isNullOrUndefine(data.msg.difficulty)){
+                        var dif_i = 1;
+                        for(; dif_i<=data.msg.difficulty; dif_i++){
+                            $('#star'+dif_i).attr("class", "star-on-png");
+                        }
+                        for(;dif_i<6;dif_i++){
+                            $('#star'+dif_i).attr("class", "star-off-png");
+                        }
+                    }
+
+                    var coursePlayer = document.getElementById("courseVideo");
+                    //set poster Url
+                    if(!isNullOrUndefine(data.msg.photoUrl)){
+                        coursePlayer.poster = data.msg.photoUrl;
+                    }
+
+                    //set video Url
+                    if(!isNullOrUndefine(data.msg.videoUrl)){
+                        coursePlayer.src = data.msg.videoUrl;
+                    }
                 }
-                for (; dif_i < 6; dif_i++) {
-                    $('#star' + dif_i).attr("class", "star-off-png");
-                }
 
-                var coursePlayer = document.getElementById("courseVideo");
-
-                //set poster Url
-                coursePlayer.poster = data.msg.photoUrl;
-                //set video Url
-                coursePlayer.src = data.msg.videoUrl;
             },
             error: function (data, state) {
                 console.log(data);
@@ -507,6 +557,14 @@
             }
         });
     });
+
+    function isNullOrUndefine(v) {
+        if(null == v || undefined == v) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 </script>
 </body>
