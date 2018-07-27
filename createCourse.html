@@ -122,7 +122,7 @@
                         <li>
                             <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                退出登录
                             </a>
                         </li>
                     </ul>
@@ -398,6 +398,8 @@
                                     <div class="col-sm-9">
                                         <select id="parentKind" class="col-sm-6 col-xs-6">
                                         </select>
+                                        <select id="childKind" class="col-sm-6 col-xs-6">
+                                        </select>
 
                                         <div class="hr hr-16 hr-dotted"></div>
                                     </div>
@@ -571,29 +573,35 @@
                         $('#parentKind').append(initOption(value.id, value.name));
                     });
                     var childKindParam = {
-                        "parentId": 0,
+                        "parentId": $('#parentKind').val(),
                         "status":0
                     };
-                    $.ajax({
-                        url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
-                        contentType: "application/json",
-                        type: 'POST',
-                        data: JSON.stringify(childKindParam),
-                        dataType: 'json',
-                        success: function (response) {
-                            // $('#parentKind').after(initChildSelect());
-                            if (response.status === 'success') {
-                                $('#parentKind').after(initChildSelect());
-                                $('#childKind').html('');
-                                $.each(response.msg.data, function (key, value) {
-                                    $('#childKind').append(initOption(value.id, value.name));
-                                })
-                            }
-                        },
-                        error: function (responseStr) {
-                            console.log("error" + responseStr);
-                        }
-                    });
+                    if($('#parentKind').val()!=4){
+                        $('#childKind').css('display','inline');
+                        getChildKind(childKindParam);
+                    }else{
+                        $('#childKind').css('display','none');
+                    }
+                    // $.ajax({
+                    //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                    //     contentType: "application/json",
+                    //     type: 'POST',
+                    //     data: JSON.stringify(childKindParam),
+                    //     dataType: 'json',
+                    //     success: function (response) {
+                    //         // $('#parentKind').after(initChildSelect());
+                    //         if (response.status === 'success') {
+                    //             // $('#parentKind').after(initChildSelect());
+                    //             $('#childKind').html('');
+                    //             $.each(response.msg.data, function (key, value) {
+                    //                 $('#childKind').append(initOption(value.id, value.name));
+                    //             })
+                    //         }
+                    //     },
+                    //     error: function (responseStr) {
+                    //         console.log("error" + responseStr);
+                    //     }
+                    // });
                 }
             },
             error: function (responseStr) {
@@ -601,13 +609,8 @@
             }
         });
 
-        $('#parentKind').change(function () {
-            var parentId = $('#parentKind').val();
-            childKindParam = {
-                "parentId": parentId,
-                "status":0
-            };
-            $('#childKind').remove();
+
+        function getChildKind(childKindParam) {
             $.ajax({
                 url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
                 contentType: "application/json",
@@ -616,14 +619,15 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.status === 'success') {
-                        // $('#childKind').html('');
+                        // $('#childKind').remove();
+                        $('#childKind').html('');
                         if(response.msg.data.length>0){
-                            $('#parentKind').after(initChildSelect());
+                            // $('#parentKind').after(initChildSelect());
                             $.each(response.msg.data, function (key, value) {
                                 $('#childKind').append(initOption(value.id, value.name));
-                                if(value.id == '4'){
-                                    $('#childKind').css('style','displat:none');
-                                }
+                                // if(value.id == '4'){
+                                //     $('#childKind').css('display','none');
+                                // }
                             })
                         }
 
@@ -634,6 +638,49 @@
                     console.log("error" + responseStr);
                 }
             });
+        }
+
+        $('#parentKind').change(function () {
+            $('#childKind').html('');
+            var parentId = $('#parentKind').val();
+            childKindParam = {
+                "parentId": parentId,
+                "status":0
+            };
+            if(parentId!=4){
+                $('#childKind').css('display','inline');
+                getChildKind(childKindParam);
+            }else{
+                $('#childKind').css('display','none');
+            }
+            // $('#childKind').remove();
+            // $.ajax({
+            //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+            //     contentType: "application/json",
+            //     type: 'POST',
+            //     data: JSON.stringify(childKindParam),
+            //     dataType: 'json',
+            //     success: function (response) {
+            //         if (response.status === 'success') {
+            //             // $('#childKind').remove();
+            //             // $('#childKind').html('');
+            //             if(response.msg.data.length>0){
+            //                 // $('#parentKind').after(initChildSelect());
+            //                 $.each(response.msg.data, function (key, value) {
+            //                     $('#childKind').append(initOption(value.id, value.name));
+            //                     if(value.id == '4'){
+            //                         $('#childKind').css('style','display:none');
+            //                     }
+            //                 })
+            //             }
+            //
+            //
+            //         }
+            //     },
+            //     error: function (responseStr) {
+            //         console.log("error" + responseStr);
+            //     }
+            // });
         });
 
 
@@ -802,7 +849,7 @@
     }
 
     function submitBn(type) {
-        var kindId = $('#childKind').val()?$('#childKind').val():$('#parentKind').val();
+        var kindId = $('#parentKind').val()==4?$('#parentKind').val():$('#childKind').val();
         console.log("表单内容" + type.value);
         switch (type.value) {
             case 1:

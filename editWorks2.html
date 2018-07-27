@@ -378,7 +378,7 @@
                                         <div class="col-sm-9 col-xs-12">
                                             <select id="parentKind" class="col-sm-6 col-xs-6">
                                             </select>
-                                            <!--<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>-->
+                                            <select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>
                                         </div>
                                     </div>
 
@@ -599,141 +599,7 @@
                 showToast("浏览器不支持HTML5文件读取！", "danger");
 
             }
-            // });
-
-            // $('#id-input-file-2').ace_file_input({
-            //     no_file: '请选择作品视频文件...',
-            //     btn_choose: '选择',
-            //     btn_change: '修改',
-            //     droppable: false,
-            //     onchange: null,
-            //     thumbnail: false, //| true | large
-            //     allowExt: ["avi", "wmv", "mpeg", "mp4", "mkv", "rmvb"],
-            //     //allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
-            //     //whitelist:'gif|png|jpg|jpeg'
-            //     //blacklist:'exe|php'
-            //     //onchange:''
-            //     //
-            // });
-            //pre-show a file name, for example a previously selected file
-            //$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
-
-
-            // $('#photoInput').ace_file_input({
-            //     style: 'well',
-            //     btn_choose: '点击或拖动作品封面图片到此',
-            //     btn_change: null,
-            //     no_icon: 'ace-icon fa fa-picture-o',
-            //     droppable: true,
-            //     thumbnail: 'fit',//large | fit
-            //     allowExt: ["jpeg", "jpg", "png", "gif", "bmp"],
-            //     allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"]
-            //     //,icon_remove:null//set null, to hide remove/reset button
-            //     /**,before_change:function(files, dropped) {
-            // 			//Check an example below
-            // 			//or examples/file-upload.html
-            // 			return true;
-            // 		}*/
-            //     /**,before_remove : function() {
-            // 			return true;
-            // 		}*/
-            //     ,
-            //     preview_error: function (filename, error_code) {
-            //         //name of the file that failed
-            //         //error_code values
-            //         //1 = 'FILE_LOAD_FAILED',
-            //         //2 = 'IMAGE_LOAD_FAILED',
-            //         //3 = 'THUMBNAIL_FAILED'
-            //         //alert(error_code);
-            //     }
-            //
-            // }).on('change', function () {
-            //     //console.log($(this).data('ace_input_files'));
-            //     //console.log($(this).data('ace_input_method'));
-            // });
-
-
-            //$('#photoInput')
-            //.ace_file_input('show_file_list', [
-            //{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
-            //{type: 'file', name: 'hello.txt'}
-            //]);
-
-
-            //dynamically change allowed formats by changing allowExt && allowMime function
-            // $('#id-file-format').removeAttr('checked').on('change', function () {
-            //     var whitelist_ext, whitelist_mime;
-            //     var btn_choose
-            //     var no_icon
-            //     if (this.checked) {
-            //         btn_choose = "点击或拖动作品封面图片到此";
-            //         no_icon = "ace-icon fa fa-picture-o";
-            //
-            //         whitelist_ext = ["jpeg", "jpg", "png", "gif", "bmp"];
-            //         whitelist_mime = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"];
-            //     }
-            //     else {
-            //         btn_choose = "Drop files here or click to choose";
-            //         no_icon = "ace-icon fa fa-cloud-upload";
-            //
-            //         whitelist_ext = null;//all extensions are acceptable
-            //         whitelist_mime = null;//all mimes are acceptable
-            //     }
-            //     var file_input = $('#photoInput');
-            //     file_input
-            //         .ace_file_input('update_settings',
-            //             {
-            //                 'btn_choose': btn_choose,
-            //                 'no_icon': no_icon,
-            //                 'allowExt': whitelist_ext,
-            //                 'allowMime': whitelist_mime
-            //             })
-            //     file_input.ace_file_input('reset_input');
-            //
-            //     file_input
-            //         .off('file.error.ace')
-            //         .on('file.error.ace', function (e, info) {
-            //console.log(info.file_count);//number of selected files
-            //console.log(info.invalid_count);//number of invalid files
-            //console.log(info.error_list);//a list of errors in the following format
-
-            //info.error_count['ext']
-            //info.error_count['mime']
-            //info.error_count['size']
-
-            //info.error_list['ext']  = [list of file names with invalid extension]
-            //info.error_list['mime'] = [list of file names with invalid mimetype]
-            //info.error_list['size'] = [list of file names with invalid size]
-
-
-            /**
-             if( !info.dropped ) {
-							//perhapse reset file field if files have been selected, and there are invalid files among them
-							//when files are dropped, only valid files will be added to our file array
-							e.preventDefault();//it will rest input
-						}
-             */
-
-
-            //if files have been selected (not dropped), you can choose to reset input
-            //because browser keeps all selected files anyway and this cannot be changed
-            //we can only reset file field to become empty again
-            //on any case you still should check files with your server side script
-            //because any arbitrary file can be uploaded by user and it's not safe to rely on browser-side measures
         });
-
-
-        /**
-         file_input
-         .off('file.preview.ace')
-         .on('file.preview.ace', function(e, info) {
-						console.log(info.file.width);
-						console.log(info.file.height);
-						e.preventDefault();//to prevent preview
-					});
-         */
-
-        // });
 
 
         //datepicker plugin
@@ -755,11 +621,6 @@
             $('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
         });
 
-        var kindParam = {
-            'parentId':-1,
-            'status':0
-        };
-
         function initOption(value,label) {
             var option = '<option value="'+value+'">'+label+'</option>';
             return option;
@@ -767,6 +628,98 @@
 
         data1 = {
             "id": workId
+        };
+
+        function getWorkDetail(){
+            $.ajax({
+                url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
+                contentType: "application/json",
+                type: 'POST',
+                data: JSON.stringify(data1),
+                dataType: 'json',
+                beforeSend: function () {
+                    console.log("正在获取信息，请稍候");
+                },
+                success: function (responseStr) {
+                    console.log("获取信息成功!!!" + responseStr);
+                    // $('#childKind').remove();
+                    $("#form-field-workID").val(responseStr.msg.id);
+                    $("#form-field-work").val(responseStr.msg.name);
+                    $("#form-field-workDetail").val(responseStr.msg.description);
+                    var t = responseStr.msg.createdAt;
+                    $("#id-date-picker-1").val(t.split(" ")[0]);
+                    $("#form-field-studentID").val(responseStr.msg.user.id);
+                    $("#form-field-student").val(responseStr.msg.user.name);
+                    $("#childKind").html('');
+                    if(responseStr.msg.kind.id == 4){
+                        $('#parentKind').val(responseStr.msg.kind.id);
+                        $('#childKind').css('display','none');
+                        // $('#childKind').remove();
+                    }else{
+                        $('#parentKind').val(responseStr.msg.kind.parentId);
+                        // $('#parentKind').after(initChildSelect());
+                        var childKindParam = {
+                            "parentId":responseStr.msg.kind.parentId,
+                            'status':0
+                        };
+                        var childKindId = responseStr.msg.kind.id;
+                        $.ajax({
+                            url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                            contentType: "application/json",
+                            type: 'POST',
+                            data: JSON.stringify(childKindParam),
+                            dataType: 'json',
+                            success: function (response) {
+                                if(response.status === 'success'){
+                                    // $('#childKind').remove();
+                                    // $('#parentKind').after(initChildSelect());
+                                    $('#childKind').html('');
+                                    $('#childKind').css('display','inline');
+                                    $.each(response.msg.data,function (key,value) {
+                                        $('#childKind').append(initOption(value.id,value.name));
+                                    });
+                                    $('#childKind').val(childKindId);
+
+                                }
+                            },
+                            error: function (responseStr) {
+                                console.log("error" + responseStr);
+                            }
+                        });                        // $('#childKind').val(responseStr.msg.kind.id);
+                    }
+                    url = responseStr.msg.photoUrl;
+                    l = url.split("/").length
+                    if (url.split("/")[l - 1] == "null") {
+                        //$("#id-sp")
+                        console.log("no photo");
+                    } else {
+                        console.log(" photo");
+                        // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
+                        var photoURL = responseStr.msg.photoUrl;
+                        console.log(photoURL);
+                        picSrc = photoURL;
+                        $("#img-preview img").attr("src", photoURL);
+                    }
+                    if (responseStr.msg.videoUrl1 == null) {
+                        //$("#id-sp")
+                        console.log("no vedio");
+                        $("#id-sp").attr("disabled", true);
+                    } else {
+                        $("#id-sp").attr("disabled", false);
+                    }
+                }
+                ,
+                error: function (responseStr) {
+                    console.log("error" + responseStr);
+                }
+            });
+        }
+
+
+
+        var kindParam = {
+            'parentId':-1,
+            'status':0
         };
 
         $.ajax({
@@ -780,86 +733,7 @@
                     $.each(response.msg.data,function (key,value) {
                         $('#parentKind').append(initOption(value.id,value.name));
                     });
-                    $.ajax({
-                        url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
-                        contentType: "application/json",
-                        type: 'POST',
-                        data: JSON.stringify(data1),
-                        dataType: 'json',
-                        beforeSend: function () {
-                            console.log("正在获取信息，请稍候");
-                        },
-                        success: function (responseStr) {
-                            console.log("获取信息成功!!!" + responseStr);
-                            $('#childKind').remove();
-                            $("#form-field-workID").val(responseStr.msg.id);
-                            $("#form-field-work").val(responseStr.msg.name);
-                            $("#form-field-workDetail").val(responseStr.msg.description);
-                            var t = responseStr.msg.createdAt;
-                            $("#id-date-picker-1").val(t.split(" ")[0]);
-                            $("#form-field-studentID").val(responseStr.msg.user.id);
-                            $("#form-field-student").val(responseStr.msg.user.name);
-                            if(responseStr.msg.kind.id == 4){
-                                $('#parentKind').val(responseStr.msg.kind.id);
-                                $('#childKind').remove();
-                            }else{
-                                $('#parentKind').val(responseStr.msg.kind.parentId);
-                                // $('#parentKind').after(initChildSelect());
-                                var childKindParam = {
-                                    "parentId":responseStr.msg.kind.parentId,
-                                    'status':0
-                                };
-                                var childKindId = responseStr.msg.kind.id;
-                                $.ajax({
-                                    url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
-                                    contentType: "application/json",
-                                    type: 'POST',
-                                    data: JSON.stringify(childKindParam),
-                                    dataType: 'json',
-                                    success: function (response) {
-                                        if(response.status === 'success'){
-                                            $('#childKind').remove();
-                                            $('#parentKind').after(initChildSelect());
-                                            // $('#childKind').html('');
-                                            $.each(response.msg.data,function (key,value) {
-                                                $('#childKind').append(initOption(value.id,value.name));
-                                            })
-                                            $('#childKind').val(childKindId);
-
-                                        }
-                                    },
-                                    error: function (responseStr) {
-                                        console.log("error" + responseStr);
-                                    }
-                                });
-                                // $('#childKind').val(responseStr.msg.kind.id);
-                            }
-                            url = responseStr.msg.photoUrl;
-                            l = url.split("/").length
-                            if (url.split("/")[l - 1] == "null") {
-                                //$("#id-sp")
-                                console.log("no photo");
-                            } else {
-                                console.log(" photo");
-                                // var photoURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532013586631&di=dec32a928f6475dd738b943e68cddf2d&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
-                                var photoURL = responseStr.msg.photoUrl;
-                                console.log(photoURL);
-                                picSrc = photoURL;
-                                $("#img-preview img").attr("src", photoURL);
-                            }
-                            if (responseStr.msg.videoUrl1 == null) {
-                                //$("#id-sp")
-                                console.log("no vedio");
-                                $("#id-sp").attr("disabled", true);
-                            } else {
-                                $("#id-sp").attr("disabled", false);
-                            }
-                        }
-                        ,
-                        error: function (responseStr) {
-                            console.log("error" + responseStr);
-                        }
-                    });
+                    getWorkDetail();
                     // var childKindParam = {
                     //     "parentId":0,
                     //     'status':0
@@ -897,28 +771,36 @@
                 "parentId":parentId,
                 "status":0
             };
-            $('#childKind').remove();
-            $.ajax({
-                url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
-                contentType: "application/json",
-                type: 'POST',
-                data: JSON.stringify(childKindParam),
-                dataType: 'json',
-                success: function (response) {
-                    if(response.status === 'success'){
-                        if(response.msg.data.length>0) {
-                            $('#parentKind').after(initChildSelect());
-                            $.each(response.msg.data,function (key,value) {
-                                $('#childKind').append(initOption(value.id,value.name));
-                            })
-                        }
+            // $('#childKind').remove();
+            $('#childKind').html('');
+            if(parentId!=4){
+                $('#childKind').css('display','inline');
+                $.ajax({
+                    url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                    contentType: "application/json",
+                    type: 'POST',
+                    data: JSON.stringify(childKindParam),
+                    dataType: 'json',
+                    success: function (response) {
+                        if(response.status === 'success'){
+                            if(response.msg.data.length>0) {
+                                // $('#parentKind').after(initChildSelect());
+                                $('#childKind').html('');
+                                $.each(response.msg.data,function (key,value) {
+                                    $('#childKind').append(initOption(value.id,value.name));
+                                })
+                            }
 
+                        }
+                    },
+                    error: function (responseStr) {
+                        console.log("error" + responseStr);
                     }
-                },
-                error: function (responseStr) {
-                    console.log("error" + responseStr);
-                }
-            });
+                });
+            }else{
+                $('#childKind').css('display','none');
+            }
+
         });
 
 
