@@ -50,7 +50,8 @@
 
     <!--Custom styles-->
     <link rel="stylesheet" href="./assets/css/custom/studySituation.css"/>
-<script src="./userinfo.js"></script></head>
+    <script src="./userinfo.js"></script>
+</head>
 
 <body class="no-skin">
 <div class="ui-widget-overlay" id="loading"
@@ -493,7 +494,7 @@
 <script src="./assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src="./assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src='./assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 <script src="./assets/js/bootstrap.min.js"></script>
 <script src="./assets/js/uuid.js"></script>
@@ -505,9 +506,8 @@
 <script src="./assets/js/ace.min.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="./assets/js/base64.js"></script>
 
-<script src="./assets/js/jquery-ui.custom.min.js"></script>
+<!--<script src="./assets/js/jquery-ui.custom.min.js"></script>-->
 <!--<script src="./assets/js/jquery.ui.touch-punch.min.js"></script>-->
 <!--<script src="./assets/js/bootstrap-tag.min.js"></script>-->
 <script src="./assets/js/jquery.bootstrap-duallistbox.min.js"></script>
@@ -905,7 +905,7 @@
                 showToast("创建成功！", "success");
                 $("#loading").css("display", "none");
 
-                window.location.href='./myCreate.html?token=' + globalToken
+                window.location.href = './myCreate.html?token=' + globalToken
                 /*if (responseStr.status === 200) {
                     console.log("表单提交成功" + responseStr);
                 } else {
