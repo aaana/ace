@@ -104,7 +104,7 @@
                         <li>
                             <a href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                退出登录
                             </a>
                         </li>
                     </ul>
@@ -201,7 +201,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li class="active">
                 <a href="workAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 作品管理 </span>
@@ -228,177 +228,192 @@
 
     <div class="main-content">
         <div class="main-content-inner">
-            <div class="widget-body">
-                <div class="widget-main padding-24">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
-                                    <b>作品视频</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
-                                    <video id="workVideo" width="400px" height="225px" controls="controls" >
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
-                        </div><!-- /.col -->
 
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
-                                    <b>作品信息</b>
-                                </div>
-                            </div>
+            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-cube"></i>
+                        <a href="workAdmin.html">作品管理</a>
+                    </li>
 
-                            <div class="row">
-                                <div class="col-sm-10 col-sm-offset-1">
-                                    <div class="profile-user-info profile-user-info-striped">
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作品名称 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="workName"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作品ID </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="workId"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作品年级 </div>
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="workGrade"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作者姓名 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="studentName"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作者ID </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="studentId"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作者班级 </div>
-
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="studentClass"></span>
-                                            </div>
-                                        </div>
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 点赞人数 </div>
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="likeCount"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 完成时间 </div>
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="makeDate"></span>
-                                            </div>
-                                        </div>
-
-                                        <div class="profile-info-row">
-                                            <div class="profile-info-name"> 作品简介 </div>
-                                            <div class="profile-info-value">
-                                                <span class="editable" id="workDetail"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div>
+                    <!--<li>-->
+                    <!--<a href="#">学习情况</a>-->
+                    <!--</li>-->
+                    <li class="active">作品详情</li>
+                </ul><!-- /.breadcrumb -->
             </div>
 
             <div class="page-content">
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
+                <!--<div class="ace-settings-container" id="ace-settings-container">-->
+                    <!--<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">-->
+                        <!--<i class="ace-icon fa fa-cog bigger-130"></i>-->
+                    <!--</div>-->
 
-                    <div class="ace-settings-box clearfix" id="ace-settings-box">
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <div class="pull-left">
-                                    <select id="skin-colorpicker" class="hide">
-                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
-                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                                    </select>
-                                </div>
-                                <span>&nbsp; Choose Skin</span>
-                            </div>
+                    <!--<div class="ace-settings-box clearfix" id="ace-settings-box">-->
+                        <!--<div class="pull-left width-50">-->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<div class="pull-left">-->
+                                    <!--<select id="skin-colorpicker" class="hide">-->
+                                        <!--<option data-skin="no-skin" value="#438EB9">#438EB9</option>-->
+                                        <!--<option data-skin="skin-1" value="#222A2D">#222A2D</option>-->
+                                        <!--<option data-skin="skin-2" value="#C6487E">#C6487E</option>-->
+                                        <!--<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--<span>&nbsp; Choose Skin</span>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-add-container">
-                                    Inside
-                                    <b>.container</b>
-                                </label>
-                            </div>
-                        </div><!-- /.pull-left -->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-add-container">-->
+                                    <!--Inside-->
+                                    <!--<b>.container</b>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
 
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-                            </div>
+                        <!--<div class="pull-left width-50">-->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-                            </div>
-                        </div><!-- /.pull-left -->
-                    </div><!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />-->
+                                <!--<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
+                    <!--</div>&lt;!&ndash; /.ace-settings-box &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; /.ace-settings-container &ndash;&gt;-->
                 <div class="row">
                     <div class="col-xs-12">
 
                         <!-- PAGE CONTENT BEGINS -->
+                        <div class="widget-body">
+                            <div class="widget-main padding-24">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+                                                <b>作品视频</b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
+                                                <video id="workVideo" width="400px" height="225px" controls="controls" >
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-xs-11 label label-lg label-success arrowed-in arrowed-right">
+                                                <b>作品信息</b>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="profile-user-info profile-user-info-striped">
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作品名称 </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="workName"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作品ID </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="workId"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作品年级 </div>
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="workGrade"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作者姓名 </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="studentName"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作者ID </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="studentId"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作者班级 </div>
+
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="studentClass"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 点赞人数 </div>
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="likeCount"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 完成时间 </div>
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="makeDate"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="profile-info-row">
+                                                        <div class="profile-info-name"> 作品简介 </div>
+                                                        <div class="profile-info-value">
+                                                            <span class="editable" id="workDetail"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+                            </div>
+                        </div>
+
 
                         <!--<div class="page-header">-->
                         <!--<i class="fa fa-graduation-cap" aria-hidden="true"></i>-->
@@ -453,6 +468,8 @@
     var workId = req['workId'];
     $(document).ready(function () {
         tokenInit();
+        var source = req['from'];
+
         $.ajax({
             type: "POST",
             url: "http://192.168.0.153:8080/work/findById?token="+globalToken,

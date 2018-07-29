@@ -401,10 +401,10 @@
                                         <select id="childKind" class="col-sm-6 col-xs-6">
                                         </select>
 
-                                        <div class="hr hr-16 hr-dotted"></div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row col-sm-offset-2">
                                 <div class="form-group col-xs-12 col-sm-8">
                                     <label class="col-sm-3 control-label no-padding-top"> 上传视频: </label>
@@ -548,7 +548,7 @@
 
         var kindParam = {
             'parentId': -1,
-            'status':0
+            'status': 0
         };
 
         function initOption(value, label) {
@@ -574,14 +574,14 @@
                     });
                     var childKindParam = {
                         "parentId": $('#parentKind').val(),
-                        "status":0
+                        "status": 0
                     };
-                    if($('#parentKind').val()!=4){
-                        $('#childKind').css('display','inline');
-                        getChildKind(childKindParam);
-                    }else{
-                        $('#childKind').css('display','none');
-                    }
+                    // if($('#parentKind').val()!=4){
+                    //     $('#childKind').css('display','inline');
+                    getChildKind(childKindParam);
+                    // }else{
+                    //     $('#childKind').css('display','none');
+                    // }
                     // $.ajax({
                     //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
                     //     contentType: "application/json",
@@ -611,6 +611,7 @@
 
 
         function getChildKind(childKindParam) {
+            $('#childKind').html('').css('display', 'none');
             $.ajax({
                 url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
                 contentType: "application/json",
@@ -620,8 +621,8 @@
                 success: function (response) {
                     if (response.status === 'success') {
                         // $('#childKind').remove();
-                        $('#childKind').html('');
-                        if(response.msg.data.length>0){
+                        if (response.msg.data.length > 0) {
+                            $('#childKind').css('display', 'inline');
                             // $('#parentKind').after(initChildSelect());
                             $.each(response.msg.data, function (key, value) {
                                 $('#childKind').append(initOption(value.id, value.name));
@@ -641,18 +642,18 @@
         }
 
         $('#parentKind').change(function () {
-            $('#childKind').html('');
+            // $('#childKind').html('');
             var parentId = $('#parentKind').val();
             childKindParam = {
                 "parentId": parentId,
-                "status":0
+                "status": 0
             };
-            if(parentId!=4){
-                $('#childKind').css('display','inline');
-                getChildKind(childKindParam);
-            }else{
-                $('#childKind').css('display','none');
-            }
+            // if(parentId!=4){
+            //     $('#childKind').css('display','inline');
+            getChildKind(childKindParam);
+            // }else{
+            //     $('#childKind').css('display','none');
+            // }
             // $('#childKind').remove();
             // $.ajax({
             //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
@@ -849,7 +850,7 @@
     }
 
     function submitBn(type) {
-        var kindId = $('#parentKind').val()==4?$('#parentKind').val():$('#childKind').val();
+        var kindId = $('#childKind').val() ? $('#childKind').val() : $('#parentKind').val();
         console.log("表单内容" + type.value);
         switch (type.value) {
             case 1:
@@ -901,7 +902,7 @@
             },
             success: function (responseStr) {
                 console.log("表单提交成功!!!" + responseStr);
-                showToast("创建成功！","success");
+                showToast("创建成功！", "success");
                 $("#loading").css("display", "none");
 
                 window.location.href = 'myCreate.html?token=' + globalToken
@@ -913,7 +914,7 @@
             },
             error: function (responseStr) {
                 console.log("error" + responseStr);
-                showToast("创建失败！","danger");
+                showToast("创建失败！", "danger");
                 $("#loading").css("display", "none");
             }
         });
@@ -922,13 +923,13 @@
     function test() {
         if ($("#form-field-course").val() === '') {
             //alert("请输入任务名称");
-            showToast("请输入任务名称","danger");
+            showToast("请输入任务名称", "danger");
             $("#form-field-course").focus();
             return;
         }
         if ($("input[name='score']")[0].value === '') {
             //alert("请选择难度");
-            showToast("请选择难度","danger");
+            showToast("请选择难度", "danger");
             return;
         }
         $("#loading").css("display", "block");

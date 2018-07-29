@@ -102,17 +102,17 @@
                         <!--</li>-->
 
                         <!--<li class="divider"></li>-->
+                        <!--<li>-->
+                            <!--<a href="reset.html">-->
+                                <!--<i class="ace-icon fa fa-key"></i>-->
+                                <!--修改密码-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li class="divider"></li>-->
                         <li>
-                            <a href="reset.html">
-                                <i class="ace-icon fa fa-key"></i>
-                                修改密码
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
+                            <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                退出登录
                             </a>
                         </li>
                     </ul>
@@ -207,7 +207,7 @@
 
                 </ul>
             </li>
-            <li class="">
+            <li class="active">
                 <a href="courseAdmin.html">
                     <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
                     <span class="menu-text"> 任务管理 </span>
@@ -246,8 +246,8 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-search"></i>
-                        <a href="#">查询</a>
+                        <i class="ace-icon fa fa-cube"></i>
+                        <a href="#">任务管理</a>
                     </li>
 
                     <!--<li>-->
@@ -667,6 +667,7 @@
                         delbutton: false,//disable delete button
                         delOptions:{recreateForm: true, beforeShowForm:beforeDeleteCallback},
                         //editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+
                     },
                     search:false
                 },

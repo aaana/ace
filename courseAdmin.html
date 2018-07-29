@@ -105,7 +105,7 @@
                         <li>
                             <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                                退出登录
                             </a>
                         </li>
                     </ul>
@@ -628,11 +628,11 @@
         }
 
         function displayFormat(cellvalue, options, rowObject) {
-            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "未发布" || cellvalue === "<a style=\"color:#0726ff\">未发布</a>") {
-                return "<a style=\"color:#0726ff\">未发布</a>"
+            if (cellvalue === 0 || cellvalue === "0" || cellvalue === "未发布" || cellvalue === "<a style=\"color:#478FCA\">未发布</a>") {
+                return "<a style=\"color:#478FCA\">未发布</a>"
             }
-            else if (cellvalue === 1 || cellvalue == "1" || cellvalue === "已发布" || cellvalue === "<a style=\"color:#18ff4a\">已发布</a>") {
-                return "<a style=\"color:#18ff4a\">已发布</a>"
+            else if (cellvalue === 1 || cellvalue == "1" || cellvalue === "已发布" || cellvalue === "<a style=\"color:#69AA46\">已发布</a>") {
+                return "<a style=\"color:#69AA46\">已发布</a>"
             } else if (cellvalue === -1 || cellvalue == "-1" || cellvalue === "已删除" || cellvalue === "<a style=\"color:#ff293c\">已删除</a>") {
                 return "<a style=\"color:#ff293c\">已删除</a>"
             }
