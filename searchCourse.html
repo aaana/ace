@@ -320,7 +320,7 @@
                 if (postData.searchOper === undefined) postData.searchOper = null;
                 return JSON.stringify(postData);
             },
-            colNames: ['任务名称', '教师姓名', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
+            colNames: ['任务名称','类别','父类别' ,'教师姓名', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
             colModel: [
 
                 // {name: 'id', index: 'id', width: 60, sorttype: "int", sortable: true, editable: true},
@@ -331,6 +331,21 @@
                     sortable: true,
                     search: true,
                     searchoptions: {sopt: ["eq"]},
+                },
+                {
+                    name: 'kind.name',
+                    index: 'kindName',
+                    width: 100,
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {
+                    name: 'kind.parentName',
+                    index: 'parentKindName',
+                    width: 100,
+                    editable: false,
+                    stype:'select',
+                    searchoptions: {sopt: ["eq"],value: " : ;平面设计:平面设计;模型制作:模型制作;编程应用:编程应用;生态研究:生态研究"}
                 },
                 {
                     name: 'user.name',

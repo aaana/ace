@@ -101,6 +101,13 @@
                         <!--</li>-->
 
                         <!--<li class="divider"></li>-->
+                        <li>
+                            <a href="reset2.html">
+                                <i class="ace-icon fa fa-key"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li class="divider"></li>
 
                         <li>
                             <a href="#" onclick="logout()">
@@ -447,7 +454,7 @@
                 if (postData.searchOper === undefined) postData.searchOper = null;
                 return JSON.stringify(postData);
             },
-            colNames: ['', '任务名称', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
+            colNames: ['', '任务名称','类别','父类别', '教师名字', '发布时间', '参与人数', '最近修改', '任务难度', '任务详情', '学习情况', '状态'],
             colModel: [
                 {
                     name: 'myac', index: '', width: 60, fixed: true, sortable: false, resize: false, search: false,
@@ -470,10 +477,25 @@
                     searchoptions: {sopt: ["eq"]},
                 },
                 {
+                    name: 'kind.name',
+                    index: 'kindName',
+                    width: 150,
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {
+                    name: 'kind.parentName',
+                    index: 'parentKindName',
+                    width: 150,
+                    editable: false,
+                    stype:'select',
+                    searchoptions: {sopt: ["eq"],value: "平面设计:平面设计;模型制作:模型制作;编程应用:编程应用;生态研究:生态研究"}
+                },
+                {
                     name: 'user.name',
                     index: 'authorName',
                     search: true,
-                    width: 100,
+                    width: 150,
                     sortable: true,
                     searchoptions: {sopt: ["eq"]},
                 },
@@ -488,7 +510,7 @@
                 {
                     name: 'workCount',
                     index: 'workCount',
-                    width: 100,
+                    width: 50,
                     sortable: false,
                     search: false,
                 },
@@ -501,7 +523,7 @@
                 }, {
                     name: 'difficulty',
                     index: 'difficulty',
-                    width: 100,
+                    width: 50,
                     sortable: true,
                     search: true,
                     searchoptions: {sopt: ["eq"]},
@@ -594,7 +616,6 @@
                 var table = this;
                 setTimeout(function () {
                     styleCheckbox(table);
-
                     updateActionIcons(table);
                     updatePagerIcons(table);
                     enableTooltips(table);
@@ -708,6 +729,7 @@
                 }
                 ,
                 multipleSearch: true,
+                closeAfterSearch: true
                 /**
                  multipleGroup:true,
                  showQuery: true

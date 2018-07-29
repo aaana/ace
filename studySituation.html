@@ -404,7 +404,7 @@
 <!-- page specific plugin scripts -->
 <script src="assets/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/jquery.jqGrid.min.js"></script>
-<script src="assets/js/grid.locale-en.js"></script>
+<script src="assets/js/grid.locale-cn.js"></script>
 
 <!-- ace scripts -->
 <script src="assets/js/ace-elements.min.js"></script>
@@ -597,7 +597,7 @@
          */
 
 
-
+        var deleteIds = [];
 
 
         jQuery(grid_selector).jqGrid({
@@ -661,7 +661,7 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames: [' ', '作品', '作者ID', '姓名', '年级', '指导老师', '时间', '是否展示', '查看/编辑'],
+            colNames: [' ', '作品','类别','父类别', '作者ID', '姓名', '年级', '指导老师', '时间', '是否展示', '查看/编辑'],
             colModel: [
                 {
                     name: 'myac', index: '', width: 70, fixed: true, sortable: false, resize: false,
@@ -676,6 +676,21 @@
                 },
                 // {name:'id',index:'id', width:100, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
                 {name: 'name', index: 'name', width: 100, editable: false, searchoptions: {sopt: ["eq"]}},
+                {
+                    name: 'kind.name',
+                    index: 'kindName',
+                    width: 100,
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {
+                    name: 'kind.parentName',
+                    index: 'parentKindName',
+                    width: 100,
+                    editable: false,
+                    stype:'select',
+                    searchoptions: {sopt: ["eq"],value: " : ;平面设计:平面设计;模型制作:模型制作;编程应用:编程应用;生态研究:生态研究"}
+                },
                 {
                     name: 'user.account',
                     index: 'userAccount',
@@ -723,7 +738,7 @@
                             if (row.my) {
                                 return "<a href='workDetailManage.html?token=" + globalToken + "&workId=" + value +"&from="+req["from"]+"&courseId="+courseId+ "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks.html?token=" + globalToken + "&workId=" + value +"&from="+req["from"]+"&courseId="+courseId+  "' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
                             } else {
-                                $('.ui-pg-div .ui-inline-edit').remove();
+                                deleteIds.push(row.id);
                                 return "<a href='workDetailManage.html?token=" + globalToken + "&workId=" + value +"&from="+req["from"]+"&courseId="+ courseId+"' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
                             }
                         }
@@ -747,6 +762,7 @@
                     updateActionIcons(table);
                     updatePagerIcons(table);
                     enableTooltips(table);
+                    deleteEditBtns();
                 }, 0);
             },
 
@@ -755,6 +771,14 @@
         });
         $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
+
+        function deleteEditBtns() {
+
+            $.each(deleteIds,function (key,value) {
+                var editBtnId = '#jEditButton_'+value;
+                $(editBtnId).remove();
+            })
+        }
         function displayFormat(cellvalue, options, rowObject) {
             if (cellvalue === true || cellvalue === "true" || cellvalue === "是") {
                 return "是";

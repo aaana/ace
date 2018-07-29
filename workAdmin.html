@@ -100,6 +100,13 @@
                         <!--</li>-->
 
                         <!--<li class="divider"></li>-->
+                        <li>
+                            <a href="reset2.html">
+                                <i class="ace-icon fa fa-key"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li class="divider"></li>
 
                         <li>
                             <a href="#" onclick="logout()">
@@ -523,7 +530,7 @@
                 search: "search",
                 filters: "filters"
             },
-            colNames: [' ', '作品名', '作者学号', '姓名', '年级', '指导老师', '时间', '是否展示', '查看/编辑'],
+            colNames: [' ', '作品名','类别','父类别', '作者学号', '姓名', '年级', '指导老师', '时间', '是否展示', '查看/编辑'],
             colModel: [
                 {
                     name: 'myac', index: '', width: 70, fixed: true, sortable: false, resize: false,
@@ -538,6 +545,21 @@
                 },
                 // {name:'id',index:'id', width:60, sorttype:"int", editable: false,search:true,searchoptions: {sopt: ["eq"]}},
                 {name: 'name', index: 'name', width: 100, editable: false, searchoptions: {sopt: ["eq"]}},
+                {
+                    name: 'kind.name',
+                    index: 'kindName',
+                    width: 100,
+                    editable: false,
+                    searchoptions: {sopt: ["eq"]}
+                },
+                {
+                    name: 'kind.parentName',
+                    index: 'parentKindName',
+                    width: 100,
+                    editable: false,
+                    stype:'select',
+                    searchoptions: {sopt: ["eq"],value: " : ;平面设计:平面设计;模型制作:模型制作;编程应用:编程应用;生态研究:生态研究"}
+                },
                 {
                     name: 'user.account',
                     index: 'userAccount',
@@ -577,7 +599,7 @@
                     searchoptions: {sopt: ["eq"], value: "true:是;false:否"}
                 },
                 {
-                    name: 'id', index: 'view', width: 120, sortable: false, editable: false, search: false,
+                    name: 'id', index: 'view', width: 150, sortable: false, editable: false, search: false,
                     formatter: function (value, grid, row, state) {
                         if(state!='edit'){
                             if(row.my){

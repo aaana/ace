@@ -64,10 +64,10 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="createCourse.html" class="navbar-brand">
+            <a href="userAdmin2.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    蔷薇小学教师和作品管理后台
+                    系统管理
                 </small>
             </a>
         </div>
@@ -79,21 +79,35 @@
                         <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									系统管理员
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-
+                        <!--<li>-->
+                        <!--<a href="#">-->
+                        <!--<i class="ace-icon fa fa-cog"></i>-->
+                        <!--Settings-->
+                        <!--</a>-->
+                        <!--</li>-->
                         <li>
-                            <a href="reset.html">
+                            <a href="reset2.html">
                                 <i class="ace-icon fa fa-key"></i>
                                 修改密码
                             </a>
                         </li>
                         <li class="divider"></li>
+                        <!--<li>-->
+                        <!--<a href="profile.html">-->
+                        <!--<i class="ace-icon fa fa-user"></i>-->
+                        <!--Profile-->
+                        <!--</a>-->
+                        <!--</li>-->
+
+                        <!--<li class="divider"></li>-->
+
                         <li>
                             <a href="#" onclick="logout()">
                                 <i class="ace-icon fa fa-power-off"></i>
@@ -123,79 +137,69 @@
             }
         </script>
 
-        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='createCourse.html';">
-                    <i class="ace-icon fa fa-plus"></i>
-                </button>
-
-                <button class="btn btn-info" onclick="window.location.href='myCreate.html';">
-                    <i class="ace-icon fa fa-list"></i>
-                </button>
-
-                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html';">
-                    <i class="ace-icon fa fa-search"></i>
-                </button>
-
-                <button class="btn btn-danger" onclick="window.location.href='workWOCourseAdmin.html';">
-                    <i class="ace-icon fa fa-cubes"></i>
-                </button>
-
-            </div>
-
-            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                <span class="btn btn-success"></span>
-
-                <span class="btn btn-info"></span>
-
-                <span class="btn btn-warning"></span>
-
-                <span class="btn btn-danger"></span>
-
-            </div>
-        </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li>
-                <a href="createCourse.html">
-                    <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
-                    <span class="menu-text"> 创建任务 </span>
+            <li class="">
+                <a href="" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-users" aria-hidden="true"></i>
+                    <span class="menu-text"> 用户管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="userAdmin2.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            用户查询
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="createUser.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            创建／导入用户
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="changeGrade.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            年级变更
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="">
+                <a href="courseAdmin.html">
+                    <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
+                    <span class="menu-text"> 任务管理 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="">
-                <a href="myCreate.html">
-                    <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 我创建的任务 </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-            <li class="">
-                <a href="searchCourse.html">
-                    <i class="menu-icon fa fa-search" aria-hidden="true"></i>
-                    <span class="menu-text"> 查询任务 </span>
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-            <li>
-                <a href="workWOCourseAdmin.html">
+                <a href="workAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
-                    <span class="menu-text"> 无教程作品管理 </span>
+                    <span class="menu-text"> 作品管理 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
-            <!--<li class="active">-->
-                <!--<a href="reset.html">-->
-                    <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
-                    <!--<span class="menu-text"> 修改密码 </span>-->
-                <!--</a>-->
+            <li class="">
+                <a href="typeAdmin.html">
+                    <i class="menu-icon fa fa-tags" aria-hidden="true"></i>
+                    <span class="menu-text"> 类别管理 </span>
+                </a>
 
-                <!--<b class="arrow"></b>-->
-            <!--</li>-->
+                <b class="arrow"></b>
+            </li>
+
 
         </ul><!-- /.nav-list -->
 
@@ -343,58 +347,58 @@
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     $(document).ready(function () {
-       // $('#oldPsw').blur(function () {
-       //     console.log("blur");
-       //     checkOldPsw();
-       // });
+        // $('#oldPsw').blur(function () {
+        //     console.log("blur");
+        //     checkOldPsw();
+        // });
 
     });
     tokenInit();
-   // function checkOldPsw(){
-   //
-   // }
-   function updatePsw() {
-       var repeatPsw = $('#repeatPsw');
-       if($('#newPsw').val() !== $('#repeatPsw').val()){
-           showToast("重复密码与新密码不同",'info');
-           repeatPsw.focus();
-       }else{
-           $.ajax({
-               url: "http://192.168.0.153:8080/user/password/modifyMy?token="+globalToken,
-               type: "POST",
-               data: {
-                   oldPassword:$('#oldPsw').val(),
-                   newPassword:$('#newPsw').val()
-               },
-               success: function (data) {
-                   if (data.status == "success") {
-                       showToast("修改成功",'success');
-                       window.location.href = 'reset.html?token='+data.msg;
+    // function checkOldPsw(){
+    //
+    // }
+    function updatePsw() {
+        var repeatPsw = $('#repeatPsw');
+        if($('#newPsw').val() !== $('#repeatPsw').val()){
+            showToast("重复密码与新密码不同",'info');
+            repeatPsw.focus();
+        }else{
+            $.ajax({
+                url: "http://192.168.0.153:8080/user/password/modifyMy?token="+globalToken,
+                type: "POST",
+                data: {
+                    oldPassword:$('#oldPsw').val(),
+                    newPassword:$('#newPsw').val()
+                },
+                success: function (data) {
+                    if (data.status == "success") {
+                        showToast("修改成功",'success');
+                        window.location.href = 'reset.html?token='+data.msg;
 
-                   } else {
-                       showToast("原密码错误",'danger');
-                       $('#oldPsw').focus();
+                    } else {
+                        showToast("原密码错误",'danger');
+                        $('#oldPsw').focus();
 
-                   }
-               },
-               error: function (e) {
-                  showToast("修改失败",'danger');
-               }
-           });
-       }
-   }
+                    }
+                },
+                error: function (e) {
+                    showToast("修改失败",'danger');
+                }
+            });
+        }
+    }
 
-   function showToast(msg,type) {
-       bootoast({
-           "message": msg,
-           "type": type,
-           "position": "top-center",
-           "icon": "",
-           "timeout":2,
-           "animationDuration": "300",
-           "dismissable": true
-       });
-   }
+    function showToast(msg,type) {
+        bootoast({
+            "message": msg,
+            "type": type,
+            "position": "top-center",
+            "icon": "",
+            "timeout":2,
+            "animationDuration": "300",
+            "dismissable": true
+        });
+    }
 
 </script>
 </body>
