@@ -66,7 +66,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="userAdmin2.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     系统管理
@@ -171,7 +171,7 @@
 
                 </ul>
             </li>
-            <li class="">
+            <li id="courseAdminLi" class="">
                 <a href="courseAdmin.html">
                     <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
                     <span class="menu-text"> 任务管理 </span>
@@ -179,7 +179,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="workAdminLi" class="">
                 <a href="workAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 作品管理 </span>
@@ -212,10 +212,10 @@
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-cubes"></i>
-                        <a href="workAdmin.html">作品管理</a>
-                    </li>
+                    <!--<li>-->
+                        <!--<i class="ace-icon fa fa-cubes"></i>-->
+                        <!--<a href="workAdmin.html">作品管理</a>-->
+                    <!--</li>-->
 
                     <!--<li>-->
                     <!--<a href="workAdmin.html">作品管理</a>-->
@@ -237,81 +237,81 @@
 
             <div class="page-content">
 
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
+                <!--<div class="ace-settings-container" id="ace-settings-container">-->
+                    <!--<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">-->
+                        <!--<i class="ace-icon fa fa-cog bigger-130"></i>-->
+                    <!--</div>-->
 
-                    <div class="ace-settings-box clearfix" id="ace-settings-box">
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <div class="pull-left">
-                                    <select id="skin-colorpicker" class="hide">
-                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
-                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                                    </select>
-                                </div>
-                                <span>&nbsp; Choose Skin</span>
-                            </div>
+                    <!--<div class="ace-settings-box clearfix" id="ace-settings-box">-->
+                        <!--<div class="pull-left width-50">-->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<div class="pull-left">-->
+                                    <!--<select id="skin-colorpicker" class="hide">-->
+                                        <!--<option data-skin="no-skin" value="#438EB9">#438EB9</option>-->
+                                        <!--<option data-skin="skin-1" value="#222A2D">#222A2D</option>-->
+                                        <!--<option data-skin="skin-2" value="#C6487E">#C6487E</option>-->
+                                        <!--<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--<span>&nbsp; Choose Skin</span>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-navbar" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-navbar" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-sidebar" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-sidebar" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-breadcrumbs" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-breadcrumbs" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>-->
+                            <!--</div>-->
 
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-add-container" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-add-container">
-                                    Inside
-                                    <b>.container</b>
-                                </label>
-                            </div>
-                        </div><!-- /.pull-left -->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-add-container" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-add-container">-->
+                                    <!--Inside-->
+                                    <!--<b>.container</b>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
 
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-                            </div>
+                        <!--<div class="pull-left width-50">-->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-                            </div>
-                        </div><!-- /.pull-left -->
-                    </div><!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
+                    <!--</div>&lt;!&ndash; /.ace-settings-box &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; /.ace-settings-container &ndash;&gt;-->
 
                 <div class="row">
                     <div class="col-xs-12">
@@ -551,6 +551,7 @@
     //
     // var req = GetRequest();
     var workId = req['workId'];
+    var courseId = req['courseId'];
 
     var pressUploadFileBtn = function () {
         $("#photoInput").click();
@@ -559,6 +560,24 @@
     var picSrc = null;
     jQuery(function ($) {
         tokenInit();
+
+        function initLi(icon,href,label) {
+            var li = '               <li>' +
+                '                        <i class="ace-icon fa '+icon+'"></i>' +
+                '                        <a href="'+href+'">'+label+'</a>' +
+                '                    </li>';
+            return li;
+        }
+
+        var source = req['from'];
+        if(source == 'workAdmin'){
+            $('#workAdminLi').attr('class','active');
+            $('.breadcrumb .active').before(initLi('fa-cube',source+'.html?token='+globalToken,'作品管理'));
+        }else if(source == 'courseAdmin'){
+            $('#courseAdminLi').attr('class','active');
+            $('.breadcrumb .active').before(initLi('fa-cube',source+'.html','任务管理'))
+                .before(initLi('fa-area-chart','studySituation2.html?token='+globalToken+"&courseId="+courseId,'学习情况'));
+        }
 
         function initChildSelect() {
             var childSelect = '<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>';

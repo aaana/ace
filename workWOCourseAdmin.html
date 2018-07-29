@@ -63,7 +63,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="createCourse.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     蔷薇小学教师和作品管理后台
@@ -202,14 +202,14 @@
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
                     <li>
-                        <i class="ace-icon fa fa-home"></i>
-                        <a href="#">主页</a>
+                        <i class="ace-icon fa fa-cubes"></i>
+                        <a href="workWOCourseAdmin.html">无教程作品管理</a>
                     </li>
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
-                    <li class="active">无教程作品管理</li>
+                    <!--<li class="active">无教程作品管理</li>-->
                 </ul><!-- /.breadcrumb -->
             </div>
 
@@ -424,9 +424,9 @@
                     formatter: function (value, grid, row, state) {
                         if (state !== 'edit') {
                             if (row.my) {
-                                return "<a href='editWorks.html?workId=" + value + "&from=workWOCourseAdmin' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks2.html?workId=" + value + "&from=workWOCourseAdmin' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
+                                return "<a href='workDetailManage.html?workId=" + value + "&from=workWOCourseAdmin&token=" +globalToken+ "' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a> <a href='editWorks.html?workId=" + value + "&from=workWOCourseAdmin&token="+ globalToken+"' style=\"color:#2679B5\" onclick=\"Modify(" + value + ")\">编辑作品</a>"
                             } else {
-                                return "<a href='editWorks.html?workId=" + value + "&from=workWOCourseAdmin' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
+                                return "<a href='workDetailManage.html?workId=" + value + "&from=workWOCourseAdmin&token=" +globalToken+"' style=\"color:#f60;margin-right: 10px\" onclick=\"Modify(" + value + ")\">查看作品</a>"
                             }
                         }
                     }

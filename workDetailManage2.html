@@ -63,7 +63,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="userAdmin2.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     系统管理
@@ -193,7 +193,7 @@
 
                 </ul>
             </li>
-            <li class="">
+            <li id="courseAdminLi" class="">
                 <a href="courseAdmin.html">
                     <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
                     <span class="menu-text"> 任务管理 </span>
@@ -201,7 +201,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="active">
+            <li id="workAdminLi" class="">
                 <a href="workAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 作品管理 </span>
@@ -231,10 +231,10 @@
 
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-cube"></i>
-                        <a href="workAdmin.html">作品管理</a>
-                    </li>
+                    <!--<li>-->
+                        <!--<i class="ace-icon fa fa-cube"></i>-->
+                        <!--<a href="workAdmin.html">作品管理</a>-->
+                    <!--</li>-->
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
@@ -465,10 +465,27 @@
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
+    var courseId = req['courseId'];
     var workId = req['workId'];
     $(document).ready(function () {
         tokenInit();
+
+        function initLi(icon,href,label) {
+            var li = '               <li>' +
+                '                        <i class="ace-icon fa '+icon+'"></i>' +
+                '                        <a href="'+href+'">'+label+'</a>' +
+                '                    </li>';
+            return li;
+        }
         var source = req['from'];
+        if(source == 'workAdmin'){
+            $('#workAdminLi').attr('class','active');
+            $('.breadcrumb .active').before(initLi('fa-cube',source+'.html?token='+globalToken,'作品管理'));
+        }else if(source == 'courseAdmin'){
+            $('#courseAdminLi').attr('class','active');
+            $('.breadcrumb .active').before(initLi('fa-cube',source+'.html','任务管理'))
+                .before(initLi('fa-area-chart','studySituation2.html?token='+globalToken+"&courseId="+courseId,'学习情况'));
+        }
 
         $.ajax({
             type: "POST",

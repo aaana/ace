@@ -90,7 +90,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
+            <a href="createCourse.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     蔷薇小学教师和作品管理后台
@@ -190,7 +190,7 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-            <li>
+            <li class="">
                 <a href="createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建任务 </span>
@@ -198,7 +198,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="myCreateCourseLi" class="">
                 <a href="myCreate.html">
                     <i class="menu-icon fa fa-list"></i>
                     <span class="menu-text"> 我创建的任务 </span>
@@ -206,7 +206,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="searchCourseLi" class="">
                 <a href="searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
                     <span class="menu-text"> 查询任务 </span>
@@ -214,7 +214,7 @@
 
                 <b class="arrow"></b>
             </li>
-            <li class="">
+            <li id="noCourseLi">
                 <a href="workWOCourseAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 无教程作品管理 </span>
@@ -222,6 +222,14 @@
 
                 <b class="arrow"></b>
             </li>
+            <!--<li class="">-->
+            <!--<a href="reset.html">-->
+            <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
+            <!--<span class="menu-text"> 修改密码 </span>-->
+            <!--</a>-->
+
+            <!--<b class="arrow"></b>-->
+            <!--</li>-->
 
         </ul><!-- /.nav-list -->
 
@@ -234,17 +242,17 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-search"></i>
-                        <a href="#">查询</a>
-                    </li>
+                <ul id="workUl" class="breadcrumb">
+                    <!--<li>-->
+                        <!--<i class="ace-icon fa fa-search"></i>-->
+                        <!--<a href="#">查询</a>-->
+                    <!--</li>-->
 
                     <!--<li>-->
                     <!--<a href="#">学习情况</a>-->
                     <!--</li>-->
-                    <li class="active">学习情况</li>
-                    <li class="active">编辑学生作品</li>
+                    <!--<li class="active">学习情况</li>-->
+                    <li id="workLi" class="active">编辑学生作品</li>
                 </ul><!-- /.breadcrumb -->
 
                 <!--<div class="nav-search" id="nav-search">-->
@@ -260,81 +268,81 @@
 
             <div class="page-content">
 
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
+                <!--<div class="ace-settings-container" id="ace-settings-container">-->
+                    <!--<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">-->
+                        <!--<i class="ace-icon fa fa-cog bigger-130"></i>-->
+                    <!--</div>-->
 
-                    <div class="ace-settings-box clearfix" id="ace-settings-box">
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <div class="pull-left">
-                                    <select id="skin-colorpicker" class="hide">
-                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
-                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                                    </select>
-                                </div>
-                                <span>&nbsp; Choose Skin</span>
-                            </div>
+                    <!--<div class="ace-settings-box clearfix" id="ace-settings-box">-->
+                        <!--<div class="pull-left width-50">-->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<div class="pull-left">-->
+                                    <!--<select id="skin-colorpicker" class="hide">-->
+                                        <!--<option data-skin="no-skin" value="#438EB9">#438EB9</option>-->
+                                        <!--<option data-skin="skin-1" value="#222A2D">#222A2D</option>-->
+                                        <!--<option data-skin="skin-2" value="#C6487E">#C6487E</option>-->
+                                        <!--<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--<span>&nbsp; Choose Skin</span>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-navbar" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-navbar" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-sidebar" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-sidebar" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-breadcrumbs" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-breadcrumbs" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>-->
+                            <!--</div>-->
 
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-add-container" autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-add-container">
-                                    Inside
-                                    <b>.container</b>
-                                </label>
-                            </div>
-                        </div><!-- /.pull-left -->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2 ace-save-state"-->
+                                       <!--id="ace-settings-add-container" autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-add-container">-->
+                                    <!--Inside-->
+                                    <!--<b>.container</b>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
 
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-                            </div>
+                        <!--<div class="pull-left width-50">-->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-                            </div>
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>-->
+                            <!--</div>-->
 
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
-                                       autocomplete="off"/>
-                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-                            </div>
-                        </div><!-- /.pull-left -->
-                    </div><!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
+                            <!--<div class="ace-settings-item">-->
+                                <!--<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"-->
+                                       <!--autocomplete="off"/>-->
+                                <!--<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>-->
+                            <!--</div>-->
+                        <!--</div>&lt;!&ndash; /.pull-left &ndash;&gt;-->
+                    <!--</div>&lt;!&ndash; /.ace-settings-box &ndash;&gt;-->
+                <!--</div>&lt;!&ndash; /.ace-settings-container &ndash;&gt;-->
 
                 <div class="row">
                     <div class="col-xs-12">
@@ -596,6 +604,61 @@
 
     jQuery(function ($) {
         tokenInit();
+
+
+        if("workWOCourseAdmin" == req["from"]){
+            document.getElementById('noCourseLi').setAttribute('class', 'active');
+
+            var a_ele = document.createElement("a");
+            a_ele.setAttribute("href", "workWOCourseAdmin.html?token=" + globalToken);
+            a_ele.innerText = "无教程作品管理";
+            var i_ele = document.createElement("i");
+            i_ele.setAttribute("class", "ace-icon fa fa-cubes");
+            var li_ele = document.createElement("li");
+            i_ele.appendChild(a_ele);
+            li_ele.appendChild(i_ele);
+            li_ele.setAttribute("id", "li_ele_id");
+
+            document.getElementById("workUl").insertBefore(li_ele, document.getElementById("workLi"));
+
+        } else {
+            if ("searchCourse" == req["from"]) {
+                document.getElementById('searchCourseLi').setAttribute('class', 'active');
+
+                var a_ele = document.createElement("a");
+                a_ele.setAttribute("href", "searchCourse.html?token=" + globalToken);
+                a_ele.innerText = "查询任务";
+                var i_ele = document.createElement("i");
+                i_ele.setAttribute("class", "ace-icon fa fa-search");
+                var li_ele = document.createElement("li");
+                i_ele.appendChild(a_ele);
+                li_ele.appendChild(i_ele);
+                li_ele.setAttribute("id", "li_ele_id");
+
+                document.getElementById("workUl").insertBefore(li_ele, document.getElementById("workLi"));
+
+            } else if ("myCreate" == req["from"]) {
+                document.getElementById('myCreateCourseLi').setAttribute('class', 'active');
+
+                var a_ele = document.createElement("a");
+                a_ele.setAttribute("href", "myCreate.html?token=" + globalToken);
+                a_ele.innerText = "  我创建的任务";
+                var i_ele = document.createElement("i");
+                i_ele.setAttribute("class", "ace-icon fa fa-list");
+                var li_ele = document.createElement("li");
+                i_ele.appendChild(a_ele);
+                li_ele.appendChild(i_ele);
+                li_ele.setAttribute("id", "li_ele_id");
+                document.getElementById("workUl").insertBefore(li_ele, document.getElementById("workLi"));
+            }
+
+            var stu_li_ele = li_ele.cloneNode(true);
+            stu_li_ele.firstChild.setAttribute("class", "ace-icon fa");
+            stu_li_ele.firstChild.firstChild.innerText = "学习情况";
+            stu_li_ele.firstChild.firstChild.setAttribute("href", "studySituation.html?token=" + globalToken + "&workId=" + workId + "&from=" + req["from"]+"&courseId=" + req['courseId']);
+            document.getElementById("workUl").insertBefore(stu_li_ele, document.getElementById("workLi"));
+
+        }
 
         function initChildSelect() {
             var childSelect = '<select id="childKind" class="col-sm-6 col-xs-6" style="float:right;"></select>';
