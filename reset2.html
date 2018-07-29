@@ -373,7 +373,7 @@
                 success: function (data) {
                     if (data.status == "success") {
                         showToast("修改成功",'success');
-                        window.location.href = 'reset.html?token='+data.msg;
+                        window.location.href='./reset.html?token='+data.msg;
 
                     } else {
                         showToast("原密码错误",'danger');

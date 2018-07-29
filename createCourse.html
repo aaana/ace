@@ -150,20 +150,20 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='createCourse.html?token='+ globalToken;">
+                <button class="btn btn-success" onclick="window.location.href='./createCourse.html'">
                     <i class="ace-icon fa fa-plus"></i>
                 </button>
 
-                <button class="btn btn-info" onclick="window.location.href='myCreate.html?token='+ globalToken;">
+                <button class="btn btn-info" onclick="window.location.href='./myCreate.html'">
                     <i class="ace-icon fa fa-list"></i>
                 </button>
 
-                <button class="btn btn-warning" onclick="window.location.href='searchCourse.html?token='+ globalToken;">
+                <button class="btn btn-warning" onclick="window.location.href='./searchCourse.html'">
                     <i class="ace-icon fa fa-search"></i>
                 </button>
 
                 <button class="btn btn-danger"
-                        onclick="window.location.href='workWOCourseAdmin.html?token='+ globalToken;">
+                        onclick="window.location.href='./workWOCourseAdmin.html'">
                     <i class="ace-icon fa fa-cubes"></i>
                 </button>
 
@@ -905,7 +905,7 @@
                 showToast("创建成功！", "success");
                 $("#loading").css("display", "none");
 
-                window.location.href = 'myCreate.html?token=' + globalToken
+                window.location.href='./myCreate.html?token=' + globalToken
                 /*if (responseStr.status === 200) {
                     console.log("表单提交成功" + responseStr);
                 } else {

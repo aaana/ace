@@ -15,15 +15,15 @@ var req = GetRequest();
 
 // var globalToken = req['token'];
 function tokenInit() {
-    $.each($("a"), function (key, value) {
-        $(value).attr("href", $(value).attr("href") + "?token=" + globalToken);
-    });
-    // var allA=$("a");
-    // for(var a in allA){
-    //     var element=$(allA[a]);
-    //     console.log(element);
-    //     element.attr("href",element.attr("href")+"?token="+globalToken);
-    // }
+//     $.each($("a"), function (key, value) {
+//         $(value).attr("href", $(value).attr("href") + "?token=" + globalToken);
+//     });
+//     // var allA=$("a");
+//     // for(var a in allA){
+//     //     var element=$(allA[a]);
+//     //     console.log(element);
+//     //     element.attr("href",element.attr("href")+"?token="+globalToken);
+//     // }
 }
 
 function logout() {

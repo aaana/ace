@@ -421,7 +421,7 @@
     // }
 
     function logout() {
-        window.location.href = 'userLogin.html';
+        window.location.href='./userLogin.html';
     }
 
     var grid_selector = "#grid-table";
@@ -498,7 +498,7 @@
             },
             error: function (msg) {
                 showToast("修改失败！请重新修改", "danger");
-                // window.location.href = 'createUser.html';
+                // window.location.href='./createUser.html';
             }
         });
         console.log(userId + newPwd)

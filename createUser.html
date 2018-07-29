@@ -547,16 +547,16 @@
                     showToast("创建成功","success");
                     reset();
                     // alert("创建成功！");
-                    // window.location.href = 'createUser.html';
+                    // window.location.href='./createUser.html';
                 } else {
                     showToast("创建失败！请重新创建","danger");
                     console.log("创建失败");
-                    // window.location.href = 'createUser.html';
+                    // window.location.href='./createUser.html';
                 }
             },
             error: function (msg) {
                 showToast("创建失败！请重新创建","danger");
-                // window.location.href = 'createUser.html';
+                // window.location.href='./createUser.html';
             }
         })
     }
@@ -587,18 +587,18 @@
                     console.log("导入成功..");
                     $('#uploadFileBtn').attr("disabled", true);
                     showToast("批量导入成功","success");
-                    // window.location.href = 'createUser.html';
+                    // window.location.href='./createUser.html';
                 } else {
                     showToast("批量导入失败！请确认文件格式","danger");
                     console.log("导入失败");
-                    // window.location.href = 'createUser.html';
+                    // window.location.href='./createUser.html';
                 }
             },
             error: function (e) {
                 $('#loadingImg').css('display','none');
                 showToast("批量导入失败！请确认文件格式","danger");
                 console.log("导入失败");
-                // window.location.href = 'createUser.html';
+                // window.location.href='./createUser.html';
             }
         });
     }

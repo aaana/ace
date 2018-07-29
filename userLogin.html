@@ -74,7 +74,7 @@
             success:function (data) {
                 console.log(data);
                 if(data.status === 'success' ){
-                    window.location.href='createCourse.html?token='+data.msg.token;
+                    window.location.href='./createCourse.html?token='+data.msg.token;
                 }
             },
             error:function (msg) {
@@ -99,7 +99,7 @@
             success:function (data) {
                 console.log(data);
                 if(data.status === 'success' && data.msg.isManager === true  ){
-                    window.location.href='userAdmin2.html?token='+data.msg.token;
+                    window.location.href='./userAdmin2.html?token='+data.msg.token;
                 }
             },
             error:function (msg) {
