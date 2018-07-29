@@ -10,12 +10,13 @@ function GetRequest() {
     }
     return theRequest;
 }
+
 var req = GetRequest();
-var globalToken = req['token'];
-function tokenInit()
-{
-    $.each($("a"),function (key,value) {
-        $(value).attr("href",$(value).attr("href")+"?token="+globalToken);
+
+// var globalToken = req['token'];
+function tokenInit() {
+    $.each($("a"), function (key, value) {
+        $(value).attr("href", $(value).attr("href") + "?token=" + globalToken);
     });
     // var allA=$("a");
     // for(var a in allA){
@@ -26,5 +27,9 @@ function tokenInit()
 }
 
 function logout() {
-    window.location.href = 'userLogin.html';
+    window.location.href='./user/logout?nextPage=userLogin';
 }
+
+$(function () {
+    $('#username').html(globalUserData.name);
+});

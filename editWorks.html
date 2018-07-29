@@ -9,48 +9,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css"/>
-    <link rel="stylesheet" href="assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="./assets/css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="./assets/css/bootstrap-datepicker3.min.css"/>
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="./assets/css/fonts.googleapis.com.css"/>
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <link rel="stylesheet" href="./assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
+    <link rel="stylesheet" href="./assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
     <![endif]-->
-    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
-    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
-    <link rel="stylesheet" href="assets/css/bootoast.css">
+    <link rel="stylesheet" href="./assets/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="./assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="./assets/css/bootoast.css">
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <link rel="stylesheet" href="./assets/css/ace-ie.min.css"/>
     <![endif]-->
 
     <!-- inline styles related to this page -->
-    <link rel="stylesheet" href="assets/css/custom/loading.css"/>
+    <link rel="stylesheet" href="./assets/css/custom/loading.css"/>
 
 
     <!-- ace settings handler -->
-    <script src="assets/js/ace-extra.min.js"></script>
+    <script src="./assets/js/ace-extra.min.js"></script>
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
     <!--[if lte IE 8]>
-    <script src="assets/js/html5shiv.min.js"></script>
-    <script src="assets/js/respond.min.js"></script>
+    <script src="./assets/js/html5shiv.min.js"></script>
+    <script src="./assets/js/respond.min.js"></script>
     <![endif]-->
 
     <!--Custom styles-->
-    <link rel="stylesheet" href="assets/css/custom/editWorks.css"/>
-    <script src="assets/js/custom/helper.js"></script>
-</head>
+    <link rel="stylesheet" href="./assets/css/custom/editWorks.css"/>
+    <script src="./assets/js/custom/helper.js"></script>
+<script src="./userinfo.js"></script></head>
 
 <body class="no-skin">
 <div class="ui-widget-overlay" id="loading"
@@ -90,7 +90,7 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="createCourse.html" class="navbar-brand">
+            <a href="./createCourse.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
                     蔷薇小学教师和作品管理后台
@@ -102,10 +102,10 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo"/>
+                        <img class="nav-user-photo" src="./assets/images/avatars/user.jpg" alt="Jason's Photo"/>
                         <span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									<span id="username"></span>
 								</span>
 
                         <i class="ace-icon fa fa-caret-down"></i>
@@ -120,7 +120,7 @@
                         <!--</li>-->
 
                         <!--<li>-->
-                        <!--<a href="profile.html">-->
+                        <!--<a href="./profile.html">-->
                         <!--<i class="ace-icon fa fa-user"></i>-->
                         <!--Profile-->
                         <!--</a>-->
@@ -191,7 +191,7 @@
 
         <ul class="nav nav-list">
             <li class="">
-                <a href="createCourse.html">
+                <a href="./createCourse.html">
                     <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
                     <span class="menu-text"> 创建任务 </span>
                 </a>
@@ -199,7 +199,7 @@
                 <b class="arrow"></b>
             </li>
             <li id="myCreateCourseLi" class="">
-                <a href="myCreate.html">
+                <a href="./myCreate.html">
                     <i class="menu-icon fa fa-list"></i>
                     <span class="menu-text"> 我创建的任务 </span>
                 </a>
@@ -207,7 +207,7 @@
                 <b class="arrow"></b>
             </li>
             <li id="searchCourseLi" class="">
-                <a href="searchCourse.html">
+                <a href="./searchCourse.html">
                     <i class="menu-icon fa fa-search" aria-hidden="true"></i>
                     <span class="menu-text"> 查询任务 </span>
                 </a>
@@ -215,7 +215,7 @@
                 <b class="arrow"></b>
             </li>
             <li id="noCourseLi">
-                <a href="workWOCourseAdmin.html">
+                <a href="./workWOCourseAdmin.html">
                     <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
                     <span class="menu-text"> 无教程作品管理 </span>
                 </a>
@@ -223,7 +223,7 @@
                 <b class="arrow"></b>
             </li>
             <!--<li class="">-->
-            <!--<a href="reset.html">-->
+            <!--<a href="./reset.html">-->
             <!--<i class="menu-icon fa fa-key" aria-hidden="true"></i>-->
             <!--<span class="menu-text"> 修改密码 </span>-->
             <!--</a>-->
@@ -425,7 +425,7 @@
                                                          onclick="pressUploadFileBtn()">
                                                         <img class="img-responsive"
                                                              style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"
-                                                             src="assets/images/default.jpg"/>
+                                                             src="./assets/images/default.jpg"/>
                                                     </div>
                                                     <input name="file" id="photoInput" accept="image/*" type="file"
                                                            multiple="multiple" style="display: none">
@@ -527,40 +527,40 @@
 <!-- basic scripts -->
 
 <!--[if !IE]> -->
-<script src="assets/js/jquery-2.1.4.min.js"></script>
+<script src="./assets/js/jquery-2.1.4.min.js"></script>
 
 <!-- <![endif]-->
 
 <!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
+<script src="./assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if ('ontouchstart' in document.documentElement) document.write("<script src="./assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
 
 <!-- page specific plugin scripts -->
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/uuid.js"></script>
-<script src="assets/js/bootoast.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/uuid.js"></script>
+<script src="./assets/js/bootoast.js"></script>
 
 <!-- page specific plugin scripts -->
 
 <!-- ace scripts -->
-<script src="assets/js/ace-elements.min.js"></script>
-<script src="assets/js/ace.min.js"></script>
+<script src="./assets/js/ace-elements.min.js"></script>
+<script src="./assets/js/ace.min.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="assets/js/base64.js"></script>
+<script src="./assets/js/base64.js"></script>
 
-<script src="assets/js/jquery-ui.custom.min.js"></script>
-<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-<script src="assets/js/bootstrap-tag.min.js"></script>
-<script src="assets/js/jquery.bootstrap-duallistbox.min.js"></script>
-<script src="assets/js/jquery.raty.min.js"></script>
+<script src="./assets/js/jquery-ui.custom.min.js"></script>
+<script src="./assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="./assets/js/bootstrap-tag.min.js"></script>
+<script src="./assets/js/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="./assets/js/jquery.raty.min.js"></script>
 
 
 <!-- page specific plugin scripts -->
-<script src="assets/js/bootstrap-datepicker.min.js"></script>
+<script src="./assets/js/bootstrap-datepicker.min.js"></script>
 
 
 <!-- inline scripts related to this page -->
@@ -672,7 +672,7 @@
                 if (picSrc) {
                     dvPreview.html('<img class="img-responsive" style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"  src="' + picSrc + '" />');
                 } else {
-                    dvPreview.html('<img class="img-responsive" style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"  src="assets/images/default.jpg" />');
+                    dvPreview.html('<img class="img-responsive" style="width: 100%;height: 150px;display: inline-block;vertical-align: middle"  src="./assets/images/default.jpg" />');
                 }
                 $($(this)[0].files).each(function () {
                     var file = $(this);
@@ -867,7 +867,7 @@
 
         function getWorkDetail(){
             $.ajax({
-                url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
+                url: "./work/findById?token="+globalToken,
                 contentType: "application/json",
                 type: 'POST',
                 data: JSON.stringify(data1),
@@ -899,7 +899,7 @@
                         };
                         var childKindId = responseStr.msg.kind.id;
                         $.ajax({
-                            url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                            url: "./kind/search?token=" + globalToken,
                             contentType: "application/json",
                             type: 'POST',
                             data: JSON.stringify(childKindParam),
@@ -958,7 +958,7 @@
         };
 
         $.ajax({
-            url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+            url: "./kind/search?token=" + globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(kindParam),
@@ -974,7 +974,7 @@
                     //     'status':0
                     // };
                     // $.ajax({
-                    //     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                    //     url: "./kind/search?token=" + globalToken,
                     //     contentType: "application/json",
                     //     type: 'POST',
                     //     data: JSON.stringify(childKindParam),
@@ -1012,7 +1012,7 @@
             // if(parentId!=4){
             //     $('#childKind').css('display','inline');
                 $.ajax({
-                    url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+                    url: "./kind/search?token=" + globalToken,
                     contentType: "application/json",
                     type: 'POST',
                     data: JSON.stringify(childKindParam),
@@ -1041,7 +1041,7 @@
         });
 
         // $.ajax({
-        //     url: "http://192.168.0.153:8080/work/findById?token="+globalToken,
+        //     url: "./work/findById?token="+globalToken,
         //     contentType: "application/json",
         //     type: 'POST',
         //     data: JSON.stringify(data1),
@@ -1102,7 +1102,7 @@
     //
     //
     //     $.ajax({
-    //         url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+    //         url: "./kind/search?token=" + globalToken,
     //         contentType: "application/json",
     //         type: 'POST',
     //         data: JSON.stringify(kindParam),
@@ -1116,7 +1116,7 @@
     //                     "parentId": 0
     //                 };
     //                 $.ajax({
-    //                     url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+    //                     url: "./kind/search?token=" + globalToken,
     //                     contentType: "application/json",
     //                     type: 'POST',
     //                     data: JSON.stringify(childKindParam),
@@ -1147,7 +1147,7 @@
     //             "status": 0
     //         };
     //         $.ajax({
-    //             url: "http://192.168.0.153:8080/kind/search?token=" + globalToken,
+    //             url: "./kind/search?token=" + globalToken,
     //             contentType: "application/json",
     //             type: 'POST',
     //             data: JSON.stringify(childKindParam),
@@ -1169,7 +1169,7 @@
     //
     //
     //     $.ajax({
-    //         url: "http://192.168.0.153:8080/work/findById?token=" + globalToken,
+    //         url: "./work/findById?token=" + globalToken,
     //         contentType: "application/json",
     //         type: 'POST',
     //         data: JSON.stringify(data1),
@@ -1258,7 +1258,7 @@
         }
         console.log("表单内容" + JSON.stringify(data1));
         $.ajax({
-            url: "http://192.168.0.153:8080/work/update?token=" + globalToken,
+            url: "./work/update?token=" + globalToken,
             contentType: "application/json",
             type: 'POST',
             data: JSON.stringify(data1),
@@ -1303,7 +1303,7 @@
             form.append('file', $('#photoInput')[0].files[0]);
             form.append("filename", uploadName);
             $.ajax({
-                url: "http://192.168.0.153:8080/file/upload?token=" + globalToken,
+                url: "./file/upload?token=" + globalToken,
                 type: "POST",
                 cache: false,
                 data: form,

@@ -10,11 +10,11 @@
     <title>Floating labels example for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/custom/userLogin.css" rel="stylesheet">
-</head>
+    <link href="./assets/css/custom/userLogin.css" rel="stylesheet">
+<script src="./userinfo.js"></script></head>
 
 <body>
 <form class="form-signin">
@@ -55,7 +55,7 @@
 </form>
 </body>
 
-<script src="assets/js/jquery-2.1.4.min.js"></script>
+<script src="./assets/js/jquery-2.1.4.min.js"></script>
 
 <script>
     function login() {
@@ -70,7 +70,7 @@
             },
             dataType:'json',
             method:'get',
-            url:'http://192.168.0.153:8080/user/accountLogin',
+            url:'./user/accountLogin',
             success:function (data) {
                 console.log(data);
                 if(data.status === 'success' ){
@@ -95,7 +95,7 @@
             },
             dataType:'json',
             method:'get',
-            url:'http://192.168.0.153:8080/user/accountLogin',
+            url:'./user/accountLogin',
             success:function (data) {
                 console.log(data);
                 if(data.status === 'success' && data.msg.isManager === true  ){
