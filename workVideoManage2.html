@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
     <title>查看编辑作品视频</title>
 
-    <meta name="description" content="Dynamic tables and grids using jqGrid plugin"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="description" content="Dynamic tables and grids using jqGrid plugin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="./assets/css/jquery-ui.min.css"/>
-    <link rel="stylesheet" href="./assets/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="./assets/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="./assets/css/bootstrap-datepicker3.min.css" />
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="./assets/css/fonts.googleapis.com.css"/>
+    <link rel="stylesheet" href="./assets/css/fonts.googleapis.com.css" />
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="./assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <link rel="stylesheet" href="./assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="./assets/css/ace-part2.min.css" class="ace-main-stylesheet"/>
+    <link rel="stylesheet" href="./assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
     <![endif]-->
-    <link rel="stylesheet" href="./assets/css/ace-skins.min.css"/>
-    <link rel="stylesheet" href="./assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="./assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="./assets/css/ace-rtl.min.css" />
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="./assets/css/ace-ie.min.css"/>
+    <link rel="stylesheet" href="./assets/css/ace-ie.min.css" />
     <![endif]-->
 
     <!-- inline styles related to this page -->
@@ -45,10 +45,9 @@
     <![endif]-->
 
     <!--Custom styles-->
-    <link rel="stylesheet" href="./assets/css/custom/studySituation.css"/>
+    <link rel="stylesheet" href="./assets/css/custom/studySituation.css" />
 
-    <script src="./userinfo.js"></script>
-</head>
+<script src="./userinfo.js"></script></head>
 
 <body class="no-skin">
 <div id="navbar" class="navbar navbar-default          ace-save-state">
@@ -67,7 +66,7 @@
             <a href="./index.html" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    蔷薇小学教师和作品管理后台
+                    系统管理
                 </small>
             </a>
         </div>
@@ -109,80 +108,72 @@
 
 <div class="main-container ace-save-state" id="main-container">
     <script type="text/javascript">
-        try {
-            ace.settings.loadState('main-container')
-        } catch (e) {
-        }
+        try{ace.settings.loadState('main-container')}catch(e){}
     </script>
 
     <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
         <script type="text/javascript">
-            try {
-                ace.settings.loadState('sidebar')
-            } catch (e) {
-            }
+            try{ace.settings.loadState('sidebar')}catch(e){}
         </script>
 
-        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='./createCourse.html';">
-                    <i class="ace-icon fa fa-plus"></i>
-                </button>
-
-                <button class="btn btn-info" onclick="window.location.href='./myCreate.html';">
-                    <i class="ace-icon fa fa-list"></i>
-                </button>
-
-                <button class="btn btn-warning" onclick="window.location.href='./searchCourse.html';">
-                    <i class="ace-icon fa fa-search"></i>
-                </button>
-
-                <button class="btn btn-danger" onclick="window.location.href='./workWOCourseAdmin.html';">
-                    <i class="ace-icon fa fa-cubes"></i>
-                </button>
-
-            </div>
-
-            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                <span class="btn btn-success"></span>
-
-                <span class="btn btn-info"></span>
-
-                <span class="btn btn-warning"></span>
-
-                <span class="btn btn-danger"></span>
-            </div>
-        </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
             <li class="">
-                <a href="./createCourse.html">
-                    <i class="menu-icon fa fa-plus" aria-hidden="true"></i>
-                    <span class="menu-text"> 创建任务 </span>
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-users" aria-hidden="true"></i>
+                    <span class="menu-text"> 用户管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
                 </a>
 
                 <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="./userAdmin2.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            用户查询
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="./createUser.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            创建／导入用户
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="./changeGrade.html">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            年级变更
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
             </li>
             <li class="">
-                <a href="./myCreate.html">
-                    <i class="menu-icon fa fa-list"></i>
-                    <span class="menu-text"> 我创建的任务 </span>
+                <a href="./courseAdmin.html">
+                    <i class="menu-icon fa fa-cube" aria-hidden="true"></i>
+                    <span class="menu-text"> 任务管理 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
             <li class="active">
-                <a href="./searchCourse.html">
-                    <i class="menu-icon fa fa-search" aria-hidden="true"></i>
-                    <span class="menu-text"> 查询任务 </span>
+                <a href="./workAdmin.html">
+                    <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
+                    <span class="menu-text"> 作品管理 </span>
                 </a>
 
                 <b class="arrow"></b>
             </li>
-            <li>
-                <a href="./workWOCourseAdmin.html">
-                    <i class="menu-icon fa fa-cubes" aria-hidden="true"></i>
-                    <span class="menu-text"> 无教程作品管理 </span>
+            <li class="">
+                <a href="./typeAdmin.html">
+                    <i class="menu-icon fa fa-tags" aria-hidden="true"></i>
+                    <span class="menu-text"> 类别管理 </span>
                 </a>
 
                 <b class="arrow"></b>
@@ -192,8 +183,7 @@
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-               data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
         </div>
     </div>
 
@@ -236,7 +226,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-10 col-sm-offset-1" align="center" style="margin-top: 12px">
-                                    <video id="workVideo" width="100%" height="100%" controls="controls">
+                                    <video id="workVideo" width="100%" height="100%" controls="controls" >
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -264,22 +254,18 @@
                                                         <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp材料准备</i>
                                                     </button>
 
-                                                    <button id="upload1b" class="btn btn-primary"
-                                                            onclick="upload1Click()">
-                                                        <i id="upload1i"
-                                                           class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
-                                                        <input type="file" id="videoUrl1" accept="video/mp4"
-                                                               style="display: none"/>
+                                                    <button id="upload1b" class="btn btn-primary" onclick="upload1Click()">
+                                                        <i id="upload1i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                        <input type="file" id="videoUrl1" accept="video/mp4" style="display: none"/>
                                                     </button>
 
-                                                    <button class="btn btn-info" onclick="download1Click()">
+                                                    <button  class="btn btn-info" onclick="download1Click()">
                                                         <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
 
                                                     </button>
 
                                                     <button class="btn btn-danger" onclick="delete1Click()">
-                                                        <i id="delete1i"
-                                                           class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
+                                                        <i id="delete1i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
                                                     </button>
                                                 </p>
                                                 <hr/>
@@ -292,20 +278,16 @@
                                                     <!--<i class="ace-icon fa fa-upload align-top bigger-125"></i>-->
                                                     <!--上传-->
                                                     </button>
-                                                    <button id="upload2b" class="btn btn-primary"
-                                                            onclick="upload2Click()">
-                                                        <i id="upload2i"
-                                                           class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
-                                                        <input type="file" id="videoUrl2" accept="video/mp4"
-                                                               style="display: none"/>
+                                                    <button id="upload2b" class="btn btn-primary" onclick="upload2Click()">
+                                                        <i id="upload2i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                        <input type="file" id="videoUrl2" accept="video/mp4" style="display: none"/>
                                                     </button>
                                                     <button class="btn btn-info" onclick="download2Click()">
                                                         <i class="ace-icon fa fa-download  align-top bigger-125 icon-on-right">&nbsp&nbsp&nbsp下&nbsp&nbsp载&nbsp&nbsp&nbsp</i>
                                                     </button>
 
                                                     <button class="btn btn-danger" onclick="delete2Click()">
-                                                        <i id="delete2i"
-                                                           class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
+                                                        <i id="delete2i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
                                                     </button>
                                                 </p>
                                                 <hr/>
@@ -314,12 +296,9 @@
                                                         <i class="ace-icon fa fa-youtube-play align-top bigger-125">&nbsp作品简介</i>
                                                     </button>
 
-                                                    <button id="upload3b" class="btn btn-primary"
-                                                            onclick="upload3Click()">
-                                                        <i id="upload3i"
-                                                           class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
-                                                        <input type="file" id="videoUrl3" accept="video/mp4"
-                                                               style="display: none"/>
+                                                    <button id="upload3b" class="btn btn-primary" onclick="upload3Click()">
+                                                        <i id="upload3i" class="ace-icon fa fa-upload align-top bigger-125">&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp</i>
+                                                        <input type="file" id="videoUrl3" accept="video/mp4" style="display: none"/>
                                                     </button>
 
                                                     <button class="btn btn-info" onclick="download3Click()">
@@ -327,8 +306,7 @@
                                                     </button>
 
                                                     <button class="btn btn-danger" onclick="delete3Click()">
-                                                        <i id="delete3i"
-                                                           class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
+                                                        <i id="delete3i" class="ace-icon fa fa-trash  align-top bigger-125">&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp</i>
                                                     </button>
                                                 </p>
                                             </div>
@@ -372,32 +350,27 @@
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-navbar" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-sidebar" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-breadcrumbs" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state"
-                                       id="ace-settings-add-container" autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-add-container">
                                     Inside
                                     <b>.container</b>
@@ -407,20 +380,17 @@
 
                         <div class="pull-left width-50">
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
                             </div>
 
                             <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight"
-                                       autocomplete="off"/>
+                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
                                 <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
                             </div>
                         </div><!-- /.pull-left -->
@@ -463,7 +433,7 @@
 <script src="./assets/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='./assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    if('ontouchstart' in document.documentElement) document.write("<script src='./assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
 <script src="./assets/js/bootstrap.min.js"></script>
 
@@ -488,7 +458,7 @@
     // var videoUrl1_R;
     // var videoUrl2_R;
     // var videoUrl3_R;
-    var VU = [0, 0, 0];
+    var VU = [0,0,0];
     var STR_UPLOAD = "&nbsp&nbsp&nbsp上&nbsp&nbsp传&nbsp&nbsp&nbsp";
     var STR_UPLOAD_C = "取消上传";
     var STR_DELETE = "&nbsp&nbsp&nbsp删&nbsp&nbsp除&nbsp&nbsp&nbsp";
@@ -503,43 +473,41 @@
             type: "POST",
             url: "./work/findById?token=1d44662ee7e0452a9d594841799d00ac",
             contentType: "application/json",
-            data: JSON.stringify({"id": workId}),
+            data: JSON.stringify({"id":workId}),
             async: true,
-            success: function (data, state) {
+            success: function(data, state) {
                 console.log(data);
-                if (null != data.msg.videoUrl1) {
+                if(null!=data.msg.videoUrl1) {
                     videoUrl1 = data.msg.videoUrl1;
                     // videoUrl1_R = data.msg.videoUrl1;
                 }
-                if (null != data.msg.videoUrl2) {
+                if(null!=data.msg.videoUrl2) {
                     videoUrl2 = data.msg.videoUrl2;
                     // videoUrl2_R = data.msg.videoUrl2;
                 }
-                if (null != data.msg.videoUrl3) {
+                if(null!=data.msg.videoUrl3) {
                     videoUrl3 = data.msg.videoUrl3;
                     // videoUrl3_R = data.msg.videoUrl3;
                 }
-                if (null != data.msg.photoUrl) {
+                if(null != data.msg.photoUrl) {
                     document.getElementById('workVideo').poster = data.msg.photoUrl;
                 }
             },
         });
 
     });
-
     //video 1
-    function video1Click() {
+    function video1Click(){
         console.log(videoUrl1);
-        if (null == videoUrl1 || " " == videoUrl1[videoUrl1.length - 1]) {
+        if(null == videoUrl1 || " " == videoUrl1[videoUrl1.length-1]) {
             alert("视频不存在！");
         } else {
             document.getElementById('workVideo').src = videoUrl1;
             document.getElementById('workVideo').play();
         }
     }
-
     function upload1Click() {
-        if (1 == VU[0]) {//取消上传
+        if(1 == VU[0]) {//取消上传
             VU[0] = 0;
             document.getElementById('upload1i').innerHTML = STR_UPLOAD;
         } else {
@@ -555,18 +523,17 @@
     };
 
     function download1Click() {
-        if (null == videoUrl1 || " " == videoUrl1[videoUrl1.length - 1]) {
+        if(null == videoUrl1||" " == videoUrl1[videoUrl1.length-1]) {
             alert("视频不存在！");
         } else {
             window.open(videoUrl1);
         }
     }
-
     function delete1Click() {
-        if (null == videoUrl1 || " " == videoUrl1[videoUrl1.length - 1]) {
+        if(null == videoUrl1 || " " == videoUrl1[videoUrl1.length-1]) {
             alert("视频不存在！");
         } else {
-            if (2 == VU[0]) {//取消删除
+            if(2 == VU[0]){//取消删除
                 VU[0] = 0;
                 document.getElementById('delete1i').innerHTML = STR_DELETE;
                 document.getElementById("upload1b").disabled = false;
@@ -580,17 +547,16 @@
     }
 
     //video 2
-    function video2Click() {
-        if (null == videoUrl2 || " " == videoUrl2[videoUrl2.length - 1]) {
+    function video2Click(){
+        if(null == videoUrl2 || " " == videoUrl2[videoUrl2.length-1]) {
             alert("视频不存在！");
         } else {
             document.getElementById('workVideo').src = videoUrl2;
             document.getElementById('workVideo').play();
         }
     }
-
     function upload2Click() {
-        if (1 == VU[1]) {//取消上传
+        if(1 == VU[1]) {//取消上传
             VU[1] = 0;
             document.getElementById('upload2i').innerHTML = STR_UPLOAD;
         } else {
@@ -606,18 +572,17 @@
     };
 
     function download2Click() {
-        if (null == videoUrl2 || " " == videoUrl2[videoUrl2.length - 1]) {
+        if(null == videoUrl2|| " " == videoUrl2[videoUrl2.length-1]) {
             alert("视频不存在！");
         } else {
             window.open(videoUrl2);
         }
     }
-
     function delete2Click() {
-        if (null == videoUrl2 || " " == videoUrl2[videoUrl2.length - 1]) {
+        if(null == videoUrl2 || " " == videoUrl2[videoUrl2.length-1]) {
             alert("视频不存在！");
         } else {
-            if (2 == VU[1]) {//取消删除
+            if(2 == VU[1]){//取消删除
                 VU[1] = 0;
                 document.getElementById('delete2i').innerHTML = STR_DELETE;
                 document.getElementById("upload2b").disabled = false;
@@ -631,17 +596,16 @@
     }
 
     //video 3
-    function video3Click() {
-        if (null == videoUrl3 || " " == videoUrl3[videoUrl3.length - 1]) {
+    function video3Click(){
+        if(null == videoUrl3 || " " == videoUrl3[videoUrl3.length-1]) {
             alert("视频不存在！");
         } else {
             document.getElementById('workVideo').src = videoUrl3;
             document.getElementById('workVideo').play();
         }
     }
-
     function upload3Click() {
-        if (1 == VU[2]) {//取消上传
+        if(1 == VU[2]) {//取消上传
             VU[2] = 0;
             document.getElementById('upload3i').innerHTML = STR_UPLOAD;
         } else {
@@ -657,18 +621,17 @@
     };
 
     function download3Click() {
-        if (null == videoUrl3 || " " == videoUrl3[videoUrl3.length - 1]) {
+        if(null == videoUrl3||" " == videoUrl3[videoUrl3.length-1]) {
             alert("视频不存在！");
         } else {
             window.open(videoUrl3);
         }
     }
-
     function delete3Click() {
-        if (null == videoUrl3 || " " == videoUrl3[videoUrl3.length - 1]) {
+        if(null == videoUrl3 || " " == videoUrl3[videoUrl3.length-1]) {
             alert("视频不存在！");
         } else {
-            if (2 == VU[2]) {//取消删除
+            if(2 == VU[2]){//取消删除
                 VU[2] = 0;
                 document.getElementById('delete3i').innerHTML = STR_DELETE;
                 document.getElementById("upload3b").disabled = false;
@@ -682,23 +645,23 @@
     }
 
     var baseUploadName = UUID.prototype.createUUID();
-    var uploadName = [null, null, null];
+    var uploadName=[null,null,null];
 
     // var UPS_1 = 0;//1:上传成功；-1:上传失败；0：未上传
     // var UPS_2 = 0;//1:上传成功；-1:上传失败；0：未上传
     // var UPS_3 = 0;//1:上传成功；-1:上传失败；0：未上传
     function saveAll() {
         //没有修改
-        console.log(VU[0] + "," + VU[1] + "," + VU[2]);
-        if (0 == VU[0] && 0 == VU[1] && 0 == VU[2]) {
+        console.log(VU[0]+","+VU[1]+","+VU[2]);
+        if(0 == VU[0] && 0 == VU[1] && 0 == VU[2]) {
             alert("您没有做修改！")
         } else {
-            for (var VU_i = 0; VU_i < 3; VU_i++) {
-                var uploadUrlId = '#videoUrl' + (1 + VU_i);
-                if (VU[VU_i] == 1) {
+            for(var VU_i = 0;VU_i<3;VU_i++){
+                var uploadUrlId = '#videoUrl'+(1+VU_i);
+                if(VU[VU_i] == 1) {
                     var title = $(uploadUrlId)[0].files[0].name;
                     var leng = title.split(".").length;
-                    uploadName[VU_i] = baseUploadName + "_" + (1 + VU_i) + "." + title.split(".")[leng - 1];
+                    uploadName[VU_i] = baseUploadName +"_"+ (1+VU_i) +"." + title.split(".")[leng - 1];
                     var form = new FormData();
                     form.append('file', $(uploadUrlId)[0].files[0]);
                     form.append("filename", uploadName[VU_i]);
@@ -713,18 +676,18 @@
                         for_i: VU_i,
                         beforeSend: function () {
                             console.log("正在上传video 1，请稍候");
-                            console.log("video1:" + uploadName[VU_i]);
+                            console.log("video1:"+uploadName[VU_i]);
                         },
                         success: function (data) {
                             console.log("上传video 1完成");
                             console.log(data);
                             var paramData = new Object();
                             paramData.id = workId;
-                            if (0 == this.for_i) {
+                            if(0 == this.for_i){
                                 paramData.videoUrl1 = uploadName[this.for_i];
-                            } else if (1 == this.for_i) {
+                            } else if(1 == this.for_i) {
                                 paramData.videoUrl2 = uploadName[this.for_i];
-                            } else if (2 == this.for_i) {
+                            } else if(2 == this.for_i) {
                                 paramData.videoUrl3 = uploadName[this.for_i];
                             }
                             console.log(JSON.stringify(paramData));
@@ -738,20 +701,17 @@
                                 beforeSend: function () {
                                     console.log("正在进行表单提交，请稍候");
                                 },
-                                success: function (data, state) {
+                                success: function (data,state) {
                                     console.log("表单提交成功!!!");
-                                    console.log(state);
+                                    console.log( state);
                                     VU[this.for_i] = 0;
-                                    document.getElementById('upload' + (this.for_i + 1) + 'i').innerHTML = STR_UPLOAD;
-                                    switch (this.for_i) {
-                                        case 0:
-                                            videoUrl1 = data.msg.videoUrl1;
+                                    document.getElementById('upload'+(this.for_i+1)+'i').innerHTML = STR_UPLOAD;
+                                    switch (this.for_i){
+                                        case 0: videoUrl1 = data.msg.videoUrl1;
                                             break;
-                                        case 1:
-                                            videoUrl2 = data.msg.videoUrl2;
+                                        case 1: videoUrl2 = data.msg.videoUrl2;
                                             break;
-                                        case 2:
-                                            videoUrl3 = data.msg.videoUrl3;
+                                        case 2: videoUrl3 = data.msg.videoUrl3;
                                             break;
                                     }
                                 },
@@ -764,18 +724,15 @@
                             console.log("上传video 1 失败");
                         }
                     });
-                } else if (2 == VU[VU_i]) {
+                } else if(2 == VU[VU_i]) {
                     var paramData = new Object();
                     paramData.id = workId;
-                    switch (VU_i) {
-                        case 0:
-                            paramData.videoUrl1 = ' ';
+                    switch (VU_i){
+                        case 0: paramData.videoUrl1 = ' ';
                             break;
-                        case 1:
-                            paramData.videoUrl2 = ' ';
+                        case 1: paramData.videoUrl2 = ' ';
                             break;
-                        case 2:
-                            paramData.videoUrl3 = ' ';
+                        case 2: paramData.videoUrl3 = ' ';
                             break;
                     }
                     console.log(JSON.stringify(paramData));
@@ -792,19 +749,16 @@
                         success: function (responseStr) {
                             console.log("删除提交成功!!!");
                             console.log(responseStr);
-                            console.log('for_i:' + this.for_i);
+                            console.log('for_i:'+this.for_i);
                             VU[this.for_i] = 0;
-                            document.getElementById('delete' + (this.for_i + 1) + 'i').innerHTML = STR_DELETE;
-                            document.getElementById('upload' + (this.for_i + 1) + 'b').disabled = false;
-                            switch (this.for_i) {
-                                case 0:
-                                    videoUrl1 = null;
+                            document.getElementById('delete'+(this.for_i+1)+'i').innerHTML = STR_DELETE;
+                            document.getElementById('upload'+(this.for_i+1)+'b').disabled = false;
+                            switch (this.for_i){
+                                case 0: videoUrl1 = null;
                                     break;
-                                case 1:
-                                    videoUrl2 = null;
+                                case 1: videoUrl2 = null;
                                     break;
-                                case 2:
-                                    videoUrl3 = null;
+                                case 2: videoUrl3 = null;
                                     break;
                             }
                         },
